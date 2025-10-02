@@ -1,49 +1,78 @@
 <!doctype html>
-<html lang='pt-BR'>
+<html lang="pt-BR">
 
 <head>
-  <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Agendamento - LavaJato</title>
-  <link rel='stylesheet' href='CSS/agendamento.css'>
+  <link rel="stylesheet" href="CSS/agendamento.css">
 </head>
 
 <body>
-  <header class='top'>
-    <img src="IMG/logo.png" class="mini" alt="logo">
-    <div class='user' id='userName'>👋 Olá, João</div>
+  <!-- Cabeçalho fixo -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <span>|</span>
+      <a href="#">Serviços</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar serviços" />
+        <button>🔍</button>
+      </div>
+
+      <a href="#">Suporte</a>
+      <span>|</span>
+      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+      <div class="avatar">👤</div>
+    </div>
   </header>
-  <main class='card'>
-    <div class="back" id="btnBack">⇦</div>
-    <h2>Agendar Serviço</h2>
-    <p class="subtitle">Escolha o serviço, data e forma de pagamento</p>
-    <form id='schedForm'>
-      <label for="serviceSelect">Serviço</label>
-      <select id='serviceSelect' required>
-        <option value="">Selecione</option>
-        <option>Lavagem Simples</option>
-        <option>Lavagem Completa</option>
-        <option>Polimento</option>
-        <option>Estética Automotiva</option>
-      </select>
 
-      <label for="date">Data</label>
-      <input id='date' type='date' required>
+  <!-- Conteúdo principal -->
+  <main>
+    <div class="card">
+      <div class="back" id="btnBack">⇦</div>
+      <h2>Agendar Serviço</h2>
+      <p class="subtitle">Escolha o serviço, data e forma de pagamento</p>
 
-      <label for="time">Horário</label>
-      <input id='time' type='time' required>
+      <form id="schedForm">
+        <label for="serviceSelect">Serviço</label>
+        <select id="serviceSelect" required>
+          <option value="">Selecione</option>
+          <option>Lavagem Simples</option>
+          <option>Lavagem Completa</option>
+          <option>Polimento</option>
+          <option>Estética Automotiva</option>
+        </select>
 
-      <label for="payment">Pagamento</label>
-      <select id='payment' required>
-        <option>Cartão</option>
-        <option>Dinheiro</option>
-        <option>Pix</option>
-      </select>
+        <label for="date">Data</label>
+        <input id="date" type="date" required>
 
-      <button class='primary' type='submit'>Confirmar</button>
-    </form>
+        <label for="time">Horário</label>
+        <input id="time" type="time" required>
+
+        <label for="payment">Pagamento</label>
+        <select id="payment" required>
+          <option>Cartão</option>
+          <option>Dinheiro</option>
+          <option>Pix</option>
+        </select>
+
+        <button class="primary" type="submit">Confirmar</button>
+      </form>
+    </div>
   </main>
-  <script src='JS/agendamento.js'></script>
+
+  <script src="JS/agendamento.js"></script>
 </body>
 
 </html>
