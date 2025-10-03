@@ -6,7 +6,7 @@
 }
 
 body {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(180deg, #0b1220, #111827);
   color: #e6eef8;
   min-height: 100vh;
@@ -43,6 +43,7 @@ header.header {
   color: #fff;
   font-weight: bold;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .logo-icon {
@@ -51,13 +52,22 @@ header.header {
 
 /* Nav */
 nav.nav a {
-  color: #fff;
+  color: white;
   text-decoration: none;
   margin: 0 0.5rem;
-  font-weight: normal;
-  /* sem negrito */
+  font-weight: 600;
+  display: inline-block;
+  /* importante para que transform funcione bem */
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+  /* deixa cursor em pointer para UX */
 }
 
+nav.nav a:hover {
+  transform: translateY(-2px);
+}
+
+/* Span dentro do nav */
 nav.nav span {
   color: #fff;
   margin: 0 0.3rem;
@@ -73,34 +83,38 @@ nav.nav span {
 
 /* Input ajustado */
 .search-box input {
-  height: 36px;                  /* mesma altura do botão */
+  height: 36px;
+  /* mesma altura do botão */
   border-radius: 10px;
   border: 1px solid #ffffff26;
-  padding: 0 10px;               /* padding horizontal */
+  padding: 0 10px;
+  /* padding horizontal */
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
-  line-height: 1;                /* evita desalinhar o texto */
+  line-height: 1;
+  /* evita desalinhar o texto */
 }
 
 /* Botão ajustado */
 .search-box button {
-  width: 36px;
-  height: 36px;                  /* mesma altura do input */
-  border-radius: 10px;           /* cantos arredondados */
-  background-color: #ffffff26;
-  border: none;
-  color: #fff;
   display: flex;
+  position: absolute;
+  left: 67rem;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  height: 36px;
+  width: 36px;
+  /* largura igual à altura para botão redondo */
+  border-radius: 10px;
+  border: none;
+  padding: 0;
   font-size: 1rem;
-  transition: background-color 0.3s ease;
-}
-
-.search-box button:hover {
-  background-color: #ffffff40;
+  background: transparent;
+  box-shadow: none;
+  color: #fff;
+  /* mantém o ícone branco */
 }
 
 /* User */
@@ -114,11 +128,14 @@ nav.nav span {
   color: #fff;
   text-decoration: none;
   font-weight: bold;
-  /* sem negrito */
+  display: inline-block;
+  /* para permitir transform */
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
 .user a:hover {
-  text-decoration: underline;
+  transform: translateY(-2px);
 }
 
 .avatar {
