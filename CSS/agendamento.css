@@ -86,11 +86,9 @@ nav.nav span {
   height: 36px;
   /* mesma altura do botão */
   border-radius: 10px;
-  border: 1px solid #ffffff26;
   padding: 0 10px;
   /* padding horizontal */
   font-size: 1rem;
-  background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
   line-height: 1;
   /* evita desalinhar o texto */
@@ -126,6 +124,9 @@ nav.nav span {
 
 .user a {
   color: #fff;
+  background: linear-gradient(90deg, #4f46e5, #f97316);
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
   text-decoration: none;
   font-weight: bold;
   display: inline-block;
@@ -138,25 +139,6 @@ nav.nav span {
   transform: translateY(-2px);
 }
 
-.avatar {
-  font-size: 1.2rem;
-  /* tamanho do ícone */
-  width: 36px;
-  /* largura do círculo */
-  height: 36px;
-  /* altura do círculo */
-  border-radius: 50%;
-  /* deixa redondo */
-  background: #ffffff26;
-  /* cor de fundo suave */
-  display: flex;
-  /* centraliza o conteúdo */
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
 .back {
   font-size: 1.5rem;
   width: 30px;
@@ -165,14 +147,13 @@ nav.nav span {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #4f46e5, #f97316);
+  background: #ffffff26;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .back:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(79, 70, 229, 0.4);
 }
 
 /* Conteúdo principal */
@@ -241,7 +222,6 @@ select:focus,
 input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 0 2px #6366f1;
 }
 
 /* Botão */
