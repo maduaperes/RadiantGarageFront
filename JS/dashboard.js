@@ -2,10 +2,10 @@
 // Serviços disponíveis
 // ==========================
 const services = [
-  { id: 1, name: 'Lavagem Simples', price: 'R$ 25' },
-  { id: 2, name: 'Lavagem Completa', price: 'R$ 50' },
-  { id: 3, name: 'Estética Automotiva', price: 'R$ 120' },
-  { id: 4, name: 'Polimento', price: 'R$ 200' }
+  { id: 1, name: 'Lavagem Simples', price: 'R$ 25', icon: 'fa-car' },
+  { id: 2, name: 'Lavagem Completa', price: 'R$ 50', icon: 'fa-bubbles' },
+  { id: 3, name: 'Estética Automotiva', price: 'R$ 120', icon: 'fa-star' },
+  { id: 4, name: 'Polimento', price: 'R$ 200', icon: 'fa-spray-can-sparkles' }
 ];
 
 // ==========================
@@ -15,11 +15,17 @@ function renderServices() {
   const list = document.getElementById('servicesList');
   if (!list) return;
 
+  list.innerHTML = ''; // limpa antes de popular
+
   services.forEach(service => {
     const serviceEl = document.createElement('div');
     serviceEl.className = 'service';
+    serviceEl.setAttribute('role', 'listitem');
+    serviceEl.setAttribute('tabindex', '0');
+    serviceEl.setAttribute('aria-label', `Serviço: ${service.name}`);
+
     serviceEl.innerHTML = `
-      <i class="fa-solid fa-car fa-2x" aria-hidden="true"></i>
+      <i class="fa-solid ${service.icon} fa-2x" aria-hidden="true"></i>
       <p><strong>${service.name}</strong></p>
       <div class="muted">${service.price}</div>
     `;
@@ -41,7 +47,7 @@ function renderUserName() {
   if (!userNameEl) return;
 
   const user = JSON.parse(localStorage.getItem('lj_user') || '{}');
-  userNameEl.textContent = user.name ? `Olá, ${user.name}` : 'Olá';
+  userNameEl.textContent = user.name ? `👋 Olá, ${user.name}` : '👋 Olá';
 }
 
 // ==========================
