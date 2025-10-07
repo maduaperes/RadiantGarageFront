@@ -1,16 +1,17 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - LavaJato</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - RadiantGarage</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="CSS/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="CSS/dashboard.css">
 </head>
 
 <body>
-  <!-- Header fixo -->
+  <!-- Header -->
   <header class="header">
     <div class="logo">
       <div class="logo-icon"></div>
@@ -37,50 +38,86 @@
     </div>
   </header>
 
-  <!-- Conteúdo principal -->
-  <main class="wrap">
-    <!-- Seção Serviços -->
-    <section class="services" aria-labelledby="servicesTitle">
-      <div class="back" id="btnBack" role="button" tabindex="0" aria-label="Voltar">↩</div>
-      <h2 id="servicesTitle">Serviços</h2>
+  <!-- Dashboard -->
+  <main class="dashboard">
 
-      <!-- Lista dinâmica -->
-      <div class="grid" id="servicesList" role="list"></div>
-    </section>
-
-    <!-- Seção Promoções -->
-    <section class="promo" aria-labelledby="promoTitle">
-      <h2 id="promoTitle">Promoções</h2>
-      <article class="card promoCard" role="alert" aria-live="polite">
-        <i class="fa-solid fa-tags" aria-hidden="true"></i>
-        <span>10% OFF na lavagem completa às segundas</span>
-      </article>
-    </section>
-
-    <!-- Seção Ações Rápidas -->
-    <section class="quick" aria-labelledby="quickActionsTitle">
-      <h2 id="quickActionsTitle">Ações rápidas</h2>
+    <!-- Ações rápidas -->
+    <section class="quick-actions">
+      <h2>Ações rápidas</h2>
       <div class="actions">
-        <button id="quickSchedule" class="primary" aria-label="Agendamento rápido">
-          <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Agendamento rápido
-        </button>
-        <button onclick="location.href='status.html'" class="secondary" aria-label="Status do serviço">
-          <i class="fa-solid fa-clock" aria-hidden="true"></i> Status do serviço
-        </button>
+        <button class="primary">Novo Serviço</button>
+        <button class="primary">Novo Cliente</button>
+        <button class="secondary">Ver Agendamentos</button>
+        <button class="secondary">Ver Relatórios</button>
       </div>
     </section>
 
-    <!-- Seção Localização -->
-    <footer class="mapCard" aria-labelledby="nearbyUnitsTitle">
-      <h2 id="nearbyUnitsTitle">Unidades próximas</h2>
-      <p>
-        <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
-        Rua Exemplo, 123 - Centro (1,2 km)
-      </p>
+    <!-- Cards -->
+    <section class="cards-grid">
+      <div class="card">
+        <h3>Serviços</h3>
+        <ul>
+          <li>Troca de óleo</li>
+          <li>Balanceamento</li>
+          <li>Alinhamento</li>
+          <li>Revisão completa</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Clientes</h3>
+        <ul>
+          <li>João Silva</li>
+          <li>Maria Souza</li>
+          <li>Carlos Oliveira</li>
+          <li>Ana Pereira</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Agendamentos</h3>
+        <ul>
+          <li>05/10 - João Silva - Troca de óleo</li>
+          <li>06/10 - Maria Souza - Revisão completa</li>
+          <li>07/10 - Carlos Oliveira - Alinhamento</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Resumo Financeiro</h3>
+        <p>Receita deste mês: <strong>R$ 12.500</strong></p>
+        <p>Serviços concluídos: <strong>45</strong></p>
+        <p>Serviços pendentes: <strong>7</strong></p>
+      </div>
+    </section>
+
+    <!-- Gráfico -->
+    <section class="chart-section">
+      <h2>Desempenho Mensal</h2>
+      <canvas id="performanceChart" height="150"></canvas>
+    </section>
+
+    <!-- Promoções -->
+    <section class="promo">
+      <h2>Promoções Ativas</h2>
+      <div class="promoCard">
+        <p>💰 Troca de óleo com 20% de desconto!</p>
+      </div>
+      <div class="promoCard">
+        <p>🛠️ Revisão completa + alinhamento grátis</p>
+      </div>
+    </section>
+
+    <!-- Unidades -->
+    <footer class="mapCard">
+      <h2>Unidades próximas</h2>
+      <p>📍 RadiantGarage Central - Rua Principal, 123</p>
+      <p>📍 RadiantGarage Norte - Av. Secundária, 456</p>
     </footer>
+
   </main>
 
-  <!-- Scripts -->
+  <!-- Script externo -->
   <script src="JS/dashboard.js"></script>
 </body>
 

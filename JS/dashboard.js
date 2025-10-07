@@ -1,82 +1,43 @@
-// ==========================
-// Serviços disponíveis
-// ==========================
-const services = [
-  { id: 1, name: 'Lavagem Simples', price: 'R$ 25', icon: 'fa-car' },
-  { id: 2, name: 'Lavagem Completa', price: 'R$ 50', icon: 'fa-bubbles' },
-  { id: 3, name: 'Estética Automotiva', price: 'R$ 120', icon: 'fa-star' },
-  { id: 4, name: 'Polimento', price: 'R$ 200', icon: 'fa-spray-can-sparkles' }
-];
+// Gráfico de desempenho - RadiantGarage
 
-// ==========================
-// Função para renderizar serviços
-// ==========================
-function renderServices() {
-  const list = document.getElementById('servicesList');
-  if (!list) return;
+document.addEventListener("DOMContentLoaded", () => {
+  const ctx = document.getElementById('performanceChart');
 
-  list.innerHTML = ''; // limpa antes de popular
+  if (!ctx) return;
 
-  services.forEach(service => {
-    const serviceEl = document.createElement('div');
-    serviceEl.className = 'service';
-    serviceEl.setAttribute('role', 'listitem');
-    serviceEl.setAttribute('tabindex', '0');
-    serviceEl.setAttribute('aria-label', `Serviço: ${service.name}`);
-
-    serviceEl.innerHTML = `
-      <i class="fa-solid ${service.icon} fa-2x" aria-hidden="true"></i>
-      <p><strong>${service.name}</strong></p>
-      <div class="muted">${service.price}</div>
-    `;
-    
-    serviceEl.addEventListener('click', () => {
-      localStorage.setItem('lj_selected', JSON.stringify(service));
-      location.href = 'agendamento.html';
-    });
-
-    list.appendChild(serviceEl);
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out'],
+      datasets: [{
+        label: 'Serviços Concluídos',
+        data: [20, 25, 30, 28, 35, 40, 38, 45, 50, 47],
+        backgroundColor: 'rgba(79, 70, 229, 0.2)',
+        borderColor: 'rgba(79, 70, 229, 1)',
+        borderWidth: 2,
+        tension: 0.3,
+        fill: true,
+        pointBackgroundColor: 'rgba(249, 115, 22, 1)',
+        pointBorderColor: '#fff'
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          labels: { color: '#e6eef8' }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#e6eef8' },
+          grid: { color: 'rgba(255,255,255,0.1)' }
+        },
+        y: {
+          ticks: { color: '#e6eef8' },
+          grid: { color: 'rgba(255,255,255,0.1)' }
+        }
+      }
+    }
   });
-}
-
-// ==========================
-// Exibir nome do usuário
-// ==========================
-function renderUserName() {
-  const userNameEl = document.getElementById('userName');
-  if (!userNameEl) return;
-
-  const user = JSON.parse(localStorage.getItem('lj_user') || '{}');
-  userNameEl.textContent = user.name ? `👋 Olá, ${user.name}` : '👋 Olá';
-}
-
-// ==========================
-// Configurar botões
-// ==========================
-function setupButtons() {
-  const quickBtn = document.getElementById('quickSchedule');
-  if (quickBtn) {
-    quickBtn.addEventListener('click', () => {
-      location.href = 'agendamento.html';
-    });
-  }
-
-  const btnBack = document.getElementById('btnBack');
-  if (btnBack) {
-    btnBack.addEventListener('click', () => {
-      location.href = 'splash.html';
-    });
-  }
-}
-
-// ==========================
-// Inicialização
-// ==========================
-function initDashboard() {
-  renderServices();
-  renderUserName();
-  setupButtons();
-}
-
-// Executar
-document.addEventListener('DOMContentLoaded', initDashboard);
+});
