@@ -41,9 +41,32 @@
   <!-- Dashboard -->
   <main class="dashboard">
 
+    <!-- Visão Geral -->
+    <section class="overview">
+      <h2>Visão Geral</h2>
+      <div class="overview-cards">
+        <div class="card">
+          <h3>Total de Serviços</h3>
+          <p>45</p>
+        </div>
+        <div class="card">
+          <h3>Clientes Ativos</h3>
+          <p>30</p>
+        </div>
+        <div class="card">
+          <h3>Agendamentos Hoje</h3>
+          <p>7</p>
+        </div>
+        <div class="card">
+          <h3>Receita Mensal</h3>
+          <p>R$ 12.500</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Ações rápidas -->
     <section class="quick-actions">
-      <h2>Ações rápidas</h2>
+      <h2>Ações Rápidas</h2>
       <div class="actions">
         <button class="primary">Novo Serviço</button>
         <button class="primary">Novo Cliente</button>
@@ -52,20 +75,20 @@
       </div>
     </section>
 
-    <!-- Cards -->
+    <!-- Cards detalhados -->
     <section class="cards-grid">
       <div class="card">
-        <h3>Serviços</h3>
+        <h3>Serviços Populares</h3>
         <ul>
-          <li>Troca de óleo</li>
-          <li>Balanceamento</li>
-          <li>Alinhamento</li>
-          <li>Revisão completa</li>
+          <li>Troca de óleo - 15 realizados</li>
+          <li>Balanceamento - 12 realizados</li>
+          <li>Alinhamento - 10 realizados</li>
+          <li>Revisão completa - 8 realizados</li>
         </ul>
       </div>
 
       <div class="card">
-        <h3>Clientes</h3>
+        <h3>Clientes Recentes</h3>
         <ul>
           <li>João Silva</li>
           <li>Maria Souza</li>
@@ -75,7 +98,7 @@
       </div>
 
       <div class="card">
-        <h3>Agendamentos</h3>
+        <h3>Agendamentos Pendentes</h3>
         <ul>
           <li>05/10 - João Silva - Troca de óleo</li>
           <li>06/10 - Maria Souza - Revisão completa</li>
@@ -91,10 +114,18 @@
       </div>
     </section>
 
-    <!-- Gráfico -->
-    <section class="chart-section">
+    <!-- Gráficos -->
+    <section class="charts">
       <h2>Desempenho Mensal</h2>
-      <canvas id="performanceChart" height="150"></canvas>
+      <div class="chart-cards">
+        <div class="chart-section">
+          <canvas id="performanceChart" height="150"></canvas>
+        </div>
+        <div class="chart-section">
+          <h3>Receita por Serviço</h3>
+          <canvas id="revenueChart" height="150"></canvas>
+        </div>
+      </div>
     </section>
 
     <!-- Promoções -->
@@ -106,6 +137,23 @@
       <div class="promoCard">
         <p>🛠️ Revisão completa + alinhamento grátis</p>
       </div>
+      <div class="promoCard">
+        <p>🎯 Pacote Premium - Check-up completo do veículo</p>
+      </div>
+    </section>
+
+    <!-- Comentários / Feedback dos Clientes -->
+    <section class="feedback">
+      <h2>Últimos Feedbacks</h2>
+      <div class="feedback-card">
+        <p>“Excelente atendimento e rapidez na troca de óleo!” - João Silva</p>
+      </div>
+      <div class="feedback-card">
+        <p>“Serviço de revisão impecável, recomendo!” - Maria Souza</p>
+      </div>
+      <div class="feedback-card">
+        <p>“Equipe profissional e ambiente limpo.” - Carlos Oliveira</p>
+      </div>
     </section>
 
     <!-- Unidades -->
@@ -113,6 +161,7 @@
       <h2>Unidades próximas</h2>
       <p>📍 RadiantGarage Central - Rua Principal, 123</p>
       <p>📍 RadiantGarage Norte - Av. Secundária, 456</p>
+      <p>📍 RadiantGarage Sul - Rua Terciária, 789</p>
     </footer>
 
   </main>

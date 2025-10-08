@@ -1,8 +1,15 @@
-/* Reset e base */
+/* ==========================
+   Reset e base
+========================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html {
+  /* Sempre reserva espaço para a barra de rolagem vertical */
+  overflow-y: scroll;
 }
 
 body {
@@ -14,7 +21,9 @@ body {
   flex-direction: column;
 }
 
-/* ===== HEADER COMPACTO ===== */
+/* ==========================
+   HEADER
+========================== */
 header.header {
   display: flex;
   align-items: center;
@@ -27,6 +36,8 @@ header.header {
   top: 0;
   z-index: 10;
   flex-wrap: wrap;
+  height: auto;
+  min-height: 48px;
 }
 
 /* ===== LOGO ===== */
@@ -48,7 +59,7 @@ header.header {
   font-size: 1.3rem;
 }
 
-/* ===== MENU CENTRAL ===== */
+/* ===== NAV ===== */
 .nav {
   display: flex;
   align-items: center;
@@ -75,11 +86,13 @@ header.header {
   margin: 0 0.2rem;
 }
 
-/* ===== CAIXA DE PESQUISA ===== */
+/* ===== SEARCH BOX ===== */
 .search-box {
-  position: relative;
   display: flex;
   align-items: center;
+  position: relative;
+  height: 28px;
+  margin-top: -6px; /* ajuste fino se necessário */
 }
 
 .search-box input {
@@ -106,7 +119,7 @@ header.header {
 .search-box button {
   position: absolute;
   right: 8px;
-  top: 50%;
+  top: 60%;
   transform: translateY(-50%);
   background: none;
   border: none;
@@ -148,18 +161,23 @@ header.header {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ===== CONTEÚDO PRINCIPAL ===== */
+/* ==========================
+   MAIN
+========================== */
 main {
   flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
+  width: 100%;
+  flex-direction: column;
+  gap: 0;
 }
 
 /* ===== CARD ===== */
 .card {
-  position: relative; /* necessário para o back */
+  position: relative;
   width: 92%;
   max-width: 480px;
   padding: 28px;
@@ -169,7 +187,6 @@ main {
   animation: fadeIn 0.6s ease;
 }
 
-/* ===== BOTÃO BACK ===== */
 .back {
   position: absolute;
   top: 16px;
@@ -177,7 +194,7 @@ main {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #ffffff26; /* círculo cinza */
+  background: #ffffff26;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,6 +223,7 @@ h2 {
   margin-bottom: 20px;
 }
 
+/* ===== FORM ===== */
 label {
   display: block;
   margin-top: 12px;
@@ -214,11 +232,10 @@ label {
 }
 
 option {
+  background-color: #ffffff;
   color: #000000;
-  background: #ffffff;
 }
 
-/* ===== INPUTS E SELECT ===== */
 select,
 input {
   width: 100%;
@@ -238,7 +255,6 @@ input:focus {
   background: rgba(255, 255, 255, 0.12);
 }
 
-/* ===== ÍCONES DOS INPUTS ===== */
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
   filter: invert(70%) brightness(0.9);
@@ -267,18 +283,13 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 
 /* ===== ANIMAÇÃO ===== */
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* ===== RESPONSIVIDADE ===== */
+/* ==========================
+   RESPONSIVIDADE
+========================== */
 @media (max-width: 900px) {
   .nav {
     flex-direction: column;
