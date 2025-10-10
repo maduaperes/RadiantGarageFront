@@ -1,68 +1,172 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard - LavaJato</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="CSS/dashboard.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - RadiantGarage</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="CSS/dashboard.css">
 </head>
 
 <body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
 
-  <header class="top" role="banner">
-    <img src="logo.svg" class="mini" alt="Logo LavaJato" />
-    <div class="user" id="userName" aria-label="Saudação ao usuário">👋 Olá, João</div>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <span>|</span>
+      <a href="#">Serviços</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar serviços" />
+        <button>🔍︎</button>
+      </div>
+
+      <a href="#">Suporte</a>
+      <span>|</span>
+      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+    </div>
   </header>
 
-  <main class='wrap'>
-    <section class='services'>
-      <div class="back" id="btnBack">⇦</div>
-      <h3>Serviços</h3>
-      <div class='grid' id='servicesList'>
-        <div class="service">
-          <i class="fa-solid fa-car fa-2x"></i>
+  <!-- Dashboard -->
+  <main class="dashboard">
 
-          <p>Lavagem Simples</p>
+    <!-- Visão Geral -->
+    <section class="overview">
+      <h2>Visão Geral</h2>
+      <div class="overview-cards">
+        <div class="card">
+          <h3>Total de Serviços</h3>
+          <p>45</p>
         </div>
-        <div class="service" role="listitem" tabindex="0" aria-label="Serviço: Lavagem Completa">
-          <i class="fa-solid fa-bubbles fa-2x" aria-hidden="true"></i>
-          <p>Lavagem Completa</p>
+        <div class="card">
+          <h3>Clientes Ativos</h3>
+          <p>30</p>
         </div>
-        <div class="service" role="listitem" tabindex="0" aria-label="Serviço: Polimento">
-          <i class="fa-solid fa-spray-can-sparkles fa-2x" aria-hidden="true"></i>
-          <p>Polimento</p>
+        <div class="card">
+          <h3>Agendamentos Hoje</h3>
+          <p>7</p>
         </div>
-        <div class="service" role="listitem" tabindex="0" aria-label="Serviço: Estética">
-          <i class="fa-solid fa-star fa-2x" aria-hidden="true"></i>
-          <p>Estética</p>
+        <div class="card">
+          <h3>Receita Mensal</h3>
+          <p>R$ 12.500</p>
         </div>
       </div>
     </section>
 
-    <section class="promo" aria-label="Promoções">
-      <h3>Promoções</h3>
-      <div class="card promoCard" role="alert" aria-live="polite">
-        <i class="fa-solid fa-tags" aria-hidden="true"></i> 10% OFF na lavagem completa às segundas
+    <!-- Ações rápidas -->
+    <section class="quick-actions">
+      <h2>Ações Rápidas</h2>
+      <div class="actions">
+        <button class="primary">Novo Serviço</button>
+        <button class="primary">Novo Cliente</button>
+        <button class="secondary">Ver Agendamentos</button>
+        <button class="secondary">Ver Relatórios</button>
       </div>
     </section>
 
-    <section class="quick" aria-label="Ações rápidas">
-      <button id="quickSchedule" class="primary" aria-label="Agendamento rápido">
-        <i class="fa-solid fa-calendar-check" aria-hidden="true"></i> Agendamento rápido
-      </button>
-      <button onclick="location.href='status.html'" class="secondary" aria-label="Status do serviço">
-        <i class="fa-solid fa-clock" aria-hidden="true"></i> Status do serviço
-      </button>
+    <!-- Cards detalhados -->
+    <section class="cards-grid">
+      <div class="card">
+        <h3>Serviços Populares</h3>
+        <ul>
+          <li>Troca de óleo - 15 realizados</li>
+          <li>Balanceamento - 12 realizados</li>
+          <li>Alinhamento - 10 realizados</li>
+          <li>Revisão completa - 8 realizados</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Clientes Recentes</h3>
+        <ul>
+          <li>João Silva</li>
+          <li>Maria Souza</li>
+          <li>Carlos Oliveira</li>
+          <li>Ana Pereira</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Agendamentos Pendentes</h3>
+        <ul>
+          <li>05/10 - João Silva - Troca de óleo</li>
+          <li>06/10 - Maria Souza - Revisão completa</li>
+          <li>07/10 - Carlos Oliveira - Alinhamento</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>Resumo Financeiro</h3>
+        <p>Receita deste mês: <strong>R$ 12.500</strong></p>
+        <p>Serviços concluídos: <strong>45</strong></p>
+        <p>Serviços pendentes: <strong>7</strong></p>
+      </div>
     </section>
 
-    <footer class="mapCard" aria-label="Unidades próximas">
-      <h4>Unidades próximas</h4>
-      <p><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Rua Exemplo, 123 - Centro (1,2 km)</p>
+    <!-- Gráficos -->
+    <section class="charts">
+      <h2>Desempenho Mensal</h2>
+      <div class="chart-cards">
+        <div class="chart-section">
+          <canvas id="performanceChart" height="150"></canvas>
+        </div>
+        <div class="chart-section">
+          <h3>Receita por Serviço</h3>
+          <canvas id="revenueChart" height="150"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- Promoções -->
+    <section class="promo">
+      <h2>Promoções Ativas</h2>
+      <div class="promoCard">
+        <p>💰 Troca de óleo com 20% de desconto!</p>
+      </div>
+      <div class="promoCard">
+        <p>🛠️ Revisão completa + alinhamento grátis</p>
+      </div>
+      <div class="promoCard">
+        <p>🎯 Pacote Premium - Check-up completo do veículo</p>
+      </div>
+    </section>
+
+    <!-- Comentários / Feedback dos Clientes -->
+    <section class="feedback">
+      <h2>Últimos Feedbacks</h2>
+      <div class="feedback-card">
+        <p>“Excelente atendimento e rapidez na troca de óleo!” - João Silva</p>
+      </div>
+      <div class="feedback-card">
+        <p>“Serviço de revisão impecável, recomendo!” - Maria Souza</p>
+      </div>
+      <div class="feedback-card">
+        <p>“Equipe profissional e ambiente limpo.” - Carlos Oliveira</p>
+      </div>
+    </section>
+
+    <!-- Unidades -->
+    <footer class="mapCard">
+      <h2>Unidades próximas</h2>
+      <p>📍 RadiantGarage Central - Rua Principal, 123</p>
+      <p>📍 RadiantGarage Norte - Av. Secundária, 456</p>
+      <p>📍 RadiantGarage Sul - Rua Terciária, 789</p>
     </footer>
+
   </main>
 
+  <!-- Script externo -->
   <script src="JS/dashboard.js"></script>
 </body>
 

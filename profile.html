@@ -9,28 +9,76 @@
 </head>
 
 <body>
-  <header class='top'>
-    <img src="IMG/logo.png" class="mini" alt="logo">
-    <div class='user' id='userName'>👋 Olá, João</div>
+  <!-- HEADER MODERNO -->
+  <header class="header">
+    <div class="header-left">
+      <img src="IMG/logo.png" alt="Logo LavaJato" class="logo">
+      <h1 class="app-title">LavaJato</h1>
+    </div>
+    <div class="header-right">
+      <span id="userNameHeader">👋 Olá, João</span>
+      <button class="logout-icon" id="logoutBtn" title="Sair">
+        <img src="IMG/logout.svg" alt="Sair">
+      </button>
+    </div>
   </header>
+
+  <!-- CARD DE PERFIL -->
   <main class="profile-card">
     <div class="profile-header">
       <div class="avatar">👤</div>
       <div class="user-info">
-        <h2 id="userName">—</h2>
-        <p id="userContact">—</p>
+        <h2 id="userName">João Silva</h2>
+        <p id="userContact">joao@email.com</p>
+        <button id="editProfileBtn" class="btn-primary">Editar Perfil</button>
       </div>
     </div>
 
+    <section class="profile-settings">
+      <h3>Configurações</h3>
+      <button id="changePasswordBtn" class="btn-secondary">Alterar Senha</button>
+    </section>
+
     <section class="history-section">
       <h3>Histórico de Serviços</h3>
-      <div id="history" class="history-list"></div>
+      <div id="history" class="history-list">
+        <!-- Itens de histórico carregados via JS -->
+      </div>
     </section>
 
     <button onclick="location.href='dashboard.html'" class="btn-secondary">Voltar</button>
   </main>
 
+  <!-- MODAL EDITAR PERFIL -->
+  <div id="editModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Editar Perfil</h3>
+      <label>Nome:</label>
+      <input type="text" id="editName" placeholder="Novo nome">
+      <label>Email:</label>
+      <input type="email" id="editEmail" placeholder="Novo email">
+      <div class="modal-actions">
+        <button id="saveEdit" class="btn-primary">Salvar</button>
+        <button id="cancelEdit" class="btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL ALTERAR SENHA -->
+  <div id="passwordModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Alterar Senha</h3>
+      <label>Senha atual:</label>
+      <input type="password" id="oldPassword">
+      <label>Nova senha:</label>
+      <input type="password" id="newPassword">
+      <div class="modal-actions">
+        <button id="savePassword" class="btn-primary">Confirmar</button>
+        <button id="cancelPassword" class="btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="JS/profile.js"></script>
 </body>
-
 </html>
