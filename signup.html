@@ -2,62 +2,85 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cadastro - LavaJato</title>
-  <link rel="stylesheet" href="CSS/signup.css">
+  <link rel="stylesheet" href="CSS/signup.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
-  <header class="top">
-    <img src="IMG/logo.png" class="mini" alt="logo">
-    <div class="user" id="userName">Conecte-se a uma conta</div>
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
+
+    <nav class="nav">
+      <a href="splash.html">Home</a>
+      <span>|</span>
+      <a href="procura.html">Serviços</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar serviços" />
+        <button type="button">🔍︎</button>
+      </div>
+
+      <a href="#">Suporte</a>
+      <span>|</span>
+      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+    </div>
   </header>
 
   <main class="card">
-    <h2>Cadastro</h2>
-
-    <!-- Container que envolve radios e form -->
+    <h2>Cadastre-se</h2>
+    <p class="subtitle">Preencha os campos abaixo para se cadastrar</p>
     <div class="signup-container">
 
-      <!-- Radios como irmãos diretos do formulário -->
-      <input type="radio" id="cliente" name="userType" checked>
-      <label for="cliente" class="radio-label">Cliente</label>
+      <!-- Tipo de usuário lado a lado -->
+      <div style="display: flex; gap: 16px; justify-content: center; margin-bottom: 20px;">
+        <input type="radio" id="cliente" name="userType" value="cliente" checked />
+        <label for="cliente">Cliente</label>
 
-      <input type="radio" id="estabelecimento" name="userType">
-      <label for="estabelecimento" class="radio-label">Estabelecimento</label>
+        <input type="radio" id="estabelecimento" name="userType" value="estabelecimento" />
+        <label for="estabelecimento">Estabelecimento</label>
+      </div>
 
       <form id="signupForm">
         <!-- Campos Cliente -->
-        <div id="clienteFields" class="fields">
-          <input type="text" placeholder="Nome completo" required>
-          <input type="email" placeholder="Email" required>
-          <input type="password" placeholder="Senha" required>
-          <input type="text" placeholder="CPF" required>
+        <div id="clienteFields">
+          <input type="text" id="nameCliente" placeholder="Nome completo" />
+          <input type="email" id="emailCliente" placeholder="Email" />
+          <input type="password" id="passwordCliente" placeholder="Senha" />
+          <input type="text" id="cpf" placeholder="CPF" />
         </div>
 
         <!-- Campos Estabelecimento -->
-        <div id="establishmentFields" class="fields">
-          <input type="text" placeholder="Nome do Estabelecimento" required>
-          <input type="text" placeholder="CNPJ" required>
-          <input type="text" placeholder="Endereço completo" required>
-          <input type="text" placeholder="Cidade" required>
-          <input type="text" placeholder="Estado" required>
-          <input type="text" placeholder="CEP" required>
-          <input type="text" placeholder="Horário de funcionamento">
+        <div id="establishmentFields" style="display:none;">
+          <input type="text" id="nameEstab" placeholder="Nome do Estabelecimento" />
+          <input type="text" id="cnpj" placeholder="CNPJ" />
+          <input type="text" id="endereco" placeholder="Endereço completo" />
+          <input type="text" id="cidade" placeholder="Cidade" />
+          <input type="text" id="estado" placeholder="Estado" />
+          <input type="text" id="cep" placeholder="CEP" />
+          <input type="text" id="horario" placeholder="Horário de funcionamento" />
+          <input type="email" id="emailEstab" placeholder="Email" />
+          <input type="password" id="passwordEstab" placeholder="Senha" />
         </div>
 
         <button class="primary" type="submit">Criar conta</button>
       </form>
-
     </div>
 
-    <p class="muted">
-      <a href="login.html">Já tem conta? Entrar</a>
-    </p>
-
+    <p class="muted">Já possui conta?<a href="login.html"> Entrar</a></p>
     <div id="feedback" class="feedback-message"></div>
   </main>
+
+  <script src="JS/signup.js"></script>
 </body>
 
 </html>

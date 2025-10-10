@@ -18,9 +18,9 @@
     </div>
 
     <nav class="nav">
-      <a href="index.html">Home</a>
+      <a href="splash.html">Home</a>
       <span>|</span>
-      <a href="#">Serviços</a>
+      <a href="procura.html">Serviços</a>
 
       <div class="search-box">
         <input type="text" placeholder="Pesquisar serviços" />
@@ -36,11 +36,13 @@
       <a href="login.html">Login</a>
     </div>
   </header>
+
   <main class="card">
     <h2>Entrar</h2>
+    <p class="subtitle">Preencha os campos abaixo para entrar</p>
     <form id="loginForm">
-      <label>Email ou telefone</label>
-      <input id="email" placeholder="ex: voce@exemplo.com ou (11) 9xxxx-xxxx">
+      <label>Email</label>
+      <input id="email" placeholder="ex: voce@exemplo.com">
       <label>Senha</label>
       <input id="password" type="password" placeholder="••••••">
       <button class="primary" type="submit">Entrar</button>
@@ -50,6 +52,7 @@
       <button class="social">Entrar com Facebook</button>
     </div>
     <p class="muted">Ainda não tem conta? <a href="signup.html">Cadastre-se</a></p>
+    <div id="feedback" class="feedback-message"></div>
   </main>
   <script src="JS/login.js"></script>
 </body>

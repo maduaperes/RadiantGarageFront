@@ -19,9 +19,9 @@
     </div>
 
     <nav class="nav">
-      <a href="index.html">Home</a>
+      <a href="splash.html">Home</a>
       <span>|</span>
-      <a href="#">Serviços</a>
+      <a href="procura.html">Serviços</a>
 
       <div class="search-box">
         <input type="text" placeholder="Pesquisar serviços" />
@@ -34,7 +34,7 @@
     </nav>
 
     <div class="user">
-      <a href="login.html">Login</a>
+      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Estabelecimento123</strong> !</a>
     </div>
   </header>
 
@@ -70,7 +70,7 @@
       <div class="actions">
         <button class="primary">Novo Serviço</button>
         <button class="primary">Novo Cliente</button>
-        <button class="secondary">Ver Agendamentos</button>
+        <button class="primary">Novo Agendamento</button>
         <button class="secondary">Ver Relatórios</button>
       </div>
     </section>
@@ -84,6 +84,7 @@
           <li>Balanceamento - 12 realizados</li>
           <li>Alinhamento - 10 realizados</li>
           <li>Revisão completa - 8 realizados</li>
+          <button class="btn-primary">Ver todos</button>
         </ul>
       </div>
 
@@ -94,6 +95,7 @@
           <li>Maria Souza</li>
           <li>Carlos Oliveira</li>
           <li>Ana Pereira</li>
+          <button class="btn-primary">Ver todos</button>
         </ul>
       </div>
 
@@ -103,6 +105,7 @@
           <li>05/10 - João Silva - Troca de óleo</li>
           <li>06/10 - Maria Souza - Revisão completa</li>
           <li>07/10 - Carlos Oliveira - Alinhamento</li>
+          <button class="btn-primary">Ver todos</button>
         </ul>
       </div>
 
@@ -116,21 +119,21 @@
 
     <!-- Gráficos -->
     <section class="charts">
-      <h2>Desempenho Mensal</h2>
       <div class="chart-cards">
         <div class="chart-section">
-          <canvas id="performanceChart" height="150"></canvas>
+          <h2>Desempenho Mensal</h2>
+          <canvas id="performanceChart" width="200" height="100"></canvas>
         </div>
         <div class="chart-section">
-          <h3>Receita por Serviço</h3>
-          <canvas id="revenueChart" height="150"></canvas>
+          <h2>Receita por Serviço</h>
+            <canvas id="revenueChart" width="200" height="100"></canvas>
         </div>
       </div>
     </section>
 
     <!-- Promoções -->
     <section class="promo">
-      <h2>Promoções Ativas</h2>
+      <h2>Promoções Ativas <button class="btn-secondary">Editar 🖉</button></h2>
       <div class="promoCard">
         <p>💰 Troca de óleo com 20% de desconto!</p>
       </div>
@@ -158,7 +161,7 @@
 
     <!-- Unidades -->
     <footer class="mapCard">
-      <h2>Unidades próximas</h2>
+      <h2>Unidades próximas <button class="btn-secondary">Editar 🖉</button></h2>
       <p>📍 RadiantGarage Central - Rua Principal, 123</p>
       <p>📍 RadiantGarage Norte - Av. Secundária, 456</p>
       <p>📍 RadiantGarage Sul - Rua Terciária, 789</p>

@@ -1,64 +1,103 @@
-const form = document.getElementById('signupForm');
-const feedback = document.getElementById('feedback');
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.getElementById('signupForm');
+  const feedback = document.getElementById('feedback');
 
-form.addEventListener('submit', function (e) {
+  const clienteRadio = document.getElementById('cliente');
+  const estabelecimentoRadio = document.getElementById('estabelecimento');
+  const clienteFields = document.getElementById('clienteFields');
+  const establishmentFields = document.getElementById('establishmentFields');
+
+  function toggleFields() {
+    const clienteInputs = clienteFields.querySelectorAll('input');
+    const estabelecimentoInputs = establishmentFields.querySelectorAll('input');
+
+    if (clienteRadio.checked) {
+      clienteFields.style.display = 'block';
+      establishmentFields.style.display = 'none';
+
+      clienteInputs.forEach(input => input.required = true);
+      estabelecimentoInputs.forEach(input => input.required = false);
+
+    } else {
+      clienteFields.style.display = 'none';
+      establishmentFields.style.display = 'grid';
+
+      estabelecimentoInputs.forEach(input => {
+        if (input.id === 'horario') {
+          input.required = false;
+        } else {
+          input.required = true;
+        }
+      });
+
+      clienteInputs.forEach(input => input.required = false);
+    }
+  }
+
+  clienteRadio.addEventListener('change', toggleFields);
+  estabelecimentoRadio.addEventListener('change', toggleFields);
+
+  toggleFields(); // chama ao carregar para ajustar a visibilidade e required
+
+  form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Dados comuns
-    const name = document.getElementById('name').value.trim() || 'Cliente';
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value.trim();
+    const userType = document.querySelector('input[name="userType"]:checked').id;
 
-    // Tipo de usuário
-    const userType = document.querySelector('input[name="userType"]:checked').value;
+    let userData = { type: userType };
 
-    // Dados do profissional
-    let service = '';
-    let company = '';
-    if (userType === 'profissional') {
-        service = document.getElementById('service').value.trim();
-        company = document.getElementById('company').value.trim();
-    }
+    if (userType === 'cliente') {
+      const nome = document.getElementById('nameCliente').value.trim();
+      const email = document.getElementById('emailCliente').value.trim();
+      const senha = document.getElementById('passwordCliente').value.trim();
+      const cpf = document.getElementById('cpf').value.trim();
 
-    // Validações
-    if (!email && !phone) {
-        feedback.textContent = "Informe pelo menos um contato (email ou telefone).";
+      if (!nome || !email || !senha || !cpf) {
+        feedback.textContent = "Preencha todos os campos de cliente.";
         feedback.style.color = "red";
         return;
-    }
+      }
 
-    if (!password) {
-        feedback.textContent = "Informe uma senha.";
+      userData = { ...userData, nome, email, senha, cpf };
+
+    } else {
+      const nomeEstab = establishmentFields.querySelector('#nameEstab').value.trim();
+      const cnpj = establishmentFields.querySelector('#cnpj').value.trim();
+      const endereco = establishmentFields.querySelector('#endereco').value.trim();
+      const cidade = establishmentFields.querySelector('#cidade').value.trim();
+      const estado = establishmentFields.querySelector('#estado').value.trim();
+      const cep = establishmentFields.querySelector('#cep').value.trim();
+      const horario = establishmentFields.querySelector('#horario').value.trim();
+      const emailEstab = establishmentFields.querySelector('#emailEstab').value.trim();
+      const senhaEstab = establishmentFields.querySelector('#passwordEstab').value.trim();
+
+      if (!nomeEstab || !cnpj || !endereco || !cidade || !estado || !cep || !emailEstab || !senhaEstab) {
+        feedback.textContent = "Preencha todos os campos obrigatórios do estabelecimento.";
         feedback.style.color = "red";
         return;
+      }
+
+      userData = {
+        ...userData,
+        nomeEstab,
+        cnpj,
+        endereco,
+        cidade,
+        estado,
+        cep,
+        horario,
+        email: emailEstab,
+        senha: senhaEstab
+      };
     }
 
-    if (userType === 'profissional' && !service) {
-        feedback.textContent = "Profissionais devem informar o serviço oferecido.";
-        feedback.style.color = "red";
-        return;
-    }
+    localStorage.setItem('lj_user', JSON.stringify(userData));
 
-    // Monta objeto do usuário
-    const user = {
-        name,
-        userType,
-        contact: email || phone,
-        password,
-        service: service || null,
-        company: company || null
-    };
-
-    // Salva no localStorage
-    localStorage.setItem('lj_user', JSON.stringify(user));
-
-    // Feedback positivo
     feedback.textContent = "Conta criada com sucesso! Redirecionando...";
     feedback.style.color = "green";
 
-    // Redireciona após 1.5s
     setTimeout(() => {
-        location.href = 'dashboard.html';
+      window.location.href = 'procura.html';
     }, 1500);
+  });
 });

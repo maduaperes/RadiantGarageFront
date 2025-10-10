@@ -148,10 +148,8 @@ header.header {
   padding: 0.3rem 0.7rem;
   font-size: 0.8rem;
   color: #fff;
-  background: linear-gradient(90deg, #4f46e5, #f97316);
   border-radius: 10px;
   text-decoration: none;
-  font-weight: bold;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
@@ -264,7 +262,7 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 /* ===== BOTÃO PRINCIPAL ===== */
 .primary {
   margin-top: 18px;
-  background: linear-gradient(90deg, #4f46e5, #f97316);
+  background: #413ba7;
   border: 0;
   padding: 14px;
   border-radius: 12px;
