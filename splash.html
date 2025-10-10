@@ -4,49 +4,176 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Splash - Lava Rápido</title>
+  <title>Home - RadiantGarage</title>
   <link rel="stylesheet" href="CSS/splash.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header class='top'>
-    <img src="IMG/logo.png" class="mini" alt="logo">
-    <div class='user' id='userName'>👋 Olá, João</div>
-  </header>
-  <main class="splash">
-<img class="logo"
-  src="data:image/svg+xml;utf8,
-  <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 140'>
-    <defs>
-      <linearGradient id='g' x1='0' x2='1'>
-        <stop offset='0' stop-color='%232563eb'/>
-        <stop offset='1' stop-color='%23f97316'/>
-      </linearGradient>
-    </defs>
-    <rect rx='24' width='140' height='140' fill='url(%23g)' />
-    <g transform='translate(20,45)' fill='white'>
-      <rect x='15' y='20' width='70' height='25' rx='8'/>
-      <rect x='25' y='10' width='50' height='15' rx='4'/>
-      <circle cx='30' cy='55' r='10'/>
-      <circle cx='70' cy='55' r='10'/>
-    </g>
-    <g fill='white' opacity='0.85'>
-      <circle cx='100' cy='30' r='6'/>
-      <circle cx='115' cy='20' r='4'/>
-      <circle cx='110' cy='40' r='5'/>
-    </g>
-    <text x='50%' y='125' text-anchor='middle'
-          font-family='Arial, sans-serif'
-          font-size='16' font-weight='bold'
-          fill='white'>LavaJato</text>
-  </svg>"
-  alt="Logo LavaJato">
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
 
-    <h1>Bem-vindo ao Lava Rápido</h1>
-    <p>Seu carro limpo com praticidade. Agende, acompanhe e avalie.</p>
-    <button id="enterBtn" class="primary">Entrar</button>
+    <nav class="nav">
+      <a href="splash.html">Home</a>
+      <span>|</span>
+      <a href="procura.html">Serviços</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar serviços" />
+        <button type="button">🔍︎</button>
+      </div>
+
+      <a href="#">Suporte</a>
+      <span>|</span>
+      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <!-- Banner ou destaque -->
+  <section class="banner">
+    <div class="banner-content">
+      <h1>Cuide do seu carro com a RadiantGarage</h1>
+      <p>Agende serviços de lavagem, polimento, higienização e mais.</p>
+      <a href="agendamento.html">Procurar Serviços</a>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <!-- Serviços em destaque -->
+    <section class="servicos">
+      <hr class="separator" />
+      <h2>Serviços Oferecidos</h2>
+      <div class="cards-servicos">
+
+        <article class="card-servico">
+          <h3>Lavagem Completa</h3>
+          <hr class="separator" />
+          <p>Exterior e interior, com atenção aos mínimos detalhes para deixar seu carro limpo, protegido e brilhando
+            como novo.</p>
+        </article>
+
+        <article class="card-servico">
+          <h3>Troca de Óleo</h3>
+          <hr class="separator" />
+          <p>Substituição do óleo do motor com verificação completa do filtro e demais componentes para garantir a
+            performance e longevidade do seu veículo.</p>
+        </article>
+
+        <article class="card-servico">
+          <h3>Alinhamento</h3>
+          <hr class="separator" />
+          <p>Correção precisa da direção e equilíbrio das rodas para melhorar a segurança, o conforto ao dirigir e a
+            durabilidade dos pneus.</p>
+        </article>
+
+        <article class="card-servico">
+          <h3>Enceramento</h3>
+          <hr class="separator" />
+          <p>Aplicação profissional de cera de alta qualidade para proteger a pintura, realçar o brilho e preservar o
+            acabamento do seu carro contra os danos do tempo.</p>
+        </article>
+
+      </div>
+
+      <div class="all-services">
+        <a href="login.html">Ver todos</a>
+      </div>
+
+    </section>
+
+    <!-- Avaliações -->
+    <section class="avaliacoes">
+      <h2>O que dizem nossos clientes</h2>
+      <div class="depoimentos">
+
+        <blockquote>
+          <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Foto de João M." class="avatar" />
+          <div class="content">
+            <header>
+              <h4>João M.</h4>
+              <span class="stars">★★★★★</span>
+            </header>
+            <p>“Ótimo atendimento e meu carro ficou impecável! Super recomendo a RadiantGarage para todos que querem
+              qualidade e cuidado.”</p>
+            <footer>Cliente fiel desde 2022</footer>
+          </div>
+        </blockquote>
+
+        <blockquote>
+          <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Foto de Ana P." class="avatar" />
+          <div class="content">
+            <header>
+              <h4>Ana P.</h4>
+              <span class="stars">★★★★☆</span>
+            </header>
+            <p>“Atendimento rápido e eficiente, adorei a facilidade do agendamento online. Meu carro ficou limpo e
+              cheiroso!”</p>
+            <footer>Usuária frequente</footer>
+          </div>
+        </blockquote>
+
+        <blockquote>
+          <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Foto de Carlos R." class="avatar" />
+          <div class="content">
+            <header>
+              <h4>Carlos R.</h4>
+              <span class="stars">★★★★★</span>
+            </header>
+            <p>“Sempre volto! Serviço de confiança e equipe muito profissional. Recomendo a todos.”</p>
+            <footer>Cliente desde 2020</footer>
+          </div>
+        </blockquote>
+
+        <blockquote>
+          <img src="https://randomuser.me/api/portraits/women/25.jpg" alt="Foto de Maria L." class="avatar" />
+          <div class="content">
+            <header>
+              <h4>Maria L.</h4>
+              <span class="stars">★★★★☆</span>
+            </header>
+            <p>“O melhor lugar para cuidar do meu carro! Serviços de qualidade e atendimento excepcional. Recomendo
+              absolutamente!”</p>
+            <footer>Usuária desde 2019</footer>
+          </div>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- Diferenciais -->
+    <section class="diferenciais">
+      <h2>Por que escolher a RadiantGarage?</h2>
+      <ul>
+        <li>✔ Equipes especializadas</li>
+        <li>✔ Agendamentos online</li>
+        <li>✔ Produtos de alta qualidade</li>
+        <li>✔ Atendimentos rápido</li>
+        <li>✔ Localizações convenientes</li>
+      </ul>
+    </section>
+
+    <!-- CTA final -->
+    <section class="chamada-final">
+      <h2>Pronto para deixar seu carro novo?</h2>
+      <p>Agende seu serviço agora mesmo ou entre em contato conosco.</p>
+      <a href="agendamento.html">Entrar em contato</a>
+    </section>
+
   </main>
-  <script src="JS/splash.js"></script>
+
 </body>
+
+<footer>
+  <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+</footer>
 
 </html>
