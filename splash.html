@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RadiantGarage | Cuide Bem do Seu Carro</title>
-  <link rel="stylesheet" href="CSS/splash.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RadiantGarage</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="CSS/splash.css">
 </head>
-
 <body>
 
   <!-- HEADER -->
@@ -19,18 +17,18 @@
     </div>
 
     <nav class="nav">
-      <a href="splash.html">Home</a>
+      <a href="#home">Home</a>
       <span>|</span>
-      <a href="procura.html">Serviços</a>
+      <a href="#services">Serviços</a>
 
       <div class="search-box">
         <input type="text" placeholder="Pesquisar serviços" />
         <button type="button">🔍︎</button>
       </div>
 
-      <a href="#">Suporte</a>
+      <a href="#support">Suporte</a>
       <span>|</span>
-      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+      <a class="reservas-btn" href="#booking">Agendar</a>
     </nav>
 
     <div class="user">
@@ -41,97 +39,71 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-content">
-      <h1>Seu Carro, Nosso Compromisso</h1>
-      <p>Cuidamos do seu veículo com excelência, tecnologia e dedicação. Da lavagem ao reparo completo, tudo em um só
-        lugar.</p>
-      <a href="agendamento.html" class="btn-primary">Agende um Serviço</a>
+      <h1>Seu carro merece o melhor cuidado</h1>
+      <p>Serviços automotivos de qualidade, rápidos e confiáveis para manter seu veículo sempre impecável.</p>
+      <a href="procura.html" class="btn-hero">Agende Agora</a>
     </div>
   </section>
-  <!-- OBJETIVO -->
-  <section class="services">
-    <p>S E R V I C E</p>
+
+  <!-- SERVICES -->
+  <section id="services" class="features">
     <h2>Nossos Serviços</h2>
-    <div class="service-cards">
+    <div class="cards">
       <div class="card">
-        <h3>Lavagem Completa</h3>
-        <p>Oferecemos uma limpeza profunda e cuidadosa, utilizando produtos de alta qualidade que preservam a pintura e
-          o acabamento do seu veículo, realizados por uma equipe especializada e comprometida com o melhor resultado.
-        </p>
-        <a href="procura.html" class="btn-secondary">Saiba mais</a>
+        <h3>Manutenção Preventiva</h3>
+        <p>Evite problemas futuros com revisões completas e detalhadas do seu carro.</p>
       </div>
       <div class="card">
-        <h3>Troca de Óleo</h3>
-        <p>Realizamos a troca de óleo de forma rápida e segura, utilizando lubrificantes premium que garantem o bom
-          funcionamento do motor, prolongando a vida útil do seu carro e otimizando seu desempenho.</p>
-        <a href="procura.html" class="btn-secondary">Saiba mais</a>
+        <h3>Estética Automotiva</h3>
+        <p>Lavagem, polimento e proteção da pintura para deixar seu carro brilhando.</p>
       </div>
       <div class="card">
-        <h3>Revisão Geral</h3>
-        <p>Executamos revisões completas, checando todos os sistemas essenciais do seu veículo para assegurar a
-          segurança, o conforto e a performance, proporcionando tranquilidade e confiança para suas viagens.</p>
-        <a href="procura.html" class="btn-secondary">Saiba mais</a>
-      </div>
-    </div>
-    <div class="separator"></div>
-  </section>
-
-  <!-- DEPOIMENTOS -->
-  <section class="about">
-    <div class="about-content">
-      <div class="about-text">
-        <p>A B O U T</p>
-        <h2>Sobre a RadiantGarage</h2>
-        <p>
-          Somos uma plataforma dedicada a conectar clientes a serviços automotivos de alta qualidade, garantindo
-          praticidade e confiança em cada etapa do processo. Nosso compromisso é integrar tecnologia avançada com um
-          atendimento personalizado, proporcionando uma experiência rápida, eficiente e segura. Valorizamos a satisfação
-          do cliente, a transparência e a excelência, buscando sempre facilitar o cuidado com seu veículo por meio de
-          profissionais qualificados e avaliações confiáveis.
-        </p>
-      </div>
-
-      <!-- IMAGEM representando "Sobre nós" -->
-      <div class="about-image">
-        <img src="https://cdn-icons-png.flaticon.com/512/11460/11460215.png" alt="Ícone sobre nós">
+        <h3>Reparos Rápidos</h3>
+        <p>Consertos ágeis e confiáveis para você não ficar parado por muito tempo.</p>
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section id="about" class="about">
+    <h2>Sobre a RadiantGarage</h2>
+    <p>Somos especialistas em cuidar do seu veículo com atenção, tecnologia e compromisso com a qualidade.</p>
+  </section>
 
+  <!-- CONTACT / BOOKING -->
+<!-- CONTACT / BOOKING -->
+<section id="booking" class="contact">
+  <h2>Entre ou cadastre-se</h2>
+  <p>Para aproveitar nossos serviços, faça login ou cadastre-se. Tanto clientes quanto profissionais podem criar suas contas:</p>
 
-  <!-- PROFISSIONAIS -->
-  <section class="how-it-works">
-    <h2>Como Funciona</h2>
-    <div class="steps">
-      <div class="step">
-        <h3>1. Escolha o Serviço</h3>
-        <p>Selecione entre diversos serviços automotivos que atendem às suas necessidades.</p>
-      </div>
-      <div class="step">
-        <h3>2. Encontre Profissionais</h3>
-        <p>Conecte-se rapidamente com profissionais avaliados e confiáveis na sua região.</p>
-      </div>
-      <div class="step">
-        <h3>3. Agende e Acompanhe</h3>
-        <p>Agende seu serviço com facilidade e acompanhe o andamento pelo nosso portal.</p>
-      </div>
+  <div class="auth-cards">
+    <!-- Clientes -->
+    <div class="auth-card">
+      <h3>Sou Cliente</h3>
+      <p>Agende serviços, acompanhe seu veículo e tenha todas as informações em um só lugar.</p>
+      <a href="login.html" class="btn-auth">Login</a>
+      <a href="register.html" class="btn-auth btn-register">Cadastrar</a>
     </div>
-  </section>
 
-  <!-- NEWSLETTER -->
-  <section class="newsletter">
-    <h2>Receba Nossas Novidades</h2>
-    <p>Cadastre-se e fique por dentro das promoções e novos serviços da RadiantGarage.</p>
-    <form>
-      <input type="email" placeholder="Digite seu e-mail" required>
-      <button type="submit">Inscrever-se</button>
-    </form>
-  </section>
+    <!-- Profissionais -->
+    <div class="auth-card">
+      <h3>Sou Profissional</h3>
+      <p>Cadastre seu estabelecimento, gerencie serviços e conecte-se com clientes facilmente.</p>
+      <a href="login.html" class="btn-auth">Login</a>
+      <a href="register.html" class="btn-auth btn-register">Cadastrar</a>
+    </div>
+  </div>
 
+  <!-- Suporte -->
+  <div class="contact-support">
+    <p>Em casos de problemas com a plataforma, <a href="support.html">entre em contato conosco</a>.</p>
+  </div>
+</section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>© 2025 RadiantGarage — Todos os direitos reservados.</p>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
   </footer>
 
 </body>
-
 </html>
