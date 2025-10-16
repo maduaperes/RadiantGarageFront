@@ -132,7 +132,7 @@ header.header {
 }
 
 .user a {
-  padding: 0.3rem 0.7rem;
+  padding: 0.5rem 1rem;
   font-size: 0.8rem;
   color: #fff;
   background: #413ba7;
@@ -329,7 +329,7 @@ header.header {
   display: inline-block;
   width: 100%;
   padding: 12px 0;
-  border-radius: 25px;
+  border-radius: 10px;
   font-weight: 600;
   text-decoration: none;
   margin: 5px 0;
@@ -347,7 +347,7 @@ header.header {
 
 .btn-auth:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(99, 102, 241, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   background: #413ba7;
 }
 
@@ -357,9 +357,10 @@ header.header {
 
 /* Support Text */
 .contact-support {
-  margin-top: 40px;
+  margin-top: 80px;
   font-size: 0.95rem;
   color: #a3b4cc;
+  text-align: center;
 }
 
 .contact-support a {

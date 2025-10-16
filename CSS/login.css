@@ -146,7 +146,7 @@ header.header {
 }
 
 .user a {
-  padding: 0.3rem 0.7rem;
+  padding: 0.5rem 1rem;
   font-size: 0.8rem;
   color: #fff;
   background: #413ba7;
@@ -154,7 +154,6 @@ header.header {
   text-decoration: none;
   font-weight: bold;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
 }
 
 .user a:hover {

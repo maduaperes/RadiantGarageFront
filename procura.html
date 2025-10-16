@@ -1,79 +1,240 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+<!doctype html>
+<html lang="pt-BR">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Procurar Serviços | LavaRapido & Estética</title>
-  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Serviços - RadiantGarage</title>
   <link rel="stylesheet" href="CSS/procura.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-
+  <!-- Header global (igual ao dashboard) -->
   <header class="header">
     <div class="logo">
-      <div class="logo-icon">🚗</div>
+      <div class="logo-icon"></div>
       <span>RadiantGarage</span>
     </div>
 
     <nav class="nav">
-      <a href="index.html">Home</a>
+      <a href="splash.html">Home</a>
       <span>|</span>
-      <a href="#">Serviços</a>
+      <a href="procura.html">Serviços</a>
+
       <div class="search-box">
         <input type="text" placeholder="Pesquisar serviços" />
-        <button>🔍</button>
+        <button>🔍︎</button>
       </div>
+
       <a href="#">Suporte</a>
       <span>|</span>
       <a class="reservas-btn" href="agendamento.html">Agendar</a>
     </nav>
 
     <div class="user">
-      <a href="login.html">Login</a>
-      <div class="avatar">👤</div>
+      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Usuario123</strong> !</a>
     </div>
   </header>
 
   <main>
 
-    <div class="search-filters">
+    <!-- FILTROS DE BUSCA -->
+    <aside class="search-filters">
       <h2>Filtros de Busca</h2>
-      <label>
-        Serviço:
-        <select>
-          <option value="">Selecione</option>
-          <option value="lavagem_simples">Lavagem Simples</option>
-          <option value="lavagem_completa">Lavagem Completa</option>
-          <option value="polimento">Polimento</option>
-          <option value="estetica">Estética Automotiva</option>
-        </select>
-      </label>
-      <label>
-        Data:
-        <input type="date">
-      </label>
-      <label>
-        Horário:
-        <input type="time">
-      </label>
-      <label>
-        Veículo:
-        <input type="text" placeholder="Modelo ou placa">
-      </label>
-      <button class="search-btn">Buscar</button>
-    </div>
+      <form>
+        <label>
+          Serviço:
+          <div class="multi-select">
+            <div class="select-box" onclick="toggleDropdown()">
+              <span id="selected">Selecione os serviços</span>
+              <i class="arrow">&#9662;</i>
+            </div>
+            <div class="options-container" id="optionsContainer">
+              <label><input type="checkbox" value="manutencao_motor"> Manutenção do Motor</label>
+              <label><input type="checkbox" value="transmissao_cambio"> Transmissão e Câmbio</label>
+              <label><input type="checkbox" value="freios_suspensao"> Freios e Suspensão</label>
+              <label><input type="checkbox" value="pneus_rodas"> Pneus e Rodas</label>
+              <label><input type="checkbox" value="sistema_eletrico"> Sistema Elétrico</label>
+              <label><input type="checkbox" value="ar_climatizacao"> Sistema de Ar e Climatização</label>
+              <label><input type="checkbox" value="seguranca_direcao"> Segurança e Direção</label>
+              <label><input type="checkbox" value="sistema_escape"> Sistema de Escape</label>
+              <label><input type="checkbox" value="combustivel_injecao"> Combustível e Injeção</label>
+              <label><input type="checkbox" value="diagnostico_revisao"> Diagnóstico e Revisão Geral</label>
+
+              <label><input type="checkbox" value="lavagem_simples"> Lavagem Simples</label>
+              <label><input type="checkbox" value="lavagem_completa"> Lavagem Completa</label>
+              <label><input type="checkbox" value="lavagem_seca"> Lavagem a Seco</label>
+              <label><input type="checkbox" value="polimento"> Polimento</label>
+              <label><input type="checkbox" value="enceramento"> Enceramento</label>
+              <label><input type="checkbox" value="vitrificacao"> Vitrificação / Cristalização</label>
+              <label><input type="checkbox" value="higienizacao_interna"> Higienização Interna</label>
+              <label><input type="checkbox" value="tratamento_couro"> Tratamento de Couro e Estofados</label>
+              <label><input type="checkbox" value="polimento_farois"> Polimento de Faróis</label>
+              <label><input type="checkbox" value="protecao_vidros"> Proteção de Vidros</label>
+              <label><input type="checkbox" value="peliculas_detalhes"> Películas e Detalhes Estéticos</label>
+            </div>
+          </div>
+        </label>
+
+        <label>
+          Urgência do Serviço:
+          <select>
+            <option value="">Selecione</option>
+            <option value="normal">Normal</option>
+            <option value="urgente">Urgente</option>
+            <option value="imediato">Imediato</option>
+          </select>
+        </label>
+
+        <label>
+          Data:
+          <input type="date" required>
+        </label>
+
+        <label>
+          Horário:
+          <input type="time" required>
+        </label>
+
+        <label>
+          Tempo Estimado:
+          <select>
+            <option value="">Qualquer</option>
+            <option value="ate1h">Até 1h</option>
+            <option value="1-2h">1–2h</option>
+            <option value="2-4h">2–4h</option>
+            <option value="mais4h">Mais de 4h</option>
+          </select>
+        </label>
+
+        <label>
+          Tipo de Atendimento:
+          <select>
+            <option value="">Qualquer</option>
+            <option value="presencial">Presencial no local</option>
+            <option value="retirada_entrega">Retirada e Entrega</option>
+            <option value="rapido">Atendimento rápido</option>
+          </select>
+        </label>
+
+        <label>
+          Localidade:
+          <input type="text" placeholder="Digite o endereço">
+        </label>
+
+        <button class="search-btn" type="submit">Buscar</button>
+        <button type="button" class="clear-btn">Limpar Filtros</button>
+
+      </form>
+    </aside>
 
     <!-- RESULTADOS -->
-    <div class="service-results">
+    <section class="service-results">
       <h2>Serviços Disponíveis</h2>
 
       <div class="service-card">
-        <img src="img/lavagem-simples.jpg" alt="Lavagem Simples">
+        <img src="https://images.pexels.com/photos/4083767/pexels-photo-4083767.jpeg" alt="Manutenção do Motor">
+        <div class="service-info">
+          <h3>Manutenção do Motor</h3>
+          <p>Preço sob consulta</p>
+          <p>Serviços de manutenção preventiva e corretiva do motor</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/12190245/pexels-photo-12190245.jpeg" alt="Transmissão e Câmbio">
+        <div class="service-info">
+          <h3>Transmissão e Câmbio</h3>
+          <p>Preço sob consulta</p>
+          <p>Revisão e reparo de transmissões e câmbios</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Freios e Suspensão">
+        <div class="service-info">
+          <h3>Freios e Suspensão</h3>
+          <p>Preço sob consulta</p>
+          <p>Revisão e manutenção de freios e suspensão</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Pneus e Rodas">
+        <div class="service-info">
+          <h3>Pneus e Rodas</h3>
+          <p>Preço sob consulta</p>
+          <p>Troca e alinhamento de pneus e rodas</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema Elétrico">
+        <div class="service-info">
+          <h3>Sistema Elétrico</h3>
+          <p>Preço sob consulta</p>
+          <p>Manutenção de fiação, baterias e componentes elétricos</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema de Ar e Climatização">
+        <div class="service-info">
+          <h3>Sistema de Ar e Climatização</h3>
+          <p>Preço sob consulta</p>
+          <p>Revisão e manutenção de ar-condicionado e climatização</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Segurança e Direção">
+        <div class="service-info">
+          <h3>Segurança e Direção</h3>
+          <p>Preço sob consulta</p>
+          <p>Manutenção de direção, airbags e sistemas de segurança</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema de Escape">
+        <div class="service-info">
+          <h3>Sistema de Escape</h3>
+          <p>Preço sob consulta</p>
+          <p>Reparo e manutenção do escapamento e catalisadores</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Combustível e Injeção">
+        <div class="service-info">
+          <h3>Combustível e Injeção</h3>
+          <p>Preço sob consulta</p>
+          <p>Revisão de bomba de combustível e sistema de injeção</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Diagnóstico e Revisão Geral">
+        <div class="service-info">
+          <h3>Diagnóstico e Revisão Geral</h3>
+          <p>Preço sob consulta</p>
+          <p>Check-up completo do veículo, diagnósticos eletrônicos e mecânicos</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem Simples">
         <div class="service-info">
           <h3>Lavagem Simples</h3>
           <p>Preço: R$ 50,00</p>
@@ -83,7 +244,7 @@
       </div>
 
       <div class="service-card">
-        <img src="img/lavagem-completa.jpg" alt="Lavagem Completa">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem Completa">
         <div class="service-info">
           <h3>Lavagem Completa</h3>
           <p>Preço: R$ 120,00</p>
@@ -93,30 +254,103 @@
       </div>
 
       <div class="service-card">
-        <img src="img/polimento.jpg" alt="Polimento">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem a Seco">
+        <div class="service-info">
+          <h3>Lavagem a Seco</h3>
+          <p>Preço sob consulta</p>
+          <p>Limpeza ecológica sem uso de água</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Polimento">
         <div class="service-info">
           <h3>Polimento</h3>
-          <p>Preço: R$ 250,00</p>
+          <p>Preço sob consulta</p>
           <p>Restauração do brilho da pintura</p>
           <a href="detalhes.html">Ver mais</a>
         </div>
       </div>
 
       <div class="service-card">
-        <img src="img/estetica.jpg" alt="Estética Automotiva">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Enceramento">
         <div class="service-info">
-          <h3>Estética Automotiva</h3>
-          <p></p>
-          <p>Cuidados estéticos completos para seu carro</p>
+          <h3>Enceramento</h3>
+          <p>Preço sob consulta</p>
+          <p>Proteção e brilho da pintura</p>
           <a href="detalhes.html">Ver mais</a>
         </div>
       </div>
 
-    </div>
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Vitrificação / Cristalização">
+        <div class="service-info">
+          <h3>Vitrificação / Cristalização</h3>
+          <p>Preço sob consulta</p>
+          <p>Proteção avançada da pintura</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Higienização Interna">
+        <div class="service-info">
+          <h3>Higienização Interna</h3>
+          <p>Preço sob consulta</p>
+          <p>Limpeza completa do interior do veículo</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Tratamento de Couro e Estofados">
+        <div class="service-info">
+          <h3>Tratamento de Couro e Estofados</h3>
+          <p>Preço sob consulta</p>
+          <p>Manutenção e hidratação do estofado de couro</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Polimento de Faróis">
+        <div class="service-info">
+          <h3>Polimento de Faróis</h3>
+          <p>Preço sob consulta</p>
+          <p>Recuperação da transparência dos faróis</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Proteção de Vidros">
+        <div class="service-info">
+          <h3>Proteção de Vidros</h3>
+          <p>Preço sob consulta</p>
+          <p>Aplicação de películas e proteção de vidros</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img src="https://images.pexels.com/photos/3807211/pexels-photo-3807211.jpeg"
+          alt="Películas e Detalhes Estéticos">
+        <div class="service-info">
+          <h3>Películas e Detalhes Estéticos</h3>
+          <p>Preço sob consulta</p>
+          <p>Aplicação de películas, adesivos e pequenos detalhes estéticos</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+
 
   </main>
-<script src="JS/script.js"></script>
-
+  <footer>
+    <p>&copy; 2023 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
+  <script src="JS/procura.js"></script>
 </body>
 
 </html>

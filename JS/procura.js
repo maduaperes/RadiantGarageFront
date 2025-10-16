@@ -1,30 +1,61 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const searchBtn = document.querySelector('.search-btn');
-  const serviceSelect = document.querySelector('select');
-  const serviceCards = document.querySelectorAll('.service-card');
+// ==========================
+// SELEÇÃO DE SERVIÇOS POR TAGS
+// ==========================
+const tags = document.querySelectorAll('.service-tags .tag');
+let selectedServices = [];
 
-  searchBtn.addEventListener('click', () => {
-    const service = serviceSelect.value;
-    const date = document.querySelector('input[type="date"]').value;
-    const time = document.querySelector('input[type="time"]').value;
-    const vehicle = document.querySelector('input[placeholder="Modelo ou placa"]').value;
+tags.forEach(tag => {
+  tag.addEventListener('click', () => {
+    const value = tag.dataset.value;
 
-    // Apenas um alerta básico para testar os dados do filtro
-    alert(`Busca realizada:\nServiço: ${service || 'Todos'}\nData: ${date || 'Não selecionada'}\nHorário: ${time || 'Não selecionado'}\nVeículo: ${vehicle || 'Não informado'}`);
+    if (selectedServices.includes(value)) {
+      selectedServices = selectedServices.filter(s => s !== value);
+      tag.classList.remove('selected');
+    } else {
+      selectedServices.push(value);
+      tag.classList.add('selected');
+    }
 
-    // Filtra os cards
-    serviceCards.forEach(card => {
-      if (!service || service === '') {
-        card.style.display = 'flex';
-      } else {
-        // Cada card tem um título, vamos usar ele para filtrar
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        if (title.includes(service.replace('_', ' '))) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      }
-    });
+    console.log('Serviços selecionados:', selectedServices);
   });
+});
+
+// ==========================
+// FORMULARIO DE BUSCA
+// ==========================
+const searchForm = document.querySelector('.search-filters form');
+
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(searchForm);
+  const data = {
+    servicos: selectedServices,
+    urgencia: formData.get('urgencia') || '',
+    data: formData.get('data') || '',
+    horario: formData.get('horario') || '',
+    tempo: formData.get('tempo') || '',
+    atendimento: formData.get('atendimento') || '',
+    localidade: formData.get('localidade') || ''
+  };
+
+  console.log('Busca realizada com os filtros:', data);
+
+  // Aqui você pode adicionar a lógica para filtrar os cards
+});
+
+// ==========================
+// BOTÃO LIMPAR FILTROS
+// ==========================
+const clearBtn = document.querySelector('.clear-btn');
+
+clearBtn.addEventListener('click', () => {
+  // Remove seleção das tags
+  selectedServices = [];
+  tags.forEach(tag => tag.classList.remove('selected'));
+
+  // Reseta form
+  searchForm.reset();
+
+  console.log('Filtros limpos');
 });
