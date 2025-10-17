@@ -255,7 +255,7 @@ input:focus {
 
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(70%) brightness(0.9);
+  filter: invert(70%) brightness(1.3);
   cursor: pointer;
 }
 

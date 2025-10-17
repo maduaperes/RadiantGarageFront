@@ -1,61 +1,86 @@
 // ==========================
-// SELEÇÃO DE SERVIÇOS POR TAGS
+// MULTISELECT - ABRIR E FECHAR DROPDOWN
 // ==========================
-const tags = document.querySelectorAll('.service-tags .tag');
-let selectedServices = [];
+const selectBox = document.querySelector('.select-box');
+const optionsContainer = document.getElementById('optionsContainer');
+const selectedSpan = document.getElementById('selected');
+const checkboxes = document.querySelectorAll('#optionsContainer input[type="checkbox"]');
+const searchForm = document.querySelector('.search-filters form');
+const clearBtn = document.querySelector('.clear-btn');
 
-tags.forEach(tag => {
-  tag.addEventListener('click', () => {
-    const value = tag.dataset.value;
+selectBox.addEventListener('click', (e) => {
+  e.preventDefault();    // evita que o label acione inputs
+  e.stopPropagation();   // impede propagação
+  const isOpen = optionsContainer.style.display === 'flex';
+  optionsContainer.style.display = isOpen ? 'none' : 'flex';
+});
 
-    if (selectedServices.includes(value)) {
-      selectedServices = selectedServices.filter(s => s !== value);
-      tag.classList.remove('selected');
-    } else {
-      selectedServices.push(value);
-      tag.classList.add('selected');
-    }
+// Fecha o dropdown ao clicar fora
+document.addEventListener('click', (e) => {
+  if (!selectBox.contains(e.target) && !optionsContainer.contains(e.target)) {
+    optionsContainer.style.display = 'none';
+  }
+});
 
-    console.log('Serviços selecionados:', selectedServices);
+// Impede que clicar dentro do container feche o dropdown
+optionsContainer.addEventListener('click', (e) => e.stopPropagation());
+
+// ==========================
+// MULTISELECT - ATUALIZAÇÃO DE SELEÇÃO
+// ==========================
+checkboxes.forEach((checkbox) => {
+  checkbox.addEventListener('change', () => {
+    const selected = Array.from(checkboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.parentNode.textContent.trim());
+
+    selectedSpan.textContent = selected.length > 0
+      ? selected.join(', ')
+      : 'Selecione os serviços';
+
+    filtrarServicos();
   });
 });
 
 // ==========================
-// FORMULARIO DE BUSCA
+// FILTRAGEM DOS CARDS
 // ==========================
-const searchForm = document.querySelector('.search-filters form');
+function filtrarServicos() {
+  const selecionados = Array.from(checkboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.value.toLowerCase());
 
-searchForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+  const cards = document.querySelectorAll('.service-card');
 
-  const formData = new FormData(searchForm);
-  const data = {
-    servicos: selectedServices,
-    urgencia: formData.get('urgencia') || '',
-    data: formData.get('data') || '',
-    horario: formData.get('horario') || '',
-    tempo: formData.get('tempo') || '',
-    atendimento: formData.get('atendimento') || '',
-    localidade: formData.get('localidade') || ''
-  };
+  cards.forEach(card => {
+    const nomeServico = card.querySelector('h3').textContent.toLowerCase();
 
-  console.log('Busca realizada com os filtros:', data);
-
-  // Aqui você pode adicionar a lógica para filtrar os cards
-});
+    if (selecionados.length === 0) {
+      card.style.display = 'flex';
+    } else {
+      const corresponde = selecionados.some(valor =>
+        nomeServico.includes(valor.replace(/_/g, ' '))
+      );
+      card.style.display = corresponde ? 'flex' : 'none';
+    }
+  });
+}
 
 // ==========================
 // BOTÃO LIMPAR FILTROS
 // ==========================
-const clearBtn = document.querySelector('.clear-btn');
-
-clearBtn.addEventListener('click', () => {
-  // Remove seleção das tags
-  selectedServices = [];
-  tags.forEach(tag => tag.classList.remove('selected'));
-
-  // Reseta form
+clearBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  checkboxes.forEach(cb => cb.checked = false);
+  selectedSpan.textContent = 'Selecione os serviços';
   searchForm.reset();
+  filtrarServicos();
+});
 
-  console.log('Filtros limpos');
+// ==========================
+// SUBMIT (caso queira filtrar manualmente)
+// ==========================
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  filtrarServicos();
 });

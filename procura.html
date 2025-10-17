@@ -43,13 +43,14 @@
     <aside class="search-filters">
       <h2>Filtros de Busca</h2>
       <form>
-        <label>
-          Serviço:
-          <div class="multi-select">
-            <div class="select-box" onclick="toggleDropdown()">
+        <div class="filter">
+          <label for="servico">Serviço:</label>
+          <div id="servico" class="multi-select">
+            <div class="select-box">
               <span id="selected">Selecione os serviços</span>
               <i class="arrow">&#9662;</i>
             </div>
+
             <div class="options-container" id="optionsContainer">
               <label><input type="checkbox" value="manutencao_motor"> Manutenção do Motor</label>
               <label><input type="checkbox" value="transmissao_cambio"> Transmissão e Câmbio</label>
@@ -75,7 +76,8 @@
               <label><input type="checkbox" value="peliculas_detalhes"> Películas e Detalhes Estéticos</label>
             </div>
           </div>
-        </label>
+        </div>
+
 
         <label>
           Urgência do Serviço:
@@ -134,9 +136,10 @@
       <h2>Serviços Disponíveis</h2>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/4083767/pexels-photo-4083767.jpeg" alt="Manutenção do Motor">
+        <img src="https://www.tecfil.com.br/wp-content/uploads/2020/09/galerias_tecfil-seo_0005_shutterstock_1457616980-1024x683.jpg" alt="Manutenção do Motor">
         <div class="service-info">
           <h3>Manutenção do Motor</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Serviços de manutenção preventiva e corretiva do motor</p>
           <a href="detalhes.html">Ver mais</a>
@@ -147,6 +150,7 @@
         <img src="https://images.pexels.com/photos/12190245/pexels-photo-12190245.jpeg" alt="Transmissão e Câmbio">
         <div class="service-info">
           <h3>Transmissão e Câmbio</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Revisão e reparo de transmissões e câmbios</p>
           <a href="detalhes.html">Ver mais</a>
@@ -154,9 +158,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Freios e Suspensão">
+        <img src="https://www.limpsom.com.br/imagens/artigos/big/freios-e-suspensao.jpg" alt="Freios e Suspensão">
         <div class="service-info">
           <h3>Freios e Suspensão</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Revisão e manutenção de freios e suspensão</p>
           <a href="detalhes.html">Ver mais</a>
@@ -164,9 +169,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Pneus e Rodas">
+        <img src="https://www.oklocadoradeveiculos.com/wp-content/uploads/2020/05/Depositphotos_94983148_xl-2015A-1080x675.jpg" alt="Pneus e Rodas">
         <div class="service-info">
           <h3>Pneus e Rodas</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Troca e alinhamento de pneus e rodas</p>
           <a href="detalhes.html">Ver mais</a>
@@ -174,9 +180,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema Elétrico">
+        <img src="https://blog.rbmotors.com.br/wp-content/uploads/2024/10/image-4.jpeg" alt="Sistema Elétrico">
         <div class="service-info">
           <h3>Sistema Elétrico</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Manutenção de fiação, baterias e componentes elétricos</p>
           <a href="detalhes.html">Ver mais</a>
@@ -184,9 +191,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema de Ar e Climatização">
+        <img src="https://www.delphiautoparts.com/images/default-source/theme/compressor-.tmb-1920w.png?Culture=pt-BR&sfvrsn=2e7eb6e_5" alt="Sistema de Ar e Climatização">
         <div class="service-info">
           <h3>Sistema de Ar e Climatização</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Revisão e manutenção de ar-condicionado e climatização</p>
           <a href="detalhes.html">Ver mais</a>
@@ -194,9 +202,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Segurança e Direção">
+        <img src="https://www.canaldapeca.com.br/blog/wp-content/uploads/2018/07/1_1.jpg" alt="Segurança e Direção">
         <div class="service-info">
           <h3>Segurança e Direção</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Manutenção de direção, airbags e sistemas de segurança</p>
           <a href="detalhes.html">Ver mais</a>
@@ -204,9 +213,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Sistema de Escape">
+        <img src="https://static.wixstatic.com/media/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg" alt="Sistema de Escape">
         <div class="service-info">
           <h3>Sistema de Escape</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Reparo e manutenção do escapamento e catalisadores</p>
           <a href="detalhes.html">Ver mais</a>
@@ -214,9 +224,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Combustível e Injeção">
+        <img src="https://mobilidade.estadao.com.br/wp-content/uploads/2023/05/injecao.jpg" alt="Combustível e Injeção">
         <div class="service-info">
           <h3>Combustível e Injeção</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Revisão de bomba de combustível e sistema de injeção</p>
           <a href="detalhes.html">Ver mais</a>
@@ -224,9 +235,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Diagnóstico e Revisão Geral">
+        <img src="https://blog.fras-le.com/wp-content/uploads/2020/02/original-e6ea8bb79457d7a5a19bfe9c35171331-scaled.jpg" alt="Diagnóstico e Revisão Geral">
         <div class="service-info">
           <h3>Diagnóstico e Revisão Geral</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Check-up completo do veículo, diagnósticos eletrônicos e mecânicos</p>
           <a href="detalhes.html">Ver mais</a>
@@ -234,9 +246,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem Simples">
+        <img src="https://www.zuldigital.com.br/blog/wp-content/uploads/2021/11/shutterstock_1859193349_Easy-Resize.com_.jpg" alt="Lavagem Simples">
         <div class="service-info">
           <h3>Lavagem Simples</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço: R$ 50,00</p>
           <p>Limpeza básica e rápida do veículo</p>
           <a href="detalhes.html">Ver mais</a>
@@ -244,9 +257,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem Completa">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu22XRNtKTw0VRj1eJejrFGebHoMkeV-jvGw&s" alt="Lavagem Completa">
         <div class="service-info">
           <h3>Lavagem Completa</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço: R$ 120,00</p>
           <p>Lavagem detalhada interna e externa</p>
           <a href="detalhes.html">Ver mais</a>
@@ -254,9 +268,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Lavagem a Seco">
+        <img src="https://www.acquazero.com/wp-content/uploads/2020/09/2792649-1-scaled.jpg" alt="Lavagem a Seco">
         <div class="service-info">
           <h3>Lavagem a Seco</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Limpeza ecológica sem uso de água</p>
           <a href="detalhes.html">Ver mais</a>
@@ -264,9 +279,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Polimento">
+        <img src="https://wicar.com.br/wp-content/uploads/2021/08/polimento-automotivo.jpg" alt="Polimento">
         <div class="service-info">
           <h3>Polimento</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Restauração do brilho da pintura</p>
           <a href="detalhes.html">Ver mais</a>
@@ -274,9 +290,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Enceramento">
+        <img src="https://canalcarro.net.br/wp-content/uploads/2025/10/Guia-Definitivo-Cuidando-da-Carroceria-do-Seu-Carro-para-Manter-o-Brilho-de-Zero-e-o-Valor-de-Mercado.webp" alt="Enceramento">
         <div class="service-info">
           <h3>Enceramento</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Proteção e brilho da pintura</p>
           <a href="detalhes.html">Ver mais</a>
@@ -284,9 +301,10 @@
       </div>
 
       <div class="service-card">
-        <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Vitrificação / Cristalização">
+        <img src="https://www.grupofoggiatto.com.br/wp-content/uploads/2023/04/bg6006f8911D8IJen2Me-scaled.jpeg" alt="Vitrificação / Cristalização">
         <div class="service-info">
           <h3>Vitrificação / Cristalização</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Proteção avançada da pintura</p>
           <a href="detalhes.html">Ver mais</a>
@@ -297,6 +315,7 @@
         <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Higienização Interna">
         <div class="service-info">
           <h3>Higienização Interna</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Limpeza completa do interior do veículo</p>
           <a href="detalhes.html">Ver mais</a>
@@ -307,6 +326,7 @@
         <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Tratamento de Couro e Estofados">
         <div class="service-info">
           <h3>Tratamento de Couro e Estofados</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Manutenção e hidratação do estofado de couro</p>
           <a href="detalhes.html">Ver mais</a>
@@ -317,6 +337,7 @@
         <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Polimento de Faróis">
         <div class="service-info">
           <h3>Polimento de Faróis</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Recuperação da transparência dos faróis</p>
           <a href="detalhes.html">Ver mais</a>
@@ -327,6 +348,7 @@
         <img src="https://images.pexels.com/photos/1513/pexels-photo-1513.jpeg" alt="Proteção de Vidros">
         <div class="service-info">
           <h3>Proteção de Vidros</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Aplicação de películas e proteção de vidros</p>
           <a href="detalhes.html">Ver mais</a>
@@ -338,6 +360,7 @@
           alt="Películas e Detalhes Estéticos">
         <div class="service-info">
           <h3>Películas e Detalhes Estéticos</h3>
+          <p>Endereço: Centro - Rua Principal, 123</p>
           <p>Preço sob consulta</p>
           <p>Aplicação de películas, adesivos e pequenos detalhes estéticos</p>
           <a href="detalhes.html">Ver mais</a>

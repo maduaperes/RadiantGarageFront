@@ -171,6 +171,15 @@ main {
   font-size: 0.85rem;
 }
 
+.search-filters .filter {
+  margin-bottom: 1rem; /* ou o valor que quiser */
+}
+
+.search-filters .filter label {
+  margin-bottom: 0.2rem;
+  display: inline-block;
+}
+
 .search-filters h2 {
   margin-bottom: 1rem;
   font-size: 1.1rem;
@@ -230,6 +239,11 @@ main {
   cursor: pointer;
 }
 
+option {
+  background-color: #ffffff;
+  color: #000000;
+}
+
 .options-container {
   position: absolute;
   top: 110%;
@@ -258,6 +272,12 @@ main {
 
 .options-container input[type="checkbox"] {
   margin-right: 0.4rem;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(70%) brightness(1.3);
+  cursor: pointer;
 }
 
 button.clear-btn {
