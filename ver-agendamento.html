@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ver Agendamentos - RadiantGarage</title>
+  <link rel="stylesheet" href="CSS/ver-agendamentos.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
+
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+      <span>|</span>
+      <a href="novo-serviço.html">Novo Serviço</a>
+      <span>|</span>
+      <a href="novo-cliente.html">Novo Cliente</a>
+      <span>|</span>
+      <a href="ver-relatorios.html">Ver Relatórios</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="card">
+      <div class="back" id="btnBack">↩</div>
+      <h2>Agendamentos</h2>
+      <p class="subtitle">Veja os agendamentos realizados</p>
+
+      <table id="agendTable">
+        <thead>
+          <tr>
+            <th>Serviço</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Pagamento</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="JS/ver-agendamentos.js"></script>
+</body>
+</html>

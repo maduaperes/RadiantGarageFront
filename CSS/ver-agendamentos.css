@@ -1,0 +1,64 @@
+@import url('dashboard.css');
+
+.main-content {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  background: rgba(255,255,255,0.05);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+}
+
+.back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+h2 {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  text-align: center;
+  color: #94a3b8;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  color: #e6eef8;
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+th {
+  color: #f97316;
+  font-weight: 700;
+}
+
+tbody tr:hover {
+  background: rgba(255,255,255,0.08);
+}
