@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Cliente - RadiantGarage</title>
+  <link rel="stylesheet" href="CSS/novo-cliente.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
+
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <span>|</span>
+      <a href="dashboard.html">Dashboard</a>
+      <span>|</span>
+      <a href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="login.html">Login</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="card">
+      <div class="back" id="btnBack">↩</div>
+      <h2>Novo Cliente</h2>
+      <p class="subtitle">Cadastre um novo cliente</p>
+
+      <form id="clientForm">
+        <label for="clientName">Nome Completo</label>
+        <input type="text" id="clientName" placeholder="Ex: João Silva" required>
+
+        <label for="clientPhone">Telefone</label>
+        <input type="tel" id="clientPhone" placeholder="(00) 00000-0000" required>
+
+        <label for="clientEmail">Email</label>
+        <input type="email" id="clientEmail" placeholder="exemplo@email.com" required>
+
+        <label for="clientCar">Modelo do Veículo</label>
+        <input type="text" id="clientCar" placeholder="Ex: Honda Civic" required>
+
+        <button type="submit" class="primary">Salvar Cliente</button>
+      </form>
+    </div>
+  </main>
+
+  <script src="JS/novo-cliente.js"></script>
+</body>
+</html>
