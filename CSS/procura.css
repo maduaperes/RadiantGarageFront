@@ -84,7 +84,6 @@ header.header {
   align-items: center;
   position: relative;
   height: 28px;
-  margin-top: -6px;
 }
 
 .search-box input {
@@ -111,7 +110,7 @@ header.header {
 .search-box button {
   position: absolute;
   right: 8px;
-  top: 60%;
+  top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;

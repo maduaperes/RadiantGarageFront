@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Serviço - RadiantGarage</title>
+  <link rel="stylesheet" href="CSS/novo-servico.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
+    </div>
+
+    <nav class="nav">
+      <a href="splash.html">Home</a>
+      <span>|</span>
+      <a href="procura.html">Serviços</a>
+
+      <div class="search-box">
+        <input type="text" placeholder="Pesquisar serviços" />
+        <button>🔍︎</button>
+      </div>
+
+      <a href="#">Suporte</a>
+      <span>|</span>
+      <a class="reservas-btn" href="agendamento.html">Agendar</a>
+    </nav>
+
+    <div class="user">
+      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Estabelecimento123</strong> !</a>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="card">
+      <div class="back" id="btnBack">↩</div>
+      <h2>Novo Serviço</h2>
+      <p class="subtitle">Cadastre um novo serviço de veículo</p>
+
+      <form id="serviceForm" class="form-grid">
+        <!-- COLUNA 1: Informações Básicas -->
+        <div class="column">
+          <label for="serviceName">Nome do Serviço</label>
+          <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor" required>
+
+          <label for="serviceCategory">Categoria</label>
+          <input type="text" id="serviceCategory" placeholder="Ex: Manutenção" required>
+
+          <label for="serviceStatus">Status</label>
+          <select id="serviceStatus">
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+          </select>
+
+          <label>Atendimento de Urgência</label>
+          <div class="multi-select">
+            <div class="select-box">
+              <span class="selected">Selecione as opções</span>
+              <i class="arrow">&#9662;</i>
+            </div>
+            <div class="options-container">
+              <label><input type="checkbox" name="urgentService" value="normal"> Normal</label>
+              <label><input type="checkbox" name="urgentService" value="urgente"> Urgente</label>
+              <label><input type="checkbox" name="urgentService" value="imediato"> Imediato</label>
+            </div>
+
+
+            <label for="time">Horário do Serviço</label>
+            <input id="time" type="time" required>
+            <input id="time" type="time" required>
+          </div>
+        </div>
+
+        <!-- COLUNA 2: Informações do Serviço -->
+        <div class="column">
+          <label for="date">Data do Serviço</label>
+          <input type="text" id="serviceDate" placeholder="Ex: Seg a Sex, 01/01/2023 a 31/12/2023" required>
+
+          <label>Tipo de Atendimento</label>
+          <div class="multi-select">
+            <div class="select-box">
+              <span class="selected">Selecione as opções</span>
+              <i class="arrow">&#9662;</i>
+            </div>
+            <div class="options-container">
+              <label><input type="checkbox" name="serviceType" value="presencial"> Presencial no local</label>
+              <label><input type="checkbox" name="serviceType" value="retirada_entrega"> Retirada e Entrega</label>
+              <label><input type="checkbox" name="serviceType" value="rapido"> Atendimento rápido</label>
+            </div>
+          </div>
+
+          <label for="servicePrice">Preço (R$)</label>
+          <input type="text" id="servicePrice" placeholder="Ex: 250,00" required>
+
+          <label for="serviceImage">Imagem do Serviço</label>
+          <input type="file" id="serviceImage" accept="image/*">
+
+          <label for="serviceNotes">Observações</label>
+          <textarea id="serviceNotes" rows="6" placeholder="Informações adicionais sobre o serviço"></textarea>
+        </div>
+
+
+        <!-- BOTÃO - FULL WIDTH -->
+        <div class="full-width-field">
+          <button type="submit" class="primary">Salvar Serviço</button>
+        </div>
+    </div>
+    </form>
+    </div>
+  </main>
+
+  <script src="JS/novo-servico.js"></script>
+</body>
+
+</html>
