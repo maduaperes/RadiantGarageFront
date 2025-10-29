@@ -1,15 +1,10 @@
 /* ==========================
-   Reset e base
+   Reset e Base
 ========================== */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-}
-
-html {
-  /* Sempre reserva espaço para a barra de rolagem vertical */
-  overflow-y: scroll;
 }
 
 body {
@@ -32,21 +27,17 @@ header.header {
   background: rgba(255, 255, 255, 0.04);
   color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-  position: sticky;
   top: 0;
   z-index: 10;
   flex-wrap: wrap;
-  height: auto;
   min-height: 48px;
 }
 
-/* ===== LOGO ===== */
 .logo {
   display: flex;
   align-items: center;
   gap: 0.4rem;
   font-size: 1rem;
-  font-weight: normal;
   flex: 1;
 }
 
@@ -59,7 +50,6 @@ header.header {
   font-size: 1.3rem;
 }
 
-/* ===== NAV ===== */
 .nav {
   display: flex;
   align-items: center;
@@ -86,13 +76,12 @@ header.header {
   margin: 0 0.2rem;
 }
 
-/* ===== SEARCH BOX ===== */
 .search-box {
   display: flex;
   align-items: center;
   position: relative;
   height: 28px;
-  margin-top: -6px; /* ajuste fino se necessário */
+  margin-top: -6px;
 }
 
 .search-box input {
@@ -119,24 +108,19 @@ header.header {
 .search-box button {
   position: absolute;
   right: 8px;
-  top: 60%;
+  top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   color: #cbd5e1;
   cursor: pointer;
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
 }
 
 .search-box button:hover {
   color: #fff;
 }
 
-/* ===== LOGIN ===== */
 .user {
   display: flex;
   align-items: center;
@@ -160,28 +144,23 @@ header.header {
 }
 
 /* ==========================
-   MAIN
+   MAIN / CARD
 ========================== */
 main {
   flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  width: 100%;
-  flex-direction: column;
-  gap: 0;
 }
 
-/* ===== CARD ===== */
 .card {
-  position: relative;
-  width: 92%;
-  max-width: 480px;
+  width: 100%;
+  max-width: 800px;
   padding: 28px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+  position: relative;
   animation: fadeIn 0.6s ease;
 }
 
@@ -206,7 +185,7 @@ main {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== TEXTOS ===== */
+/* TEXTOS */
 h2 {
   margin-bottom: 8px;
   font-size: 1.6rem;
@@ -221,47 +200,112 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* ===== FORM ===== */
-label {
+/* ==========================
+   FORMULÁRIO
+========================== */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+form label {
   display: block;
-  margin-top: 12px;
+  margin-bottom: 4px;
   font-size: 0.9rem;
   color: #cbd5e1;
 }
 
-option {
-  background-color: #ffffff;
-  color: #000000;
-}
-
-select,
-input {
+form input,
+form select,
+form textarea {
   width: 100%;
   padding: 12px;
   border-radius: 10px;
   border: none;
-  margin-top: 6px;
   background: rgba(255, 255, 255, 0.07);
-  color: #e6eef8;
+  color: #fff;
   font-size: 0.95rem;
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-select:focus,
-input:focus {
+form input:focus,
+form select:focus,
+form textarea:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.12);
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(70%) brightness(1.3);
+form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* MULTI-SELECT */
+.multi-select {
+  position: relative;
+}
+
+.multi-select .select-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
   cursor: pointer;
 }
 
-/* ===== BOTÃO PRINCIPAL ===== */
+.multi-select .options-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  padding: 8px 0;
+  margin-top: 4px;
+  z-index: 5;
+}
+
+.multi-select .options-container label {
+  display: block;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #e6eef8;
+}
+
+.multi-select .options-container label:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+
+/* ==========================
+   FORM COLUMNS
+========================== */
+.col {
+  flex: 1 1 48%;
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  flex: 1 1 100%;
+}
+
+/* BOTÕES */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 4%;
+  margin-top: 16px;
+}
+
 .primary {
-  margin-top: 18px;
   background: #413ba7;
   border: 0;
   padding: 14px;
@@ -269,17 +313,42 @@ input[type="time"]::-webkit-calendar-picker-indicator {
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  width: 100%;
-  font-size: 1rem;
   transition: transform 0.2s, box-shadow 0.2s;
+  width: 48%;
 }
 
-.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+.secondary {
+  background: #6b6b6b;
+  border: 0;
+  padding: 14px;
+  border-radius: 12px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  width: 48%;
 }
 
-/* ===== ANIMAÇÃO ===== */
+.privacy {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.privacy label {
+  margin-left: 6px;
+  font-size: 0.85rem;
+  color: #cbd5e1;
+}
+
+#feedbackMessage {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #ff6961;
+}
+
+/* ANIMAÇÃO */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
@@ -289,36 +358,23 @@ input[type="time"]::-webkit-calendar-picker-indicator {
    RESPONSIVIDADE
 ========================== */
 @media (max-width: 900px) {
-  .nav {
+  .buttons {
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 8px;
   }
 
-  .search-box input {
+  .primary,
+  .secondary {
     width: 100%;
-    max-width: 200px;
+  }
+
+  .col {
+    flex: 1 1 100%;
   }
 }
 
 @media (max-width: 600px) {
-  header.header {
-    flex-direction: column;
-    gap: 0.8rem;
-    text-align: center;
-  }
-
-  .logo,
-  .user {
-    justify-content: center;
-  }
-
-  .nav {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .search-box input {
-    width: 100%;
-    max-width: 160px;
+  main {
+    padding: 1rem;
   }
 }

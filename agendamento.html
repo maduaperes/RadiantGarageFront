@@ -10,7 +10,6 @@
 </head>
 
 <body>
-  <!-- Header global (igual ao dashboard) -->
   <header class="header">
     <div class="logo">
       <div class="logo-icon"></div>
@@ -37,37 +36,105 @@
     </div>
   </header>
 
-  <!-- Conteúdo principal de agendamento -->
   <main>
     <div class="card">
       <div class="back" id="btnBack">↩</div>
       <h2>Agendar Serviço</h2>
-      <p class="subtitle">Escolha o serviço, data e forma de pagamento</p>
+      <p class="subtitle">Preencha todos os campos para agendar seu serviço</p>
 
       <form id="schedForm">
-        <label for="serviceSelect">Serviço</label>
-        <select id="serviceSelect" required>
+
+        <!-- Linha 1: Nome e E-mail -->
+        <label for="name">Nome</label>
+        <input type="text" id="name" placeholder="Digite seu nome" required>
+
+        <label for="email">E-mail</label>
+        <input type="email" id="email" placeholder="email@exemplo.com" required>
+
+        <!-- Linha 2: Serviços -->
+        <label for="services">Serviço(s)</label>
+        <div id="services" class="multi-select full-width">
+          <div class="select-box">
+            <span id="selected">Selecione os serviços</span>
+            <i class="arrow">&#9662;</i>
+          </div>
+          <div class="options-container">
+            <label><input type="checkbox" value="manutencao_motor"> Manutenção do Motor</label>
+            <label><input type="checkbox" value="transmissao_cambio"> Transmissão e Câmbio</label>
+            <label><input type="checkbox" value="freios_suspensao"> Freios e Suspensão</label>
+            <label><input type="checkbox" value="pneus_rodas"> Pneus e Rodas</label>
+            <label><input type="checkbox" value="sistema_eletrico"> Sistema Elétrico</label>
+            <label><input type="checkbox" value="ar_climatizacao"> Sistema de Ar e Climatização</label>
+            <label><input type="checkbox" value="seguranca_direcao"> Segurança e Direção</label>
+            <label><input type="checkbox" value="sistema_escape"> Sistema de Escape</label>
+            <label><input type="checkbox" value="combustivel_injecao"> Combustível e Injeção</label>
+            <label><input type="checkbox" value="diagnostico_revisao"> Diagnóstico e Revisão Geral</label>
+            <label><input type="checkbox" value="lavagem_simples"> Lavagem Simples</label>
+            <label><input type="checkbox" value="lavagem_completa"> Lavagem Completa</label>
+            <label><input type="checkbox" value="lavagem_seca"> Lavagem a Seco</label>
+            <label><input type="checkbox" value="polimento"> Polimento</label>
+            <label><input type="checkbox" value="enceramento"> Enceramento</label>
+            <label><input type="checkbox" value="vitrificacao"> Vitrificação / Cristalização</label>
+            <label><input type="checkbox" value="higienizacao_interna"> Higienização Interna</label>
+            <label><input type="checkbox" value="tratamento_couro"> Tratamento de Couro e Estofados</label>
+            <label><input type="checkbox" value="polimento_farois"> Polimento de Faróis</label>
+            <label><input type="checkbox" value="protecao_vidros"> Proteção de Vidros</label>
+            <label><input type="checkbox" value="peliculas_detalhes"> Películas e Detalhes Estéticos</label>
+          </div>
+        </div>
+
+        <!-- Linha 3: Urgência, Data e Hora -->
+        <label for="urgency">Urgência do Serviço</label>
+        <select id="urgency" required>
           <option value="">Selecione</option>
-          <option>Lavagem Simples</option>
-          <option>Lavagem Completa</option>
-          <option>Polimento</option>
-          <option>Estética Automotiva</option>
+          <option value="normal">Normal</option>
+          <option value="urgente">Urgente</option>
+          <option value="imediato">Imediato</option>
         </select>
 
         <label for="date">Data</label>
-        <input id="date" type="date" required>
+        <input type="date" id="date" required>
 
         <label for="time">Horário</label>
-        <input id="time" type="time" required>
+        <input type="time" id="time" required>
 
-        <label for="payment">Pagamento</label>
-        <select id="payment" required>
-          <option>Cartão</option>
-          <option>Dinheiro</option>
-          <option>Pix</option>
+        <!-- Linha 4: Tempo Estimado e Tipo de Atendimento -->
+        <label for="duration">Tempo Estimado</label>
+        <select id="duration" required>
+          <option value="">Qualquer</option>
+          <option value="ate1h">Até 1h</option>
+          <option value="1-2h">1–2h</option>
+          <option value="2-4h">2–4h</option>
+          <option value="mais4h">Mais de 4h</option>
         </select>
 
-        <button class="primary" type="submit">Confirmar</button>
+        <label for="serviceType">Tipo de Atendimento</label>
+        <select id="serviceType" required>
+          <option value="">Qualquer</option>
+          <option value="presencial">Presencial no local</option>
+          <option value="retirada_entrega">Retirada e Entrega</option>
+          <option value="rapido">Atendimento rápido</option>
+        </select>
+
+        <!-- Linha 5: Localidade e Observações -->
+        <label for="location">Localidade</label>
+        <input type="text" id="location" placeholder="Digite o endereço" required>
+
+        <label for="notes">Observações</label>
+        <textarea id="notes" placeholder="Alguma observação ou pedido especial"></textarea>
+
+        <!-- Linha 6: Termos e Botões -->
+        <div class="privacy full-width">
+          <input type="checkbox" id="agree" required>
+          <label for="agree">Concordo com os termos de uso do serviço.</label>
+        </div>
+
+        <div class="buttons full-width">
+          <button class="primary" type="submit">Confirmar</button>
+          <button class="secondary" type="reset">Limpar</button>
+        </div>
+
+        <div id="feedbackMessage" class="full-width"></div>
       </form>
     </div>
   </main>

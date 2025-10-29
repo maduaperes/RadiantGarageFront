@@ -252,12 +252,12 @@ label {
 input,
 select,
 textarea {
-  padding: 0.9rem 1rem;
-  border-radius: 14px;
+  margin-top: 0.3rem;
+  padding: 0.4rem 0.6rem;
+  border-radius: 8px;
   border: none;
   background: rgba(255, 255, 255, 0.08);
-  color: #cbd5e1;
-  font-size: 0.9rem;
+  color: #e6eef8;
   transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -267,6 +267,12 @@ textarea:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.12);
   box-shadow: 0 0 0 2px #6366f1;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #94a3b8;
+  opacity: 1; 
 }
 
 /* ==========================
