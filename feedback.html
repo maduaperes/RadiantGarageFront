@@ -7,7 +7,6 @@
   <title>Avaliação - RadiantGarage</title>
   <link rel="stylesheet" href="CSS/feedback.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
 </head>
 
 <body>
@@ -33,52 +32,112 @@
     </nav>
 
     <div class="user">
-      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Usuario123</strong> !</a>
+      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Usuario123</strong>!</a>
     </div>
   </header>
 
   <main class="card">
     <div class="back" id="btnBack">↩</div>
-    <h2>Avalie o serviço</h2>
 
-    <input type="text" id="title" placeholder="Título da avaliação" maxlength="50">
+    <h2>Queremos saber sua opinião!</h2>
+    <p class="intro">
+      Sua opinião é muito importante para nós!<br>
+      Por favor, preencha o formulário abaixo.
+    </p>
 
-    <textarea id="description" placeholder="Descreva sua experiência" rows="4" maxlength="500"></textarea>
-    <div id="charCount">0/500</div>
+    <form id="feedbackForm" enctype="multipart/form-data">
 
-    <div class="rating-section">
-      <label>Atendimento:</label>
-      <div class="stars" id="stars-attendance">
-        <span data-value="1">★</span>
-        <span data-value="2">★</span>
-        <span data-value="3">★</span>
-        <span data-value="4">★</span>
-        <span data-value="5">★</span>
+      <!-- Linha 1: Nome + Email -->
+      <div class="row-2">
+        <div>
+          <label for="name">Seu nome (opcional):</label>
+          <input type="text" id="name" placeholder="Digite seu nome">
+        </div>
+
+        <div>
+          <label for="email">Seu e-mail (opcional):</label>
+          <input type="email" id="email" placeholder="email@exemplo.com">
+        </div>
       </div>
-    </div>
 
-    <div class="rating-section">
-      <label>Serviço:</label>
-      <div class="stars" id="stars-service">
-        <span data-value="1">★</span>
-        <span data-value="2">★</span>
-        <span data-value="3">★</span>
-        <span data-value="4">★</span>
-        <span data-value="5">★</span>
+      <!-- Linha 2: Tipo de feedback -->
+      <div class="row-full">
+        <label for="category">Tipo de feedback:</label>
+        <select id="category">
+          <option value="">Selecione...</option>
+          <option value="elogio">Elogio</option>
+          <option value="sugestao">Sugestão</option>
+          <option value="problema">Problema</option>
+          <option value="outro">Outro</option>
+        </select>
+
+        <input type="text" id="title" placeholder="Título da avaliação" maxlength="50">
+
+        <textarea id="description" placeholder="Descreva sua experiência" rows="4" maxlength="500"></textarea>
+        <div id="charCount">0/500</div>
       </div>
-    </div>
 
-    <div class="upload">
-      <label for="image">Adicionar foto:</label>
-      <input type="file" id="image" accept="image/*">
-    </div>
+      </div>
 
-    <div class="buttons">
-      <button id="submit" class="primary" disabled>Enviar</button>
-      <button id="clear" class="secondary">Limpar</button>
-    </div>
+      <!-- Linha 3: Avaliações -->
+      <div class="row-3">
+        <div class="rating-section">
+          <label>Avaliação geral:</label>
+          <div class="stars" id="stars-overall">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+        </div>
 
-    <div id="feedbackMessage" class="feedback-message"></div>
+        <div class="rating-section">
+          <label>Serviço:</label>
+          <div class="stars" id="stars-service">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+        </div>
+
+        <div class="rating-section">
+          <label>Atendimento:</label>
+          <div class="stars" id="stars-attendance">
+            <span data-value="1">★</span>
+            <span data-value="2">★</span>
+            <span data-value="3">★</span>
+            <span data-value="4">★</span>
+            <span data-value="5">★</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linha 4: Adicionar foto -->
+      <div class="full-width-field upload">
+        <label for="image">Adicionar foto (opcional):</label>
+        <input type="file" id="image" accept="image/*">
+      </div>
+
+      <!-- Linha 5: Termos + Botões -->
+      <div class="full-width-field">
+        <div class="privacy">
+          <input type="checkbox" id="agree">
+          <label for="agree">
+            Concordo que meu feedback será usado apenas para aprimorar os serviços da RadiantGarage.
+          </label>
+        </div>
+
+        <div class="buttons">
+          <button id="submit" class="primary" disabled>Enviar</button>
+          <button id="clear" class="secondary" type="reset">Limpar</button>
+        </div>
+
+        <div id="feedbackMessage" class="feedback-message"></div>
+      </div>
+    </form>
   </main>
 
   <script src="JS/feedback.js"></script>
