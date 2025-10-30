@@ -1,24 +1,74 @@
-const services = JSON.parse(localStorage.getItem('lj_services') || '[]');
-const selected = JSON.parse(localStorage.getItem('lj_selected') || '{}');
-const sel = document.getElementById('serviceSelect');
-if (services.length === 0) {
-  // default services (same as dashboard)
-  services.push({ id: 1, name: 'Lavagem Simples' }, { id: 2, name: 'Lavagem Completa' }, { id: 3, name: 'Estética Automotiva' }, { id: 4, name: 'Polimento' });
-  localStorage.setItem('lj_services', JSON.stringify(services));
-}
-services.forEach(s => sel.insertAdjacentHTML('beforeend', `<option value='${s.id}'>${s.name}</option>`));
-if (selected && selected.id) sel.value = selected.id;
-document.getElementById('schedForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const data = { serviceId: sel.value, date: document.getElementById('date').value, time: document.getElementById('time').value, payment: document.getElementById('payment').value, status: 'agendado' };
-  // save to history
-  const hist = JSON.parse(localStorage.getItem('lj_history') || '[]');
-  hist.unshift(data);
-  localStorage.setItem('lj_history', JSON.stringify(hist));
-  localStorage.setItem('lj_current', JSON.stringify(data));
-  alert('Agendamento confirmado!');
-  location.href = 'status.html';
-});
-document.getElementById('btnBack').addEventListener('click', () => {
-  location.href = 'dashboard.html';
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("agendamentoForm");
+  const feedback = document.getElementById("feedbackMessage");
+  const backButton = document.querySelector(".back");
+
+  // Botão de voltar
+  if (backButton) {
+    backButton.addEventListener("click", () => {
+      window.history.back();
+    });
+  }
+
+  // Função para exibir mensagens
+  function showMessage(text, type = "error") {
+    feedback.textContent = text;
+    feedback.style.color = type === "success" ? "#4ade80" : "#f87171"; // verde ou vermelho
+    feedback.style.marginTop = "12px";
+  }
+
+  // Função de validação simples
+  function validateForm() {
+    const requiredFields = form.querySelectorAll("input[required], select[required]");
+    for (const field of requiredFields) {
+      if (!field.value.trim()) {
+        field.focus();
+        showMessage("Por favor, preencha todos os campos obrigatórios.");
+        return false;
+      }
+    }
+
+    const termos = document.getElementById("termos");
+    if (!termos.checked) {
+      showMessage("Você deve aceitar os termos de uso e privacidade.");
+      termos.focus();
+      return false;
+    }
+
+    return true;
+  }
+
+  // Submissão do formulário
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    if (!validateForm()) return;
+
+    // Coletar dados do formulário
+    const dados = {
+      nome: document.getElementById("nome").value.trim(),
+      telefone: document.getElementById("telefone").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      data: document.getElementById("data").value,
+      horario: document.getElementById("horario").value,
+      veiculo: document.getElementById("veiculo").value.trim(),
+      servico: document.getElementById("servico").value,
+      pagamento: document.getElementById("pagamento").value,
+      placa: document.getElementById("placa").value.trim(),
+      observacoes: document.getElementById("observacoes").value.trim(),
+    };
+
+    console.log("Dados do agendamento:", dados);
+
+    // Simulação de envio
+    showMessage("Agendamento realizado com sucesso!", "success");
+
+    // Limpar formulário após sucesso
+    form.reset();
+
+    // Remover mensagem após 5 segundos
+    setTimeout(() => {
+      feedback.textContent = "";
+    }, 5000);
+  });
 });

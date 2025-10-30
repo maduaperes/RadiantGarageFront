@@ -32,112 +32,89 @@
     </nav>
 
     <div class="user">
-      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Usuario123</strong> !</a>
+      <a href="profile.html" title="Ver perfil">Seja bem vindo, <strong>Usuario123</strong>!</a>
     </div>
   </header>
 
   <main>
     <div class="card">
-      <div class="back" id="btnBack">↩</div>
+      <div class="back">↩</div>
       <h2>Agendar Serviço</h2>
-      <p class="subtitle">Preencha todos os campos para agendar seu serviço</p>
+      <p class="subtitle">Preencha os campos abaixo para agendar o seu atendimento</p>
 
-      <form id="schedForm">
+      <form id="agendamentoForm">
+        <!-- ================= COLUNA 1 ================= -->
+        <div class="col">
+          <label for="nome">Nome completo:</label>
+          <input type="text" id="nome" placeholder="Digite seu nome" required>
 
-        <!-- Linha 1: Nome e E-mail -->
-        <label for="name">Nome</label>
-        <input type="text" id="name" placeholder="Digite seu nome" required>
+          <label for="telefone">Telefone:</label>
+          <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
 
-        <label for="email">E-mail</label>
-        <input type="email" id="email" placeholder="email@exemplo.com" required>
-
-        <!-- Linha 2: Serviços -->
-        <label for="services">Serviço(s)</label>
-        <div id="services" class="multi-select full-width">
-          <div class="select-box">
-            <span id="selected">Selecione os serviços</span>
-            <i class="arrow">&#9662;</i>
-          </div>
-          <div class="options-container">
-            <label><input type="checkbox" value="manutencao_motor"> Manutenção do Motor</label>
-            <label><input type="checkbox" value="transmissao_cambio"> Transmissão e Câmbio</label>
-            <label><input type="checkbox" value="freios_suspensao"> Freios e Suspensão</label>
-            <label><input type="checkbox" value="pneus_rodas"> Pneus e Rodas</label>
-            <label><input type="checkbox" value="sistema_eletrico"> Sistema Elétrico</label>
-            <label><input type="checkbox" value="ar_climatizacao"> Sistema de Ar e Climatização</label>
-            <label><input type="checkbox" value="seguranca_direcao"> Segurança e Direção</label>
-            <label><input type="checkbox" value="sistema_escape"> Sistema de Escape</label>
-            <label><input type="checkbox" value="combustivel_injecao"> Combustível e Injeção</label>
-            <label><input type="checkbox" value="diagnostico_revisao"> Diagnóstico e Revisão Geral</label>
-            <label><input type="checkbox" value="lavagem_simples"> Lavagem Simples</label>
-            <label><input type="checkbox" value="lavagem_completa"> Lavagem Completa</label>
-            <label><input type="checkbox" value="lavagem_seca"> Lavagem a Seco</label>
-            <label><input type="checkbox" value="polimento"> Polimento</label>
-            <label><input type="checkbox" value="enceramento"> Enceramento</label>
-            <label><input type="checkbox" value="vitrificacao"> Vitrificação / Cristalização</label>
-            <label><input type="checkbox" value="higienizacao_interna"> Higienização Interna</label>
-            <label><input type="checkbox" value="tratamento_couro"> Tratamento de Couro e Estofados</label>
-            <label><input type="checkbox" value="polimento_farois"> Polimento de Faróis</label>
-            <label><input type="checkbox" value="protecao_vidros"> Proteção de Vidros</label>
-            <label><input type="checkbox" value="peliculas_detalhes"> Películas e Detalhes Estéticos</label>
-          </div>
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" placeholder="exemplo@email.com" required>
         </div>
 
-        <!-- Linha 3: Urgência, Data e Hora -->
-        <label for="urgency">Urgência do Serviço</label>
-        <select id="urgency" required>
-          <option value="">Selecione</option>
-          <option value="normal">Normal</option>
-          <option value="urgente">Urgente</option>
-          <option value="imediato">Imediato</option>
-        </select>
+        <!-- ================= COLUNA 2 ================= -->
+        <div class="col">
+          <label for="data">Data do serviço:</label>
+          <input type="date" id="data" required>
 
-        <label for="date">Data</label>
-        <input type="date" id="date" required>
+          <label for="horario">Horário:</label>
+          <input type="time" id="horario" required>
 
-        <label for="time">Horário</label>
-        <input type="time" id="time" required>
-
-        <!-- Linha 4: Tempo Estimado e Tipo de Atendimento -->
-        <label for="duration">Tempo Estimado</label>
-        <select id="duration" required>
-          <option value="">Qualquer</option>
-          <option value="ate1h">Até 1h</option>
-          <option value="1-2h">1–2h</option>
-          <option value="2-4h">2–4h</option>
-          <option value="mais4h">Mais de 4h</option>
-        </select>
-
-        <label for="serviceType">Tipo de Atendimento</label>
-        <select id="serviceType" required>
-          <option value="">Qualquer</option>
-          <option value="presencial">Presencial no local</option>
-          <option value="retirada_entrega">Retirada e Entrega</option>
-          <option value="rapido">Atendimento rápido</option>
-        </select>
-
-        <!-- Linha 5: Localidade e Observações -->
-        <label for="location">Localidade</label>
-        <input type="text" id="location" placeholder="Digite o endereço" required>
-
-        <label for="notes">Observações</label>
-        <textarea id="notes" placeholder="Alguma observação ou pedido especial"></textarea>
-
-        <!-- Linha 6: Termos e Botões -->
-        <div class="privacy full-width">
-          <input type="checkbox" id="agree" required>
-          <label for="agree">Concordo com os termos de uso do serviço.</label>
+          <label for="veiculo">Modelo do veículo:</label>
+          <input type="text" id="veiculo" placeholder="Ex: Honda Civic, Uno..." required>
         </div>
 
-        <div class="buttons full-width">
-          <button class="primary" type="submit">Confirmar</button>
-          <button class="secondary" type="reset">Limpar</button>
+        <!-- ================= COLUNA 3 ================= -->
+        <div class="col">
+          <label for="servico">Serviço desejado:</label>
+          <select id="servico" required>
+            <option value="">Selecione</option>
+            <option value="polimento">Polimento</option>
+            <option value="lavagem">Lavagem completa</option>
+            <option value="cristalizacao">Cristalização</option>
+            <option value="higienizacao">Higienização interna</option>
+          </select>
+
+          <label for="pagamento">Forma de pagamento:</label>
+          <select id="pagamento" required>
+            <option value="">Selecione</option>
+            <option value="pix">Pix</option>
+            <option value="cartao">Cartão de crédito</option>
+            <option value="debito">Cartão de débito</option>
+            <option value="dinheiro">Dinheiro</option>
+          </select>
+
+          <label for="placa">Placa do veículo:</label>
+          <input type="text" id="placa" placeholder="ABC-1234" required>
         </div>
 
-        <div id="feedbackMessage" class="full-width"></div>
+        <!-- ================= FULL WIDTH ================= -->
+        <div class="full-width">
+          <label for="observacoes">Observações:</label>
+          <textarea id="observacoes" placeholder="Digite observações adicionais (opcional)"></textarea>
+        </div>
+
+        <div class="full-width privacy">
+          <input type="checkbox" id="termos" required>
+          <label for="termos">Li e aceito os termos de uso e privacidade</label>
+        </div>
+
+        <div class="full-width buttons">
+          <button type="submit" class="primary">Confirmar agendamento</button>
+          <button type="reset" class="secondary">Limpar</button>
+        </div>
+
+        <p id="feedbackMessage"></p>
       </form>
     </div>
   </main>
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
 
   <script src="JS/agendamento.js"></script>
 </body>
