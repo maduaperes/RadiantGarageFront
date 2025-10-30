@@ -1,103 +1,140 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('signupForm');
-  const feedback = document.getElementById('feedback');
+// =============================
+// Função de Máscaras Automáticas
+// =============================
+function aplicarMascara(input, tipo) {
+  input.addEventListener("input", () => {
+    let valor = input.value.replace(/\D/g, "");
 
-  const clienteRadio = document.getElementById('cliente');
-  const estabelecimentoRadio = document.getElementById('estabelecimento');
-  const clienteFields = document.getElementById('clienteFields');
-  const establishmentFields = document.getElementById('establishmentFields');
-
-  function toggleFields() {
-    const clienteInputs = clienteFields.querySelectorAll('input');
-    const estabelecimentoInputs = establishmentFields.querySelectorAll('input');
-
-    if (clienteRadio.checked) {
-      clienteFields.style.display = 'block';
-      establishmentFields.style.display = 'none';
-
-      clienteInputs.forEach(input => input.required = true);
-      estabelecimentoInputs.forEach(input => input.required = false);
-
-    } else {
-      clienteFields.style.display = 'none';
-      establishmentFields.style.display = 'grid';
-
-      estabelecimentoInputs.forEach(input => {
-        if (input.id === 'horario') {
-          input.required = false;
-        } else {
-          input.required = true;
-        }
-      });
-
-      clienteInputs.forEach(input => input.required = false);
+    if (tipo === "cnpj") {
+      valor = valor.replace(/^(\d{2})(\d)/, "$1.$2");
+      valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
+      valor = valor.replace(/\.(\d{3})(\d)/, ".$1/$2");
+      valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
+      input.value = valor.substring(0, 18);
     }
+
+    if (tipo === "telefone") {
+      if (valor.length <= 10) {
+        valor = valor.replace(/^(\d{2})(\d{4})(\d)/, "($1) $2-$3");
+      } else {
+        valor = valor.replace(/^(\d{2})(\d{5})(\d)/, "($1) $2-$3");
+      }
+      input.value = valor.substring(0, 15);
+    }
+
+    if (tipo === "cep") {
+      valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
+      input.value = valor.substring(0, 9);
+    }
+  });
+}
+
+// =============================
+// Inicialização de máscaras
+// =============================
+window.addEventListener("DOMContentLoaded", () => {
+  aplicarMascara(document.getElementById("cnpj"), "cnpj");
+  aplicarMascara(document.getElementById("telefone"), "telefone");
+  aplicarMascara(document.getElementById("cep"), "cep");
+});
+
+// =============================
+// Validação do formulário
+// =============================
+document.getElementById("signupForm").addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const feedback = document.getElementById("feedback");
+  feedback.innerHTML = "";
+  feedback.style.color = "";
+
+  // Campos obrigatórios
+  const requiredFields = [
+    "nameEstab",
+    "cnpj",
+    "endereco",
+    "cidade",
+    "estado",
+    "cep",
+    "telefone",
+    "emailEstab",
+    "passwordEstab"
+  ];
+
+  let allFilled = true;
+
+  // Verifica se todos os campos obrigatórios estão preenchidos
+  requiredFields.forEach((id) => {
+    const field = document.getElementById(id);
+    if (!field.value.trim()) {
+      allFilled = false;
+      field.style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
+    } else {
+      field.style.boxShadow = "none";
+    }
+  });
+
+  if (!allFilled) {
+    feedback.textContent = "Por favor, preencha todos os campos obrigatórios.";
+    feedback.style.color = "#ff6666";
+    return;
   }
 
-  clienteRadio.addEventListener('change', toggleFields);
-  estabelecimentoRadio.addEventListener('change', toggleFields);
+  // =============================
+  // Validações adicionais
+  // =============================
 
-  toggleFields(); // chama ao carregar para ajustar a visibilidade e required
+  // Validação de CNPJ (básica)
+  const cnpj = document.getElementById("cnpj").value.replace(/\D/g, "");
+  if (cnpj.length !== 14) {
+    feedback.textContent = "CNPJ inválido. Deve conter 14 dígitos.";
+    feedback.style.color = "#ff6666";
+    document.getElementById("cnpj").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
+    return;
+  }
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+  // Validação de e-mail
+  const email = document.getElementById("emailEstab").value;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    feedback.textContent = "Por favor, insira um email válido.";
+    feedback.style.color = "#ff6666";
+    document.getElementById("emailEstab").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
+    return;
+  }
 
-    const userType = document.querySelector('input[name="userType"]:checked').id;
+  // Validação de senha
+  const senha = document.getElementById("passwordEstab").value;
+  if (senha.length < 6) {
+    feedback.textContent = "A senha deve ter no mínimo 6 caracteres.";
+    feedback.style.color = "#ff6666";
+    document.getElementById("passwordEstab").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
+    return;
+  }
 
-    let userData = { type: userType };
+  // =============================
+  // Se tudo estiver certo
+  // =============================
+  feedback.textContent = "Cadastro realizado com sucesso!";
+  feedback.style.color = "#7CFC00";
 
-    if (userType === 'cliente') {
-      const nome = document.getElementById('nameCliente').value.trim();
-      const email = document.getElementById('emailCliente').value.trim();
-      const senha = document.getElementById('passwordCliente').value.trim();
-      const cpf = document.getElementById('cpf').value.trim();
+  // Limpa o formulário após sucesso
+  this.reset();
 
-      if (!nome || !email || !senha || !cpf) {
-        feedback.textContent = "Preencha todos os campos de cliente.";
-        feedback.style.color = "red";
-        return;
-      }
+  // Exemplo: redirecionar após 2 segundos
+  // setTimeout(() => window.location.href = "login.html", 2000);
 
-      userData = { ...userData, nome, email, senha, cpf };
+  // Caso tenha backend:
+  // const formData = new FormData(this);
+  // fetch("/api/estabelecimento", { method: "POST", body: formData });
+});
 
-    } else {
-      const nomeEstab = establishmentFields.querySelector('#nameEstab').value.trim();
-      const cnpj = establishmentFields.querySelector('#cnpj').value.trim();
-      const endereco = establishmentFields.querySelector('#endereco').value.trim();
-      const cidade = establishmentFields.querySelector('#cidade').value.trim();
-      const estado = establishmentFields.querySelector('#estado').value.trim();
-      const cep = establishmentFields.querySelector('#cep').value.trim();
-      const horario = establishmentFields.querySelector('#horario').value.trim();
-      const emailEstab = establishmentFields.querySelector('#emailEstab').value.trim();
-      const senhaEstab = establishmentFields.querySelector('#passwordEstab').value.trim();
-
-      if (!nomeEstab || !cnpj || !endereco || !cidade || !estado || !cep || !emailEstab || !senhaEstab) {
-        feedback.textContent = "Preencha todos os campos obrigatórios do estabelecimento.";
-        feedback.style.color = "red";
-        return;
-      }
-
-      userData = {
-        ...userData,
-        nomeEstab,
-        cnpj,
-        endereco,
-        cidade,
-        estado,
-        cep,
-        horario,
-        email: emailEstab,
-        senha: senhaEstab
-      };
-    }
-
-    localStorage.setItem('lj_user', JSON.stringify(userData));
-
-    feedback.textContent = "Conta criada com sucesso! Redirecionando...";
-    feedback.style.color = "green";
-
-    setTimeout(() => {
-      window.location.href = 'procura.html';
-    }, 1500);
+// =============================
+// Feedback visual ao digitar
+// =============================
+const inputs = document.querySelectorAll("input, textarea");
+inputs.forEach(input => {
+  input.addEventListener("input", () => {
+    input.style.boxShadow = "none";
   });
 });

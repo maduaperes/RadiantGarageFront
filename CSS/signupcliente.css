@@ -1,3 +1,6 @@
+/* ==========================
+   Reset e base
+========================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -5,7 +8,6 @@
 }
 
 html {
-  /* Sempre reserva espaço para a barra de rolagem vertical */
   overflow-y: scroll;
 }
 
@@ -16,6 +18,8 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ==========================
@@ -29,11 +33,11 @@ header.header {
   background: rgba(255, 255, 255, 0.04);
   color: #fff;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  width: 100%;
   position: sticky;
   top: 0;
   z-index: 10;
   flex-wrap: wrap;
-  height: auto;
   min-height: 48px;
 }
 
@@ -89,8 +93,7 @@ header.header {
   align-items: center;
   position: relative;
   height: 28px;
-  margin-top: 0px;
-  /* ajuste fino se necessário */
+  margin-top: -6px;
 }
 
 .search-box input {
@@ -128,7 +131,6 @@ header.header {
   align-items: center;
   justify-content: center;
   transition: color 0.2s ease;
-  margin-top: -3px;
 }
 
 .search-box button:hover {
@@ -159,12 +161,10 @@ header.header {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ==========================
-   CARD PRINCIPAL
-========================== */
+/* Card principal */
 main.card {
   width: 100%;
-  max-width: 800px;
+  max-width: 700px;
   padding: 50px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.04);
@@ -179,77 +179,101 @@ main.card {
 
 /* Título */
 h2 {
-    font-size: 2rem;
-    color: #e6eef8;
-    margin-bottom: 15px;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #fff;
+  margin-bottom: 8px;
 }
 
 /* Sub-título */
 p.subtitle {
-  margin-bottom: 20px;
-  font-size: 0.95rem;
+  margin-bottom: 30px;
+  font-size: 0.9rem;
   text-align: center;
   color: #94a3b8;
 }
 
 /* ==========================
-   FORMULÁRIO
+   Grid de Cadastro (Ajustado para Mobile-First)
 ========================== */
-.signup-container {
-  width: 100%;
-}
-
-#establishmentFields {
+.grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 20px;
-  margin-top: 10px;
+  /* MOBILE-FIRST: Por padrão, 1 coluna */
+  grid-template-columns: 1fr; 
+  gap: 16px 20px; /* linhas e colunas */
+  width: 100%;
+  margin-bottom: 12px;
 }
 
-#endereco {
-  grid-column: 1 / -1; /* ocupa as duas colunas */
+/* Campos que ocupam toda largura (como a Senha e Confirmar Senha fora do grid-container) */
+.full-width {
+  /* Garante que ocupe a única coluna no mobile e as duas colunas no desktop */
+  grid-column: 1 / -1; 
 }
 
+/* Form group (Regra geral) */
 .form-group {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  /* No layout de 1 coluna, todos ocupam a coluna 1 por padrão */
 }
 
-.form-group label {
+/* Esconde o input (radio/checkbox) */
+input[type="radio"],
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* Label estilo botão (Não é o caso dos form-groups de input de texto) */
+label {
   display: block;
   color: #cbd5e1;
   font-size: 0.9rem;
-  margin-bottom: 4px;
 }
 
-.form-group input {
+/* Ajustando o Label dos form-group */
+.form-group > label {
+  display: block;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
+
+.form-group > label:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* Inputs */
+input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
+  margin-top: 6px; /* Adicionado espaço entre o label e o input */
   background: rgba(255, 255, 255, 0.07);
   color: #e6eef8;
   font-size: 0.95rem;
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.form-group input::placeholder {
+input::placeholder {
   color: #94a3b8;
-  font-style: italic;
 }
 
-.form-group input:focus {
+input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 6px rgba(65, 59, 167, 0.5);
 }
 
-/* ==========================
-   BOTÃO
-========================== */
+/* Botão primário */
 .primary {
-  margin-top: 24px;
+  margin-top: 18px;
   background: #413ba7;
   border: 0;
   padding: 14px;
@@ -267,14 +291,13 @@ p.subtitle {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ==========================
-   TEXTO SECUNDÁRIO
-========================== */
+/* Texto "muted" */
 .muted {
   color: #94a3b8;
   font-size: 14px;
   text-align: center;
   margin-top: 14px;
+  transition: color 0.3s;
 }
 
 .muted a {
@@ -286,19 +309,7 @@ p.subtitle {
   color: #213fc7;
 }
 
-/* ==========================
-   FEEDBACK MENSAGEM
-========================== */
-.feedback-message {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 14px;
-  min-height: 1.2em;
-}
-
-/* ==========================
-   AUTOFILL FIX
-========================== */
+/* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
   box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
@@ -306,14 +317,20 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* ==========================
-   ANIMAÇÃO
-========================== */
+.feedback-message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  min-height: 1.2em;
+}
+
+/* Animação de fadeIn */
 @keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -321,14 +338,21 @@ input:-webkit-autofill {
 }
 
 /* ==========================
-   RESPONSIVIDADE
+   Responsividade: Desktop
 ========================== */
-@media (max-width: 600px) {
-  #establishmentFields {
-    grid-template-columns: 1fr;
+@media (min-width: 601px) {
+  /* ⭐️ TELA GRANDE: Altera o grid para 2 colunas. */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  main.card {
-    padding: 30px 20px;
-  }
+  /* ⭐️ TELA GRANDE: Distribuição dos 4 campos em 2x2. */
+  /* Campo 1: Nome */
+  .grid-container .form-group:nth-child(1) { grid-column: 1; }
+  /* Campo 2: Email */
+  .grid-container .form-group:nth-child(2) { grid-column: 2; } 
+  /* Campo 3: Telefone */
+  .grid-container .form-group:nth-child(3) { grid-column: 1; } 
+  /* Campo 4: CPF */
+  .grid-container .form-group:nth-child(4) { grid-column: 2; } 
 }
