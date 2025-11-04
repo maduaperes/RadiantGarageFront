@@ -1,138 +1,153 @@
-/* ==========================
-   RESET E BASE
-========================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
-    overflow-y: scroll;
+  overflow-y: scroll;
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(180deg, #0b1220, #111827);
-    color: #e6eef8;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(180deg, #0b1220, #111827);
+  color: #e6eef8;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ==========================
    HEADER
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  height: auto;
+  min-height: 48px;
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1rem;
-    flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1rem;
+  font-weight: normal;
+  flex: 1;
 }
 
 .logo span {
-    font-weight: bold;
-    cursor: pointer;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .logo-icon {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.8rem;
-    flex: 2;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
+  flex: 2;
+  flex-wrap: wrap;
 }
 
 .nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
-    cursor: pointer;
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+  cursor: pointer;
 }
 
 .nav a:hover {
-    transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+.nav span {
+  margin: 0 0.2rem;
 }
 
 .search-box {
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 28px;
-    margin-top: -6px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 28px;
 }
 
 .search-box input {
-    height: 28px;
-    width: 250px;
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
+  height: 28px;
+  width: 250px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+  color: #94a3b8;
+}
+
+.search-box input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.search-box button:hover {
+  color: #fff;
 }
 
 .user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 1;
 }
 
 .user a {
-    padding: 0.3rem 0.7rem;
-    font-size: 0.8rem;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    cursor: pointer;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  color: #fff;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
 }
 
 .user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
-
 /* ==========================
    CONTEÚDO PRINCIPAL
 ========================== */
@@ -181,7 +196,7 @@ header.header {
 
 .service-details h1 {
     font-size: 2rem;
-    color: #e6eef8;
+    color: #ffffff;
     margin-bottom: 15px;
 }
 
@@ -208,7 +223,7 @@ header.header {
 
 .thumbs img {
     width: 100%;
-    height: 80px;
+    height: 100%;
     border-radius: 8px;
     object-fit: cover;
     cursor: pointer;
@@ -225,7 +240,7 @@ header.header {
     gap: 10px;
     margin: 15px 0;
     font-size: 14px;
-    color: #6c63ff;
+    color: #ffffff;
     cursor: pointer;
     text-decoration: underline;
 }
@@ -252,7 +267,7 @@ header.header {
     margin-left: auto;
     padding: 8px 25px;
     border-radius: 20px;
-    background-color: #6c63ff;
+    background-color: #413ba7;
     color: #fff;
     text-decoration: none;
     font-weight: 600;
@@ -267,12 +282,12 @@ header.header {
 .endereco {
     font-size: 14px;
     margin-bottom: 15px;
-    color: #94a3b8;
+    color: #ffffff;
 }
 
 .endereco i {
     margin-right: 5px;
-    color: #6c63ff;
+    color: #a7a7a7;
 }
 
 /* DESCRIÇÃO */
@@ -287,7 +302,7 @@ header.header {
     display: block;
     font-weight: bold;
     font-size: 16px;
-    color: #e6eef8;
+    color: #ffffff;
 }
 
 .read-more {
@@ -295,9 +310,10 @@ header.header {
     padding: 5px 15px;
     border-radius: 20px;
     border: none;
-    background-color: #6c63ff;
+    background-color: #413ba7;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 20px;
 }
 
 .read-more:hover {
@@ -307,8 +323,11 @@ header.header {
 /* COMODIDADES */
 .comodidades {
     font-size: 14px;
-    color: #cbd5e1;
+    color: #ffffff;
     margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .comodidades .icones {
@@ -329,7 +348,7 @@ header.header {
 }
 
 .detalhes-adicionais h2 {
-    color: #6c63ff;
+    color: #ffffff;
     margin-bottom: 15px;
     font-size: 18px;
 }
@@ -343,14 +362,14 @@ header.header {
 
 .detalhes-adicionais ul li {
     font-size: 14px;
-    color: #cbd5e1;
+    color: #ffffff;
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
 }
 
 .detalhes-adicionais ul li strong {
-    color: #6c63ff;
+    color: #ffffff;
 }
 
 /* ==========================
@@ -359,26 +378,32 @@ header.header {
 .other-services {
     flex: 1;
     background-color: #1b1f2a;
-    padding: 20px;
+    padding: 20px; /* padding mantido */
     border-radius: 10px;
 }
 
 .other-services h2 {
+    color: #ffffff;
     margin-bottom: 15px;
-    color: #e6eef8;
+    font-size: 18px;
 }
 
 .other-services ul {
     list-style: none;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    flex-direction: column; /* itens empilhados verticalmente */
+    gap: 15px; /* espaço entre cada item */
+    padding: 0;
+    margin: 0;
 }
 
 .other-services li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    display: flex; /* imagem à esquerda, texto à direita */
+    align-items: center; /* centraliza verticalmente */
+    gap: 15px; /* espaço entre imagem e conteúdo */
+    width: 100%;
+    padding: 10px 15px; /* padding interno mantido */
+    border-radius: 8px;
 }
 
 .other-services li img {
@@ -386,12 +411,18 @@ header.header {
     height: 60px;
     border-radius: 8px;
     object-fit: cover;
+    flex-shrink: 0; /* evita que a imagem encolha */
 }
 
 .other-services li a {
-    color: #6c63ff;
+    color: #e6eef8;
     text-decoration: none;
-    font-weight: 600;
+    background: #413ba7;
+    padding: 8px 12px;
+    border-radius: 50px;
+    transition: 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .other-services li a:hover {

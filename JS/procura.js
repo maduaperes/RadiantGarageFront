@@ -9,17 +9,14 @@ const searchForm = document.querySelector('.search-filters form');
 const clearBtn = document.querySelector('.clear-btn');
 
 selectBox.addEventListener('click', (e) => {
-  e.preventDefault();    // evita que o label acione inputs
-  e.stopPropagation();   // impede propagação
-  const isOpen = optionsContainer.style.display === 'flex';
-  optionsContainer.style.display = isOpen ? 'none' : 'flex';
+  e.preventDefault();    
+  e.stopPropagation();   
+  optionsContainer.style.display = optionsContainer.style.display === 'flex' ? 'none' : 'flex';
 });
 
 // Fecha o dropdown ao clicar fora
-document.addEventListener('click', (e) => {
-  if (!selectBox.contains(e.target) && !optionsContainer.contains(e.target)) {
-    optionsContainer.style.display = 'none';
-  }
+document.addEventListener('click', () => {
+  optionsContainer.style.display = 'none';
 });
 
 // Impede que clicar dentro do container feche o dropdown
@@ -30,17 +27,32 @@ optionsContainer.addEventListener('click', (e) => e.stopPropagation());
 // ==========================
 checkboxes.forEach((checkbox) => {
   checkbox.addEventListener('change', () => {
-    const selected = Array.from(checkboxes)
-      .filter(cb => cb.checked)
-      .map(cb => cb.parentNode.textContent.trim());
-
-    selectedSpan.textContent = selected.length > 0
-      ? selected.join(', ')
-      : 'Selecione os serviços';
-
+    atualizarSelecionados();
     filtrarServicos();
   });
 });
+
+function atualizarSelecionados() {
+  const selected = Array.from(checkboxes)
+    .filter(cb => cb.checked)
+    .map(cb => cb.parentNode.textContent.trim());
+
+  selectedSpan.textContent = selected.length > 0
+    ? selected.join(', ')
+    : 'Selecione os serviços';
+}
+
+// ==========================
+// NORMALIZAÇÃO DE TEXTO
+// ==========================
+function normalizarTexto(texto) {
+  return texto
+    .toLowerCase()
+    .normalize('NFD')                 // separa acentos
+    .replace(/[\u0300-\u036f]/g, '') // remove acentos
+    .replace(/_/g, ' ')               // substitui underline por espaço
+    .trim();
+}
 
 // ==========================
 // FILTRAGEM DOS CARDS
@@ -48,19 +60,18 @@ checkboxes.forEach((checkbox) => {
 function filtrarServicos() {
   const selecionados = Array.from(checkboxes)
     .filter(cb => cb.checked)
-    .map(cb => cb.value.toLowerCase());
+    .map(cb => normalizarTexto(cb.value));
 
   const cards = document.querySelectorAll('.service-card');
 
   cards.forEach(card => {
-    const nomeServico = card.querySelector('h3').textContent.toLowerCase();
+    const nomeServico = normalizarTexto(card.querySelector('h3').textContent);
 
     if (selecionados.length === 0) {
-      card.style.display = 'flex';
+      card.style.display = 'flex'; // mostra todos se nada estiver selecionado
     } else {
-      const corresponde = selecionados.some(valor =>
-        nomeServico.includes(valor.replace(/_/g, ' '))
-      );
+      // verifica se o nome do serviço contém algum dos valores selecionados
+      const corresponde = selecionados.some(valor => nomeServico.includes(valor));
       card.style.display = corresponde ? 'flex' : 'none';
     }
   });
@@ -72,7 +83,7 @@ function filtrarServicos() {
 clearBtn.addEventListener('click', (e) => {
   e.preventDefault();
   checkboxes.forEach(cb => cb.checked = false);
-  selectedSpan.textContent = 'Selecione os serviços';
+  atualizarSelecionados();
   searchForm.reset();
   filtrarServicos();
 });

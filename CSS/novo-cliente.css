@@ -288,6 +288,16 @@ textarea::placeholder {
   margin-bottom: -10px;
 }
 
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
+}
+
 /* Responsivo */
 @media (max-width: 1024px) {
   .form-grid {
