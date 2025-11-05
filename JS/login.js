@@ -14,23 +14,39 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    // Usuário fixo pra teste
-    const validEmail = "...";
-    const validSenha = "...";
+    // Usuários fixos para teste
+    const usuariosTeste = [
+      { tipo: "admin", email: "...", senha: "..." },
+      { tipo: "cliente", email: "***", senha: "***" }
+    ];
 
-    if (email !== validEmail || senha !== validSenha) {
+    // Verifica se o usuário existe e se as credenciais estão corretas
+    const usuario = usuariosTeste.find(
+      (u) => u.email === email && u.senha === senha
+    );
+
+    if (!usuario) {
       feedback.textContent = "Email ou senha incorretos.";
       feedback.style.color = "red";
       return;
     }
 
-    feedback.textContent = "Entrando em sua conta...";
+    feedback.textContent = `Entrando como ${usuario.tipo}...`;
     feedback.style.color = "green";
 
-    localStorage.setItem('lj_user', JSON.stringify({ name: 'Cliente', contact: email }));
+    // Salva informações básicas do usuário
+    localStorage.setItem(
+      'lj_user',
+      JSON.stringify({ name: usuario.tipo, contact: email })
+    );
 
+    // Redireciona conforme o tipo de usuário
     setTimeout(() => {
-      window.location.href = 'dashboard.html';
+      if (usuario.tipo === "admin") {
+        window.location.href = 'dashboard.html';
+      } else {
+        window.location.href = 'procura.html';
+      }
     }, 1500);
   });
 });
