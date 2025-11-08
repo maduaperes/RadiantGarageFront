@@ -66,9 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // Limpar formulário após sucesso
     form.reset();
 
-    // Remover mensagem após 5 segundos
+    // Redirecionar para a página de status após 2 segundos
     setTimeout(() => {
-      feedback.textContent = "";
-    }, 5000);
+      window.location.href = "status.html"; // 🔁 altere o nome se o arquivo for diferente
+    }, 2000);
   });
 });

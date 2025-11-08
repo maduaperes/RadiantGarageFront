@@ -16,5 +16,5 @@ if (!current) { statusBox.textContent = 'Nenhum serviço agendado. Faça um agen
 document.getElementById('toDashboard').addEventListener('click', () => location.href = 'dashboard.html');
 document.getElementById('leaveFeedback').addEventListener('click', () => location.href = 'feedback.html');
 document.getElementById('btnBack').addEventListener('click', () => {
-  location.href = 'dashboard.html';
+  location.href = 'procura.html';
 });

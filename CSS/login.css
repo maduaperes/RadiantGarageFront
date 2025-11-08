@@ -276,10 +276,22 @@ input:focus {
 .muted a {
   color: #ffffff;
   text-decoration: none;
+  background: #413ba7;
+  padding: 10px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: none;
 }
 
 .muted a:hover {
-  color: #213fc7;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
