@@ -308,36 +308,6 @@ textarea::placeholder {
   border-radius: 8px;
 }
 
-/* PRIVACIDADE */
-/* ==========================
-   TERMOS DE USO / PRIVACIDADE
-========================== */
-.privacy {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 16px;
-  flex-wrap: nowrap; /* evita quebra entre checkbox e texto */
-  justify-content: flex-start; /* alinha tudo à esquerda */
-  max-width: 100%; /* garante que não estoure */
-}
-
-.privacy input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  accent-color: #413ba7;
-  cursor: pointer;
-  flex-shrink: 0; /* checkbox não encolhe */
-}
-
-.privacy label {
-  font-size: 0.9rem;
-  color: #cbd5e1;
-  cursor: pointer;
-  line-height: 1.4;
-  user-select: none; /* evita seleção do texto ao clicar rápido */
-}
-
 /* BOTÕES */
 .buttons {
   display: flex;
@@ -409,10 +379,33 @@ option {
   background: #ffffff;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(70%) brightness(1.3);
+/* ==========================
+   TERMOS DE USO / PRIVACIDADE — versão final
+========================== */
+.privacy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.privacy input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   cursor: pointer;
+  accent-color: #413ba7; /* cor do checkbox */
+  appearance: auto; /* garante exibição padrão do navegador */
+  opacity: 1; /* garante visibilidade */
+  margin: 0;
+}
+
+.privacy label {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  cursor: pointer;
+  user-select: none;
 }
 
 /* ANIMAÇÃO */

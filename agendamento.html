@@ -38,7 +38,6 @@
 
   <main>
     <div class="card">
-      <div class="back">↩</div>
       <h2>Agendar Serviço</h2>
       <p class="subtitle">Preencha os campos abaixo para agendar o seu atendimento</p>
 
@@ -71,23 +70,27 @@
         <div class="full-width">
           <label for="observacoes">Observações:</label>
           <textarea id="observacoes" placeholder="Digite observações adicionais (opcional)"></textarea>
-
-          <label for="servico">Serviço:</label>
-          <select id="servico" required>
-            <option value="">Manutenção do Motor</option>
         </div>
 
-        <div class="full-width privacy">
+        <!-- ✅ Novo campo de seleção de serviço -->
+        <div class="full-width">
+          <label for="servico">Serviço:</label>
+          <select id="servico" required>
+            <option value="manutencao_motor">Manutenção do Motor</option>
+          </select>
+        </div>
+
+        <!-- ✅ Checkbox -->
+        <div class="privacy">
           <input type="checkbox" id="termos" required>
           <label for="termos">Li e aceito os termos de uso e privacidade</label>
         </div>
 
+        <!-- ✅ Botões -->
         <div class="full-width buttons">
           <button type="submit" class="primary">Confirmar agendamento</button>
           <button type="reset" class="secondary">Limpar</button>
         </div>
-
-        <p id="feedbackMessage"></p>
       </form>
     </div>
   </main>
