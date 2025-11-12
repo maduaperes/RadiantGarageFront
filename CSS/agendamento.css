@@ -317,8 +317,9 @@ textarea::placeholder {
   align-items: center;
   gap: 10px;
   margin-top: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap; /* evita quebra entre checkbox e texto */
+  justify-content: flex-start; /* alinha tudo à esquerda */
+  max-width: 100%; /* garante que não estoure */
 }
 
 .privacy input[type="checkbox"] {
@@ -326,6 +327,7 @@ textarea::placeholder {
   height: 18px;
   accent-color: #413ba7;
   cursor: pointer;
+  flex-shrink: 0; /* checkbox não encolhe */
 }
 
 .privacy label {
@@ -333,6 +335,7 @@ textarea::placeholder {
   color: #cbd5e1;
   cursor: pointer;
   line-height: 1.4;
+  user-select: none; /* evita seleção do texto ao clicar rápido */
 }
 
 /* BOTÕES */
