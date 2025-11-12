@@ -3,33 +3,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const feedback = document.getElementById("feedbackMessage");
   const backButton = document.querySelector(".back");
 
-  // Botão de voltar
   if (backButton) {
     backButton.addEventListener("click", () => {
-      window.history.back();
+      window.location.href = "servico.html"; // substitua pelo caminho correto da página
     });
+
   }
 
-  // Função para exibir mensagens
   function showMessage(text, type = "error") {
+    if (!feedback) return;
     feedback.textContent = text;
-    feedback.style.color = type === "success" ? "#4ade80" : "#f87171"; // verde ou vermelho
+    feedback.style.color = type === "success" ? "#4ade80" : "#f87171";
     feedback.style.marginTop = "12px";
+    feedback.style.textAlign = "center";
+    feedback.style.transition = "0.3s";
   }
 
-  // Função de validação simples
   function validateForm() {
     const requiredFields = form.querySelectorAll("input[required], select[required]");
     for (const field of requiredFields) {
       if (!field.value.trim()) {
-        field.focus();
         showMessage("Por favor, preencha todos os campos obrigatórios.");
+        field.focus();
         return false;
       }
     }
 
     const termos = document.getElementById("termos");
-    if (!termos.checked) {
+    if (termos && !termos.checked) {
       showMessage("Você deve aceitar os termos de uso e privacidade.");
       termos.focus();
       return false;
@@ -38,37 +39,42 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
-  // Submissão do formulário
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (!validateForm()) return;
 
-    // Coletar dados do formulário
-    const dados = {
+    // ===== Dados do cliente =====
+    const cliente = {
       nome: document.getElementById("nome").value.trim(),
-      telefone: document.getElementById("telefone").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      data: document.getElementById("data").value,
-      horario: document.getElementById("horario").value,
-      veiculo: document.getElementById("veiculo").value.trim(),
-      servico: document.getElementById("servico").value,
-      pagamento: document.getElementById("pagamento").value,
-      placa: document.getElementById("placa").value.trim(),
-      observacoes: document.getElementById("observacoes").value.trim(),
+      telefone: document.getElementById("telefone").value.trim()
     };
 
-    console.log("Dados do agendamento:", dados);
+    // ===== Dados do agendamento =====
+    const agendamento = {
+      veiculo: document.getElementById("veiculo").value.trim(),
+      placa: document.getElementById("placa") ? document.getElementById("placa").value.trim() : "",
+      servico: document.getElementById("servico") ? document.getElementById("servico").value.trim() : "",
+      data: document.getElementById("data") ? document.getElementById("data").value.trim() : "",
+      horario: document.getElementById("horario") ? document.getElementById("horario").value.trim() : "",
+      pagamento: document.getElementById("pagamento").value,
+      observacoes: document.getElementById("observacoes").value.trim()
+    };
 
-    // Simulação de envio
+    // ===== Salvar no localStorage =====
+    let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
+    clientes.push(cliente);
+    localStorage.setItem("clientes", JSON.stringify(clientes));
+
+    localStorage.setItem("ultimoAgendamento", JSON.stringify(agendamento));
+
+    // Mostrar sucesso
     showMessage("Agendamento realizado com sucesso!", "success");
-
-    // Limpar formulário após sucesso
     form.reset();
 
-    // Redirecionar para a página de status após 2 segundos
+    // Redirecionar para status
     setTimeout(() => {
-      window.location.href = "status.html"; // 🔁 altere o nome se o arquivo for diferente
-    }, 2000);
+      window.location.href = "status.html";
+    }, 1500);
   });
 });

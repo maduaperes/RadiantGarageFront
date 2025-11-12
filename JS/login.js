@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (usuario.tipo === "admin") {
         window.location.href = 'dashboard.html';
       } else {
-        window.location.href = 'procura.html';
+        window.location.href = 'agendamento.html';
       }
     }, 1500);
   });

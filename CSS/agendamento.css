@@ -213,7 +213,7 @@ h2 {
 ========================== */
 form {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 20px;
 }
 
@@ -383,6 +383,13 @@ textarea::placeholder {
   font-size: 0.9rem;
   text-align: center;
   color: #ff6961;
+}
+
+#successMessage {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  text-align: center;
+  color: #4ade80;
 }
 
 footer {

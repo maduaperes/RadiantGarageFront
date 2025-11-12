@@ -186,7 +186,7 @@ main.card h2 {
   font-size: 1.5rem;
   text-align: center;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #4f46e5, #f97316);
+  background: #ffffff;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -200,7 +200,7 @@ main.card h2 {
 }
 
 .resumo h3 {
-  color: #60a5fa;
+  color: #ffffff;
   font-size: 1rem;
   margin-bottom: 0.6rem;
 }
@@ -223,7 +223,7 @@ main.card h2 {
 }
 
 .status-section h3 {
-  color: #fbbf24;
+  color: rgb(255, 255, 255);
   font-size: 1rem;
   margin-bottom: 0.5rem;
 }
@@ -249,7 +249,7 @@ main.card h2 {
 .progress .bar {
   width: 0%;
   height: 100%;
-  background: linear-gradient(90deg, #4f46e5, #f97316);
+  background: #413ba7;
   border-radius: 6px;
   transition: width 1s ease-in-out;
 }
@@ -269,7 +269,7 @@ main.card h2 {
 }
 
 .contato h3 {
-  color: #22c55e;
+  color: #ffffff;
   font-size: 1rem;
   margin-bottom: 0.4rem;
 }
@@ -299,7 +299,7 @@ button {
 }
 
 button.primary {
-  background: linear-gradient(90deg, #4f46e5, #f97316);
+  background: #413ba7;
   color: white;
 }
 
@@ -316,6 +316,15 @@ button.secondary {
 button.secondary:hover {
   background: rgba(255, 255, 255, 0.15);
   transform: translateY(-2px);
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
 }
 
 /* Responsividade */
