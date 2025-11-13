@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Botão de voltar
   if (backButton) {
     backButton.addEventListener("click", () => {
-      window.location.href = "servico.html"; // substitua pelo caminho correto da página
+      window.location.href = "procura.html"; // Ajuste para página correta
     });
   }
 
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.style.marginTop = "12px";
     feedback.style.textAlign = "center";
     feedback.style.transition = "0.3s";
+    feedback.style.display = "block"; // garante que esteja visível
   }
 
   // Validação do formulário
@@ -71,11 +72,13 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("clientes", JSON.stringify(clientes));
     localStorage.setItem("ultimoAgendamento", JSON.stringify(agendamento));
 
-    // Mostrar sucesso
+    // Mostrar sucesso antes de resetar
     showMessage("Agendamento realizado com sucesso!", "success");
-    form.reset();
 
-    // Redirecionar para status
+    // Resetar o formulário após 1 segundo
+    setTimeout(() => form.reset(), 1000);
+
+    // Redirecionar para status após 1,5 segundos
     setTimeout(() => {
       window.location.href = "status.html";
     }, 1500);

@@ -42,8 +42,8 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ===== Botões =====
-  if (btnBack) btnBack.addEventListener("click", () => window.location.href = "procura.html");
-  if (toDashboard) toDashboard.addEventListener("click", () => window.location.href = "servico.html");
+  if (btnBack) btnBack.addEventListener("click", () => window.location.href = "servico.html");
+  if (toDashboard) toDashboard.addEventListener("click", () => window.location.href = "procura.html");
   if (leaveFeedback) leaveFeedback.addEventListener("click", () => alert("Em breve você poderá avaliar o serviço! ⭐"));
 
   cancelBtn.addEventListener("click", () => {
@@ -109,5 +109,5 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   atualizarStatus();
-  const intervalo = setInterval(atualizarStatus, 2500);
+  const intervalo = setInterval(atualizarStatus, 3000);
 });
