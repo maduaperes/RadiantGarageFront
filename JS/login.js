@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     feedback.textContent = `Entrando como ${usuario.tipo}...`;
-    feedback.style.color = "green";
 
     // Salva informações básicas do usuário
     localStorage.setItem(

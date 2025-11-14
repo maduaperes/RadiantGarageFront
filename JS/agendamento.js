@@ -2,11 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("agendamentoForm");
   const feedback = document.getElementById("feedbackMessage");
   const backButton = document.querySelector(".back");
+  const clearButton = document.querySelector(".secondary");
+  const telefoneInput = document.getElementById("telefone"); // campo telefone
+
+  // 🔹 Permitir somente números no telefone
+  if (telefoneInput) {
+    telefoneInput.addEventListener("input", () => {
+      telefoneInput.value = telefoneInput.value.replace(/\D/g, ""); 
+    });
+  }
 
   // Botão de voltar
   if (backButton) {
     backButton.addEventListener("click", () => {
-      window.location.href = "procura.html"; // Ajuste para página correta
+      window.location.href = "procura.html";
     });
   }
 
@@ -18,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.style.marginTop = "12px";
     feedback.style.textAlign = "center";
     feedback.style.transition = "0.3s";
-    feedback.style.display = "block"; // garante que esteja visível
+    feedback.style.display = "block";
   }
 
   // Validação do formulário
@@ -42,19 +51,31 @@ document.addEventListener("DOMContentLoaded", () => {
     return true;
   }
 
+  // ===== Botão Limpar =====
+  if (clearButton) {
+    clearButton.addEventListener("click", () => {
+      form.reset();
+      showMessage("Formulário limpo com sucesso!", "success");
+
+      setTimeout(() => {
+        feedback.style.display = "none";
+      }, 2000);
+    });
+  }
+
   // Submit do formulário
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
     if (!validateForm()) return;
 
-    // ===== Dados do cliente =====
+    // Dados do cliente
     const cliente = {
       nome: document.getElementById("nome").value.trim(),
       telefone: document.getElementById("telefone").value.trim()
     };
 
-    // ===== Dados do agendamento =====
+    // Dados do agendamento
     const servicoSelect = document.getElementById("servico");
     const agendamento = {
       veiculo: document.getElementById("veiculo").value.trim(),
@@ -66,19 +87,17 @@ document.addEventListener("DOMContentLoaded", () => {
       observacoes: document.getElementById("observacoes").value.trim()
     };
 
-    // ===== Salvar no localStorage =====
+    // Salvar no localStorage
     let clientes = JSON.parse(localStorage.getItem("clientes")) || [];
     clientes.push(cliente);
     localStorage.setItem("clientes", JSON.stringify(clientes));
     localStorage.setItem("ultimoAgendamento", JSON.stringify(agendamento));
 
-    // Mostrar sucesso antes de resetar
+    // Mostrar sucesso
     showMessage("Agendamento realizado com sucesso!", "success");
 
-    // Resetar o formulário após 1 segundo
     setTimeout(() => form.reset(), 1000);
 
-    // Redirecionar para status após 1,5 segundos
     setTimeout(() => {
       window.location.href = "status.html";
     }, 1500);

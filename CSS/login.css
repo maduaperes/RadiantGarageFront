@@ -304,12 +304,12 @@ input:-webkit-autofill {
 
 .feedback-message {
   margin-top: 20px;
-  /* espaço para separar do texto acima */
   text-align: center;
-  /* centraliza o texto */
   font-size: 13px;
   min-height: 1.2em;
-  /* para manter espaço mesmo quando vazio */
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 footer {
