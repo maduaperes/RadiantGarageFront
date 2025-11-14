@@ -18,6 +18,38 @@ body {
 }
 
 /* ==========================
+   FEEDBACK MESSAGE
+========================== */
+#feedbackMessage {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #fff;
+}
+
+#feedbackMessage.success {
+  display: block;
+  background: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+#feedbackMessage.error {
+  display: block;
+  background: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+#feedbackMessage.info {
+  display: block;
+  background: rgba(59, 130, 246, 0.25);
+  color: #60a5fa;
+}
+
+/* ==========================
    HEADER
 ========================== */
 header.header {
@@ -171,11 +203,10 @@ main {
 }
 
 .search-filters .filter {
-  margin-bottom: 1rem; /* ou o valor que quiser */
+  margin-bottom: 1rem;
 }
 
-.search-filters .filter label {
-  margin-bottom: 0.2rem;
+.search-filters label {
   display: inline-block;
 }
 
@@ -238,17 +269,11 @@ main {
   cursor: pointer;
 }
 
-option {
-  background-color: #ffffff;
-  color: #000000;
-}
-
 .options-container {
   position: absolute;
   top: 110%;
   left: 0;
   background: rgba(30, 41, 59, 0.95);
-  /* fundo escuro e quase opaco */
   border-radius: 8px;
   padding: 0.5rem;
   display: none;
@@ -256,21 +281,34 @@ option {
   max-height: 250px;
   overflow-y: auto;
   width: 100%;
-  z-index: 5;
+  z-index: 99999;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  /* sombra para destacar */
 }
 
-.options-container label {
-  margin-bottom: 0.3rem;
-  font-weight: normal;
+.options-container.open {
+  display: flex !important;
+}
+
+.options-container label.option {
+  display: flex;
+  align-items: center; /* faz checkbox e texto ficarem na mesma linha */
+  gap: 8px; /* distância entre checkbox e texto */
+  margin-bottom: 0.4rem;
   cursor: pointer;
   color: #e6eef8;
-  /* cor do texto clara */
+  font-weight: normal;
+  line-height: 1.2;
 }
 
 .options-container input[type="checkbox"] {
-  margin-right: 0.4rem;
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  display: inline-block; /* garante que não seja block */
+}
+
+.options-container span {
+  display: inline-block; /* garante que o texto fique ao lado do checkbox */
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,
@@ -284,7 +322,6 @@ button.clear-btn {
   border: none;
   border-radius: 8px;
   background: #ef4444;
-  /* vermelho suave */
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -295,7 +332,6 @@ button.clear-btn {
 button.clear-btn:hover {
   background: #b91c1c;
 }
-
 
 /* ==========================
    SERVICE RESULTS

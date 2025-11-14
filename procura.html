@@ -52,26 +52,16 @@
             </div>
 
             <div class="options-container" id="optionsContainer">
-              <label><input type="checkbox" value="manutencao do motor"> Manutenção do Motor</label>
+              <label><input type="checkbox" value="manutencao e mecanica geral"> Manutenção e Mecânica Geral</label>
               <label><input type="checkbox" value="transmissao e cambio"> Transmissão e Câmbio</label>
               <label><input type="checkbox" value="freios e suspensao"> Freios e Suspensão</label>
-              <label><input type="checkbox" value="pneus e rodas"> Pneus e Rodas</label>
               <label><input type="checkbox" value="sistema eletrico"> Sistema Elétrico</label>
-              <label><input type="checkbox" value="ar e climatizacao"> Sistema de Ar e Climatização</label>
-              <label><input type="checkbox" value="seguranca e direcao"> Segurança e Direção</label>
               <label><input type="checkbox" value="sistema de escape"> Sistema de Escape</label>
               <label><input type="checkbox" value="combustivel e injecao"> Combustível e Injeção</label>
-              <label><input type="checkbox" value="diagnostico e revisao"> Diagnóstico e Revisão Geral</label>
-              <label><input type="checkbox" value="lavagem simples"> Lavagem Simples</label>
-              <label><input type="checkbox" value="lavagem completa"> Lavagem Completa</label>
-              <label><input type="checkbox" value="lavagem a seco"> Lavagem a Seco</label>
-              <label><input type="checkbox" value="polimento"> Polimento</label>
-              <label><input type="checkbox" value="enceramento"> Enceramento</label>
-              <label><input type="checkbox" value="vitrificacao"> Vitrificação / Cristalização</label>
-              <label><input type="checkbox" value="higienizacao interna"> Higienização Interna</label>
-              <label><input type="checkbox" value="tratamento de couro"> Tratamento de Couro e Estofados</label>
-              <label><input type="checkbox" value="peliculas e detalhes"> Películas e Detalhes Estéticos</label>
+              <label><input type="checkbox" value="revisao e diagnostico"> Revisão e Diagnóstico</label>
+              <label><input type="checkbox" value="personalizacao e acessorios"> Personalização e Acessórios</label>
             </div>
+
           </div>
         </div>
 
@@ -131,7 +121,10 @@
     <section class="service-results">
       <h2>Serviços Disponíveis</h2>
 
-      <div class="service-card">
+      <!-- =================== MANUTENÇÃO MECÂNICA =================== -->
+      <h2 class="category-title">Manutenção Mecânica</h2>
+
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img
           src="https://www.tecfil.com.br/wp-content/uploads/2020/09/galerias_tecfil-seo_0005_shutterstock_1457616980-1024x683.jpg"
           alt="Manutenção do Motor">
@@ -144,7 +137,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img src="https://images.pexels.com/photos/12190245/pexels-photo-12190245.jpeg" alt="Transmissão e Câmbio">
         <div class="service-info">
           <h3>Transmissão e Câmbio</h3>
@@ -155,7 +148,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img src="https://www.limpsom.com.br/imagens/artigos/big/freios-e-suspensao.jpg" alt="Freios e Suspensão">
         <div class="service-info">
           <h3>Freios e Suspensão</h3>
@@ -166,20 +159,7 @@
         </div>
       </div>
 
-      <div class="service-card">
-        <img
-          src="https://www.oklocadoradeveiculos.com/wp-content/uploads/2020/05/Depositphotos_94983148_xl-2015A-1080x675.jpg"
-          alt="Pneus e Rodas">
-        <div class="service-info">
-          <h3>Pneus e Rodas</h3>
-          <h5>R$ 300</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Troca, balanceamento e alinhamento de pneus e rodas...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card">
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img src="https://blog.rbmotors.com.br/wp-content/uploads/2024/10/image-4.jpeg" alt="Sistema Elétrico">
         <div class="service-info">
           <h3>Sistema Elétrico</h3>
@@ -190,31 +170,7 @@
         </div>
       </div>
 
-      <div class="service-card">
-        <img
-          src="https://www.delphiautoparts.com/images/default-source/theme/compressor-.tmb-1920w.png?Culture=pt-BR&sfvrsn=2e7eb6e_5"
-          alt="Sistema de Ar e Climatização">
-        <div class="service-info">
-          <h3>Sistema de Ar e Climatização</h3>
-          <h5>R$ 400</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Revisão e manutenção de ar-condicionado e climatização...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <img src="https://www.canaldapeca.com.br/blog/wp-content/uploads/2018/07/1_1.jpg" alt="Segurança e Direção">
-        <div class="service-info">
-          <h3>Segurança e Direção</h3>
-          <h5>R$ 450</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Manutenção de direção, airbags e sistemas de segurança...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card">
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img
           src="https://static.wixstatic.com/media/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg"
           alt="Sistema de Escape">
@@ -227,7 +183,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="manutencao e mecanica geral">
         <img src="https://mobilidade.estadao.com.br/wp-content/uploads/2023/05/injecao.jpg" alt="Combustível e Injeção">
         <div class="service-info">
           <h3>Combustível e Injeção</h3>
@@ -238,20 +194,26 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <!-- =================== AR E CLIMATIZAÇÃO =================== -->
+      <h2 class="category-title">Ar e Climatização</h2>
+
+      <div class="service-card" data-category="ar e climatizacao">
         <img
-          src="https://blog.fras-le.com/wp-content/uploads/2020/02/original-e6ea8bb79457d7a5a19bfe9c35171331-scaled.jpg"
-          alt="Diagnóstico e Revisão Geral">
+          src="https://www.delphiautoparts.com/images/default-source/theme/compressor-.tmb-1920w.png?Culture=pt-BR&sfvrsn=2e7eb6e_5"
+          alt="Sistema de Ar e Climatização">
         <div class="service-info">
-          <h3>Diagnóstico e Revisão Geral</h3>
-          <h5>R$ 600</h5>
+          <h3>Sistema de Ar e Climatização</h3>
+          <h5>R$ 400</h5>
           <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Check-up completo do veículo, diagnósticos eletrônicos e mecânicos...</p>
+          <p>Revisão e manutenção de ar-condicionado e climatização...</p>
           <a href="detalhes.html">Ver mais</a>
         </div>
       </div>
 
-      <div class="service-card">
+      <!-- =================== ESTÉTICA AUTOMOTIVA =================== -->
+      <h2 class="category-title">Estética Automotiva</h2>
+
+      <div class="service-card" data-category="estetica automotiva">
         <img
           src="https://www.zuldigital.com.br/blog/wp-content/uploads/2021/11/shutterstock_1859193349_Easy-Resize.com_.jpg"
           alt="Lavagem Simples">
@@ -264,7 +226,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica automotiva">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu22XRNtKTw0VRj1eJejrFGebHoMkeV-jvGw&s"
           alt="Lavagem Completa">
         <div class="service-info">
@@ -276,7 +238,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica automotiva">
         <img src="https://www.acquazero.com/wp-content/uploads/2020/09/2792649-1-scaled.jpg" alt="Lavagem a Seco">
         <div class="service-info">
           <h3>Lavagem a Seco</h3>
@@ -287,7 +249,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica automotiva">
         <img src="https://wicar.com.br/wp-content/uploads/2021/08/polimento-automotivo.jpg" alt="Polimento">
         <div class="service-info">
           <h3>Polimento</h3>
@@ -298,7 +260,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica automotiva">
         <img
           src="https://canalcarro.net.br/wp-content/uploads/2025/10/Guia-Definitivo-Cuidando-da-Carroceria-do-Seu-Carro-para-Manter-o-Brilho-de-Zero-e-o-Valor-de-Mercado.webp"
           alt="Enceramento">
@@ -311,7 +273,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica automotiva">
         <img src="https://www.grupofoggiatto.com.br/wp-content/uploads/2023/04/bg6006f8911D8IJen2Me-scaled.jpeg"
           alt="Vitrificação / Cristalização">
         <div class="service-info">
@@ -323,7 +285,10 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <!-- =================== INTERIOR =================== -->
+      <h2 class="category-title">Interior e Conforto</h2>
+
+      <div class="service-card" data-category="interior e conforto">
         <img src="https://www.simoniz.uk/wp-content/uploads/2025/03/iStock-2170601866.jpg" alt="Higienização Interna">
         <div class="service-info">
           <h3>Higienização Interna</h3>
@@ -334,7 +299,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="interior e conforto">
         <img src="https://www.detailingdevils.com/uploads/blogs/car-seat-clean.webp"
           alt="Tratamento de Couro e Estofados">
         <div class="service-info">
@@ -346,7 +311,40 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <!-- =================== SEGURANÇA =================== -->
+      <h2 class="category-title">Segurança e Direção</h2>
+
+      <div class="service-card" data-category="seguranca e direcao">
+        <img src="https://www.canaldapeca.com.br/blog/wp-content/uploads/2018/07/1_1.jpg" alt="Segurança e Direção">
+        <div class="service-info">
+          <h3>Segurança e Direção</h3>
+          <h5>R$ 450</h5>
+          <p>Endereço: Centro - Rua Principal, 123</p>
+          <p>Manutenção de direção, airbags e sistemas de segurança...</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <!-- =================== DIAGNÓSTICO =================== -->
+      <h2 class="category-title">Diagnóstico e Revisão</h2>
+
+      <div class="service-card" data-category="diagnostico e revisao">
+        <img
+          src="https://blog.fras-le.com/wp-content/uploads/2020/02/original-e6ea8bb79457d7a5a19bfe9c35171331-scaled.jpg"
+          alt="Diagnóstico e Revisão Geral">
+        <div class="service-info">
+          <h3>Diagnóstico e Revisão Geral</h3>
+          <h5>R$ 600</h5>
+          <p>Endereço: Centro - Rua Principal, 123</p>
+          <p>Check-up completo do veículo, diagnósticos eletrônicos e mecânicos...</p>
+          <a href="detalhes.html">Ver mais</a>
+        </div>
+      </div>
+
+      <!-- =================== ESTÉTICA EXTERNA =================== -->
+      <h2 class="category-title">Estética Externa</h2>
+
+      <div class="service-card" data-category="estetica externa">
         <img src="https://blog.autoglassonline.com.br/wp-content/uploads/2023/07/polir-revitalizar-limpar-o-farol.png"
           alt="Polimento de Faróis">
         <div class="service-info">
@@ -358,7 +356,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica externa">
         <img src="https://suaoficinaonline.com.br/conteudo/content/images/2018/12/insulfilm.jpg"
           alt="Proteção de Vidros">
         <div class="service-info">
@@ -370,7 +368,7 @@
         </div>
       </div>
 
-      <div class="service-card">
+      <div class="service-card" data-category="estetica externa">
         <img src="https://wrapguys.com/wp-content/uploads/2019/06/wrapping-vehicle.jpg"
           alt="Películas e Detalhes Estéticos">
         <div class="service-info">
@@ -381,6 +379,7 @@
           <a href="detalhes.html">Ver mais</a>
         </div>
       </div>
+
     </section>
 
   </main>
