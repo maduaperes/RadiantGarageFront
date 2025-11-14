@@ -1,128 +1,179 @@
-// ===== Variáveis principais =====
-let overallRating = 0, serviceRating = 0, attendanceRating = 0;
+document.addEventListener("DOMContentLoaded", () => {
 
-const starsOverall = document.querySelectorAll('#stars-overall span');
-const starsService = document.querySelectorAll('#stars-service span');
-const starsAttendance = document.querySelectorAll('#stars-attendance span');
+  // Variáveis principais
+  window.overallRating = 0;
+  window.serviceRating = 0;
+  window.attendanceRating = 0;
 
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const categorySelect = document.getElementById('category');
-const imageInput = document.getElementById('image');
-const checkboxAgree = document.getElementById('agree');
+  const starsOverall = document.querySelectorAll('#stars-overall span');
+  const starsService = document.querySelectorAll('#stars-service span');
+  const starsAttendance = document.querySelectorAll('#stars-attendance span');
 
-const submitBtn = document.getElementById('submit');
-const clearBtn = document.getElementById('clear');
-const feedbackMessage = document.getElementById('feedbackMessage');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const titleInput = document.getElementById('title');
+  const imageInput = document.getElementById('image');
+  const checkboxAgree = document.getElementById('agree');
 
-let feedbackTimeout;
+  const observationsInput = document.getElementById('description');
+  const counterSpan = document.getElementById('charCount');
 
-// ===== Função: Mostrar notificação =====
-function showNotification(message, color) {
-  feedbackMessage.textContent = message;
-  feedbackMessage.style.color = color;
-  feedbackMessage.style.opacity = "1";
+  const submitBtn = document.getElementById('submit');
+  const clearBtn = document.getElementById('clear');
+  const feedbackMessage = document.getElementById('feedbackMessage');
 
-  if (feedbackTimeout) clearTimeout(feedbackTimeout);
+  let feedbackTimeout;
 
-  feedbackTimeout = setTimeout(() => {
-    feedbackMessage.style.opacity = "0";
-  }, 8000);
-}
 
-// ===== Função: Destacar estrelas =====
-function highlightStars(stars, count) {
-  stars.forEach(star => star.classList.remove('selected'));
-  stars.forEach(star => {
-    if (parseInt(star.dataset.value) <= count) star.classList.add('selected');
-  });
-}
+  // Mostrar notificação
+  function showNotification(message, color, permanent = false) {
+    feedbackMessage.textContent = message;
+    feedbackMessage.style.color = color;
+    feedbackMessage.classList.add('active');
 
-// ===== Configurar eventos das estrelas =====
-function setupStarEvents(stars, ratingVar) {
-  stars.forEach(star => {
-    star.addEventListener('mouseover', () => highlightStars(stars, parseInt(star.dataset.value)));
-    star.addEventListener('mouseout', () => highlightStars(stars, ratingVar.value));
-    star.addEventListener('click', () => {
-      ratingVar.value = parseInt(star.dataset.value);
-      highlightStars(stars, ratingVar.value);
-      checkEnableSubmit();
-    });
-  });
-}
+    if (feedbackTimeout) clearTimeout(feedbackTimeout);
 
-// Ligações das estrelas
-setupStarEvents(starsOverall, { get value() { return overallRating; }, set value(v) { overallRating = v; } });
-setupStarEvents(starsService, { get value() { return serviceRating; }, set value(v) { serviceRating = v; } });
-setupStarEvents(starsAttendance, { get value() { return attendanceRating; }, set value(v) { attendanceRating = v; } });
-
-// ===== Habilitar botão "Enviar" =====
-function checkEnableSubmit() {
-  submitBtn.disabled = !(
-    (overallRating || serviceRating || attendanceRating) &&
-    categorySelect.value !== '' &&
-    checkboxAgree.checked
-  );
-}
-
-// ===== Monitorar mudanças =====
-[nameInput, emailInput, categorySelect, checkboxAgree].forEach(el =>
-  el.addEventListener('input', checkEnableSubmit)
-);
-
-// ===== Limpar formulário =====
-function clearForm() {
-  overallRating = serviceRating = attendanceRating = 0;
-  highlightStars(starsOverall, 0);
-  highlightStars(starsService, 0);
-  highlightStars(starsAttendance, 0);
-
-  nameInput.value = '';
-  emailInput.value = '';
-  categorySelect.value = '';
-  imageInput.value = '';
-  checkboxAgree.checked = false;
-  checkEnableSubmit();
-  showNotification("Formulário limpo!", "green");
-}
-
-// ===== Botão limpar =====
-clearBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-  clearForm();
-});
-
-// ===== Enviar feedback =====
-submitBtn.addEventListener('click', (e) => {
-  e.preventDefault();
-
-  if (!checkboxAgree.checked) {
-    showNotification("Você precisa concordar com os termos antes de enviar.", "red");
-    return;
+    if (!permanent) {
+      feedbackTimeout = setTimeout(() => {
+        feedbackMessage.classList.remove('active');
+      }, 8000);
+    }
   }
 
-  const review = {
-    nome: nameInput.value.trim() || 'Anônimo',
-    email: emailInput.value.trim(),
-    tipo: categorySelect.value,
-    ratings: {
-      geral: overallRating,
-      serviço: serviceRating,
-      atendimento: attendanceRating
-    },
-    imagem: imageInput.files[0]?.name || '',
-    data: new Date().toLocaleString('pt-BR')
-  };
 
-  const reviews = JSON.parse(localStorage.getItem('radiant_reviews') || '[]');
-  reviews.unshift(review);
-  localStorage.setItem('radiant_reviews', JSON.stringify(reviews));
+  // Estrelas
+  function highlightStars(stars, count) {
+    stars.forEach(star => star.classList.remove('selected'));
+    stars.forEach(star => {
+      if (parseInt(star.dataset.value) <= count) {
+        star.classList.add('selected');
+      }
+    });
+  }
 
-  showNotification("Avaliação enviada com sucesso!", "green");
-  clearForm();
-});
+  function setupStarEvents(stars, ratingName) {
+    stars.forEach(star => {
+      star.addEventListener('mouseover', () => {
+        highlightStars(stars, star.dataset.value);
+      });
 
-// ===== Botão voltar =====
-document.getElementById('btnBack').addEventListener('click', () => {
-  location.href = 'status.html';
+      star.addEventListener('mouseout', () => {
+        highlightStars(stars, window[ratingName]);
+      });
+
+      star.addEventListener('click', () => {
+        window[ratingName] = parseInt(star.dataset.value);
+        highlightStars(stars, window[ratingName]);
+        checkEnableSubmit();
+      });
+    });
+  }
+
+  setupStarEvents(starsOverall, 'overallRating');
+  setupStarEvents(starsService, 'serviceRating');
+  setupStarEvents(starsAttendance, 'attendanceRating');
+
+
+  // Contador de caracteres
+  function updateCharCount() {
+    const max = 500;
+    const used = observationsInput.value.length;
+    counterSpan.textContent = `${max - used} caracteres disponíveis.`;
+    counterSpan.style.color = max - used <= 50 ? 'red' : 'inherit';
+  }
+
+  observationsInput.addEventListener('input', updateCharCount);
+  updateCharCount();
+
+
+  // Botão enviar habilitado?
+  function checkEnableSubmit() {
+    const hasRating =
+      window.overallRating > 0 ||
+      window.serviceRating > 0 ||
+      window.attendanceRating > 0;
+
+    submitBtn.disabled = !(hasRating && checkboxAgree.checked);
+  }
+
+
+  checkboxAgree.addEventListener('change', checkEnableSubmit);
+  observationsInput.addEventListener('input', checkEnableSubmit);
+
+
+  // Limpar formulário
+  function clearForm() {
+    window.overallRating = 0;
+    window.serviceRating = 0;
+    window.attendanceRating = 0;
+
+    highlightStars(starsOverall, 0);
+    highlightStars(starsService, 0);
+    highlightStars(starsAttendance, 0);
+
+    nameInput.value = '';
+    emailInput.value = '';
+    titleInput.value = '';
+    imageInput.value = '';
+    checkboxAgree.checked = false;
+    observationsInput.value = '';
+
+    updateCharCount();
+    checkEnableSubmit();
+  }
+
+
+  // Botão limpar
+  clearBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    clearForm();
+    showNotification("Formulário limpo!", "green");
+  });
+
+
+  // Enviar feedback
+  submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if (!checkboxAgree.checked) {
+      showNotification("Você precisa concordar com os termos.", "red");
+      return;
+    }
+
+    const review = {
+      nome: nameInput.value.trim() || 'Anônimo',
+      email: emailInput.value.trim(),
+      titulo: titleInput.value.trim(),
+      ratings: {
+        geral: window.overallRating,
+        servico: window.serviceRating,
+        atendimento: window.attendanceRating
+      },
+      observacoes: observationsInput.value.trim(),
+      imagem: imageInput.files[0]?.name || '',
+      data: new Date().toLocaleString("pt-BR")
+    };
+
+    const reviews = JSON.parse(localStorage.getItem("radiant_reviews") || "[]");
+    reviews.unshift(review);
+    localStorage.setItem("radiant_reviews", JSON.stringify(reviews));
+
+    showNotification("Obrigada pelo feedback!", "green");
+
+    submitBtn.disabled = true;
+    clearBtn.disabled = true;
+
+    setTimeout(clearForm, 1000);
+    setTimeout(() => {
+      window.location.href = "procura.html";
+    }, 2500);
+  });
+
+
+  // Voltar
+  const btnBack = document.getElementById('btnBack');
+  btnBack?.addEventListener('click', () => {
+    window.location.href = "status.html";
+  });
+
 });
