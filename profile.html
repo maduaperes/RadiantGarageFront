@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<header class="header">
+  <header class="header">
     <div class="logo">
       <div class="logo-icon"></div>
       <span>RadiantGarage</span>
@@ -28,35 +28,63 @@
       </nav>
 
       <div class="user">
-        <a href="login.html">Login</a>
+        <a href="login.html">Perfil</a>
       </div>
     </div>
-    </header>
+  </header>
 
-  <!-- CARD DE PERFIL -->
-  <main class="profile-card">
-    <div class="profile-header">
-      <div class="avatar">👤</div>
-      <div class="user-info">
-        <h2 id="userName">João Silva</h2>
-        <p id="userContact">joao@email.com</p>
-        <button id="editProfileBtn" class="btn-primary">Editar Perfil</button>
+  <main>
+    <div class="profile-card">
+
+      <div class="profile-header">
+        <div class="avatar">
+          <img src="https://cdn-icons-png.flaticon.com/512/3736/3736502.png" alt="Foto de Perfil" id="profileImage">
+        </div>
+        <div class="user-info">
+          <h2 id="userName">João Silva</h2>
+          <p id="userContact">joao@email.com</p>
+          <div style="display: flex; gap: 10px; margin-top: 10px;">
+            <button id="editProfileBtn" class="btn-primary">Editar Perfil</button>
+            <button id="changePasswordBtn" class="btn-secondary" style="margin-top:0">Senha</button>
+          </div>
+        </div>
+      </div>
+
+      <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 10px 0;">
+
+      <section class="vehicles-section">
+        <h3>Meus Veículos</h3>
+        <div class="history-list" style="max-height: 120px;">
+          <div class="history-item">
+            <p><strong>Tesla Model 3</strong> - ABC-1234</p>
+            <span class="status concluido">Ativo</span>
+          </div>
+        </div>
+        <button class="btn-primary" style="font-size: 0.75rem; padding: 5px 10px; margin-top: 8px;">+ Adicionar
+          Veículo</button>
+      </section>
+
+      <section class="address-section" style="margin-top: 1rem;">
+        <h3>Endereços de Atendimento</h3>
+        <p style="font-size: 0.85rem; color: #94a3b8;">📍 Rua das Flores, 123 - Centro</p>
+      </section>
+
+      <section class="history-section">
+        <h3>Histórico de Serviços</h3>
+        <div id="history" class="history-list">
+          <div class="history-item">
+            <p>Lavagem Ecológica - 12/10/2025</p>
+            <span class="status concluido">Concluído</span>
+          </div>
+        </div>
+      </section>
+
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+        <button onclick="location.href='procura.html'" class="btn-secondary" style="margin-top: 0;">Voltar</button>
+        <button onclick="logout()" class="btn-danger" style="padding: 0.6rem 1rem; font-size: 0.8rem;">Sair da
+          Conta</button>
       </div>
     </div>
-
-    <section class="profile-settings">
-      <h3>Configurações</h3>
-      <button id="changePasswordBtn" class="btn-secondary">Alterar Senha</button>
-    </section>
-
-    <section class="history-section">
-      <h3>Histórico de Serviços</h3>
-      <div id="history" class="history-list">
-        <!-- Itens de histórico carregados via JS -->
-      </div>
-    </section>
-
-    <button onclick="location.href='dashboard.html'" class="btn-secondary">Voltar</button>
   </main>
 
   <!-- MODAL EDITAR PERFIL -->
@@ -89,6 +117,25 @@
     </div>
   </div>
 
+  <div id="vehicleModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Adicionar Veículo</h3>
+      <label>Modelo do Carro:</label>
+      <input type="text" id="carModel" placeholder="Ex: Tesla Model 3">
+      <label>Placa:</label>
+      <input type="text" id="carPlate" placeholder="Ex: ABC-1234">
+      <div class="modal-actions">
+        <button id="saveVehicle" class="btn-primary">Adicionar</button>
+        <button id="cancelVehicle" class="btn-secondary">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
   <script src="JS/profile.js"></script>
 </body>
+
+<footer>
+  <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+</footer>
+
 </html>

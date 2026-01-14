@@ -1,114 +1,86 @@
+/* ==========================
+   CONFIGURAÇÕES BASE
+========================== */
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
-  background-color: #0b1220;
-  color: #fff;
+  font-family: 'Montserrat', sans-serif; /* Unificado com o padrão anterior */
+  background: linear-gradient(180deg, #0b1220, #111827);
+  color: #e6eef8;
+  min-height: 100vh;
 }
 
-/* HEADER */
+/* ==========================
+   HEADER (Violeta Transparente)
+========================== */
 header.header {
     display: flex;
     align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
     justify-content: flex-start;
     padding: 0.35rem 1rem;
     background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px); /* Efeito de vidro */
     color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
     position: relative; 
+    top: 0;
+    z-index: 100;
+    min-height: 48px;
 }
 
-/* 1. LOGO: Posição Esquerda */
 .logo {
     display: flex;
     align-items: center;
     gap: 0.4rem;
     font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
     cursor: pointer;
     margin-left: 20px;
 }
 
-.logo span {
-    font-weight: bold;
-}
+.logo span { font-weight: bold; }
 
-.logo-icon {
-    font-size: 1.3rem;
-}
-
-/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
+/* SEARCH-BOX CENTRALIZADO */
 .search-box {
-    /* CHAVE: Centralização Perfeita */
     position: absolute; 
     left: 50%; 
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+    z-index: 1;
 }
 
 .search-box input {
     height: 28px;
     width: 350px; 
-    padding: 0 32px 0 8px;
+    padding: 0 32px 0 12px;
     font-size: 0.8rem;
     border-radius: 10px;
     border: none;
     background: rgba(255, 255, 255, 0.08);
     color: #e6eef8;
-    transition: background 0.2s ease;
-}
-
-.search-box input::placeholder {
-    color: #94a3b8;
+    transition: all 0.3s ease;
 }
 
 .search-box input:focus {
     outline: none;
     background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 0 2px rgba(65, 59, 167, 0.4);
 }
 
 .search-box button {
     position: absolute;
     right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
     background: none;
     border: none;
     color: #cbd5e1;
     cursor: pointer;
-    font-size: 0.9rem;
 }
 
-.search-box button:hover {
-    color: #fff;
-}
-
-/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+/* GRUPO DIREITA (Nav + User) */
 .right-group {
     display: flex;
     align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
     gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
     margin-left: auto;
-    z-index: 2;
-}
-
-/* 4. NAV: Agrupamento de Links DENTRO do right-group */
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
 }
 
 .nav a {
@@ -116,107 +88,93 @@ header.header {
     color: white;
     text-decoration: none;
     font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
+    transition: 0.3s;
 }
 
-.nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
-}
-
-.nav span {
-    margin: 0 0.2rem;
-}
-
-/* 5. USER (Login): DENTRO do right-group */
-.user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
+.nav a:hover { color: #94a3b8; }
 
 .user a {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
     color: #fff;
-    background: #413ba7;
+    background: #413ba7; /* Violeta Principal */
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: 0.3s;
 }
 
 .user a:hover {
+    background: #4f46e5;
     transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* CONTEÚDO PRINCIPAL */
+/* ==========================
+   CONTEÚDO DASHBOARD
+========================== */
 .dashboard {
   padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .overview h2 {
-  font-size: 28px;
+  font-size: 24px;
   margin-bottom: 5px;
+  font-weight: 700;
 }
 
-.quick-actions {
-  margin-top: 30px;
-}
-
-.quick-actions h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
-}
-
+/* BOTÕES E AÇÕES */
 .actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
+  margin-top: 15px;
 }
 
-.actions input,
-.actions select {
-  background-color: #1a2238;
+.actions input, .actions select {
+  background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding: 10px;
   border-radius: 8px;
   outline: none;
 }
 
 .primary {
-  background-color: #4fc3f7;
-  color: #0b1220;
+  background-color: #413ba7;
+  color: #fff;
   padding: 10px 20px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .primary:hover {
-  background-color: #29b6f6;
+  background-color: #4f46e5;
+  transform: translateY(-2px);
 }
 
 .secondary {
-  background-color: #1a2238;
-  color: #4fc3f7;
-  border: 1px solid #4fc3f7;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   padding: 10px 20px;
-  border-radius: 8px;
+  border-radius: 10px;
+  font-weight: 600;
   cursor: pointer;
-  transition: 0.2s;
+  transition: 0.3s;
 }
 
 .secondary:hover {
-  background-color: #4fc3f7;
-  color: #0b1220;
+  background: rgba(255, 255, 255, 0.2);
 }
 
-/* CARDS */
+/* ==========================
+   CARDS (Estilo Glassmorphism)
+========================== */
 .overview-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -225,56 +183,77 @@ header.header {
 }
 
 .card {
-  background-color: #1a2238;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 24px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: #413ba7;
 }
 
 .card h3 {
-  font-size: 18px;
-  color: #4fc3f7;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
   margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 22px;
+  font-size: 28px;
   font-weight: bold;
+  color: #fff;
 }
 
-/* TABELA */
+/* ==========================
+   TABELA DE RELATÓRIOS
+========================== */
 .tabela-relatorios {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
-.tabela-relatorios th,
-.tabela-relatorios td {
+.tabela-relatorios th {
+  background: rgba(65, 59, 167, 0.2);
   text-align: left;
-  padding: 10px;
-  border-bottom: 1px solid #ffffff20;
+  padding: 15px;
+  color: #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.tabela-relatorios td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  font-size: 0.85rem;
 }
 
 .status.concluido {
-  color: #4fc3f7;
+  color: #10b981; /* Verde esmeralda para sucesso */
+  font-weight: bold;
 }
 
 .status.pendente {
-  color: #fbbf24;
+  color: #f59e0b; /* Âmbar para atenção */
+  font-weight: bold;
 }
 
-@media (max-width: 768px) {
-  .header {
-    flex-direction: column;
-    gap: 15px;
-  }
+option {
+  background: rgb(255, 255, 255);
+  color: #000000;
+}
 
-  .actions {
-    flex-direction: column;
-  }
-
-  .overview-cards {
-    grid-template-columns: 1fr;
-  }
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+  .search-box { display: none; } /* Esconde busca em telas pequenas para não quebrar */
+  .header { padding: 1rem; }
+  .right-group { gap: 0.8rem; }
 }
