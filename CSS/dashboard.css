@@ -47,11 +47,13 @@ header.header {
   margin-left: 20px;
 }
 
-.logo span { font-weight: bold; }
+.logo span {
+  font-weight: bold;
+}
 
 .search-box {
-  position: absolute; 
-  left: 50%; 
+  position: absolute;
+  left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
@@ -60,7 +62,7 @@ header.header {
 
 .search-box input {
   height: 28px;
-  width: 350px; 
+  width: 350px;
   padding: 0 32px 0 12px;
   font-size: 0.8rem;
   border-radius: 10px;
@@ -87,7 +89,7 @@ header.header {
 .right-group {
   display: flex;
   align-items: center;
-  gap: 1.5rem; 
+  gap: 1.5rem;
   margin-left: auto;
 }
 
@@ -173,26 +175,42 @@ main.dashboard {
   object-fit: cover;
 }
 
-.user-info h2 { font-size: 1.3rem; margin-bottom: 2px; }
-.user-info p { font-size: 0.85rem; color: #94a3b8; }
+.user-info h2 {
+  font-size: 1.3rem;
+  margin-bottom: 2px;
+}
+
+.user-info p {
+  font-size: 0.85rem;
+  color: #94a3b8;
+}
 
 /* ==========================
    CLASSES DO DASHBOARD (Mantidas)
 ========================== */
-.overview, .quick-actions, .charts, .promo, .feedback {
+.overview,
+.quick-actions,
+.charts,
+.promo,
+.feedback {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   width: 100%;
 }
 
-.overview-cards, .cards-grid, .chart-cards {
+.overview-cards,
+.cards-grid,
+.chart-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1.5rem;
 }
 
-.card, .chart-section, .promoCard, .feedback-card {
+.card,
+.chart-section,
+.promoCard,
+.feedback-card {
   background: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
   border-radius: 16px;
@@ -208,7 +226,8 @@ main.dashboard {
 /* ==========================
    BOTÕES GERAIS
 ========================== */
-.btn-primary, .quick-actions .actions a.primary {
+.btn-primary,
+.quick-actions .actions a.primary {
   background: #413ba7;
   color: #fff;
   border: none;
@@ -220,7 +239,8 @@ main.dashboard {
   text-decoration: none;
 }
 
-.btn-secondary, .quick-actions .actions a.secondary {
+.btn-secondary,
+.quick-actions .actions a.secondary {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
   border: none;
@@ -266,15 +286,21 @@ main.dashboard {
   padding: 2px 8px;
   border-radius: 5px;
 }
-.status.concluido { background: #28a745; color: #fff; }
+
+.status.concluido {
+  background: #28a745;
+  color: #fff;
+}
 
 /* ==========================
    MODAIS
 ========================== */
 .modal {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(5px);
   display: flex;
@@ -283,7 +309,9 @@ main.dashboard {
   z-index: 1000;
 }
 
-.modal.hidden { display: none; }
+.modal.hidden {
+  display: none;
+}
 
 .modal-content {
   background: #1a1f2e;
@@ -294,7 +322,12 @@ main.dashboard {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.modal-content label { display: block; margin: 10px 0 5px; font-size: 0.9rem; }
+.modal-content label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 0.9rem;
+}
+
 .modal-content input {
   width: 100%;
   padding: 10px;
@@ -304,7 +337,11 @@ main.dashboard {
   color: white;
 }
 
-.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
 
 /* ==========================
    FOOTER E ANIMAÇÃO
@@ -319,12 +356,155 @@ footer {
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 900px) {
-  .search-box { display: none; }
-  .overview-cards, .cards-grid { grid-template-columns: 1fr; }
+/* 1. Ajustes para Tablets e Telas Médias (Até 1024px) */
+@media (max-width: 1024px) {
+  .search-box input {
+    width: 250px;
+  }
+
+  main.dashboard {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Celulares Grandes (Até 768px) */
+@media (max-width: 768px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* DASHBOARD: Enquadramento total */
+  main.dashboard {
+    padding: 1rem;
+    /* Reduz espaçamento lateral para ganhar tela */
+  }
+
+  .overview-cards,
+  .cards-grid,
+  .chart-cards {
+    grid-template-columns: 1fr;
+    /* Uma coluna perfeita */
+    gap: 1.2rem;
+    width: 100%;
+  }
+
+  /* BOTÕES: Ajuste de enquadramento */
+  .quick-actions .actions {
+    display: grid;
+    /* Mudado para grid para manter tamanhos idênticos */
+    grid-template-columns: 1fr 1fr;
+    /* Dois botões por linha, perfeitamente alinhados */
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .quick-actions .actions a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0;
+    padding: 12px 5px;
+    font-size: 0.8rem;
+    text-align: center;
+    white-space: nowrap;
+    /* Evita que o texto quebre em duas linhas */
+  }
+}
+
+/* 3. Ajustes para Celulares Pequenos (Até 480px) */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* Botões de Ação Empilhados */
+  .quick-actions .actions {
+    flex-direction: column;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .quick-actions .actions a.primary,
+  .quick-actions .actions a.secondary {
+    width: 100%;
+    text-align: center;
+  }
+
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}
+
+/* Ajuste para garantir que imagens não estourem o container */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Melhoria no scroll interno para touch */
+.history-list {
+  -webkit-overflow-scrolling: touch;
 }

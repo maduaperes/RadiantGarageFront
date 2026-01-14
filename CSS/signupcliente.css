@@ -22,148 +22,150 @@ body {
    HEADER
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
-    justify-content: flex-start;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
 }
 
 /* 1. LOGO: Posição Esquerda */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .logo-icon {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
-    /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
-    height: 28px;
-    width: 350px; 
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
-    transition: background 0.2s ease;
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 .search-box input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .search-box button:hover {
-    color: #fff;
+  color: #fff;
 }
 
 /* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
 .right-group {
-    display: flex;
-    align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
-    margin-left: auto;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
 }
 
 /* 4. NAV: Agrupamento de Links DENTRO do right-group */
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
+  transform: translateY(-2px);
+  color: #aaa;
 }
 
 .nav span {
-    margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 
 /* 5. USER (Login): DENTRO do right-group */
 .user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .user a {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    color: #fff;
-    background: #413ba7;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* Card principal */
@@ -204,8 +206,9 @@ p.subtitle {
 .grid-container {
   display: grid;
   /* MOBILE-FIRST: Por padrão, 1 coluna */
-  grid-template-columns: 1fr; 
-  gap: 16px 20px; /* linhas e colunas */
+  grid-template-columns: 1fr;
+  gap: 16px 20px;
+  /* linhas e colunas */
   width: 100%;
   margin-bottom: 12px;
 }
@@ -213,7 +216,7 @@ p.subtitle {
 /* Campos que ocupam toda largura (como a Senha e Confirmar Senha fora do grid-container) */
 .full-width {
   /* Garante que ocupe a única coluna no mobile e as duas colunas no desktop */
-  grid-column: 1 / -1; 
+  grid-column: 1 / -1;
 }
 
 /* Form group (Regra geral) */
@@ -241,16 +244,16 @@ label {
 }
 
 /* Ajustando o Label dos form-group */
-.form-group > label {
+.form-group>label {
   display: block;
   color: #cbd5e1;
   font-size: 0.9rem;
   margin-top: auto;
 }
 
-.form-group > label:hover {
-    transform: none;
-    box-shadow: none;
+.form-group>label:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 
@@ -260,7 +263,8 @@ input {
   padding: 12px;
   border-radius: 10px;
   border: none;
-  margin-top: 6px; /* Adicionado espaço entre o label e o input */
+  margin-top: 6px;
+  /* Adicionado espaço entre o label e o input */
   background: rgba(255, 255, 255, 0.07);
   color: #e6eef8;
   font-size: 0.95rem;
@@ -352,22 +356,110 @@ input:-webkit-autofill {
   }
 }
 
-/* ==========================
-   Responsividade: Desktop
-========================== */
-@media (min-width: 601px) {
-  /* ⭐️ TELA GRANDE: Altera o grid para 2 colunas. */
-  .grid-container {
-    grid-template-columns: repeat(2, 1fr);
+/* 1. TABLETS E LAPTOPS (Até 1024px) */
+@media (max-width: 1024px) {
+  main.card {
+    max-width: 90%;
+    padding: 40px;
   }
 
-  /* ⭐️ TELA GRANDE: Distribuição dos 4 campos em 2x2. */
-  /* Campo 1: Nome */
-  .grid-container .form-group:nth-child(1) { grid-column: 1; }
-  /* Campo 2: Email */
-  .grid-container .form-group:nth-child(2) { grid-column: 2; } 
-  /* Campo 3: Telefone */
-  .grid-container .form-group:nth-child(3) { grid-column: 1; } 
-  /* Campo 4: CPF */
-  .grid-container .form-group:nth-child(4) { grid-column: 2; } 
+  .search-box input {
+    width: 250px;
+    /* Redução para evitar colisão com o menu */
+  }
+}
+
+/* 2. CELULARES GRANDES E TABLETS VERTICAIS (Até 768px) */
+@media (max-width: 768px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  /* FORMULÁRIO: Passa para 1 coluna para não esmagar os campos */
+  .grid-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  main.card {
+    padding: 30px 20px;
+    margin: 20px auto;
+  }
+}
+
+/* 3. CELULARES PEQUENOS (Até 480px) */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  main.card {
+    padding: 20px 15px;
+    border-radius: 10px;
+    box-shadow: none;
+    /* Visual mais limpo em telas pequenas */
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p.subtitle {
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+  }
+
+  .primary {
+    padding: 12px;
+  }
 }

@@ -3,7 +3,7 @@
 ========================== */
 body {
   margin: 0;
-  font-family: 'Montserrat', sans-serif; /* Unificado com o padrão anterior */
+  font-family: 'Montserrat', sans-serif;
   background: linear-gradient(180deg, #0b1220, #111827);
   color: #e6eef8;
   min-height: 100vh;
@@ -18,7 +18,7 @@ header.header {
     justify-content: flex-start;
     padding: 0.35rem 1rem;
     background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(10px); /* Efeito de vidro */
+    backdrop-filter: blur(10px);
     color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     position: relative; 
@@ -38,7 +38,6 @@ header.header {
 
 .logo span { font-weight: bold; }
 
-/* SEARCH-BOX CENTRALIZADO */
 .search-box {
     position: absolute; 
     left: 50%; 
@@ -75,7 +74,6 @@ header.header {
     cursor: pointer;
 }
 
-/* GRUPO DIREITA (Nav + User) */
 .right-group {
     display: flex;
     align-items: center;
@@ -97,7 +95,7 @@ header.header {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
     color: #fff;
-    background: #413ba7; /* Violeta Principal */
+    background: #413ba7; 
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
@@ -124,7 +122,6 @@ header.header {
   font-weight: 700;
 }
 
-/* BOTÕES E AÇÕES */
 .actions {
   display: flex;
   flex-wrap: wrap;
@@ -173,13 +170,27 @@ header.header {
 }
 
 /* ==========================
-   CARDS (Estilo Glassmorphism)
+   CARDS & GRID
 ========================== */
 .overview-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
   margin-top: 30px;
+}
+
+/* Correção visual do Grid da Tabela */
+.cards-grid {
+  width: 100%;
+  margin-top: 30px;
+  display: block; /* Garante que ocupe a linha toda */
+}
+
+.cards-grid .card {
+  width: 100%;
+  max-width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
 }
 
 .card {
@@ -236,24 +247,89 @@ header.header {
   font-size: 0.85rem;
 }
 
-.status.concluido {
-  color: #10b981; /* Verde esmeralda para sucesso */
-  font-weight: bold;
+.status.concluido { color: #10b981; font-weight: bold; }
+.status.pendente { color: #f59e0b; font-weight: bold; }
+
+option { background: rgb(255, 255, 255); color: #000000; }
+
+/* ==========================
+   RESPONSIVIDADE (AJUSTADA)
+========================== */
+
+@media (max-width: 1024px) {
+    .dashboard { padding: 20px; }
+    .search-box input { width: 250px; }
 }
 
-.status.pendente {
-  color: #f59e0b; /* Âmbar para atenção */
-  font-weight: bold;
+@media (max-width: 768px) {
+    header.header {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .logo { margin-left: 0; margin-bottom: 1rem; }
+
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-box input { width: 100%; }
+
+    .right-group {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+
+    .overview h2 { font-size: 20px; text-align: center; }
+
+    .overview-cards { grid-template-columns: 1fr; }
+
+    /* Ajuste da Tabela Detalhada no Mobile */
+    .cards-grid {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .cards-grid .card {
+        padding: 15px;
+        min-width: 600px; /* Garante que a tabela interna respire */
+    }
+
+    .tabela-relatorios th, 
+    .tabela-relatorios td {
+        padding: 10px 8px;
+        font-size: 0.75rem;
+    }
+
+    .actions { flex-direction: column; }
+    .actions input, .actions select, .actions button { width: 100%; }
 }
 
-option {
-  background: rgb(255, 255, 255);
-  color: #000000;
+@media (max-width: 480px) {
+    .dashboard { padding: 15px; }
+    .card { padding: 15px; }
+    .card p { font-size: 22px; }
+    .nav { gap: 0.5rem; }
+    .nav a { font-size: 0.75rem; }
+    .user a { padding: 0.4rem 0.8rem; font-size: 0.7rem; }
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 900px) {
-  .search-box { display: none; } /* Esconde busca em telas pequenas para não quebrar */
-  .header { padding: 1rem; }
-  .right-group { gap: 0.8rem; }
+/* Scrollbar da Tabela */
+.cards-grid::-webkit-scrollbar { height: 5px; }
+.cards-grid::-webkit-scrollbar-track { background: transparent; }
+.cards-grid::-webkit-scrollbar-thumb {
+    background: rgba(65, 59, 167, 0.5);
+    border-radius: 10px;
+}
+
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    min-height: 40px;
 }

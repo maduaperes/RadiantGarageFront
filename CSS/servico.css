@@ -34,7 +34,7 @@ header.header {
     flex-wrap: wrap;
     min-height: 48px;
     /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+    position: relative;
 }
 
 /* 1. LOGO: Posição Esquerda */
@@ -44,7 +44,8 @@ header.header {
     gap: 0.4rem;
     font-size: 1.2rem;
     font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
+    flex: 0 0 auto;
+    /* Não cresce */
     cursor: pointer;
     margin-left: 20px;
 }
@@ -60,17 +61,18 @@ header.header {
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
     /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
+    position: absolute;
+    left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+    z-index: 1;
+    /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
     height: 28px;
-    width: 350px; 
+    width: 350px;
     padding: 0 32px 0 8px;
     font-size: 0.8rem;
     border-radius: 10px;
@@ -110,7 +112,7 @@ header.header {
     display: flex;
     align-items: center;
     /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
+    gap: 1.5rem;
     /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
     margin-left: auto;
     z-index: 2;
@@ -490,6 +492,36 @@ footer.footer {
    RESPONSIVO
 ========================== */
 @media (max-width: 992px) {
+
+    header.header {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 1rem;
+    }
+
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .right-group {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+
     .container {
         flex-direction: column;
         margin-top: 20px;
@@ -527,4 +559,35 @@ footer.footer {
         padding: 6px 20px;
         font-size: 12px;
     }
+
+    header.header {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 1rem;
+    }
+
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .right-group {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+
+
 }

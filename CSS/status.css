@@ -17,11 +17,14 @@ body {
   flex-direction: column;
 }
 
-/* HEADER */
+/* ==========================
+   HEADER
+========================== */
 header.header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
   padding: 0.35rem 1rem;
   background: rgba(255, 255, 255, 0.04);
   color: #fff;
@@ -29,64 +32,47 @@ header.header {
   top: 0;
   z-index: 10;
   flex-wrap: wrap;
-  height: auto;
   min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
 }
 
+/* 1. LOGO: Posição Esquerda */
 .logo {
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: normal;
-  flex: 1;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
   font-weight: bold;
-  cursor: pointer;
 }
 
 .logo-icon {
   font-size: 1.3rem;
 }
 
-.nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.8rem;
-  flex: 2;
-  flex-wrap: wrap;
-}
-
-.nav a {
-  font-size: 0.85rem;
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  transition: transform 0.2s ease, color 0.2s ease;
-  cursor: pointer;
-}
-
-.nav a:hover {
-  transform: translateY(-2px);
-}
-
-.nav span {
-  margin: 0 0.2rem;
-}
-
+/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  position: relative;
-  height: 28px;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
   height: 28px;
-  width: 250px;
+  width: 350px;
   padding: 0 32px 0 8px;
   font-size: 0.8rem;
   border-radius: 10px;
@@ -107,7 +93,7 @@ header.header {
 
 .search-box button {
   position: absolute;
-  right: -11px;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -115,28 +101,65 @@ header.header {
   color: #cbd5e1;
   cursor: pointer;
   font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s ease;
-  font-weight: normal;
 }
 
+.search-box button:hover {
+  color: #fff;
+}
+
+/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+.right-group {
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
+}
+
+/* 4. NAV: Agrupamento de Links DENTRO do right-group */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+  transform: translateY(-2px);
+  color: #aaa;
+}
+
+.nav span {
+  margin: 0 0.2rem;
+}
+
+/* 5. USER (Login): DENTRO do right-group */
 .user {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  flex: 1;
 }
 
 .user a {
-  padding: 0.3rem 0.7rem;
+  padding: 0.5rem 1rem;
   font-size: 0.8rem;
   color: #fff;
+  background: #413ba7;
   border-radius: 10px;
   text-decoration: none;
+  font-weight: bold;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
 }
 
 .user a:hover {
@@ -327,18 +350,77 @@ footer {
   margin-top: auto;
 }
 
-/* Responsividade */
-@media (max-width: 600px) {
+/* 1. LAPTOPS E TELAS MÉDIAS (Até 1024px) */
+@media (max-width: 1024px) {
+
   main.card {
-    padding: 1.2rem;
-    margin: 2rem 1rem;
+    width: 85%;
+    margin: 2.5rem auto;
   }
+}
 
-  .actions {
+/* 2. TABLETS E CELULARES GRANDES (Até 768px) */
+@media (max-width: 768px) {
+  header.header {
     flex-direction: column;
+    padding: 1rem;
+    height: auto;
   }
 
-  button {
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
     width: 100%;
   }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+}
+
+/* 3. CELULARES PEQUENOS (Até 480px) */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
 }

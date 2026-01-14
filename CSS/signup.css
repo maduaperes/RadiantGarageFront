@@ -22,148 +22,150 @@ body {
    HEADER
 ========================== */
 header.header {
-    display: flex;
-    align-items: center;
-    /* Alinha Logo na esquerda e o right-group na direita */
-    justify-content: flex-start;
-    padding: 0.35rem 1rem;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
-    top: 0;
-    z-index: 10;
-    flex-wrap: wrap;
-    min-height: 48px;
-    /* Essencial para o posicionamento absoluto da busca */
-    position: relative; 
+  display: flex;
+  align-items: center;
+  /* Alinha Logo na esquerda e o right-group na direita */
+  justify-content: flex-start;
+  padding: 0.35rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  top: 0;
+  z-index: 10;
+  flex-wrap: wrap;
+  min-height: 48px;
+  /* Essencial para o posicionamento absoluto da busca */
+  position: relative;
 }
 
 /* 1. LOGO: Posição Esquerda */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 1.2rem;
-    font-weight: normal;
-    flex: 0 0 auto; /* Não cresce */
-    cursor: pointer;
-    margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: normal;
+  flex: 0 0 auto;
+  /* Não cresce */
+  cursor: pointer;
+  margin-left: 20px;
 }
 
 .logo span {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .logo-icon {
-    font-size: 1.3rem;
+  font-size: 1.3rem;
 }
 
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
-    /* CHAVE: Centralização Perfeita */
-    position: absolute; 
-    left: 50%; 
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    z-index: 1; /* Garante que fique sobre outros elementos */
+  /* CHAVE: Centralização Perfeita */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1;
+  /* Garante que fique sobre outros elementos */
 }
 
 .search-box input {
-    height: 28px;
-    width: 350px; 
-    padding: 0 32px 0 8px;
-    font-size: 0.8rem;
-    border-radius: 10px;
-    border: none;
-    background: rgba(255, 255, 255, 0.08);
-    color: #e6eef8;
-    transition: background 0.2s ease;
+  height: 28px;
+  width: 350px;
+  padding: 0 32px 0 8px;
+  font-size: 0.8rem;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #e6eef8;
+  transition: background 0.2s ease;
 }
 
 .search-box input::placeholder {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
 .search-box input:focus {
-    outline: none;
-    background: rgba(255, 255, 255, 0.12);
+  outline: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .search-box button {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cbd5e1;
-    cursor: pointer;
-    font-size: 0.9rem;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #cbd5e1;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
 .search-box button:hover {
-    color: #fff;
+  color: #fff;
 }
 
 /* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
 .right-group {
-    display: flex;
-    align-items: center;
-    /* Espaço entre o menu NAV e o botão USER */
-    gap: 1.5rem; 
-    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
-    margin-left: auto;
-    z-index: 2;
+  display: flex;
+  align-items: center;
+  /* Espaço entre o menu NAV e o botão USER */
+  gap: 1.5rem;
+  /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+  margin-left: auto;
+  z-index: 2;
 }
 
 /* 4. NAV: Agrupamento de Links DENTRO do right-group */
 .nav {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 0.8rem;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  flex-wrap: wrap;
 }
 
 .nav a {
-    font-size: 0.85rem;
-    color: white;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.2s ease, color 0.2s ease;
+  font-size: 0.85rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.2s ease, color 0.2s ease;
 }
 
 .nav a:hover {
-    transform: translateY(-2px);
-    color: #aaa;
+  transform: translateY(-2px);
+  color: #aaa;
 }
 
 .nav span {
-    margin: 0 0.2rem;
+  margin: 0 0.2rem;
 }
 
 /* 5. USER (Login): DENTRO do right-group */
 .user {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .user a {
-    padding: 0.5rem 1rem;
-    font-size: 0.8rem;
-    color: #fff;
-    background: #413ba7;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  color: #fff;
+  background: #413ba7;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .user a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 /* ==========================
@@ -186,9 +188,9 @@ main.card {
 
 /* Título */
 h2 {
-    font-size: 2rem;
-    color: #e6eef8;
-    margin-bottom: 15px;
+  font-size: 2rem;
+  color: #e6eef8;
+  margin-bottom: 15px;
 }
 
 /* Sub-título */
@@ -214,7 +216,8 @@ p.subtitle {
 }
 
 #endereco {
-  grid-column: 1 / -1; /* ocupa as duas colunas */
+  grid-column: 1 / -1;
+  /* ocupa as duas colunas */
 }
 
 .form-group {
@@ -321,6 +324,7 @@ input:-webkit-autofill {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -328,14 +332,126 @@ input:-webkit-autofill {
 }
 
 /* ==========================
-   RESPONSIVIDADE
+   RESPONSIVIDADE REFINADA
 ========================== */
-@media (max-width: 600px) {
+
+/* 1. TELAS ATÉ 1024px (Laptops e Tablets em Paisagem) */
+@media (max-width: 1024px) {
+  main.card {
+    max-width: 90%;
+    /* Aumenta a largura do card para não ficar muito apertado */
+    padding: 40px;
+  }
+
+  .search-box input {
+    width: 280px;
+    /* Reduz a barra de busca para não encostar nos itens laterais */
+  }
+}
+
+/* 2. TELAS ATÉ 768px (Tablets e Celulares Grandes) */
+@media (max-width: 768px) {
+  header.header {
+    padding: 0.8rem 1rem;
+    justify-content: space-between;
+  }
+
+  /* BUSCA: Sai do meio e vai para uma linha abaixo para não quebrar o menu */
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    order: 3;
+    /* Move a busca para baixo do logo/botão login */
+    margin-top: 1rem;
+    justify-content: center;
+  }
+
+  .search-box input {
+    width: 100%;
+    height: 35px;
+  }
+
+  .right-group {
+    margin-left: 0;
+    gap: 1rem;
+  }
+
+  /* FORMULÁRIO: Ajuste das colunas */
   #establishmentFields {
     grid-template-columns: 1fr;
+    /* Em tablets menores, os campos ficam um abaixo do outro */
+    gap: 12px;
   }
 
   main.card {
-    padding: 30px 20px;
+    padding: 30px;
+    margin: 20px auto;
   }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}
+
+/* 3. TELAS ATÉ 480px (Celulares Pequenos) */
+@media (max-width: 480px) {
+  header.header {
+    flex-direction: column;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  main.card {
+    padding: 25px 15px;
+    border-radius: 0;
+    /* Remove arredondamento para parecer um app full screen */
+    box-shadow: none;
+    background: transparent;
+    /* Opcional: deixa o card mais limpo no celular */
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+
+  p.subtitle {
+    font-size: 0.85rem;
+  }
+
+  .primary {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Ajuste global para imagens/ícones não quebrarem layout */
+img {
+  max-width: 100%;
+  height: auto;
 }

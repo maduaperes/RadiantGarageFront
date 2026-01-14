@@ -482,38 +482,68 @@ footer {
    RESPONSIVIDADE
 ========================== */
 @media (max-width: 900px) {
-  .nav {
+  header.header {
     flex-direction: column;
-    gap: 0.6rem;
+    padding: 1rem;
+    height: auto;
+  }
+
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
+  }
+
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
   .search-box input {
     width: 100%;
-    max-width: 200px;
   }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
 }
 
 @media (max-width: 600px) {
   header.header {
     flex-direction: column;
-    gap: 0.8rem;
-    text-align: center;
+    padding: 1rem;
+    height: auto;
   }
 
-  .logo,
-  .user {
-    justify-content: center;
+  .logo {
+    margin-left: 0;
+    margin-bottom: 1rem;
   }
 
-  .nav {
-    flex-wrap: wrap;
-    justify-content: center;
+  .search-box {
+    position: relative;
+    left: 0;
+    transform: none;
+    width: 100%;
+    margin-bottom: 1rem;
   }
 
   .search-box input {
     width: 100%;
-    max-width: 160px;
   }
+
+  .right-group {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+
 
   .footer-content {
     flex-direction: column;
