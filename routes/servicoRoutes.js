@@ -1,11 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const estabelecimentoController = require('../controllers/estabelecimentoController');
+import { Router } from 'express'
+import * as servicoController from '../controllers/servicoController.js'
+import { authMiddleware } from '../middlewares/authMiddleware.js'
 
+const router = Router()
 
-router.get('/estabelecimento/servicos', estabelecimentoController.listarServicos);
-router.post('/estabelecimento/servico', estabelecimentoController.cadastrarServico);
-router.put('/estabelecimento/servico/:id', estabelecimentoController.atualizarServico);
-router.delete('/estabelecimento/servico/:id', estabelecimentoController.deletarServico);
+router.use(authMiddleware)
 
-module.exports = router;
+router.get('/', servicoController.listarServicos)
+router.post('/', servicoController.cadastrarServico)
+router.put('/:id', servicoController.atualizarServico)
+router.delete('/:id', servicoController.deletarServico)
+
+export default router

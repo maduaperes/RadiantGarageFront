@@ -1,11 +1,14 @@
-const express = require('express');
-const router = express.Router();
-const cliienteController = require('../controllers/clienteController');
+import { Router } from 'express'
+import * as agendamentoController from '../controllers/agendamentoController.js'
+import { authMiddleware } from '../middlewares/authMiddleware.js'
 
+const router = Router()
 
-router.get('/cliente/agendamentos', cliienteController.listarAgendamentos);
-router.post('/cliente/agendamento', cliienteController.cadastrarAgendamento);
-router.put('/cliente/agendamento/:id', cliienteController.atualizarAgendamento);
-router.delete('/cliente/agendamento/:id', cliienteController.deletarAgendamento);
+router.use(authMiddleware)
 
-module.exports = router;
+router.get('/', agendamentoController.listarAgendamentos)
+router.post('/', agendamentoController.cadastrarAgendamento)
+router.put('/:id', agendamentoController.atualizarAgendamento)
+router.delete('/:id', agendamentoController.deletarAgendamento)
+
+export default router

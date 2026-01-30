@@ -1,10 +1,9 @@
 import { supabase } from '../config/supabase.js'
 
-export async function createContato(userId, data) {
+export async function createContato(data) {
   const { data: contato, error } = await supabase
-    .from('contatos')
+    .from('contato')
     .insert({
-      user_id: userId,
       celular: data.celular,
       telefone: data.telefone,
       email: data.email
@@ -16,38 +15,36 @@ export async function createContato(userId, data) {
   return contato
 }
 
-export async function getContatos(userId) {
+export async function getContatos() {
   const { data, error } = await supabase
-    .from('contatos')
+    .from('contato')
     .select('*')
-    .eq('user_id', userId)
+    .order('id_contato', { ascending: true })
 
   if (error) throw error
   return data
 }
 
-export async function getContatoById(id, userId) {
+export async function getContatoById(id) {
   const { data, error } = await supabase
-    .from('contatos')
+    .from('contato')
     .select('*')
-    .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_contato', id)
     .single()
 
   if (error) throw error
   return data
 }
 
-export async function updateContato(id, userId, data) {
+export async function updateContato(id, data) {
   const { data: contato, error } = await supabase
-    .from('contatos')
+    .from('contato')
     .update({
       celular: data.celular,
       telefone: data.telefone,
       email: data.email
     })
-    .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_contato', id)
     .select()
     .single()
 
@@ -55,12 +52,11 @@ export async function updateContato(id, userId, data) {
   return contato
 }
 
-export async function deleteContato(id, userId) {
+export async function deleteContato(id) {
   const { error } = await supabase
-    .from('contatos')
+    .from('contato')
     .delete()
-    .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_contato', id)
 
   if (error) throw error
   return { success: true }
