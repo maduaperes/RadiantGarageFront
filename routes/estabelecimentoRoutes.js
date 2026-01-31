@@ -6,7 +6,8 @@ const router = Router()
 
 router.use(authMiddleware)
 
-router.get('/', estabelecimentoController.listarEstabelecimento)
+router.get('/', estabelecimentoController.listarEstabelecimentos)
+router.get('/:id', estabelecimentoController.listarEstabelecimentoId)
 router.post('/', estabelecimentoController.cadastrarEstabelecimento)
 router.put('/:id', estabelecimentoController.atualizarEstabelecimento)
 router.delete('/:id', estabelecimentoController.deletarEstabelecimento)

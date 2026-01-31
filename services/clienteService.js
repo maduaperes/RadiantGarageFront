@@ -1,67 +1,74 @@
 import { supabase } from '../config/supabase.js'
 
-export async function createCliente(userId, data) {
-  const { data: cliente, error } = await supabase
-    .from('clientes')
-    .insert({
-      user_id: userId,
-      nome_cliente: data.nome_cliente,
-      id_contato: data.id_contato,
-      tema: data.tema
-    })
+export async function createCliente(userId, payload) {
+  const cliente = {
+    ...payload,
+    id_usuario: userId
+  }
+
+  const { data, error } = await supabase
+    .from('cliente')
+    .insert([cliente])
     .select()
     .single()
 
   if (error) throw error
-  return cliente
+
+  return data
 }
 
 export async function getClientes(userId) {
   const { data, error } = await supabase
-    .from('clientes')
-    .select('*')
-    .eq('user_id', userId)
+    .from('cliente')
+    .select(`
+      *,
+      contatos (*)
+    `)
+    .eq('id_usuario', userId)
 
   if (error) throw error
+
   return data
 }
 
 export async function getClienteById(id, userId) {
   const { data, error } = await supabase
-    .from('clientes')
-    .select('*')
+    .from('cliente')
+    .select(`
+      *,
+      contatos (*)
+    `)
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
     .single()
 
-  if (error) throw error
+  if (error || !data) throw new Error('Cliente não encontrado')
+
   return data
 }
 
-export async function updateCliente(id, userId, data) {
-  const { data: cliente, error } = await supabase
-    .from('clientes')
-    .update({
-      nome_cliente: data.nome_cliente,
-      id_contato: data.id_contato,
-      tema: data.tema
-    })
+export async function updateCliente(id, userId, payload) {
+  const { data, error } = await supabase
+    .from('cliente')
+    .update(payload)
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
     .select()
     .single()
 
-  if (error) throw error
-  return cliente
+  if (error || !data) throw new Error('Erro ao atualizar cliente')
+
+  return data
 }
 
 export async function deleteCliente(id, userId) {
   const { error } = await supabase
-    .from('clientes')
+    .from('cliente')
     .delete()
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
 
   if (error) throw error
+
   return { success: true }
 }

@@ -1,69 +1,74 @@
 import { supabase } from '../config/supabase.js'
 
-export async function createEstabelecimento(userId, data) {
-  const { data: estabelecimento, error } = await supabase
-    .from('estabelecimentos')
-    .insert({
-      user_id: userId,
-      cnpj: data.cnpj,
-      nome_estabelecimento: data.nome_estabelecimento,
-      descricao: data.descricao,
-      id_contato: data.id_contato
-    })
+export async function createEstabelecimento(userId, payload) {
+  const estabelecimento = {
+    ...payload,
+    id_usuario: userId
+  }
+
+  const { data, error } = await supabase
+    .from('estabelecimento')
+    .insert([estabelecimento])
     .select()
     .single()
 
   if (error) throw error
-  return estabelecimento
+
+  return data
 }
 
 export async function getEstabelecimentos(userId) {
   const { data, error } = await supabase
-    .from('estabelecimentos')
-    .select('*')
-    .eq('user_id', userId)
+    .from('estabelecimento')
+    .select(`
+      *,
+      contatos (*)
+    `)
+    .eq('id_usuario', userId)
 
   if (error) throw error
+
   return data
 }
 
 export async function getEstabelecimentoById(id, userId) {
   const { data, error } = await supabase
-    .from('estabelecimentos')
-    .select('*')
+    .from('estabelecimento')
+    .select(`
+      *,
+      contatos (*)
+    `)
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
     .single()
 
-  if (error) throw error
+  if (error || !data) throw new Error('Estabelecimento não encontrado')
+
   return data
 }
 
-export async function updateEstabelecimento(id, userId, data) {
-  const { data: estabelecimento, error } = await supabase
-    .from('estabelecimentos')
-    .update({
-      cnpj: data.cnpj,
-      nome_estabelecimento: data.nome_estabelecimento,
-      descricao: data.descricao,
-      id_contato: data.id_contato
-    })
+export async function updateEstabelecimento(id, userId, payload) {
+  const { data, error } = await supabase
+    .from('estabelecimento')
+    .update(payload)
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
     .select()
     .single()
 
-  if (error) throw error
-  return estabelecimento
+  if (error || !data) throw new Error('Erro ao atualizar estabelecimento')
+
+  return data
 }
 
 export async function deleteEstabelecimento(id, userId) {
   const { error } = await supabase
-    .from('estabelecimentos')
+    .from('estabelecimento')
     .delete()
     .eq('id', id)
-    .eq('user_id', userId)
+    .eq('id_usuario', userId)
 
   if (error) throw error
+
   return { success: true }
 }

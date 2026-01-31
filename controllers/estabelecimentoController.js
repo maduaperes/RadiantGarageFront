@@ -6,33 +6,33 @@ export async function cadastrarEstabelecimento(req, res) {
       req.user.id,
       req.body
     )
-    res.status(201).json(estabelecimento)
+    return res.status(201).json(estabelecimento)
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message })
   }
 }
 
-export async function listarEstabelecimento(req, res) {
+export async function listarEstabelecimentos(req, res) {
   try {
     const estabelecimentos = await estabelecimentoService.getEstabelecimentos(
       req.user.id
     )
-    res.json(estabelecimentos)
+    return res.json(estabelecimentos)
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message })
   }
 }
 
-export async function findById(req, res) {
+export async function listarEstabelecimentoId(req, res) {
   try {
     const estabelecimento =
       await estabelecimentoService.getEstabelecimentoById(
         req.params.id,
         req.user.id
       )
-    res.json(estabelecimento)
+    return res.json(estabelecimento)
   } catch (err) {
-    res.status(404).json({ error: err.message })
+    return res.status(404).json({ error: err.message })
   }
 }
 
@@ -44,9 +44,9 @@ export async function atualizarEstabelecimento(req, res) {
         req.user.id,
         req.body
       )
-    res.json(estabelecimento)
+    return res.json(estabelecimento)
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message })
   }
 }
 
@@ -56,8 +56,8 @@ export async function deletarEstabelecimento(req, res) {
       req.params.id,
       req.user.id
     )
-    res.json(result)
+    return res.json(result)
   } catch (err) {
-    res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message })
   }
 }
