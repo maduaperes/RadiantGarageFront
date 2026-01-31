@@ -14,87 +14,87 @@ async function getEstabelecimentoDoUsuario(userId) {
   return data.id
 }
 
-export async function createServico(userId, data) {
+export async function createEndereco(userId, payload) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
-  const { data: servico, error } = await supabase
-    .from('servico')
+  const { data, error } = await supabase
+    .from('endereco')
     .insert({
-      nome_servico: data.nome_servico,
-      custo_servico: data.custo_servico,
-      descricao: data.descricao ?? null,
-      id_categoria_fk: data.id_categoria_fk ?? null,
-      tempo_estipulado: data.tempo_estipulado,
-      estabelecimento: estabelecimentoId
+      rua: payload.rua,
+      cidade: payload.cidade,
+      estado: payload.estado,
+      numero: payload.numero,
+      cep: payload.cep,
+      estabelecimento_id: estabelecimentoId
     })
     .select()
     .single()
 
   if (error) throw error
 
-  return servico
+  return data
 }
 
-export async function getServicos(userId) {
+export async function getEnderecos(userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
   const { data, error } = await supabase
-    .from('servico')
+    .from('endereco')
     .select('*')
-    .eq('estabelecimento', estabelecimentoId)
+    .eq('estabelecimento_id', estabelecimentoId)
 
   if (error) throw error
 
   return data
 }
 
-export async function getServicoById(id, userId) {
+export async function getEnderecoById(id, userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
   const { data, error } = await supabase
-    .from('servico')
+    .from('endereco')
     .select('*')
     .eq('id', id)
-    .eq('estabelecimento', estabelecimentoId)
+    .eq('estabelecimento_id', estabelecimentoId)
     .single()
 
   if (error || !data) {
-    throw new Error('Serviço não encontrado')
+    throw new Error('Endereço não encontrado')
   }
 
   return data
 }
 
-export async function updateServico(id, userId, data) {
+export async function updateEndereco(id, userId, payload) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
-  const { data: servico, error } = await supabase
-    .from('servico')
+  const { data, error } = await supabase
+    .from('endereco')
     .update({
-      nome_servico: data.nome_servico,
-      custo_servico: data.custo_servico,
-      descricao: data.descricao,
-      id_categoria_fk: data.id_categoria_fk,
-      tempo_estipulado: data.tempo_estipulado
+      rua: payload.rua,
+      cidade: payload.cidade,
+      estado: payload.estado,
+      numero: payload.numero,
+      cep: payload.cep
     })
     .eq('id', id)
-    .eq('estabelecimento', estabelecimentoId)
+    .eq('estabelecimento_id', estabelecimentoId)
     .select()
     .single()
 
   if (error) throw error
 
-  return servico
+  return data
 }
 
-export async function deleteServico(id, userId) {
+export async function deleteEndereco(id, userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
   const { error } = await supabase
-    .from('servico')
+    .from('endereco')
     .delete()
     .eq('id', id)
-    .eq('estabelecimento', estabelecimentoId)
+    .eq('estabelecimento_id', estabelecimentoId)
 
   if (error) throw error
 

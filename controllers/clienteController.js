@@ -1,6 +1,12 @@
 import * as clienteService from '../services/clienteService.js'
 
 export async function cadastrarCliente(req, res) {
+  const { nome_cliente, cpf } = req.body
+
+  if (!nome_cliente || !cpf) {
+    return res.status(400).json({ error: 'Nome e CPF são obrigatórios' })
+  }
+
   try {
     const cliente = await clienteService.createCliente(
       req.user.id,

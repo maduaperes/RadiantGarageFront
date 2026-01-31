@@ -7,7 +7,7 @@ const router = Router()
 router.use(authMiddleware)
 
 router.get('/', agendamentoController.listarAgendamentos)
-router.post('/', agendamentoController.cadastrarAgendamento)
+router.post('/', agendamentoController.criarAgendamento)
 router.put('/:id', agendamentoController.atualizarAgendamento)
 router.delete('/:id', agendamentoController.deletarAgendamento)
 
