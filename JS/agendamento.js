@@ -1,24 +1,54 @@
-const services = JSON.parse(localStorage.getItem('lj_services') || '[]');
-const selected = JSON.parse(localStorage.getItem('lj_selected') || '{}');
-const sel = document.getElementById('serviceSelect');
-if (services.length === 0) {
-  // default services (same as dashboard)
-  services.push({ id: 1, name: 'Lavagem Simples' }, { id: 2, name: 'Lavagem Completa' }, { id: 3, name: 'Estética Automotiva' }, { id: 4, name: 'Polimento' });
-  localStorage.setItem('lj_services', JSON.stringify(services));
-}
-services.forEach(s => sel.insertAdjacentHTML('beforeend', `<option value='${s.id}'>${s.name}</option>`));
-if (selected && selected.id) sel.value = selected.id;
-document.getElementById('schedForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  const data = { serviceId: sel.value, date: document.getElementById('date').value, time: document.getElementById('time').value, payment: document.getElementById('payment').value, status: 'agendado' };
-  // save to history
-  const hist = JSON.parse(localStorage.getItem('lj_history') || '[]');
-  hist.unshift(data);
-  localStorage.setItem('lj_history', JSON.stringify(hist));
-  localStorage.setItem('lj_current', JSON.stringify(data));
-  alert('Agendamento confirmado!');
-  location.href = 'status.html';
-});
-document.getElementById('btnBack').addEventListener('click', () => {
-  location.href = 'dashboard.html';
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("agendamentoForm");
+  const feedback = document.getElementById("feedbackMessage");
+  const btnBack = document.getElementById("btnBack");
+
+  btnBack.addEventListener("click", () => {
+    window.history.back();
+  });
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const data = document.getElementById("data").value;
+    const hora = document.getElementById("hora").value;
+    const observacoes = document.getElementById("observacoes").value;
+    const pagamento = document.getElementById("pagamento").value;
+    const servico = document.getElementById("servico").value;
+    const termos = document.getElementById("termos").checked;
+
+    if (!data || !hora || !pagamento || !servico) {
+      feedback.textContent = "Por favor, preencha todos os campos obrigatórios.";
+      feedback.style.color = "#f87171"; 
+      return;
+    }
+
+    if (!termos) {
+      feedback.textContent = "Você precisa aceitar os termos de uso e privacidade.";
+      feedback.style.color = "#f87171";
+      return;
+    }
+
+    const agendamento = {
+      id: Date.now(), 
+      data,
+      hora,
+      observacoes,
+      pagamento,
+      servico
+    };
+
+    const agendamentos = JSON.parse(localStorage.getItem("agendamentos")) || [];
+
+    agendamentos.push(agendamento);
+
+    localStorage.setItem("agendamentos", JSON.stringify(agendamentos));
+
+    feedback.textContent = "Agendamento realizado com sucesso!";
+    feedback.style.color = "#4ade80"; 
+
+    setTimeout(() => {
+      window.location.href = "procura.html";
+    }, 1000);
+  });
 });

@@ -1,64 +1,83 @@
-const form = document.getElementById('signupForm');
-const feedback = document.getElementById('feedback');
+// =============================
+// Seleção dos elementos
+// =============================
+const form = document.getElementById("signupForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const feedback = document.getElementById("feedback");
+const btnBack = document.getElementById("btnBack");
 
-form.addEventListener('submit', function (e) {
-    e.preventDefault();
+// =============================
+// Botão voltar
+// =============================
+if (btnBack) {
+  btnBack.addEventListener("click", () => {
+    window.history.back();
+  });
+}
 
-    // Dados comuns
-    const name = document.getElementById('name').value.trim() || 'Cliente';
-    const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
-    const password = document.getElementById('password').value.trim();
+// =============================
+// Validação do formulário
+// =============================
+if (form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-    // Tipo de usuário
-    const userType = document.querySelector('input[name="userType"]:checked').value;
+    feedback.textContent = "";
+    feedback.style.color = "";
 
-    // Dados do profissional
-    let service = '';
-    let company = '';
-    if (userType === 'profissional') {
-        service = document.getElementById('service').value.trim();
-        company = document.getElementById('company').value.trim();
+    // Validação email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) {
+      feedback.textContent = "Informe o email.";
+      feedback.style.color = "#f87171";
+      email.focus();
+      return;
     }
 
-    // Validações
-    if (!email && !phone) {
-        feedback.textContent = "Informe pelo menos um contato (email ou telefone).";
-        feedback.style.color = "red";
-        return;
+    if (!emailRegex.test(email.value)) {
+      feedback.textContent = "Email inválido.";
+      feedback.style.color = "#f87171";
+      email.focus();
+      return;
     }
 
-    if (!password) {
-        feedback.textContent = "Informe uma senha.";
-        feedback.style.color = "red";
-        return;
+    // Validação senha
+    if (password.value.length < 6) {
+      feedback.textContent = "A senha deve ter no mínimo 6 caracteres.";
+      feedback.style.color = "#f87171";
+      password.focus();
+      return;
     }
 
-    if (userType === 'profissional' && !service) {
-        feedback.textContent = "Profissionais devem informar o serviço oferecido.";
-        feedback.style.color = "red";
-        return;
+    // Confirmação de senha
+    if (password.value !== confirmPassword.value) {
+      feedback.textContent = "As senhas não coincidem.";
+      feedback.style.color = "#f87171";
+      confirmPassword.focus();
+      return;
     }
 
-    // Monta objeto do usuário
-    const user = {
-        name,
-        userType,
-        contact: email || phone,
-        password,
-        service: service || null,
-        company: company || null
-    };
+    // =============================
+    // Sucesso
+    // =============================
+    feedback.textContent = "Cadastro realizado com sucesso!";
+    feedback.style.color = "#4ade80";
 
-    // Salva no localStorage
-    localStorage.setItem('lj_user', JSON.stringify(user));
+    form.reset();
 
-    // Feedback positivo
-    feedback.textContent = "Conta criada com sucesso! Redirecionando...";
-    feedback.style.color = "green";
-
-    // Redireciona após 1.5s
     setTimeout(() => {
-        location.href = 'dashboard.html';
-    }, 1500);
+      window.location.href = "novo-contato.html";
+    }, 1000);
+  });
+}
+
+// =============================
+// Remove erro ao digitar
+// =============================
+document.querySelectorAll("input").forEach(input => {
+  input.addEventListener("input", () => {
+    input.style.boxShadow = "none";
+  });
 });

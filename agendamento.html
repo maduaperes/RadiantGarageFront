@@ -10,67 +10,101 @@
 </head>
 
 <body>
-  <!-- Header global (igual ao dashboard) -->
   <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
 
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <span>|</span>
-      <a href="#">Serviços</a>
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar serviços" />
+      <button type="button">🔍︎</button>
+    </div>
 
-      <div class="search-box">
-        <input type="text" placeholder="Pesquisar serviços" />
-        <button>🔍︎</button>
+    <div class="right-group">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <span>|</span>
+        <a href="procura.html">Serviços</a>
+      </nav>
+
+      <div class="user">
+        <a href="profile.html">Perfil</a>
       </div>
-
-      <a href="#">Suporte</a>
-      <span>|</span>
-      <a class="reservas-btn" href="agendamento.html">Agendar</a>
-    </nav>
-
-    <div class="user">
-      <a href="login.html">Login</a>
     </div>
   </header>
 
-  <!-- Conteúdo principal de agendamento -->
   <main>
     <div class="card">
       <div class="back" id="btnBack">↩</div>
+
       <h2>Agendar Serviço</h2>
-      <p class="subtitle">Escolha o serviço, data e forma de pagamento</p>
+      <p class="subtitle">Preencha os campos abaixo para agendar o seu atendimento</p>
 
-      <form id="schedForm">
-        <label for="serviceSelect">Serviço</label>
-        <select id="serviceSelect" required>
-          <option value="">Selecione</option>
-          <option>Lavagem Simples</option>
-          <option>Lavagem Completa</option>
-          <option>Polimento</option>
-          <option>Estética Automotiva</option>
-        </select>
+      <div class="establishment-contact">
+        <h3>Contato do estabelecimento</h3>
 
-        <label for="date">Data</label>
-        <input id="date" type="date" required>
+        <p><strong>Telefone:</strong> (11) 91234-5678</p>
+        <p><strong>Email:</strong> contato@radiantgarage.com</p>
 
-        <label for="time">Horário</label>
-        <input id="time" type="time" required>
+        <a href="tel:+5511912345678" class="contact-btn">
+          Entrar em contato
+        </a>
+      </div>
 
-        <label for="payment">Pagamento</label>
-        <select id="payment" required>
-          <option>Cartão</option>
-          <option>Dinheiro</option>
-          <option>Pix</option>
-        </select>
+      <form id="agendamentoForm">
+        <div class="col">
+          <label for="data">Data:</label>
+          <input type="date" id="data" name="data" required>
+        </div>
 
-        <button class="primary" type="submit">Confirmar</button>
+        <div class="col">
+          <label for="hora">Hora:</label>
+          <input type="time" id="hora" name="hora" required>
+        </div>
+
+        <div class="full-width">
+          <label for="observacoes">Observações:</label>
+          <textarea id="observacoes" placeholder="Digite observações adicionais (opcional)"></textarea>
+
+          <label for="pagamento">Forma de pagamento:</label>
+          <select id="pagamento" required>
+            <option value="">Selecione</option>
+            <option value="pix">Pix</option>
+            <option value="cartao">Cartão de crédito</option>
+            <option value="debito">Cartão de débito</option>
+            <option value="dinheiro">Dinheiro</option>
+          </select>
+        </div>
+
+        <div class="full-width">
+          <label for="servico">Serviço:</label>
+          <select id="servico" required>
+            <option value="manutencao_motor">Manutenção do Motor</option>
+          </select>
+        </div>
+
+        <div class="privacy">
+          <input type="checkbox" id="termos" required>
+          <label for="termos">Li e aceito os termos de uso e privacidade</label>
+        </div>
+
+        <div class="full-width buttons">
+          <button type="submit" class="primary">Confirmar agendamento</button>
+          <button type="reset" class="secondary">Limpar</button>
+        </div>
+
+        <div id="feedbackMessage" style="margin-top: 10px; font-weight: 600;"></div>
       </form>
     </div>
   </main>
+
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
 
   <script src="JS/agendamento.js"></script>
 </body>

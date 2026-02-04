@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Contato - RadiantGarage</title>
+    <link rel="stylesheet" href="CSS/novo-contato.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
+    </div>
+
+        <div class="search-box">
+            <input type="text" placeholder="Pesquisar contatos" />
+            <button type="button">🔍︎</button>
+        </div>
+
+        <div class="right-group">
+            <nav class="nav">
+                <a href="index.html">Home</a>
+                <span>|</span>
+                <a href="contatos.html">Contatos</a>
+            </nav>
+
+            <div class="user">
+                <a href="profile.html">Perfil</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="card">
+        <div class="back" id="btnBack">↩</div>
+        <h2>Novo Contato</h2>
+        <p class="subtitle">Cadastre um novo contato da sua rede de clientes.</p>
+
+        <form id="contactForm">
+            <label for="contactName">Nome</label>
+            <input type="text" id="contactName" placeholder="Ex: João da Silva" required>
+
+            <label for="contactEmail">E-mail</label>
+            <input type="email" id="contactEmail" placeholder="Ex: joao@email.com" required>
+
+            <label for="contactPhone">Telefone</label>
+            <input type="tel" id="contactPhone" placeholder="Ex: (11) 91234-5678">
+
+            <label for="contactMobile">Celular</label>
+            <input type="tel" id="contactMobile" placeholder="Ex: (11) 91234-5678">
+
+            <button type="submit" class="primary">Salvar Contato</button>
+        </form>
+
+        <div id="feedback" class="feedback-message"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="JS/novo-contato.js"></script>
+</body>
+
+</html>

@@ -4,60 +4,64 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cadastro - LavaJato</title>
+  <title>Cadastro - RadiantGarage</title>
   <link rel="stylesheet" href="CSS/signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-  <header class="top">
-    <img src="IMG/logo.png" class="mini" alt="logo">
-    <div class="user" id="userName">Conecte-se a uma conta</div>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar serviços" />
+      <button type="button">🔍︎</button>
+    </div>
+
+    <div class="right-group">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <span>|</span>
+        <a href="procura.html">Serviços</a>
+      </nav>
+
+      <div class="user">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
   </header>
 
   <main class="card">
-    <h2>Cadastro</h2>
-
-    <!-- Container que envolve radios e form -->
-    <div class="signup-container">
-
-      <!-- Radios como irmãos diretos do formulário -->
-      <input type="radio" id="cliente" name="userType" checked>
-      <label for="cliente" class="radio-label">Cliente</label>
-
-      <input type="radio" id="estabelecimento" name="userType">
-      <label for="estabelecimento" class="radio-label">Estabelecimento</label>
-
-      <form id="signupForm">
-        <!-- Campos Cliente -->
-        <div id="clienteFields" class="fields">
-          <input type="text" placeholder="Nome completo" required>
-          <input type="email" placeholder="Email" required>
-          <input type="password" placeholder="Senha" required>
-          <input type="text" placeholder="CPF" required>
-        </div>
-
-        <!-- Campos Estabelecimento -->
-        <div id="establishmentFields" class="fields">
-          <input type="text" placeholder="Nome do Estabelecimento" required>
-          <input type="text" placeholder="CNPJ" required>
-          <input type="text" placeholder="Endereço completo" required>
-          <input type="text" placeholder="Cidade" required>
-          <input type="text" placeholder="Estado" required>
-          <input type="text" placeholder="CEP" required>
-          <input type="text" placeholder="Horário de funcionamento">
-        </div>
-
-        <button class="primary" type="submit">Criar conta</button>
-      </form>
-
-    </div>
-
+    <div class="back" id="btnBack">↩</div>
+    <h2>Cadastrar-se</h2>
+    <p class="subtitle">Preencha os campos abaixo para entrar</p>
+    <form id="signupForm">
+      <label>Email</label>
+      <input id="email" placeholder="ex: voce@exemplo.com">
+      <label>Senha</label>
+      <input id="password" type="password" placeholder="••••••">
+      <label>Confirmar Senha</label>
+      <input id="confirmPassword" type="password" placeholder="••••••">
+      <button class="primary" type="submit">Cadastrar-se</button>
+    </form>
     <p class="muted">
-      <a href="login.html">Já tem conta? Entrar</a>
+      Já possui uma conta? <a href="signup.html">Entrar</a>
     </p>
-
     <div id="feedback" class="feedback-message"></div>
+
   </main>
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="JS/signup.js"></script>
 </body>
 
 </html>

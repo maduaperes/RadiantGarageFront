@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Serviço - RadiantGarage</title>
+  <link rel="stylesheet" href="CSS/novo-servico.css"> <!-- Mesmo CSS dos outros formulários -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar serviços" />
+      <button type="button">🔍︎</button>
+    </div>
+
+    <div class="right-group">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <span>|</span>
+        <a href="procura.html">Serviços</a>
+      </nav>
+
+      <div class="user">
+        <a href="login.html">Login</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="card">
+    <form id="serviceForm">
+      <div class="back" id="btnBack">↩</div>
+      <h2>Novo Serviço</h2>
+      <p class="subtitle">Cadastre um novo serviço de veículo.</p>
+
+      <label for="serviceName">Nome do Serviço</label>
+      <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor">
+
+      <label for="serviceCategory">Categoria</label>
+      <input type="text" id="serviceCategory" placeholder="Ex: Manutenção">
+
+      <label for="servicePrice">Preço (R$)</label>
+      <input type="text" id="servicePrice" placeholder="Ex: 250,00">
+
+      <label for="serviceNotes">Descrição</label>
+      <textarea id="serviceNotes" placeholder="Informações adicionais sobre o serviço"></textarea>
+
+      <button type="submit" class="primary">Salvar Serviço</button>
+    </form>
+
+    <div id="feedback" class="feedback-message"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="JS/novo-servico.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Novo Endereço - RadiantGarage</title>
+  <link rel="stylesheet" href="CSS/novo-endereco.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar endereços" />
+      <button type="button">🔍︎</button>
+    </div>
+
+    <div class="right-group">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <span>|</span>
+        <a href="novo-endereco.html">Novo Endereço</a>
+      </nav>
+
+      <div class="user">
+        <a href="profile.html">Perfil</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="card">
+    <div class="back" id="btnBack">↩</div>
+    <h2>Novo Endereço</h2>
+    <p class="subtitle">Cadastre um novo endereço para atendimento.</p>
+
+    <form id="addressForm">
+      <label for="cep">CEP</label>
+      <input type="text" id="cep" placeholder="Ex: 12345-678" required>
+
+      <label for="rua">Rua</label>
+      <input type="text" id="rua" placeholder="Ex: Avenida Paulista" required>
+
+      <label for="bairro">Bairro</label>
+      <input type="text" id="bairro" placeholder="Ex: Centro" required>
+
+      <label for="cidade">Cidade</label>
+      <input type="text" id="cidade" placeholder="Ex: São Paulo" required>
+
+      <label for="estado">Estado</label>
+      <input type="text" id="estado" placeholder="Ex: SP" required>
+
+      <button type="submit" class="primary">Salvar Endereço</button>
+    </form>
+
+    <div id="feedback" class="feedback-message"></div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="JS/novo-endereco.js"></script>
+</body>
+
+</html>

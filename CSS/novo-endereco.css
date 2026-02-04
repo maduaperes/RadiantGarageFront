@@ -1,0 +1,279 @@
+/* ==========================
+   RESET E BASE
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #0b1220, #111827);
+    color: #e6eef8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================
+   HEADER (NÃO ALTERAR)
+========================== */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 100;
+    min-height: 48px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo span {
+    font-weight: bold;
+}
+
+.search-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+
+.search-box input {
+    height: 28px;
+    width: 350px;
+    padding: 0 32px 0 12px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e6eef8;
+}
+
+.search-box input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+    position: absolute;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.nav {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.nav a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.user a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background: #413ba7;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ==========================
+   CARD CENTRAL
+========================== */
+main.card {
+    max-width: 460px;
+    width: 100%;
+    margin: 3rem auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 2rem;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 0.6s ease;
+}
+
+/* Botão voltar */
+.back {
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
+    display: inline-block;
+    opacity: 0.8;
+}
+
+.back:hover {
+    opacity: 1;
+}
+
+h2 {
+    font-size: 1.6rem;
+    margin-bottom: 0.3rem;
+}
+
+.subtitle {
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    margin-bottom: 1.5rem;
+}
+
+/* ==========================
+   FORMULÁRIO
+========================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+input {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================
+   BOTÃO
+========================== */
+button.primary {
+    margin-top: 1.5rem;
+    padding: 12px;
+    border-radius: 14px;
+    border: none;
+    background: #413ba7;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button.primary:hover {
+    background: #5b49d6;
+}
+
+/* ==========================
+   FEEDBACK
+========================== */
+.feedback-message {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    margin-top: auto;
+}
+
+.back {
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+@media (max-width: 500px) {
+    main.card {
+        margin: 1.5rem 1rem;
+        padding: 1.5rem;
+    }
+}
+
+/* ==========================
+   ANIMAÇÃO
+========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
