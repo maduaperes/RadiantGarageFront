@@ -1,53 +1,67 @@
 import * as agendamentoService from '../services/agendamentoService.js'
 
-export async function listarAgendamentos(req, res) {
-  const { data, error } = await agendamentoService.listarAgendamentos()
+export async function criarAgendamento(req, res) {
+  const { data_hora, id_cliente, id_servico_fk, status, pagamento } = req.body
 
-  if (error) return res.status(500).json({ error: error.message })
-
-  return res.json(data)
-}
-
-export async function cadastrarAgendamento(req, res) {
-  const {
-    data_hora,
-    id_cliente,
-    pagamento,
-    id_servico_fk
-  } = req.body
-
-  if (!data_hora || !id_servico_fk) {
-    return res.status(400).json({ error: 'Campos obrigatórios ausentes' })
+  if (!data_hora || !id_cliente || !id_servico_fk) {
+    return res.status(400).json({
+      error: 'Data, cliente e serviço são obrigatórios'
+    })
   }
 
-  const { data, error } = await agendamentoService.criarAgendamento({
-    data_hora,
-    id_cliente,
-    pagamento,
-    id_servico_fk
-  })
+  try {
+    const agendamento = await agendamentoService.createAgendamento(
+      req.user.id,
+      req.body
+    )
+    return res.status(201).json(agendamento)
+  } catch (err) {
+    return res.status(400).json({ error: err.message })
+  }
+}
 
-  if (error) return res.status(500).json({ error: error.message })
+export async function listarAgendamentos(req, res) {
+  try {
+    const agendamentos = await agendamentoService.getAgendamentos(req.user.id)
+    return res.json(agendamentos)
+  } catch (err) {
+    return res.status(400).json({ error: err.message })
+  }
+}
 
-  return res.status(201).json(data[0])
+export async function buscarAgendamento(req, res) {
+  try {
+    const agendamento = await agendamentoService.getAgendamentoById(
+      req.params.id,
+      req.user.id
+    )
+    return res.json(agendamento)
+  } catch (err) {
+    return res.status(404).json({ error: err.message })
+  }
 }
 
 export async function atualizarAgendamento(req, res) {
-  const { id } = req.params
-
-  const { error } = await agendamentoService.atualizarAgendamento(id, req.body)
-
-  if (error) return res.status(500).json({ error: error.message })
-
-  return res.json({ message: 'Agendamento atualizado com sucesso' })
+  try {
+    const agendamento = await agendamentoService.updateAgendamento(
+      req.params.id,
+      req.user.id,
+      req.body
+    )
+    return res.json(agendamento)
+  } catch (err) {
+    return res.status(400).json({ error: err.message })
+  }
 }
 
 export async function deletarAgendamento(req, res) {
-  const { id } = req.params
-
-  const { error } = await agendamentoService.deletarAgendamento(id)
-
-  if (error) return res.status(500).json({ error: error.message })
-
-  return res.json({ message: 'Agendamento removido com sucesso' })
+  try {
+    const result = await agendamentoService.deleteAgendamento(
+      req.params.id,
+      req.user.id
+    )
+    return res.json(result)
+  } catch (err) {
+    return res.status(400).json({ error: err.message })
+  }
 }

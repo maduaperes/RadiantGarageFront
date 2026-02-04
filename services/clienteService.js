@@ -1,20 +1,20 @@
 import { supabase } from '../config/supabase.js'
 
-export async function createCliente(userId, payload) {
-  const cliente = {
-    ...payload,
-    id_usuario: userId
-  }
-
-  const { data, error } = await supabase
+export async function createCliente(userId, data) {
+  const { data: cliente, error } = await supabase
     .from('cliente')
-    .insert([cliente])
+    .insert({
+      id_usuario: userId,
+      nome_cliente: data.nome_cliente,
+      cpf: data.cpf,
+      id_contato: data.id_contato ?? null
+    })
     .select()
     .single()
 
   if (error) throw error
 
-  return data
+  return cliente
 }
 
 export async function getClientes(userId) {
@@ -22,7 +22,7 @@ export async function getClientes(userId) {
     .from('cliente')
     .select(`
       *,
-      contatos (*)
+      contato (*)
     `)
     .eq('id_usuario', userId)
 
@@ -36,7 +36,7 @@ export async function getClienteById(id, userId) {
     .from('cliente')
     .select(`
       *,
-      contatos (*)
+      contato (*)
     `)
     .eq('id', id)
     .eq('id_usuario', userId)
@@ -47,18 +47,22 @@ export async function getClienteById(id, userId) {
   return data
 }
 
-export async function updateCliente(id, userId, payload) {
-  const { data, error } = await supabase
+export async function updateCliente(id, userId, data) {
+  const { data: cliente, error } = await supabase
     .from('cliente')
-    .update(payload)
+    .update({
+      nome_cliente: data.nome_cliente,
+      cpf: data.cpf,
+      id_contato: data.id_contato
+    })
     .eq('id', id)
     .eq('id_usuario', userId)
     .select()
     .single()
 
-  if (error || !data) throw new Error('Erro ao atualizar cliente')
+  if (error) throw error
 
-  return data
+  return cliente
 }
 
 export async function deleteCliente(id, userId) {
