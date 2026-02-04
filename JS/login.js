@@ -1,69 +1,67 @@
-const loginForm = document.getElementById('loginForm');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const feedback = document.getElementById('feedback');
-const btnBack = document.getElementById('btnBack');
+const API_URL = "http://localhost:3000/api"
 
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
+const loginForm = document.getElementById("loginForm")
+const emailInput = document.getElementById("email")
+const passwordInput = document.getElementById("password")
+const feedback = document.getElementById("feedback")
+const btnBack = document.getElementById("btnBack")
 
-function showFeedback(message, type = 'error') {
-  feedback.textContent = message;
-  feedback.style.color = type === 'error' ? 'red' : 'green';
+function showFeedback(message, type = "error") {
+  feedback.textContent = message
+  feedback.style.color = type === "error" ? "red" : "green"
 }
 
 function clearFeedback() {
-  feedback.textContent = '';
+  feedback.textContent = ""
 }
 
-btnBack.addEventListener('click', () => {
-  window.history.back();
-});
+btnBack.addEventListener("click", () => {
+  window.history.back()
+})
 
-loginForm.addEventListener('submit', (e) => {
-  e.preventDefault();
+async function loginRequest(email, password) {
+  const response = await fetch(`${API_URL}/auth/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ email, password })
+  })
 
-  clearFeedback();
+  const data = await response.json()
 
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
+  if (!response.ok) {
+    throw new Error(data.error || "Erro ao fazer login")
+  }
+
+  return data
+}
+
+loginForm.addEventListener("submit", async (e) => {
+  e.preventDefault()
+  clearFeedback()
+
+  const email = emailInput.value.trim()
+  const password = passwordInput.value.trim()
 
   if (!email || !password) {
-    showFeedback('Por favor, preencha todos os campos.');
-    return;
+    showFeedback("Preencha todos os campos")
+    return
   }
 
-  if (!isValidEmail(email)) {
-    showFeedback('Por favor, insira um email válido.');
-    return;
-  }
+  try {
+    const data = await loginRequest(email, password)
 
-  /* ==========================
-     TESTE DE LOGIN
-  ========================== */
+    localStorage.setItem("token", data.session.access_token)
+    localStorage.setItem("user", JSON.stringify(data.user))
 
-  // CLIENTE
-  if (email === 'cliente@exemplo.com' && password === '123456') {
-    showFeedback('Login realizado com sucesso! (Cliente)', 'success');
+    showFeedback("Login realizado com sucesso!", "success")
 
     setTimeout(() => {
-      window.location.href = 'agendamento.html';
-    }, 1000);
-    return;
+      window.location.href = "index.html"
+    }, 800)
+
+  } catch (err) {
+    showFeedback(err.message)
   }
-
-  // ESTABELECIMENTO
-  if (email === 'admin@exemplo.com' && password === '123456') {
-    showFeedback('Login realizado com sucesso! (Estabelecimento)', 'success');
-
-    setTimeout(() => {
-      window.location.href = 'dashboard.html';
-    }, 1000);
-    return;
-  }
-
-  // ERRO
-  showFeedback('Email ou senha incorretos.');
-});
+})

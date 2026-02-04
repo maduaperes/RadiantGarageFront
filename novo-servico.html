@@ -29,9 +29,13 @@
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
-
+        <span>|</span>
+      <div class="nav">
+        <a id="varbuttonId"></a>
+      </div>
       <div class="user">
-        <a href="login.html">Login</a>
+        <a id="login" href="login.html">Login</a>
+      </div>
       </div>
     </div>
   </header>
@@ -45,8 +49,10 @@
       <label for="serviceName">Nome do Serviço</label>
       <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor">
 
-      <label for="serviceCategory">Categoria</label>
-      <input type="text" id="serviceCategory" placeholder="Ex: Manutenção">
+      <label for="text">Categoria</label>
+      <select id="serviceCategory">
+      <option value="">Selecione a categoria</option>
+      </select>
 
       <label for="servicePrice">Preço (R$)</label>
       <input type="text" id="servicePrice" placeholder="Ex: 250,00">
@@ -65,6 +71,7 @@
   </footer>
 
   <script src="JS/novo-servico.js"></script>
+  <script src="JS/script.js"></script>
 </body>
 
 </html>

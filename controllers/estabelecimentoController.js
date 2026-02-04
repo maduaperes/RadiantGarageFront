@@ -12,6 +12,15 @@ export async function cadastrarEstabelecimento(req, res) {
   }
 }
 
+export async function getMyEstabelecimento(req, res) {
+  const data = await estabelecimentoService.getByUserId(req.user.id)
+
+  return res.json({
+    isEstabelecimento: !!data
+  })
+}
+
+
 export async function listarEstabelecimentos(req, res) {
   try {
     const estabelecimentos = await estabelecimentoService.getEstabelecimentos(
