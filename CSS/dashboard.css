@@ -22,7 +22,7 @@ body {
 }
 
 /* ==========================
-   HEADER (Comum a todas as páginas)
+   HEADER (NÃO ALTERADO)
 ========================== */
 header.header {
   display: flex;
@@ -49,6 +49,14 @@ header.header {
 
 .logo span {
   font-weight: bold;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .search-box {
@@ -116,7 +124,7 @@ header.header {
 }
 
 /* ==========================
-   ESTRUTURA DE PÁGINAS (Main)
+   MAIN / DASHBOARD
 ========================== */
 main {
   flex: 1;
@@ -125,226 +133,143 @@ main {
   width: 100%;
 }
 
-/* Centralização específica para a tela de Perfil */
-main:not(.dashboard) {
-  align-items: center;
-  justify-content: center;
-  padding: 60px 20px;
-}
-
-/* Layout para a Dashboard */
 main.dashboard {
+  display: flex;
+  flex-direction: column;
   gap: 2rem;
   padding: 2rem 1.5rem;
 }
 
 /* ==========================
-   CARD DE PERFIL E COMPONENTES
+   INTRO DO DASHBOARD
 ========================== */
-.profile-card {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
-  padding: 1.5rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  animation: fadeIn 0.6s ease;
+.dashboard-intro {
+  max-width: 900px;
 }
 
-.profile-header {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+.dashboard-intro h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.avatar {
-  width: 65px;
-  height: 65px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid #413ba7;
-  flex-shrink: 0;
-}
-
-.avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.user-info h2 {
-  font-size: 1.3rem;
-  margin-bottom: 2px;
-}
-
-.user-info p {
-  font-size: 0.85rem;
-  color: #94a3b8;
+.dashboard-intro p {
+  font-size: 0.95rem;
+  color: #cbd5e1;
+  line-height: 1.6;
 }
 
 /* ==========================
-   CLASSES DO DASHBOARD (Mantidas)
+   GRID DE CARDS
 ========================== */
-.overview,
-.quick-actions,
-.charts,
-.promo,
-.feedback {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  width: 100%;
-}
-
-.overview-cards,
-.cards-grid,
-.chart-cards {
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
-.card,
-.chart-section,
-.promoCard,
-.feedback-card {
+/* ==========================
+   CARD
+========================== */
+.card {
   background: rgba(255, 255, 255, 0.05);
   padding: 1.5rem;
   border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-}
-
-.quick-actions .actions {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
 }
 
-/* ==========================
-   BOTÕES GERAIS
-========================== */
-.btn-primary,
-.quick-actions .actions a.primary {
-  background: #413ba7;
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
+.card h3 {
+  font-size: 1.2rem;
 }
 
-.btn-secondary,
-.quick-actions .actions a.secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  border: none;
-  padding: 10px 16px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.3s;
-  text-decoration: none;
-}
-
-.btn-danger {
-  background: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
+.card p {
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  line-height: 1.5;
 }
 
 /* ==========================
-   HISTÓRICOS E LISTAS (Scroll)
+   AÇÕES DOS CARDS (LINKS)
 ========================== */
-.history-list {
+.card-actions {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-height: 180px;
-  overflow-y: auto;
-  padding-right: 5px;
-  margin-top: 10px;
+  margin-top: 0.5rem;
 }
 
-.history-item {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 0.8rem;
-  border-radius: 10px;
-  border-left: 4px solid #413ba7;
-}
-
-.status {
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 2px 8px;
-  border-radius: 5px;
-}
-
-.status.concluido {
-  background: #28a745;
-  color: #fff;
-}
-
-/* ==========================
-   MODAIS
-========================== */
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(5px);
-  display: flex;
+.card-actions a {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+  text-align: center;
 }
 
-.modal.hidden {
-  display: none;
+.card-actions a.btn-primary {
+  background: #413ba7;
+  color: #fff;
 }
 
-.modal-content {
-  background: #1a1f2e;
-  padding: 2rem;
-  border-radius: 20px;
-  width: 90%;
-  max-width: 400px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.card-actions a.btn-primary:hover {
+  background: #5b49d6;
 }
 
-.modal-content label {
-  display: block;
-  margin: 10px 0 5px;
+/* ==========================
+   LISTA DE SERVIÇOS
+========================== */
+#listServicos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+#listServicos li {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.75rem;
+  border-radius: 10px;
   font-size: 0.9rem;
 }
 
-.modal-content input {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #0b1220;
-  color: white;
+/* ==========================
+   LISTA DE AGENDAMENTOS
+========================== */
+#listAgendamentos {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  max-height: 220px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
-.modal-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 20px;
+#listAgendamentos li {
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+/* Scroll discreto */
+#listAgendamentos::-webkit-scrollbar {
+  width: 6px;
+}
+
+#listAgendamentos::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
 }
 
 /* ==========================
-   FOOTER E ANIMAÇÃO
+   FOOTER
 ========================== */
 footer {
   text-align: center;
@@ -355,6 +280,32 @@ footer {
   margin-top: auto;
 }
 
+/* ==========================
+   RESPONSIVIDADE
+========================== */
+@media (max-width: 768px) {
+  main.dashboard {
+    padding: 1.2rem;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-intro h2 {
+    font-size: 1.3rem;
+  }
+
+  .dashboard-intro p {
+    font-size: 0.85rem;
+  }
+}
+
+/* ==========================
+   ANIMAÇÃO
+========================== */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -365,146 +316,4 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
-}
-
-/* 1. Ajustes para Tablets e Telas Médias (Até 1024px) */
-@media (max-width: 1024px) {
-  .search-box input {
-    width: 250px;
-  }
-
-  main.dashboard {
-    padding: 1.5rem 1rem;
-  }
-}
-
-/* Celulares Grandes (Até 768px) */
-@media (max-width: 768px) {
-  header.header {
-    flex-direction: column;
-    padding: 1rem;
-    height: auto;
-  }
-
-  .logo {
-    margin-left: 0;
-    margin-bottom: 1rem;
-  }
-
-  .search-box {
-    position: relative;
-    left: 0;
-    transform: none;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .search-box input {
-    width: 100%;
-  }
-
-  .right-group {
-    width: 100%;
-    justify-content: space-between;
-    margin-left: 0;
-  }
-
-  /* DASHBOARD: Enquadramento total */
-  main.dashboard {
-    padding: 1rem;
-    /* Reduz espaçamento lateral para ganhar tela */
-  }
-
-  .overview-cards,
-  .cards-grid,
-  .chart-cards {
-    grid-template-columns: 1fr;
-    /* Uma coluna perfeita */
-    gap: 1.2rem;
-    width: 100%;
-  }
-
-  /* BOTÕES: Ajuste de enquadramento */
-  .quick-actions .actions {
-    display: grid;
-    /* Mudado para grid para manter tamanhos idênticos */
-    grid-template-columns: 1fr 1fr;
-    /* Dois botões por linha, perfeitamente alinhados */
-    gap: 0.8rem;
-    width: 100%;
-  }
-
-  .quick-actions .actions a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    margin: 0;
-    padding: 12px 5px;
-    font-size: 0.8rem;
-    text-align: center;
-    white-space: nowrap;
-    /* Evita que o texto quebre em duas linhas */
-  }
-}
-
-/* 3. Ajustes para Celulares Pequenos (Até 480px) */
-@media (max-width: 480px) {
-  header.header {
-    flex-direction: column;
-    padding: 1rem;
-    height: auto;
-  }
-
-  .logo {
-    margin-left: 0;
-    margin-bottom: 1rem;
-  }
-
-  .search-box {
-    position: relative;
-    left: 0;
-    transform: none;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .search-box input {
-    width: 100%;
-  }
-
-  .right-group {
-    width: 100%;
-    justify-content: space-between;
-    margin-left: 0;
-  }
-
-  /* Botões de Ação Empilhados */
-  .quick-actions .actions {
-    flex-direction: column;
-  }
-
-  .btn-primary,
-  .btn-secondary,
-  .quick-actions .actions a.primary,
-  .quick-actions .actions a.secondary {
-    width: 100%;
-    text-align: center;
-  }
-
-  .modal-content {
-    width: 95%;
-    padding: 1.5rem;
-  }
-}
-
-/* Ajuste para garantir que imagens não estourem o container */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Melhoria no scroll interno para touch */
-.history-list {
-  -webkit-overflow-scrolling: touch;
 }

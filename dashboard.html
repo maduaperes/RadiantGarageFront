@@ -6,233 +6,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard - RadiantGarage</title>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <link rel="stylesheet" href="CSS/dashboard.css">
 </head>
 
 <body>
-  <!-- Header -->
   <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
 
     <div class="search-box">
-      <input type="text" placeholder="Pesquisar serviços" />
+      <input type="text" placeholder="Pesquisar" />
       <button type="button">🔍︎</button>
     </div>
 
     <div class="right-group">
       <nav class="nav">
-        <a href="splash.html">Home</a>
+        <a href="index.html">Home</a>
         <span>|</span>
-        <a href="procura.html">Serviços</a>
+        <a href="novo-endereco.html">Novo Endereço</a>
       </nav>
 
       <div class="user">
-        <a href="login.html">Login</a>
+        <a href="profile.html">Perfil</a>
       </div>
     </div>
   </header>
 
-  <!-- Dashboard -->
   <main class="dashboard">
 
-    <!-- Visão Geral -->
-    <section class="overview">
-      <h2>Visão Geral</h2>
-      <div class="overview-cards">
-        <div class="card">
-          <h3>Total de Serviços</h3>
-          <p>45</p>
-        </div>
-        <div class="card">
-          <h3>Clientes Ativos</h3>
-          <p>30</p>
-        </div>
-        <div class="card">
-          <h3>Agendamentos Hoje</h3>
-          <p>7</p>
-        </div>
-        <div class="card">
-          <h3>Receita Mensal</h3>
-          <p>R$ 12.500</p>
-        </div>
-      </div>
+    <!-- TEXTO DE BOAS-VINDAS -->
+    <section class="dashboard-intro">
+      <h2>Bem-vindo ao painel da RadiantGarage</h2>
+      <p>
+        Aqui você pode gerenciar os principais recursos do sistema de forma rápida e prática.
+        Utilize as opções abaixo para cadastrar novos serviços ou acompanhar os agendamentos
+        realizados pelos clientes.
+      </p>
     </section>
 
-    <!-- Ações rápidas -->
-    <section class="quick-actions">
-      <h2>Ações Rápidas</h2>
-      <div class="actions">
-        <a href="novo-servico.html" class="primary">Novo Serviço</a>
-        <a href="novo-cliente.html" class="primary">Novo Cliente</a>
-        <a href="agendamento.html" class="primary">Novo Agendamento</a>
-        <a href="relatorios.html" class="secondary">Ver Relatórios</a>
-      </div>
-    </section>
-
-    <!-- Cards detalhados -->
+    <!-- CARDS DE AÇÃO -->
     <section class="cards-grid">
+
       <div class="card">
-        <h3>Serviços Disponíveis</h3>
-        <ul id="listServicos">
-          <li>Manutenção do Motor</li>
-          <li>Combustível e Injeção</li>
-          <li>Lavagem Simples/ Completa</li>
-          <li>Diagnóstico e Revisão Geral</li>
-        </ul>
-        <button class="btn-primary view-all" data-type="servicos">Ver todos</button>
+        <h3>Cadastrar Serviço</h3>
+        <p>
+          Adicione novos serviços disponíveis para os clientes,
+          definindo descrição, tipo e demais informações.
+        </p>
+
+        <div class="card-actions">
+          <a href="novo-servico.html" class="btn-primary">
+            Novo Serviço
+          </a>
+        </div>
       </div>
 
       <div class="card">
-        <h3>Clientes Recentes</h3>
-        <ul id="listClientes">
-          <li>João Silva</li>
-          <li>Maria Souza</li>
-          <li>Carlos Oliveira</li>
-          <li>Ana Pereira</li>
-        </ul>
-        <button class="btn-primary view-all" data-type="clientes">Ver todos</button>
-      </div>
+        <h3>Agendamentos Registrados</h3>
 
-      <div class="card">
-        <h3>Agendamentos Pendentes</h3>
+        <p class="card-description">
+          Acompanhe abaixo os agendamentos realizados pelos clientes.
+        </p>
+
         <ul id="listAgendamentos">
           <li>05/10 - João Silva - Manutenção do Motor</li>
           <li>17/10 - Maria Souza - Combustível e Injeção</li>
           <li>26/10 - Carlos Oliveira - Lavagem Simples</li>
         </ul>
-        <button class="btn-primary view-all" data-type="agendamentos">Ver todos</button>
       </div>
 
-      <div class="card">
-        <h3>Resumo Financeiro</h3>
-        <p>Receita deste mês: <strong>R$ 12.500</strong></p>
-        <p>Serviços concluídos: <strong>45</strong></p>
-        <p>Serviços pendentes: <strong>7</strong></p>
-      </div>
+
     </section>
 
-    <div id="listModal" class="modal hidden">
-      <div class="modal-content" style="max-width: 500px;">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <h3 id="modalTitle">Lista Completa</h3>
-          <button id="editListBtn" class="btn-secondary" style="font-size: 0.7rem; padding: 4px 8px;">Editar Itens
-            🖉</button>
-        </div>
-
-        <div class="history-list" id="modalListContent" style="margin: 15px 0; max-height: 300px;">
-        </div>
-
-        <div class="modal-actions">
-          <button id="saveListBtn" class="btn-primary hidden">Salvar Alterações</button>
-          <button id="closeListModal" class="btn-secondary">Fechar</button>
-        </div>
-      </div>
-    </div>
-
-    <div id="scheduleModal" class="modal hidden">
-      <div class="modal-content">
-        <h3>Editar Agendamentos</h3>
-        <div id="scheduleInputsContainer">
-        </div>
-        <div class="modal-actions">
-          <button id="saveSchedule" class="btn-primary">Salvar</button>
-          <button id="cancelSchedule" class="btn-secondary">Cancelar</button>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Gráficos -->
-  <section class="charts">
-    <div class="chart-cards">
-      <div class="chart-section">
-        <h2>Desempenho Mensal</h2>
-        <canvas id="performanceChart" width="200" height="100"></canvas>
-      </div>
-      <div class="chart-section">
-        <h2>Receita por Serviço</h>
-          <canvas id="revenueChart" width="200" height="100"></canvas>
-      </div>
-    </div>
-  </section>
-
-  <!-- Promoções -->
-  <section class="promo">
-    <h2>Promoções Ativas <button id="editPromoBtn" class="btn-secondary">Editar 🖉</button></h2>
-    <div class="promoCard">
-      <p id="promoText1">💰 Troca de óleo com 20% de desconto!</p>
-    </div>
-    <div class="promoCard">
-      <p id="promoText2">🛠️ Revisão completa + alinhamento grátis</p>
-    </div>
-    <div class="promoCard">
-      <p id="promoText3">🎯 Pacote Premium - Check-up completo do veículo</p>
-    </div>
-  </section>
-
-  <div id="promoModal" class="modal hidden">
-    <div class="modal-content">
-      <h3>Editar Promoções</h3>
-      <label>Promoção 1:</label>
-      <input type="text" id="inputPromo1">
-      <label>Promoção 2:</label>
-      <input type="text" id="inputPromo2">
-      <label>Promoção 3:</label>
-      <input type="text" id="inputPromo3">
-      <div class="modal-actions">
-        <button id="savePromo" class="btn-primary">Salvar</button>
-        <button id="cancelPromo" class="btn-secondary">Cancelar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Comentários / Feedback dos Clientes -->
-  <section class="feedback">
-    <h2>Últimos Feedbacks</h2>
-    <div class="feedback-card">
-      <p>“Excelente atendimento e rapidez na troca de óleo!” - João Silva</p>
-    </div>
-    <div class="feedback-card">
-      <p>“Serviço de revisão impecável, recomendo!” - Maria Souza</p>
-    </div>
-    <div class="feedback-card">
-      <p>“Equipe profissional e ambiente limpo.” - Carlos Oliveira</p>
-    </div>
-  </section>
-
-  <section class="address-section" style="margin-top: 1rem;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-      <h3>Endereços de Atendimento</h3>
-      <button id="editAddressBtn" class="btn-primary" style="font-size: 0.7rem; padding: 4px 8px;">Editar</button>
-    </div>
-    <p id="userAddress" style="font-size: 0.85rem; color: #94a3b8; margin-top: 5px;">📍 Rua das Flores, 123 - Centro
-    </p>
-  </section>
-
-  <div id="addressModal" class="modal hidden">
-    <div class="modal-content">
-      <h3>Editar Endereço</h3>
-      <label>Rua e Número:</label>
-      <input type="text" id="editStreet" placeholder="Ex: Rua das Flores, 123">
-      <label>Bairro/Cidade:</label>
-      <input type="text" id="editCity" placeholder="Ex: Centro - Sorocaba">
-      <div class="modal-actions">
-        <button id="saveAddress" class="btn-primary">Salvar</button>
-        <button id="cancelAddress" class="btn-secondary">Cancelar</button>
-      </div>
-    </div>
-  </div>
   </main>
 
   <footer>
     <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
   </footer>
-
-  <script src="JS/dashboard.js"></script>
 </body>
 
 </html>

@@ -58,6 +58,14 @@ header.header {
     font-size: 1.3rem;
 }
 
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
     /* CHAVE: Centralização Perfeita */
@@ -262,14 +270,10 @@ header.header {
     margin: 15px 0;
 }
 
-.avaliacao .stars {
-    color: orange;
-    font-size: 20px;
-}
-
-.avaliacao .nota {
-    font-weight: bold;
-    color: #37b825;
+.avaliacao span {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
 }
 
 .avaliacao a {
@@ -346,25 +350,6 @@ header.header {
 .read-more:hover {
     background-color: #5348c0;
     transform: translateY(-1px);
-}
-
-/* ==========================
-   COMODIDADES
-========================== */
-.comodidades {
-    font-size: 14px;
-    color: #ffffff;
-    margin-top: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.comodidades .icones {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    color: #6c63ff;
 }
 
 /* ==========================

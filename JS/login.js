@@ -1,51 +1,69 @@
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('loginForm');
-  const feedback = document.getElementById('feedback');
+const loginForm = document.getElementById('loginForm');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const feedback = document.getElementById('feedback');
+const btnBack = document.getElementById('btnBack');
 
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
+function isValidEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
 
-    const email = document.getElementById('email').value.trim();
-    const senha = document.getElementById('password').value.trim();
+function showFeedback(message, type = 'error') {
+  feedback.textContent = message;
+  feedback.style.color = type === 'error' ? 'red' : 'green';
+}
 
-    if (!email || !senha) {
-      feedback.textContent = "Preencha email e senha.";
-      feedback.style.color = "red";
-      return;
-    }
+function clearFeedback() {
+  feedback.textContent = '';
+}
 
-    // Usuários fixos para teste
-    const usuariosTeste = [
-      { tipo: "admin", email: "...", senha: "..." },
-      { tipo: "cliente", email: "***", senha: "***" }
-    ];
+btnBack.addEventListener('click', () => {
+  window.history.back();
+});
 
-    // Verifica se o usuário existe e se as credenciais estão corretas
-    const usuario = usuariosTeste.find(
-      (u) => u.email === email && u.senha === senha
-    );
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
 
-    if (!usuario) {
-      feedback.textContent = "Email ou senha incorretos.";
-      feedback.style.color = "red";
-      return;
-    }
+  clearFeedback();
 
-    feedback.textContent = `Entrando como ${usuario.tipo}...`;
+  const email = emailInput.value.trim();
+  const password = passwordInput.value.trim();
 
-    // Salva informações básicas do usuário
-    localStorage.setItem(
-      'lj_user',
-      JSON.stringify({ name: usuario.tipo, contact: email })
-    );
+  if (!email || !password) {
+    showFeedback('Por favor, preencha todos os campos.');
+    return;
+  }
 
-    // Redireciona conforme o tipo de usuário
+  if (!isValidEmail(email)) {
+    showFeedback('Por favor, insira um email válido.');
+    return;
+  }
+
+  /* ==========================
+     TESTE DE LOGIN
+  ========================== */
+
+  // CLIENTE
+  if (email === 'cliente@exemplo.com' && password === '123456') {
+    showFeedback('Login realizado com sucesso! (Cliente)', 'success');
+
     setTimeout(() => {
-      if (usuario.tipo === "admin") {
-        window.location.href = 'dashboard.html';
-      } else {
-        window.location.href = 'agendamento.html';
-      }
-    }, 1500);
-  });
+      window.location.href = 'agendamento.html';
+    }, 1000);
+    return;
+  }
+
+  // ESTABELECIMENTO
+  if (email === 'admin@exemplo.com' && password === '123456') {
+    showFeedback('Login realizado com sucesso! (Estabelecimento)', 'success');
+
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 1000);
+    return;
+  }
+
+  // ERRO
+  showFeedback('Email ou senha incorretos.');
 });

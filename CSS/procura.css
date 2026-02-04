@@ -95,6 +95,14 @@ header.header {
   font-size: 1.3rem;
 }
 
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
   /* CHAVE: Centralização Perfeita */
@@ -105,6 +113,14 @@ header.header {
   align-items: center;
   z-index: 1;
   /* Garante que fique sobre outros elementos */
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .search-box input {

@@ -1,0 +1,267 @@
+/* ==========================
+   Reset e base
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #0b1220, #111827);
+    color: #e6eef8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    position: relative;
+    min-height: 48px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.logo span {
+    font-weight: bold;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+}
+
+.search-box input {
+    height: 28px;
+    width: 350px;
+    padding: 0 32px 0 8px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e6eef8;
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.search-box button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+}
+
+.nav {
+    display: flex;
+    gap: 0.8rem;
+}
+
+.nav a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.user a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    background: #413ba7;
+    border-radius: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ==========================
+   CARD PRINCIPAL
+========================== */
+.card {
+    max-width: 600px;
+    width: 100%;
+    margin: 10% auto 0;
+    padding: 50px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 0.6s ease;
+    position: relative;
+}
+
+.back {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* ==========================
+   TEXTOS
+========================== */
+h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-bottom: 30px;
+}
+
+/* ==========================
+   OPÇÕES DE CONTA
+========================== */
+.account-options {
+    display: flex;
+    gap: 20px;
+}
+
+.account-card {
+    flex: 1;
+    padding: 35px 25px;
+    background: rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    text-align: center;
+    text-decoration: none;
+    color: #e6eef8;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.account-card:hover {
+    transform: translateY(-6px);
+    border-color: #413ba7;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
+}
+
+.account-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.account-card p {
+    font-size: 0.95rem;
+    color: #94a3b8;
+}
+
+.feedback-message {
+    margin-top: 30px;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4ade80;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.feedback-message.show {
+    opacity: 1;
+}
+
+
+/* ==========================
+   FOOTER
+========================== */
+footer {
+    margin-top: auto;
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+}
+
+/* ==========================
+   RESPONSIVO
+========================== */
+@media (max-width: 768px) {
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin: 1rem 0;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .account-options {
+        flex-direction: column;
+    }
+
+    .card {
+        margin-top: 5%;
+        padding: 30px;
+    }
+}
+
+/* ==========================
+   ANIMAÇÃO
+========================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

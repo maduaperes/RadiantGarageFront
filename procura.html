@@ -12,9 +12,12 @@
 <body>
   <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
+
 
     <div class="search-box">
       <input type="text" placeholder="Pesquisar serviços" />
@@ -23,7 +26,7 @@
 
     <div class="right-group">
       <nav class="nav">
-        <a href="splash.html">Home</a>
+        <a href="index.html">Home</a>
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
@@ -36,7 +39,6 @@
 
   <main>
 
-    <!-- FILTROS DE BUSCA -->
     <aside class="search-filters">
       <h2>Filtros de Busca</h2>
       <form>
@@ -60,62 +62,19 @@
           </div>
 
           <label>
-            Urgência do Serviço:
-            <select>
-              <option value="">Selecione</option>
-              <option value="normal">Normal</option>
-              <option value="urgente">Urgente</option>
-              <option value="imediato">Imediato</option>
-            </select>
-          </label>
-
-          <label>
-            Data:
-            <input type="date" required>
-          </label>
-
-          <label>
-            Horário:
-            <input type="time" required>
-          </label>
-
-          <label>
-            Tempo Estimado:
-            <select>
-              <option value="">Qualquer</option>
-              <option value="ate1h">Até 1h</option>
-              <option value="1-2h">1–2h</option>
-              <option value="2-4h">2–4h</option>
-              <option value="mais4h">Mais de 4h</option>
-            </select>
-          </label>
-
-          <label>
-            Tipo de Atendimento:
-            <select>
-              <option value="">Qualquer</option>
-              <option value="presencial">Presencial no local</option>
-              <option value="retirada_entrega">Retirada e Entrega</option>
-              <option value="rapido">Atendimento rápido</option>
-            </select>
-          </label>
-
-          <label>
             Localidade:
             <input type="text" placeholder="Digite o endereço">
           </label>
 
           <button class="search-btn" type="submit">Buscar</button>
           <button type="button" class="clear-btn">Limpar Filtros</button>
-
+        </div>
       </form>
     </aside>
 
-    <!-- RESULTADOS -->
     <section class="service-results">
       <h2>Serviços Disponíveis</h2>
 
-      <!-- =================== MANUTENÇÃO MECÂNICA =================== -->
       <h2 class="category-title">Manutenção Mecânica</h2>
 
       <div class="service-card" data-category="manutencao e mecanica geral">
@@ -188,7 +147,6 @@
         </div>
       </div>
 
-      <!-- =================== AR E CLIMATIZAÇÃO =================== -->
       <h2 class="category-title">Ar e Climatização</h2>
 
       <div class="service-card" data-category="ar e climatizacao">
@@ -204,7 +162,6 @@
         </div>
       </div>
 
-      <!-- =================== ESTÉTICA AUTOMOTIVA =================== -->
       <h2 class="category-title">Estética Automotiva</h2>
 
       <div class="service-card" data-category="estetica automotiva">
@@ -279,7 +236,6 @@
         </div>
       </div>
 
-      <!-- =================== INTERIOR =================== -->
       <h2 class="category-title">Interior e Conforto</h2>
 
       <div class="service-card" data-category="interior e conforto">
@@ -305,7 +261,6 @@
         </div>
       </div>
 
-      <!-- =================== SEGURANÇA =================== -->
       <h2 class="category-title">Segurança e Direção</h2>
 
       <div class="service-card" data-category="seguranca e direcao">
@@ -319,13 +274,10 @@
         </div>
       </div>
 
-      <!-- =================== DIAGNÓSTICO =================== -->
       <h2 class="category-title">Diagnóstico e Revisão</h2>
 
       <div class="service-card" data-category="diagnostico e revisao">
-        <img
-          src="https://images.pexels.com/photos/7541344/pexels-photo-7541344.jpeg"
-          alt="Diagnóstico e Revisão Geral">
+        <img src="https://images.pexels.com/photos/7541344/pexels-photo-7541344.jpeg" alt="Diagnóstico e Revisão Geral">
         <div class="service-info">
           <h3>Diagnóstico e Revisão Geral</h3>
           <h5>R$ 600</h5>
@@ -335,7 +287,6 @@
         </div>
       </div>
 
-      <!-- =================== ESTÉTICA EXTERNA =================== -->
       <h2 class="category-title">Estética Externa</h2>
 
       <div class="service-card" data-category="estetica externa">

@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
       localStorage.setItem('ultimoAgendamento', JSON.stringify(agendamento));
 
       // Redireciona para status.html
-      window.location.href = 'status.html';
+      window.location.href = 'index.html';
     });
   }
 });

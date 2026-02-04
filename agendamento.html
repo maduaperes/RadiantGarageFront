@@ -10,10 +10,12 @@
 </head>
 
 <body>
-<header class="header">
+  <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
 
     <div class="search-box">
@@ -23,7 +25,7 @@
 
     <div class="right-group">
       <nav class="nav">
-        <a href="splash.html">Home</a>
+        <a href="index.html">Home</a>
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
@@ -32,27 +34,40 @@
         <a href="profile.html">Perfil</a>
       </div>
     </div>
-    </header>
+  </header>
 
   <main>
     <div class="card">
+      <div class="back" id="btnBack">↩</div>
+
       <h2>Agendar Serviço</h2>
       <p class="subtitle">Preencha os campos abaixo para agendar o seu atendimento</p>
 
-      <form id="agendamentoForm">
-        <!-- ================= COLUNA 1 ================= -->
-        <div class="col">
-          <label for="nome">Nome completo:</label>
-          <input type="text" id="nome" placeholder="Digite seu nome" required>
+      <div class="establishment-contact">
+        <h3>Contato do estabelecimento</h3>
 
-          <label for="telefone">Telefone:</label>
-          <input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX" required>
+        <p><strong>Telefone:</strong> (11) 91234-5678</p>
+        <p><strong>Email:</strong> contato@radiantgarage.com</p>
+
+        <a href="tel:+5511912345678" class="contact-btn">
+          Entrar em contato
+        </a>
+      </div>
+
+      <form id="agendamentoForm">
+        <div class="col">
+          <label for="data">Data:</label>
+          <input type="date" id="data" name="data" required>
         </div>
 
-        <!-- ================= COLUNA 2 ================= -->
         <div class="col">
-          <label for="veiculo">Modelo do veículo:</label>
-          <input type="text" id="veiculo" placeholder="Ex: Honda Civic, Uno..." required>
+          <label for="hora">Hora:</label>
+          <input type="time" id="hora" name="hora" required>
+        </div>
+
+        <div class="full-width">
+          <label for="observacoes">Observações:</label>
+          <textarea id="observacoes" placeholder="Digite observações adicionais (opcional)"></textarea>
 
           <label for="pagamento">Forma de pagamento:</label>
           <select id="pagamento" required>
@@ -64,13 +79,6 @@
           </select>
         </div>
 
-        <!-- ================= FULL WIDTH ================= -->
-        <div class="full-width">
-          <label for="observacoes">Observações:</label>
-          <textarea id="observacoes" placeholder="Digite observações adicionais (opcional)"></textarea>
-        </div>
-
-        <!-- ✅ Novo campo de seleção de serviço -->
         <div class="full-width">
           <label for="servico">Serviço:</label>
           <select id="servico" required>
@@ -78,21 +86,21 @@
           </select>
         </div>
 
-        <!-- ✅ Checkbox -->
         <div class="privacy">
           <input type="checkbox" id="termos" required>
           <label for="termos">Li e aceito os termos de uso e privacidade</label>
         </div>
 
-        <!-- ✅ Botões -->
         <div class="full-width buttons">
           <button type="submit" class="primary">Confirmar agendamento</button>
           <button type="reset" class="secondary">Limpar</button>
         </div>
+
         <div id="feedbackMessage" style="margin-top: 10px; font-weight: 600;"></div>
       </form>
     </div>
   </main>
+
 
   <footer>
     <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>

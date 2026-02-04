@@ -2,18 +2,21 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cadastro - RadiantGarage</title>
-  <link rel="stylesheet" href="CSS/signup.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="CSS/signup.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-<header class="header">
+  <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
 
     <div class="search-box">
@@ -23,7 +26,7 @@
 
     <div class="right-group">
       <nav class="nav">
-        <a href="splash.html">Home</a>
+        <a href="index.html">Home</a>
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
@@ -32,74 +35,31 @@
         <a href="login.html">Login</a>
       </div>
     </div>
-    </header>
+  </header>
 
   <main class="card">
-    <h2>Cadastro de Estabelecimento</h2>
-    <p class="subtitle">Preencha as informações do seu negócio.</p>
-
-    <div class="signup-container">
-      <form id="signupForm">
-
-        <div id="establishmentFields">
-          <div class="form-group">
-            <label for="nameEstab">Nome do Estabelecimento</label>
-            <input type="text" id="nameEstab" placeholder="Ex: Radiant Garage" />
-          </div>
-
-          <div class="form-group">
-            <label for="cnpj">CNPJ</label>
-            <input type="text" id="cnpj" placeholder="Ex: 12.345.678/0001-90" />
-          </div>
-
-          <div class="form-group">
-            <label for="endereco">Endereço completo</label>
-            <input type="text" id="endereco" placeholder="Ex: Rua das Oficinas, 123" />
-          </div>
-
-          <div class="form-group">
-            <label for="cidade">Cidade</label>
-            <input type="text" id="cidade" placeholder="Ex: São Paulo" />
-          </div>
-
-          <div class="form-group">
-            <label for="estado">Estado</label>
-            <input type="text" id="estado" placeholder="Ex: SP" />
-          </div>
-
-          <div class="form-group">
-            <label for="cep">CEP</label>
-            <input type="text" id="cep" placeholder="Ex: 01234-567" />
-          </div>
-
-          <div class="form-group">
-            <label for="telefone">Telefone</label>
-            <input type="text" id="telefone" placeholder="Ex: (11) 98765-4321" />
-          </div>
-
-          <div class="form-group">
-            <label for="emailEstab">Email</label>
-            <input type="email" id="emailEstab" placeholder="Ex: contato@radiantgarage.com" />
-          </div>
-
-          <div class="form-group">
-            <label for="passwordEstab">Senha</label>
-            <input type="password" id="passwordEstab" placeholder="Mínimo 6 caracteres" />
-          </div>
-
-          <div class="form-group">
-            <label for="confirmPasswordEstab">Confirmar Senha</label>
-            <input type="password" id="confirmPasswordEstab" placeholder="Mínimo 6 caracteres" />
-          </div>
-        </div>
-
-        <button class="primary" type="submit">Criar conta</button>
-      </form>
-    </div>
-
-    <p class="muted">Já possui conta como cliente?<a href="login.html"> Entrar</a></p>
+    <div class="back" id="btnBack">↩</div>
+    <h2>Cadastrar-se</h2>
+    <p class="subtitle">Preencha os campos abaixo para entrar</p>
+    <form id="signupForm">
+      <label>Email</label>
+      <input id="email" placeholder="ex: voce@exemplo.com">
+      <label>Senha</label>
+      <input id="password" type="password" placeholder="••••••">
+      <label>Confirmar Senha</label>
+      <input id="confirmPassword" type="password" placeholder="••••••">
+      <button class="primary" type="submit">Cadastrar-se</button>
+    </form>
+    <p class="muted">
+      Já possui uma conta? <a href="signup.html">Entrar</a>
+    </p>
     <div id="feedback" class="feedback-message"></div>
+
   </main>
+
+  <footer>
+    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
+  </footer>
 
   <script src="JS/signup.js"></script>
 </body>

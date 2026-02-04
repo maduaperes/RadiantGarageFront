@@ -5,15 +5,17 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Novo Serviço - RadiantGarage</title>
-  <link rel="stylesheet" href="CSS/novo-servico.css">
+  <link rel="stylesheet" href="CSS/novo-servico.css"> <!-- Mesmo CSS dos outros formulários -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-<header class="header">
+  <header class="header">
     <div class="logo">
-      <div class="logo-icon"></div>
-      <span>RadiantGarage</span>
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
     </div>
 
     <div class="search-box">
@@ -23,7 +25,7 @@
 
     <div class="right-group">
       <nav class="nav">
-        <a href="splash.html">Home</a>
+        <a href="index.html">Home</a>
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
@@ -32,85 +34,30 @@
         <a href="login.html">Login</a>
       </div>
     </div>
-    </header>
+  </header>
 
-  <!-- MAIN -->
-  <main class="main-content">
-    <div class="card">
+  <main class="card">
+    <form id="serviceForm">
       <div class="back" id="btnBack">↩</div>
       <h2>Novo Serviço</h2>
-      <p class="subtitle">Cadastre um novo serviço de veículo</p>
+      <p class="subtitle">Cadastre um novo serviço de veículo.</p>
 
-      <form id="serviceForm" class="form-grid">
-        <!-- COLUNA 1: Informações Básicas -->
-        <div class="column">
-          <label for="serviceName">Nome do Serviço</label>
-          <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor" required>
+      <label for="serviceName">Nome do Serviço</label>
+      <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor">
 
-          <label for="serviceCategory">Categoria</label>
-          <input type="text" id="serviceCategory" placeholder="Ex: Manutenção" required>
+      <label for="serviceCategory">Categoria</label>
+      <input type="text" id="serviceCategory" placeholder="Ex: Manutenção">
 
-          <label for="serviceStatus">Status</label>
-          <select id="serviceStatus">
-            <option value="ativo">Ativo</option>
-            <option value="inativo">Inativo</option>
-          </select>
+      <label for="servicePrice">Preço (R$)</label>
+      <input type="text" id="servicePrice" placeholder="Ex: 250,00">
 
-          <label>Atendimento de Urgência</label>
-          <div class="multi-select">
-            <div class="select-box">
-              <span class="selected">Selecione as opções</span>
-              <i class="arrow">&#9662;</i>
-            </div>
-            <div class="options-container">
-              <label><input type="checkbox" name="urgentService" value="normal"> Normal</label>
-              <label><input type="checkbox" name="urgentService" value="urgente"> Urgente</label>
-              <label><input type="checkbox" name="urgentService" value="imediato"> Imediato</label>
-            </div>
+      <label for="serviceNotes">Descrição</label>
+      <textarea id="serviceNotes" placeholder="Informações adicionais sobre o serviço"></textarea>
 
-
-            <label for="time">Horário do Serviço</label>
-            <input id="time" type="time" required>
-            <input id="time" type="time" required>
-          </div>
-        </div>
-
-        <!-- COLUNA 2: Informações do Serviço -->
-        <div class="column">
-          <label for="date">Data do Serviço</label>
-          <input type="text" id="serviceDate" placeholder="Ex: Seg a Sex, 01/01/2023 a 31/12/2023" required>
-
-          <label>Tipo de Atendimento</label>
-          <div class="multi-select">
-            <div class="select-box">
-              <span class="selected">Selecione as opções</span>
-              <i class="arrow">&#9662;</i>
-            </div>
-            <div class="options-container">
-              <label><input type="checkbox" name="serviceType" value="presencial"> Presencial no local</label>
-              <label><input type="checkbox" name="serviceType" value="retirada_entrega"> Retirada e Entrega</label>
-              <label><input type="checkbox" name="serviceType" value="rapido"> Atendimento rápido</label>
-            </div>
-          </div>
-
-          <label for="servicePrice">Preço (R$)</label>
-          <input type="text" id="servicePrice" placeholder="Ex: 250,00" required>
-
-          <label for="serviceImage">Imagem do Serviço</label>
-          <input type="file" id="serviceImage" accept="image/*">
-
-          <label for="serviceNotes">Observações</label>
-          <textarea id="serviceNotes" rows="6" placeholder="Informações adicionais sobre o serviço"></textarea>
-        </div>
-
-
-        <!-- BOTÃO - FULL WIDTH -->
-        <div class="full-width-field">
-          <button type="submit" class="primary">Salvar Serviço</button>
-        </div>
-    </div>
+      <button type="submit" class="primary">Salvar Serviço</button>
     </form>
-    </div>
+
+    <div id="feedback" class="feedback-message"></div>
   </main>
 
   <footer>

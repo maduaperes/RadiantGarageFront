@@ -1,139 +1,82 @@
 // =============================
-// Função de Máscaras Automáticas
+// Seleção dos elementos
 // =============================
-function aplicarMascara(input, tipo) {
-  input.addEventListener("input", () => {
-    let valor = input.value.replace(/\D/g, "");
+const form = document.getElementById("signupForm");
+const email = document.getElementById("email");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const feedback = document.getElementById("feedback");
+const btnBack = document.getElementById("btnBack");
 
-    if (tipo === "cnpj") {
-      valor = valor.replace(/^(\d{2})(\d)/, "$1.$2");
-      valor = valor.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-      valor = valor.replace(/\.(\d{3})(\d)/, ".$1/$2");
-      valor = valor.replace(/(\d{4})(\d)/, "$1-$2");
-      input.value = valor.substring(0, 18);
-    }
-
-    if (tipo === "telefone") {
-      if (valor.length <= 10) {
-        valor = valor.replace(/^(\d{2})(\d{4})(\d)/, "($1) $2-$3");
-      } else {
-        valor = valor.replace(/^(\d{2})(\d{5})(\d)/, "($1) $2-$3");
-      }
-      input.value = valor.substring(0, 15);
-    }
-
-    if (tipo === "cep") {
-      valor = valor.replace(/^(\d{5})(\d)/, "$1-$2");
-      input.value = valor.substring(0, 9);
-    }
+// =============================
+// Botão voltar
+// =============================
+if (btnBack) {
+  btnBack.addEventListener("click", () => {
+    window.history.back();
   });
 }
 
 // =============================
-// Inicialização de máscaras
-// =============================
-window.addEventListener("DOMContentLoaded", () => {
-  aplicarMascara(document.getElementById("cnpj"), "cnpj");
-  aplicarMascara(document.getElementById("telefone"), "telefone");
-  aplicarMascara(document.getElementById("cep"), "cep");
-});
-
-// =============================
 // Validação do formulário
 // =============================
-document.getElementById("signupForm").addEventListener("submit", function (event) {
-  event.preventDefault();
+if (form) {
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
 
-  const feedback = document.getElementById("feedback");
-  feedback.innerHTML = "";
-  feedback.style.color = "";
+    feedback.textContent = "";
+    feedback.style.color = "";
 
-  // Campos obrigatórios
-  const requiredFields = [
-    "nameEstab",
-    "cnpj",
-    "endereco",
-    "cidade",
-    "estado",
-    "cep",
-    "telefone",
-    "emailEstab",
-    "passwordEstab"
-  ];
-
-  let allFilled = true;
-
-  // Verifica se todos os campos obrigatórios estão preenchidos
-  requiredFields.forEach((id) => {
-    const field = document.getElementById(id);
-    if (!field.value.trim()) {
-      allFilled = false;
-      field.style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
-    } else {
-      field.style.boxShadow = "none";
+    // Validação email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim()) {
+      feedback.textContent = "Informe o email.";
+      feedback.style.color = "#f87171";
+      email.focus();
+      return;
     }
+
+    if (!emailRegex.test(email.value)) {
+      feedback.textContent = "Email inválido.";
+      feedback.style.color = "#f87171";
+      email.focus();
+      return;
+    }
+
+    // Validação senha
+    if (password.value.length < 6) {
+      feedback.textContent = "A senha deve ter no mínimo 6 caracteres.";
+      feedback.style.color = "#f87171";
+      password.focus();
+      return;
+    }
+
+    // Confirmação de senha
+    if (password.value !== confirmPassword.value) {
+      feedback.textContent = "As senhas não coincidem.";
+      feedback.style.color = "#f87171";
+      confirmPassword.focus();
+      return;
+    }
+
+    // =============================
+    // Sucesso
+    // =============================
+    feedback.textContent = "Cadastro realizado com sucesso!";
+    feedback.style.color = "#4ade80";
+
+    form.reset();
+
+    setTimeout(() => {
+      window.location.href = "novo-contato.html";
+    }, 1000);
   });
-
-  if (!allFilled) {
-    feedback.textContent = "Por favor, preencha todos os campos obrigatórios.";
-    feedback.style.color = "#ff6666";
-    return;
-  }
-
-  // =============================
-  // Validações adicionais
-  // =============================
-
-  // Validação de CNPJ (básica)
-  const cnpj = document.getElementById("cnpj").value.replace(/\D/g, "");
-  if (cnpj.length !== 14) {
-    feedback.textContent = "CNPJ inválido. Deve conter 14 dígitos.";
-    feedback.style.color = "#ff6666";
-    document.getElementById("cnpj").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
-    return;
-  }
-
-  // Validação de e-mail
-  const email = document.getElementById("emailEstab").value;
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    feedback.textContent = "Por favor, insira um email válido.";
-    feedback.style.color = "#ff6666";
-    document.getElementById("emailEstab").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
-    return;
-  }
-
-  // Validação de senha
-  const senha = document.getElementById("passwordEstab").value;
-  if (senha.length < 6) {
-    feedback.textContent = "A senha deve ter no mínimo 6 caracteres.";
-    feedback.style.color = "#ff6666";
-    document.getElementById("passwordEstab").style.boxShadow = "0 0 8px rgba(255, 80, 80, 0.6)";
-    return;
-  }
-
-  // =============================
-  // Se tudo estiver certo
-  // =============================
-  feedback.textContent = "Cadastro realizado com sucesso!";
-  feedback.style.color = "#7CFC00";
-
-  // Limpa o formulário após sucesso
-  this.reset();
-
-  // Exemplo: redirecionar após 2 segundos
-  // setTimeout(() => window.location.href = "login.html", 2000);
-
-  // Caso tenha backend:
-  // const formData = new FormData(this);
-  // fetch("/api/estabelecimento", { method: "POST", body: formData });
-});
+}
 
 // =============================
-// Feedback visual ao digitar
+// Remove erro ao digitar
 // =============================
-const inputs = document.querySelectorAll("input, textarea");
-inputs.forEach(input => {
+document.querySelectorAll("input").forEach(input => {
   input.addEventListener("input", () => {
     input.style.boxShadow = "none";
   });

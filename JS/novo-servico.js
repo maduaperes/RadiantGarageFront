@@ -1,105 +1,79 @@
-// Botão de voltar
-document.getElementById("btnBack").addEventListener("click", () => {
-  location.href = "dashboard.html";
-});
+// Seleciona elementos do DOM
+const serviceForm = document.getElementById('serviceForm');
+const serviceName = document.getElementById('serviceName');
+const serviceCategory = document.getElementById('serviceCategory');
+const servicePrice = document.getElementById('servicePrice');
+const serviceNotes = document.getElementById('serviceNotes');
+const feedback = document.getElementById('feedback');
+const btnBack = document.getElementById('btnBack');
 
-// Função para coletar valores de checkboxes múltiplas
-function getCheckedValues(name) {
-  return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`))
-    .map(input => input.value);
+// Função para mostrar feedback
+function showFeedback(message, type = 'error') {
+  feedback.textContent = message;
+  feedback.style.color = type === 'error' ? 'red' : 'green';
 }
 
-// Formata o campo preço enquanto digita
-const priceInput = document.getElementById("servicePrice");
-priceInput.addEventListener("input", (e) => {
-  let value = e.target.value;
+// Função para limpar feedback
+function clearFeedback() {
+  feedback.textContent = '';
+}
 
-  // Remove tudo que não é número
-  value = value.replace(/\D/g, "");
+// Função para validar preço (apenas números e vírgula)
+function isValidPrice(price) {
+  const regex = /^\d{1,7}(,\d{2})?$/; // Ex: 250 ou 250,00
+  return regex.test(price);
+}
 
-  // Converte para reais (2 casas decimais)
-  value = (parseInt(value || "0") / 100).toFixed(2);
-
-  // Formata com vírgula como decimal
-  value = value.replace(".", ",");
-
-  // Adiciona R$
-  e.target.value = value;
+// Evento de clique no botão de voltar
+btnBack.addEventListener('click', () => {
+  window.history.back();
 });
 
-// Formulário
-document.getElementById("serviceForm").addEventListener("submit", (e) => {
-  e.preventDefault();
+// Evento de submit do formulário
+serviceForm.addEventListener('submit', (e) => {
+  e.preventDefault(); // previne reload da página
 
-  const name = document.getElementById("serviceName").value.trim();
-  const category = document.getElementById("serviceCategory").value.trim();
-  const status = document.getElementById("serviceStatus").value;
-  const urgent = getCheckedValues("urgentService");
-  
-  const times = Array.from(document.querySelectorAll('input[type="time"]')).map(input => input.value);
-  const dates = Array.from(document.querySelectorAll('input[type="date"]')).map(input => input.value);
-  const type = getCheckedValues("serviceType");
+  clearFeedback();
 
-  // Converte preço de R$ 1.234,56 para número
-  const price = parseFloat(priceInput.value.replace(/\./g, "").replace(",", ".")) || 0;
+  const name = serviceName.value.trim();
+  const category = serviceCategory.value.trim();
+  const price = servicePrice.value.trim();
+  const notes = serviceNotes.value.trim();
 
-  const notes = document.getElementById("serviceNotes").value.trim();
-  const imageInput = document.getElementById("serviceImage");
-  const image = imageInput.files[0] ? URL.createObjectURL(imageInput.files[0]) : null;
-
-  // Validação básica
-  if (!name || !category || !status) {
-    alert("Preencha os campos obrigatórios!");
+  // Validações
+  if (!name) {
+    showFeedback('Por favor, insira o nome do serviço.');
     return;
   }
 
-  const services = JSON.parse(localStorage.getItem("lj_services") || "[]");
+  if (!category) {
+    showFeedback('Por favor, insira a categoria do serviço.');
+    return;
+  }
 
-  const newService = {
-    id: Date.now(),
-    name,
-    category,
-    status,
-    urgent,
-    times,
-    dates,
-    type,
-    price,
-    notes,
-    image
-  };
+  if (!price) {
+    showFeedback('Por favor, insira o preço do serviço.');
+    return;
+  }
 
-  services.push(newService);
-  localStorage.setItem("lj_services", JSON.stringify(services));
+  if (!isValidPrice(price)) {
+    showFeedback('Preço inválido. Use apenas números e vírgula. Ex: 250,00');
+    return;
+  }
 
-  alert("Serviço cadastrado com sucesso!");
-  location.href = "dashboard.html";
-});
+  // Simulação de salvar no localStorage
+  const services = JSON.parse(localStorage.getItem('services') || '[]');
+  services.push({ name, category, price, notes });
+  localStorage.setItem('services', JSON.stringify(services));
 
-// Script para multi-select dropdown
-document.querySelectorAll('.multi-select').forEach(select => {
-  const selectBox = select.querySelector('.select-box');
-  const optionsContainer = select.querySelector('.options-container');
-  const selected = select.querySelector('.selected');
+  showFeedback('Serviço cadastrado com sucesso!', 'success');
 
-  selectBox.addEventListener('click', () => {
-    select.classList.toggle('active');
-  });
+  // Limpa o formulário após 1 segundo
+  setTimeout(() => {
+    serviceForm.reset();
+    clearFeedback();
 
-  optionsContainer.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      const checkedOptions = Array.from(optionsContainer.querySelectorAll('input[type="checkbox"]:checked'))
-        .map(input => input.parentNode.textContent.trim());
-      selected.textContent = checkedOptions.length > 0 ? checkedOptions.join(', ') : 'Selecione as opções';
-    });
-  });
-});
-
-// Fecha dropdown se clicar fora
-document.addEventListener('click', e => {
-  document.querySelectorAll('.multi-select').forEach(select => {
-    if (!select.contains(e.target)) {
-      select.classList.remove('active');
-    }
-  });
+    // redireciona para o dashboard
+    window.location.href = "dashboard.html";
+  }, 1000);
 });

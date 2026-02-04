@@ -62,6 +62,14 @@ header.header {
   font-size: 1.3rem;
 }
 
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
 .search-box {
   /* CHAVE: Centralização Perfeita */
@@ -251,57 +259,31 @@ input:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Botões sociais */
-.socials {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
-}
-
-.social {
-  flex: 1;
-  padding: 10px;
-  border-radius: 10px;
-  background: #ffffff0d;
-  color: #ffffff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: center;
-  border: none;
-}
-
-.social:hover {
-  background: #ffffff22;
-}
-
 /* Texto "muted" */
 .muted {
   color: #94a3b8;
-  font-size: 14px;
+  font-size: 0.9rem;
   text-align: center;
   margin-top: 14px;
   transition: color 0.3s;
 }
 
 .muted a {
-  color: #ffffff;
+  color: #2153f5;
   text-decoration: none;
-  background: #413ba7;
-  padding: 10px;
   border-radius: 12px;
   transition: all 0.3s ease;
   font-weight: 600;
   font-size: 0.9rem;
   display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 2px;
   cursor: pointer;
   border: none;
 }
 
 .muted a:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  color: #3d6aff;
 }
 
 /* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
@@ -329,6 +311,26 @@ footer {
   background: rgba(255, 255, 255, 0.04);
   color: #94a3b8;
   margin-top: auto;
+}
+
+.back {
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Animação de fadeIn */

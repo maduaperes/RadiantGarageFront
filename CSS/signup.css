@@ -1,3 +1,6 @@
+/* ==========================
+   Reset e base
+========================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -57,6 +60,14 @@ header.header {
 
 .logo-icon {
   font-size: 1.3rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
 }
 
 /* 2. SEARCH-BOX: Centralização Absoluta no Meio */
@@ -168,98 +179,69 @@ header.header {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ==========================
-   CARD PRINCIPAL
-========================== */
-main.card {
+/* Card */
+.card {
   width: 100%;
-  max-width: 800px;
+  max-width: 600px;
   padding: 50px;
   border-radius: 16px;
   background: rgba(255, 255, 255, 0.04);
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
   animation: fadeIn 0.6s ease;
   color: #e6eef8;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 0 auto;
+  margin-top: 10%;
 }
 
 /* Título */
 h2 {
-  font-size: 2rem;
-  color: #e6eef8;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #fff;
 }
 
 /* Sub-título */
 p.subtitle {
   margin-bottom: 20px;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   text-align: center;
   color: #94a3b8;
 }
 
-/* ==========================
-   FORMULÁRIO
-========================== */
-.signup-container {
-  width: 100%;
-}
-
-#establishmentFields {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px 20px;
-  margin-top: 10px;
-}
-
-#endereco {
-  grid-column: 1 / -1;
-  /* ocupa as duas colunas */
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-}
-
-.form-group label {
+/* Labels */
+label {
   display: block;
-  color: #cbd5e1;
+  margin-top: 12px;
   font-size: 0.9rem;
-  margin-bottom: 4px;
+  color: #cbd5e1;
 }
 
-.form-group input {
+/* Inputs */
+input {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px;
   border-radius: 10px;
   border: none;
+  margin-top: 6px;
   background: rgba(255, 255, 255, 0.07);
   color: #e6eef8;
   font-size: 0.95rem;
   transition: background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.form-group input::placeholder {
+input::placeholder {
   color: #94a3b8;
-  font-style: italic;
 }
 
-.form-group input:focus {
+input:focus {
   outline: none;
   background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 6px rgba(65, 59, 167, 0.5);
 }
 
-/* ==========================
-   BOTÃO
-========================== */
+/* Botão primário */
 .primary {
-  margin-top: 24px;
+  margin-top: 18px;
   background: #413ba7;
   border: 0;
   padding: 14px;
@@ -277,38 +259,34 @@ p.subtitle {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ==========================
-   TEXTO SECUNDÁRIO
-========================== */
+/* Texto "muted" */
 .muted {
   color: #94a3b8;
-  font-size: 14px;
+  font-size: 0.9rem;
   text-align: center;
   margin-top: 14px;
+  transition: color 0.3s;
 }
 
 .muted a {
-  color: #ffffff;
+  color: #2153f5;
   text-decoration: none;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-block;
+  margin-left: 2px;
+  cursor: pointer;
+  border: none;
 }
 
 .muted a:hover {
-  color: #213fc7;
+  transform: translateY(-2px);
+  color: #3d6aff;
 }
 
-/* ==========================
-   FEEDBACK MENSAGEM
-========================== */
-.feedback-message {
-  margin-top: 16px;
-  text-align: center;
-  font-size: 14px;
-  min-height: 1.2em;
-}
-
-/* ==========================
-   AUTOFILL FIX
-========================== */
+/* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
   box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
@@ -316,9 +294,46 @@ input:-webkit-autofill {
   transition: background-color 5000s ease-in-out 0s;
 }
 
-/* ==========================
-   ANIMAÇÃO
-========================== */
+.feedback-message {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  min-height: 1.2em;
+  color: #4ade80;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+  margin-top: auto;
+}
+
+.back {
+  top: 16px;
+  left: 16px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff26;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Animação de fadeIn */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -331,72 +346,8 @@ input:-webkit-autofill {
   }
 }
 
-/* ==========================
-   RESPONSIVIDADE REFINADA
-========================== */
-
-/* 1. TELAS ATÉ 1024px (Laptops e Tablets em Paisagem) */
-@media (max-width: 1024px) {
-  main.card {
-    max-width: 90%;
-    /* Aumenta a largura do card para não ficar muito apertado */
-    padding: 40px;
-  }
-
-  .search-box input {
-    width: 280px;
-    /* Reduz a barra de busca para não encostar nos itens laterais */
-  }
-}
-
-/* 2. TELAS ATÉ 768px (Tablets e Celulares Grandes) */
 @media (max-width: 768px) {
-  header.header {
-    padding: 0.8rem 1rem;
-    justify-content: space-between;
-  }
 
-  /* BUSCA: Sai do meio e vai para uma linha abaixo para não quebrar o menu */
-  .search-box {
-    position: relative;
-    left: 0;
-    transform: none;
-    width: 100%;
-    order: 3;
-    /* Move a busca para baixo do logo/botão login */
-    margin-top: 1rem;
-    justify-content: center;
-  }
-
-  .search-box input {
-    width: 100%;
-    height: 35px;
-  }
-
-  .right-group {
-    margin-left: 0;
-    gap: 1rem;
-  }
-
-  /* FORMULÁRIO: Ajuste das colunas */
-  #establishmentFields {
-    grid-template-columns: 1fr;
-    /* Em tablets menores, os campos ficam um abaixo do outro */
-    gap: 12px;
-  }
-
-  main.card {
-    padding: 30px;
-    margin: 20px auto;
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
-}
-
-/* 3. TELAS ATÉ 480px (Celulares Pequenos) */
-@media (max-width: 480px) {
   header.header {
     flex-direction: column;
     padding: 1rem;
@@ -426,32 +377,8 @@ input:-webkit-autofill {
     margin-left: 0;
   }
 
-  main.card {
-    padding: 25px 15px;
-    border-radius: 0;
-    /* Remove arredondamento para parecer um app full screen */
-    box-shadow: none;
-    background: transparent;
-    /* Opcional: deixa o card mais limpo no celular */
+  .container {
+    padding: 1rem;
   }
 
-  h2 {
-    font-size: 1.4rem;
-    text-align: center;
-  }
-
-  p.subtitle {
-    font-size: 0.85rem;
-  }
-
-  .primary {
-    padding: 12px;
-    font-size: 0.95rem;
-  }
-}
-
-/* Ajuste global para imagens/ícones não quebrarem layout */
-img {
-  max-width: 100%;
-  height: auto;
 }

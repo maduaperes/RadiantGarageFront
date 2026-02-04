@@ -1,0 +1,315 @@
+/* ==========================
+   Reset e base
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #0b1220, #111827);
+    color: #e6eef8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================
+   HEADER (mantido igual)
+========================== */
+header.header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+    min-height: 48px;
+    position: relative;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    flex: 0 0 auto;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.logo span {
+    font-weight: bold;
+}
+
+.logo-icon {
+    font-size: 1.3rem;
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.search-box {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+}
+
+.search-box input {
+    height: 28px;
+    width: 350px;
+    padding: 0 32px 0 8px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e6eef8;
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.search-box input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.search-box button:hover {
+    color: #fff;
+}
+
+.right-group {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-left: auto;
+    z-index: 2;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+    transform: translateY(-2px);
+    color: #aaa;
+}
+
+.nav span {
+    margin: 0 0.2rem;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background: #413ba7;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   MAIN CONTENT - CARD CENTRALIZADO
+========================== */
+main.card {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    color: #e6eef8;
+    margin: 50px auto;
+    /* centraliza horizontal e dá margem superior */
+}
+
+h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    color: #94a3b8;
+}
+
+/* FORMULÁRIO */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.07);
+    color: #e6eef8;
+    font-size: 1rem;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 0 8px rgba(65, 59, 167, 0.5);
+}
+
+textarea {
+    min-height: 100px;
+    max-height: 300px;
+    resize: vertical;
+}
+
+/* BOTÃO */
+.primary {
+    margin-top: 1rem;
+    background: #413ba7;
+    color: #fff;
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+}
+
+.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* FEEDBACK */
+.feedback-message {
+    margin-top: 12px;
+    text-align: center;
+    font-size: 0.9rem;
+    min-height: 1.2em;
+    color: #4ade80;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    margin-top: auto;
+}
+
+.back {
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* RESPONSIVO */
+@media (max-width: 768px) {
+    main.card {
+        margin: 30px 1rem;
+        padding: 1.5rem;
+    }
+
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+}
