@@ -1,15 +1,12 @@
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Cadastro - RadiantGarage</title>
+  <title>Criar Conta - RadiantGarage</title>
   <link rel="stylesheet" href="CSS/signup.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
 </head>
-
 <body>
   <header class="header">
     <div class="logo">
@@ -18,48 +15,33 @@
         <span>RadiantGarage</span>
       </a>
     </div>
-
-    <div class="search-box">
-      <input type="text" placeholder="Pesquisar serviços" />
-      <button type="button">🔍︎</button>
-    </div>
-
-    <div class="right-group">
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <span>|</span>
-        <a href="procura.html">Serviços</a>
-      </nav>
-    </div>
   </header>
 
   <main class="card">
-    <div class="back" id="btnBack">↩</div>
-    <h2>Cadastrar-se</h2>
-    <p class="subtitle">Preencha os campos abaixo para entrar</p>
+    <div class="back" onclick="window.history.back()">↩</div>
+    <h2>Criar Conta</h2>
+    <p class="subtitle">Cadastre seu e-mail para gerenciar sua oficina</p>
+    
     <form id="signupForm">
-      <label>Email</label>
-      <input id="email" placeholder="ex: voce@exemplo.com">
-      <label>Senha</label>
-      <input id="password" type="password" placeholder="••••••">
-      <label>Confirmar Senha</label>
-      <input id="confirmPassword" type="password" placeholder="••••••">
-      <button class="primary" type="submit">Cadastrar-se</button>
+      <label for="email">E-mail</label>
+      <input type="email" id="email" placeholder="ex: contato@oficina.com" required>
+      
+      <label for="password">Senha</label>
+      <input type="password" id="password" placeholder="No mínimo 6 caracteres" required>
+      
+      <label for="confirmPassword">Confirmar Senha</label>
+      <input type="password" id="confirmPassword" placeholder="Repita a senha" required>
+      
+      <button class="primary" type="submit">Finalizar Cadastro</button>
     </form>
-    <p class="muted">
-      Já possui uma conta? <a href="signup.html">Entrar</a>
+    
+    <p class="muted" style="margin-top: 15px; font-size: 0.85rem; text-align: center;">
+      Já possui uma conta? <a href="login.html" style="color: #413ba7; font-weight: bold;">Entrar</a>
     </p>
+    
     <div id="feedback" class="feedback-message"></div>
-
   </main>
 
-  <footer>
-    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
-  </footer>
-
   <script src="JS/signup.js"></script>
-  <script src="JS/script.js"></script>
-
 </body>
-
 </html>

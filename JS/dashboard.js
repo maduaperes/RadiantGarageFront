@@ -1,97 +1,121 @@
+const API_URL_SERVICOS = "http://localhost:3000/api/servicos";
+const API_URL_PERFIL = "http://localhost:3000/api/auth/perfil";
+
 document.addEventListener("DOMContentLoaded", () => {
+    // Inicia o carregamento dos dados
+    carregarPerfil();
+    carregarServicos();
+});
 
-    function makeEditable(listId, editBtnId, saveBtnId, closeBtnId, storageKey) {
-        const list = document.getElementById(listId);
-        const editBtn = document.getElementById(editBtnId);
-        const saveBtn = document.getElementById(saveBtnId);
-        const closeBtn = document.getElementById(closeBtnId);
+// ==========================================
+// 1. GET - BUSCAR DADOS DO PERFIL
+// ==========================================
+async function carregarPerfil() {
+    try {
+        const token = localStorage.getItem('token');
+        
+        const response = await fetch(API_URL_PERFIL, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
+            }
+        });
 
-        // Guarda o estado original em texto
-        let originalItems = Array.from(list.children).map(li => li.textContent);
+        if (response.ok) {
+            const perfil = await response.json();
+            // FAT: Renderizando dados do estabelecimento no topo
+            document.getElementById("nomeOficina").textContent = `Olá, ${perfil.nome || 'Oficina'}`;
+            document.getElementById("endOficina").textContent = perfil.endereco || 'Endereço não cadastrado';
+            document.getElementById("contatoOficina").textContent = perfil.contato || 'Contato não cadastrado';
+        }
+    } catch (err) {
+        console.error("Erro ao carregar perfil:", err);
+    }
+}
 
-        // Carrega do localStorage (forçando string)
-        const storedItems = JSON.parse(localStorage.getItem(storageKey));
-        if (Array.isArray(storedItems)) {
-            list.innerHTML = "";
-            storedItems.forEach(item => {
-                const li = document.createElement("li");
+// ==========================================
+// 2. GET - BUSCAR E RENDERIZAR SERVIÇOS
+// ==========================================
+async function carregarServicos() {
+    const list = document.getElementById("listServicos");
 
-                // Se vier objeto antigo, converte para string
-                li.textContent = typeof item === "string"
-                    ? item
-                    : Object.values(item).join(" - ");
+    try {
+        const token = localStorage.getItem('token');
 
-                list.appendChild(li);
-            });
+        const response = await fetch(API_URL_SERVICOS, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
+            }
+        });
 
-            originalItems = Array.from(list.children).map(li => li.textContent);
+        if (!response.ok) throw new Error("Falha ao buscar serviços.");
+
+        const servicos = await response.json();
+        
+        // Limpa a mensagem de "Carregando"
+        list.innerHTML = "";
+
+        if (servicos.length === 0) {
+            list.innerHTML = "<li>Nenhum serviço cadastrado.</li>";
+            return;
         }
 
-        editBtn.addEventListener("click", () => {
-            list.querySelectorAll("li").forEach(li => {
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = li.textContent;
-                input.style.width = "100%";
-                input.style.marginBottom = "6px";
-
-                li.textContent = "";
-                li.appendChild(input);
-            });
-
-            editBtn.style.display = "none";
-            saveBtn.style.display = "inline-block";
-            closeBtn.style.display = "inline-block";
+        // FAT: Criando os itens da lista dinamicamente
+        servicos.forEach(servico => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span><strong>${servico.nome_servico}</strong> - R$ ${parseFloat(servico.custo_servico).toFixed(2)}</span>
+                <div class="actions-group">
+                    <a href="editar-servico.html?id=${servico.id}" class="btn-edit">Alterar</a>
+                    <button class="btn-delete" onclick="removerServico(${servico.id}, '${servico.nome_servico}')">Remover</button>
+                </div>
+            `;
+            list.appendChild(li);
         });
 
-        saveBtn.addEventListener("click", () => {
-            const newItems = [];
-
-            list.querySelectorAll("li").forEach(li => {
-                const input = li.querySelector("input");
-                if (input && input.value.trim() !== "") {
-                    const value = input.value.trim();
-                    li.textContent = value;
-                    newItems.push(value);
-                }
-            });
-
-            localStorage.setItem(storageKey, JSON.stringify(newItems));
-            originalItems = [...newItems];
-
-            editBtn.style.display = "inline-block";
-            saveBtn.style.display = "none";
-            closeBtn.style.display = "none";
-        });
-
-        closeBtn.addEventListener("click", () => {
-            // Descarta alterações e restaura
-            list.innerHTML = "";
-            originalItems.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                list.appendChild(li);
-            });
-
-            editBtn.style.display = "inline-block";
-            saveBtn.style.display = "none";
-            closeBtn.style.display = "none";
-        });
+    } catch (err) {
+        console.error("Erro ao carregar serviços:", err);
+        list.innerHTML = `<li style="color: #f87171;">Erro na conexão com o servidor.</li>`;
     }
+}
 
-    makeEditable(
-        "listServicos",
-        "editServicosBtn",
-        "saveServicosBtn",
-        "closeServicosBtn",
-        "servicos"
-    );
+// ==========================================
+// 3. PUSH - REMOVER SERVIÇO (DELETE)
+// ==========================================
+async function removerServico(id, nome) {
+    if (!confirm(`Deseja remover o serviço "${nome}"?`)) return;
 
-    makeEditable(
-        "listAgendamentos",
-        "editAgendamentosBtn",
-        "saveAgendamentosBtn",
-        "closeAgendamentosBtn",
-        "agendamentos"
-    );
-});
+    try {
+        const token = localStorage.getItem('token');
+        
+        const response = await fetch(`${API_URL_SERVICOS}/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                ...(token && { 'Authorization': `Bearer ${token}` })
+            }
+        });
+
+        if (response.ok) {
+            alert("Removido com sucesso!");
+            carregarServicos(); // FAT: Re-renderiza a lista atualizada
+        } else {
+            alert("Não foi possível remover o serviço.");
+        }
+    } catch (err) {
+        console.error("Erro ao deletar:", err);
+    }
+}
+
+// Lógica de Logout
+const btnSair = document.getElementById("login");
+if (btnSair && btnSair.textContent === "Sair") {
+    btnSair.addEventListener("click", (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = "index.html";
+    });
+}

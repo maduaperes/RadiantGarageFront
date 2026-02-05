@@ -1,101 +1,72 @@
-const form = document.getElementById("signupForm");
-const email = document.getElementById("email");
-const password = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
-const feedback = document.getElementById("feedback");
-const btnBack = document.getElementById("btnBack");
-
 const REGISTER_URL = "http://localhost:3000/api/auth/register";
 const LOGIN_URL = "http://localhost:3000/api/auth/login";
 
-btnBack?.addEventListener("click", () => {
-  window.history.back();
-});
+const form = document.getElementById("signupForm");
+const feedback = document.getElementById("feedback");
 
-function showError(message, input) {
+function showFeedback(message, isError = true) {
   feedback.textContent = message;
-  feedback.style.color = "#f87171";
-  input?.focus();
-}
-
-function showFeedback(message, type = "success") {
-  feedback.textContent = message;
-  feedback.style.color = type === "success" ? "#4ade80" : "#f87171";
-}
-
-function clearFeedback() {
-  feedback.textContent = "";
-}
-
-async function loginUser(emailValue, passwordValue) {
-  try {
-    const res = await fetch(LOGIN_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: emailValue, password: passwordValue })
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      throw new Error(data.message || "Erro ao logar usuário.");
-    }
-
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-    }
-
-    return true;
-  } catch (err) {
-    console.error(err);
-    showFeedback("Cadastro realizado, mas falha no login: " + err.message, "error");
-    return false;
-  }
+  feedback.style.color = isError ? "#f87171" : "#4ade80";
 }
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();
-  clearFeedback();
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email.value.trim()) return showError("Informe o email.", email);
-  if (!emailRegex.test(email.value)) return showError("Email inválido.", email);
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
 
-  if (password.value.length < 6) return showError("A senha deve ter no mínimo 6 caracteres.", password);
+  // Validação básica antes do Push
+  if (password !== confirmPassword) {
+    return showFeedback("As senhas não coincidem.");
+  }
 
-  if (password.value !== confirmPassword.value) return showError("As senhas não coincidem.", confirmPassword);
+  if (password.length < 6) {
+    return showFeedback("A senha deve ter pelo menos 6 caracteres.");
+  }
 
   try {
-    const registerRes = await fetch(REGISTER_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email.value.trim(), password: password.value })
+    // 1. Requisição de Registro (POST)
+    const registerResponse = await fetch(REGISTER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
     });
 
-    const registerData = await registerRes.json();
+    const registerData = await registerResponse.json();
 
-    if (!registerRes.ok) {
-      throw new Error(registerData.message || "Erro ao cadastrar usuário.");
+    if (!registerResponse.ok) {
+      throw new Error(registerData.error || "Erro ao criar conta.");
     }
 
-    const loggedIn = await loginUser(email.value.trim(), password.value);
-    if (!loggedIn) return;
+    // 2. Requisição de Login Automático (conforme seu modelo)
+    const loginResponse = await fetch(LOGIN_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
 
-    showFeedback("Cadastro e login realizados com sucesso!", "success");
-    form.reset();
+    const loginData = await loginResponse.json();
+
+    if (!loginResponse.ok) {
+      throw new Error("Conta criada, mas erro ao logar automaticamente.");
+    }
+
+    // Salvando o token do Supabase (data.session.access_token ou data.token)
+    // Ajustado conforme o retorno padrão do seu authService
+    const token = loginData.session?.access_token || loginData.token;
+    if (token) {
+      localStorage.setItem("token", token);
+    }
+
+    showFeedback("Conta criada com sucesso! Redirecionando...", false);
 
     setTimeout(() => {
       window.location.href = "novo-contato.html";
-    }, 1000);
+    }, 1500);
 
   } catch (err) {
     console.error(err);
-    showFeedback(err.message || "Erro desconhecido.");
+    showFeedback(err.message);
   }
-});
-
-document.querySelectorAll("input").forEach(input => {
-  input.addEventListener("input", () => {
-    input.style.boxShadow = "none";
-  });
 });

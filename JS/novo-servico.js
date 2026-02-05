@@ -1,115 +1,59 @@
-// --- CONFIGURAÇÃO ---
-const API_URL = "http://localhost:3000/api";
-const serviceForm = document.getElementById('serviceForm');
-const serviceName = document.getElementById('serviceName');
-const servicePrice = document.getElementById('servicePrice');
-const serviceNotes = document.getElementById('serviceNotes');
-const serviceCategory = document.getElementById('serviceCategory');
-const feedback = document.getElementById('feedback');
-const btnBack = document.getElementById('btnBack');
+const API_URL = "http://localhost:3000/api/servicos";
 
-// --- FUNÇÕES DE FEEDBACK ---
-function showFeedback(message, type = 'error') {
-  feedback.textContent = message;
-  feedback.style.color = type === 'error' ? 'red' : 'green';
-}
-
-function clearFeedback() {
-  feedback.textContent = '';
-}
-
-// --- VOLTAR ---
-btnBack?.addEventListener('click', () => {
-  window.history.back();
+document.getElementById("btnBack").addEventListener("click", () => {
+  location.href = "dashboard.html";
 });
 
-// --- CARREGAR CATEGORIAS ---
-async function loadCategories() {
-  clearFeedback();
-  try {
-    const token = localStorage.getItem("token");
-    const res = await fetch(`${API_URL}/categorias`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...(token && { "Authorization": `Bearer ${token}` })
-      }
-    });
+document.getElementById("serviceForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    if (!res.ok) throw new Error(`Erro ao buscar categorias: ${res.status}`);
-
-    const categorias = await res.json();
-
-    serviceCategory.innerHTML = '<option value="">Selecione a categoria</option>';
-    categorias.forEach(cat => {
-      const option = document.createElement('option');
-      option.value = cat.id_categoria;
-      option.textContent = cat.nome_categoria || cat.nome;
-      serviceCategory.appendChild(option);
-    });
-
-  } catch (err) {
-    console.error(err);
-    showFeedback("Não foi possível carregar categorias.");
-  }
-}
-
-// --- CADASTRAR SERVIÇO ---
-async function cadastrarServico() {
-  clearFeedback();
-
-  const nome_servico = serviceName.value.trim();
-  let custo_servico = servicePrice.value.trim();
-  const descricao = serviceNotes.value.trim();
-  const id_categoria_fk = parseInt(serviceCategory.value);
-  const estabelecimento = localStorage.getItem("estabelecimento_id");
-  const tempo_estipulado = 60;
-
-  // --- VALIDAÇÕES ---
-  if (!nome_servico) return showFeedback("Insira o nome do serviço!");
-  if (!custo_servico) return showFeedback("Insira o preço do serviço!");
-  if (!id_categoria_fk) return showFeedback("Selecione uma categoria!");
-  if (!estabelecimento) return showFeedback("Estabelecimento não logado!");
-
-  // Converter preço "250,00" -> 250.00
-  custo_servico = parseFloat(custo_servico.replace(",", "."));
-  if (isNaN(custo_servico)) return showFeedback("Preço inválido!");
+  const feedback = document.getElementById("feedback");
+  
+  // Coleta de dados dos inputs
+  const nome_servico = document.getElementById("nome_servico").value.trim();
+  const custo_servico = parseFloat(document.getElementById("custo_servico").value);
+  const tempo_estipulado = parseInt(document.getElementById("tempo_estipulado").value);
+  const descricao = document.getElementById("descricao").value.trim();
 
   try {
-    const token = localStorage.getItem("token");
-    const response = await fetch(`${API_URL}/servicos`, {
-      method: "POST",
+    const token = localStorage.getItem('token');
+
+    // Estrutura do body conforme seu Controller (req.body)
+    const bodyData = {
+      nome_servico,
+      custo_servico,
+      tempo_estipulado,
+      descricao: descricao || null,
+      id_categoria_fk: null // Você pode implementar um select de categorias depois
+    };
+
+    // Requisição POST conforme seu modelo solicitado
+    const response = await fetch(API_URL, {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        ...(token && { "Authorization": `Bearer ${token}` })
+        'Content-Type': 'application/json',
+        ...(token && { 'Authorization': `Bearer ${token}` })
       },
-      body: JSON.stringify({
-        nome_servico,
-        custo_servico,
-        descricao,
-        estabelecimento,
-        id_categoria_fk,
-        tempo_estipulado
-      })
+      body: JSON.stringify(bodyData)
     });
+
+    const result = await response.json();
 
     if (!response.ok) {
-      const err = await response.json().catch(() => ({}));
-      throw new Error(err.message || "Erro ao cadastrar serviço");
+      throw new Error(result.error || "Erro ao cadastrar serviço");
     }
 
-    showFeedback("Serviço cadastrado com sucesso!", "success");
-    setTimeout(() => serviceForm.reset(), 1000);
+    // Sucesso
+    feedback.style.color = "#4ade80";
+    feedback.textContent = "Serviço cadastrado com sucesso!";
+    
+    setTimeout(() => {
+      location.href = "dashboard.html";
+    }, 1500);
 
   } catch (err) {
     console.error(err);
-    showFeedback(err.message);
+    feedback.style.color = "#ff4b2b";
+    feedback.textContent = err.message;
   }
-}
-
-// --- EVENTOS ---
-serviceForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  cadastrarServico();
 });
-
-window.addEventListener('DOMContentLoaded', loadCategories);
