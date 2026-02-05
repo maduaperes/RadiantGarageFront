@@ -1,3 +1,6 @@
+
+
+
 <!doctype html>
 <html lang="pt-BR">
 
@@ -30,12 +33,9 @@
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
-        <span>|</span>
-      <div class="nav">
-        <a id="varbuttonId"></a>
-      </div>
+
       <div class="user">
-        <a id="login" href="login.html">Login</a>
+        <a href="login.html">Login</a>
       </div>
     </div>
   </header>
@@ -75,267 +75,17 @@
       </form>
     </aside>
 
-    <section class="service-results">
-      <h2>Serviços Disponíveis</h2>
+  <section class="service-results">
+  <h2>Serviços Disponíveis</h2>
+  <div id="servicesContainer"></div>
+</section>
 
-      <h2 class="category-title">Manutenção Mecânica</h2>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img
-          src="https://www.tecfil.com.br/wp-content/uploads/2020/09/galerias_tecfil-seo_0005_shutterstock_1457616980-1024x683.jpg"
-          alt="Manutenção do Motor">
-        <div class="service-info">
-          <h3>Manutenção do Motor</h3>
-          <h5>R$ 450</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Serviços de manutenção preventiva e corretiva do motor...</p>
-          <a href="servico.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img src="https://images.pexels.com/photos/12190245/pexels-photo-12190245.jpeg" alt="Transmissão e Câmbio">
-        <div class="service-info">
-          <h3>Transmissão e Câmbio</h3>
-          <h5>R$ 300</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Revisão e reparo de transmissões e câmbios...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img src="https://www.limpsom.com.br/imagens/artigos/big/freios-e-suspensao.jpg" alt="Freios e Suspensão">
-        <div class="service-info">
-          <h3>Freios e Suspensão</h3>
-          <h5>R$ 250</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Revisão e manutenção de freios e suspensão...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img src="https://blog.rbmotors.com.br/wp-content/uploads/2024/10/image-4.jpeg" alt="Sistema Elétrico">
-        <div class="service-info">
-          <h3>Sistema Elétrico</h3>
-          <h5>R$ 350</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Manutenção de fiação, baterias e componentes elétricos...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img
-          src="https://static.wixstatic.com/media/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg/v1/fill/w_568,h_320,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/ce3e3a_7ae148c82d6848168b6eda390cdbc4f0~mv2.jpg"
-          alt="Sistema de Escape">
-        <div class="service-info">
-          <h3>Sistema de Escape</h3>
-          <h5>R$ 500</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Reparo e manutenção do escapamento e catalisadores...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="manutencao e mecanica geral">
-        <img src="https://mobilidade.estadao.com.br/wp-content/uploads/2023/05/injecao.jpg" alt="Combustível e Injeção">
-        <div class="service-info">
-          <h3>Combustível e Injeção</h3>
-          <h5>R$ 550</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Revisão de bomba de combustível e sistema de injeção...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Ar e Climatização</h2>
-
-      <div class="service-card" data-category="ar e climatizacao">
-        <img
-          src="https://www.delphiautoparts.com/images/default-source/theme/compressor-.tmb-1920w.png?Culture=pt-BR&sfvrsn=2e7eb6e_5"
-          alt="Sistema de Ar e Climatização">
-        <div class="service-info">
-          <h3>Sistema de Ar e Climatização</h3>
-          <h5>R$ 400</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Revisão e manutenção de ar-condicionado e climatização...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Estética Automotiva</h2>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img
-          src="https://www.zuldigital.com.br/blog/wp-content/uploads/2021/11/shutterstock_1859193349_Easy-Resize.com_.jpg"
-          alt="Lavagem Simples">
-        <div class="service-info">
-          <h3>Lavagem Simples</h3>
-          <h5>R$ 80</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Limpeza básica e rápida do veículo...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu22XRNtKTw0VRj1eJejrFGebHoMkeV-jvGw&s"
-          alt="Lavagem Completa">
-        <div class="service-info">
-          <h3>Lavagem Completa</h3>
-          <h5>R$ 150</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Lavagem detalhada interna e externa...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img src="https://www.acquazero.com/wp-content/uploads/2020/09/2792649-1-scaled.jpg" alt="Lavagem a Seco">
-        <div class="service-info">
-          <h3>Lavagem a Seco</h3>
-          <h5>R$ 200</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Limpeza ecológica sem uso de água...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img src="https://wicar.com.br/wp-content/uploads/2021/08/polimento-automotivo.jpg" alt="Polimento">
-        <div class="service-info">
-          <h3>Polimento</h3>
-          <h5>R$ 100</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Restauração do brilho da pintura...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img
-          src="https://mecanicagarrett.com.br/wp-content/uploads/2020/12/qual-a-import%C3%A2ncia-de-encerar-o-carro.jpg"
-          alt="Enceramento">
-        <div class="service-info">
-          <h3>Enceramento</h3>
-          <h5>R$ 50</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Proteção e brilho da pintura...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica automotiva">
-        <img src="https://www.grupofoggiatto.com.br/wp-content/uploads/2023/04/bg6006f8911D8IJen2Me-scaled.jpeg"
-          alt="Vitrificação / Cristalização">
-        <div class="service-info">
-          <h3>Vitrificação / Cristalização</h3>
-          <h5>R$ 200</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Proteção avançada e brilho duradouro da pintura...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Interior e Conforto</h2>
-
-      <div class="service-card" data-category="interior e conforto">
-        <img src="https://www.simoniz.uk/wp-content/uploads/2025/03/iStock-2170601866.jpg" alt="Higienização Interna">
-        <div class="service-info">
-          <h3>Higienização Interna</h3>
-          <h5>R$ 100</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Limpeza completa do interior do veículo...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="interior e conforto">
-        <img src="https://www.detailingdevils.com/uploads/blogs/car-seat-clean.webp"
-          alt="Tratamento de Couro e Estofados">
-        <div class="service-info">
-          <h3>Tratamento de Couro e Estofados</h3>
-          <h5>R$ 150</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Manutenção e hidratação do estofado de couro...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Segurança e Direção</h2>
-
-      <div class="service-card" data-category="seguranca e direcao">
-        <img src="https://www.canaldapeca.com.br/blog/wp-content/uploads/2018/07/1_1.jpg" alt="Segurança e Direção">
-        <div class="service-info">
-          <h3>Segurança e Direção</h3>
-          <h5>R$ 450</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Manutenção de direção, airbags e sistemas de segurança...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Diagnóstico e Revisão</h2>
-
-      <div class="service-card" data-category="diagnostico e revisao">
-        <img src="https://images.pexels.com/photos/7541344/pexels-photo-7541344.jpeg" alt="Diagnóstico e Revisão Geral">
-        <div class="service-info">
-          <h3>Diagnóstico e Revisão Geral</h3>
-          <h5>R$ 600</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Check-up completo do veículo, diagnósticos eletrônicos e mecânicos...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <h2 class="category-title">Estética Externa</h2>
-
-      <div class="service-card" data-category="estetica externa">
-        <img src="https://blog.autoglassonline.com.br/wp-content/uploads/2023/07/polir-revitalizar-limpar-o-farol.png"
-          alt="Polimento de Faróis">
-        <div class="service-info">
-          <h3>Polimento de Faróis</h3>
-          <h5>R$ 50</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Recuperação da transparência dos faróis...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica externa">
-        <img src="https://suaoficinaonline.com.br/conteudo/content/images/2018/12/insulfilm.jpg"
-          alt="Proteção de Vidros">
-        <div class="service-info">
-          <h3>Proteção de Vidros</h3>
-          <h5>R$ 200</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Aplicação de películas e proteção de vidros...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-      <div class="service-card" data-category="estetica externa">
-        <img src="https://wrapguys.com/wp-content/uploads/2019/06/wrapping-vehicle.jpg"
-          alt="Películas e Detalhes Estéticos">
-        <div class="service-info">
-          <h3>Películas e Detalhes Estéticos</h3>
-          <h5>R$ 100</h5>
-          <p>Endereço: Centro - Rua Principal, 123</p>
-          <p>Aplicação de películas, adesivos e pequenos detalhes estéticos...</p>
-          <a href="detalhes.html">Ver mais</a>
-        </div>
-      </div>
-
-    </section>
 
   </main>
   <footer>
     <p>&copy; 2023 RadiantGarage. Todos os direitos reservados.</p>
   </footer>
   <script src="JS/procura.js"></script>
-  <script src="JS/script.js"></script>
 </body>
 
 </html>

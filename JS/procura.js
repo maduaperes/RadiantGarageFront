@@ -1,125 +1,76 @@
-// ------------------ MULTISELECT ------------------
-const selectBox = document.querySelector('.select-box');
-const optionsContainer = document.getElementById('optionsContainer');
-const selectedSpan = document.getElementById('selected');
-const checkboxes = document.querySelectorAll('#optionsContainer input[type="checkbox"]');
-const searchForm = document.querySelector('.search-filters form');
-const clearBtn = document.querySelector('.clear-btn');
+async function buscarServicos() {
+  try {
+    const token = localStorage.getItem("token");
 
-// Abre e fecha o dropdown
-if (selectBox && optionsContainer) {
-  selectBox.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    optionsContainer.classList.toggle('open');
-  });
+    const response = await fetch("http://localhost:3000/api/servicos", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        ...(token && { Authorization: `Bearer ${token}` })
+      }
+    });
 
-  document.addEventListener('click', () => {
-    optionsContainer.classList.remove('open');
-  });
+    if (!response.ok) {
+      if (response.status === 401) {
+        console.error("Não autorizado. Faça login.");
+        return;
+      }
+      throw new Error(`Erro ao buscar serviços: ${response.status}`);
+    }
 
-  optionsContainer.addEventListener('click', (e) => e.stopPropagation());
-}
+    const data = await response.json();
 
-// Atualiza seleção no span
-checkboxes.forEach((checkbox) => {
-  checkbox.addEventListener('change', () => {
-    atualizarSelecionados();
-    filtrarServicos();
-  });
-});
+    // 🔥 Garante que sempre será um array
+    const servicos = Array.isArray(data) ? data : data.servicos;
 
-function atualizarSelecionados() {
-  const selecionados = Array.from(checkboxes)
-    .filter(cb => cb.checked)
-    .map(cb => cb.parentNode.textContent.trim());
+    if (!Array.isArray(servicos)) {
+      throw new Error("Formato de dados inválido");
+    }
 
-  if (selecionados.length === 0) {
-    selectedSpan.textContent = 'Selecione os serviços';
-  } else if (selecionados.length <= 3) {
-    selectedSpan.textContent = selecionados.join(', ');
-  } else {
-    selectedSpan.textContent = selecionados.slice(0, 3).join(', ') + ` + ${selecionados.length - 3} outros`;
+    console.log("Serviços vindos do backend:", servicos);
+
+    renderizarServicos(servicos);
+
+  } catch (error) {
+    console.error("Erro na requisição GET:", error.message);
   }
 }
 
-function normalizarTexto(texto) {
-  return texto.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/_/g, ' ').trim();
-}
 
-// ------------------ FILTRO DE SERVIÇOS ------------------
+function renderizarServicos(servicos) {
+  const container = document.getElementById("servicesContainer");
 
-// Mapeamento de filtros -> categorias
-const filtroParaCategoria = {
-  'manutencao e mecanica geral': 'manutencao e mecanica geral',
-  'transmissao e cambio': 'manutencao e mecanica geral',
-  'freios e suspensao': 'manutencao e mecanica geral',
-  'sistema eletrico': 'manutencao e mecanica geral',
-  'sistema de escape': 'manutencao e mecanica geral',
-  'combustivel e injecao': 'manutencao e mecanica geral',
-  'revisao e diagnostico': 'manutencao e mecanica geral',
-  'personalizacao e acessorios': 'manutencao e mecanica geral',
-  'ar e climatizacao': 'ar e climatizacao',
-  'estetica automotiva': 'estetica automotiva',
-  'interior e conforto': 'interior e conforto',
-  'seguranca e direcao': 'seguranca e direcao',
-  'diagnostico e revisao': 'diagnostico e revisao',
-  'estetica externa': 'estetica externa'
-};
+  // 🔒 segurança pra evitar erro se o elemento não existir
+  if (!container) {
+    console.error("Elemento #servicesContainer não encontrado no HTML");
+    return;
+  }
 
-function filtrarServicos() {
-  // Pega filtros selecionados e transforma em categorias
-  const selecionados = Array.from(checkboxes)
-    .filter(cb => cb.checked)
-    .map(cb => normalizarTexto(cb.value))
-    .map(filtro => filtroParaCategoria[filtro]);
+  container.innerHTML = "";
 
-  const cards = document.querySelectorAll('.service-card');
-  const categorias = document.querySelectorAll('.category-title');
+  // 🔒 garante que é um array
+  if (!Array.isArray(servicos)) {
+    console.error("Resposta da API não é um array:", servicos);
+    return;
+  }
 
-  // Mostra ou esconde cards
-  cards.forEach(card => {
-    const categoria = normalizarTexto(card.dataset.category);
+  servicos.forEach(servico => {
+    const card = document.createElement("div");
+    card.classList.add("service-card");
 
-    if (selecionados.length === 0) {
-      card.style.display = 'flex';
-    } else {
-      const corresponde = selecionados.includes(categoria);
-      card.style.display = corresponde ? 'flex' : 'none';
-    }
-  });
+    card.innerHTML = `
+      <h3>${servico.nome ?? "Sem nome"}</h3>
+      <p>${servico.descricao ?? "Sem descrição"}</p>
+      <strong>R$ ${servico.preco ?? "0,00"}</strong>
+    `;
 
-  // Mostra ou esconde categorias
-  categorias.forEach(categoria => {
-    let cardsDaCategoria = [];
-    let next = categoria.nextElementSibling;
-    while (next && !next.classList.contains('category-title')) {
-      if (next.classList.contains('service-card')) cardsDaCategoria.push(next);
-      next = next.nextElementSibling;
-    }
-    const algumVisivel = cardsDaCategoria.some(card => card.style.display === 'flex');
-    categoria.style.display = algumVisivel ? 'block' : 'none';
+    container.appendChild(card);
   });
 }
 
-// ------------------ LIMPAR FILTROS ------------------
-if (clearBtn) {
-  clearBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    checkboxes.forEach(cb => cb.checked = false);
-    atualizarSelecionados();
-    if (searchForm) searchForm.reset();
-    filtrarServicos();
-  });
-}
+// 🚀 chama a função quando a página carregar
+document.addEventListener("DOMContentLoaded", () => {
+  buscarServicos();
+});
 
-// ------------------ SUBMIT FORM ------------------
-if (searchForm) {
-  searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    filtrarServicos();
-  });
-}
 
-// Inicializa mostrando todos
-filtrarServicos();
