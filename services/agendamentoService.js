@@ -1,34 +1,32 @@
 import { supabase } from '../config/supabase.js'
 
 export async function createAgendamento(userId, data) {
-  // valida se o cliente pertence ao usuário
-  const { data: cliente } = await supabase
+  // Pega o cliente logado pelo userId
+  const { data: cliente, error: clienteError } = await supabase
     .from('cliente')
     .select('id')
-    .eq('id', data.id_cliente)
     .eq('id_usuario', userId)
-    .single()
+    .single();
 
-  if (!cliente) {
-    throw new Error('Cliente não pertence ao usuário')
+  if (clienteError || !cliente) {
+    throw new Error('Cliente não identificado');
   }
 
   const { data: agendamento, error } = await supabase
     .from('agendamento')
     .insert({
       data_hora: data.data_hora,
-      id_cliente: data.id_cliente,
+      id_cliente: cliente.id,   // pega o cliente logado
       id_servico_fk: data.id_servico_fk,
-      status: data.status ?? 'pendente',
-      pagamento: data.pagamento ?? 'pendente',
+      pagamento: data.pagamento ?? 'dinheiro',
       observacao: data.observacao ?? null
     })
     .select()
-    .single()
+    .single();
 
-  if (error) throw error
+  if (error) throw error;
 
-  return agendamento
+  return agendamento;
 }
 
 export async function getAgendamentos(userId) {
@@ -72,7 +70,6 @@ export async function updateAgendamento(id, userId, data) {
     .from('agendamento')
     .update({
       data_hora: data.data_hora,
-      status: data.status,
       pagamento: data.pagamento,
       observacao: data.observacao
     })

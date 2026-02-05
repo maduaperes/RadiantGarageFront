@@ -17,7 +17,7 @@
         <span>RadiantGarage</span>
       </a>
     </div>
-
+ 
     <div class="search-box">
       <input type="text" placeholder="Pesquisar serviços" />
       <button type="button">🔍︎</button>
@@ -46,17 +46,6 @@
       <h2>Agendar Serviço</h2>
       <p class="subtitle">Preencha os campos abaixo para agendar o seu atendimento</p>
 
-      <div class="establishment-contact">
-        <h3>Contato do estabelecimento</h3>
-
-        <p><strong>Telefone:</strong> (11) 91234-5678</p>
-        <p><strong>Email:</strong> contato@radiantgarage.com</p>
-
-        <a href="tel:+5511912345678" class="contact-btn">
-          Entrar em contato
-        </a>
-      </div>
-
       <form id="agendamentoForm">
         <div class="col">
           <label for="data">Data:</label>
@@ -75,23 +64,10 @@
           <label for="pagamento">Forma de pagamento:</label>
           <select id="pagamento" required>
             <option value="">Selecione</option>
-            <option value="pix">Pix</option>
-            <option value="cartao">Cartão de crédito</option>
-            <option value="debito">Cartão de débito</option>
-            <option value="dinheiro">Dinheiro</option>
+            <option value="Pix">Pix</option>
+            <option value="Cartão">Cartão de crédito ou débito</option>
+            <option value="Dinheiro">Dinheiro</option>
           </select>
-        </div>
-
-        <div class="full-width">
-          <label for="servico">Serviço:</label>
-          <select id="servico" required>
-            <option value="manutencao_motor">Manutenção do Motor</option>
-          </select>
-        </div>
-
-        <div class="privacy">
-          <input type="checkbox" id="termos" required>
-          <label for="termos">Li e aceito os termos de uso e privacidade</label>
         </div>
 
         <div class="full-width buttons">

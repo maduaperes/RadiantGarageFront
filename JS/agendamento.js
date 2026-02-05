@@ -1,108 +1,80 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("agendamentoForm");
-  const feedback = document.getElementById("feedbackMessage");
-  const btnBack = document.getElementById("btnBack");
-  const selectServico = document.getElementById("servico");
-
-  // 🔑 Pegando o token do localStorage
-  const token = localStorage.getItem("token");
-
-  // 🔹 BOTÃO VOLTAR
+const btnBack = document.getElementById("btnBack");
+if (btnBack) {
   btnBack.addEventListener("click", () => {
-    window.history.back();
+    window.history.back(); // volta para a página anterior
   });
+}
 
-  // 🔹 Se não houver token, bloqueia a página
-  if (!token) {
-    feedback.textContent = "Usuário não autenticado. Faça login novamente.";
-    feedback.style.color = "#f87171";
+
+// Pega ID do serviço da URL
+function getServiceIdFromURL() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get("id");
+}
+
+const agendamentoForm = document.getElementById("agendamentoForm");
+const feedbackMessage = document.getElementById("feedbackMessage");
+
+async function enviarAgendamento(event) {
+  event.preventDefault();
+
+  const serviceId = getServiceIdFromURL();
+  if (!serviceId) {
+    feedbackMessage.textContent = "Serviço não identificado.";
+    feedbackMessage.style.color = "red";
     return;
   }
 
-  // 🔹 FUNÇÃO PARA CARREGAR SERVIÇOS
-  async function carregarServicos() {
-    try {
-      const response = await fetch("http://localhost:3000/api/servicos", {
-        method: "GET",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error("Erro ao buscar serviços");
-      }
-
-      const servicos = await response.json();
-
-      // Limpa opções antigas
-      selectServico.innerHTML = '<option value="">Selecione um serviço</option>';
-
-      servicos.forEach((servico) => {
-        const option = document.createElement("option");
-        option.value = servico.id;
-        option.textContent = servico.nome;
-        selectServico.appendChild(option);
-      });
-    } catch (error) {
-      console.error(error);
-      feedback.textContent = "Erro ao carregar serviços.";
-      feedback.style.color = "#f87171";
-    }
+  const token = localStorage.getItem("token");
+  if (!token) {
+    alert("Você precisa estar logado para agendar.");
+    window.location.href = "login.html";
+    return;
   }
 
-  carregarServicos();
+  const data = document.getElementById("data").value;
+  const hora = document.getElementById("hora").value;
+  const observacao = document.getElementById("observacoes").value;
+  const pagamento = document.getElementById("pagamento").value;
 
-  // 🔹 SUBMIT DO AGENDAMENTO
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  if (!data || !hora || !pagamento) {
+    feedbackMessage.textContent = "Data, hora e forma de pagamento são obrigatórios.";
+    feedbackMessage.style.color = "red";
+    return;
+  }
 
-    const data = document.getElementById("data").value;
-    const hora = document.getElementById("hora").value;
-    const observacoes = document.getElementById("observacoes").value;
-    const pagamento = document.getElementById("pagamento").value;
-    const servico_id = selectServico.value;
-    const termos = document.getElementById("termos").checked;
+  const dataHora = new Date(`${data}T${hora}:00`).toISOString();
 
-    if (!data || !hora || !pagamento || !servico_id) {
-      feedback.textContent = "Por favor, preencha todos os campos obrigatórios.";
-      feedback.style.color = "#f87171";
-      return;
-    }
+  try {
+    // Envia o POST sem id_cliente, backend pega do token
+    const response = await fetch("http://localhost:3000/api/agendamentos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        data_hora: dataHora,
+        id_servico_fk: serviceId,
+        pagamento,
+        observacao
+      })
+    });
 
-    if (!termos) {
-      feedback.textContent = "Você precisa aceitar os termos de uso e privacidade.";
-      feedback.style.color = "#f87171";
-      return;
-    }
+    const result = await response.json();
 
-    const agendamento = { data, hora, observacoes, pagamento, servico_id };
+    if (!response.ok) throw new Error(result.error || "Erro ao agendar serviço");
 
-    try {
-      const response = await fetch("http://localhost:3000/api/agendamentos", {
-        method: "POST",
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(agendamento),
-      });
+    feedbackMessage.textContent = "Agendamento realizado com sucesso!";
+    feedbackMessage.style.color = "green";
+    agendamentoForm.reset();
 
-      if (!response.ok) {
-        throw new Error("Erro ao realizar o agendamento");
-      }
+  } catch (error) {
+    feedbackMessage.textContent = error.message;
+    feedbackMessage.style.color = "red";
+    console.error("Erro ao enviar agendamento:", error);
+  }
+}
 
-      feedback.textContent = "Agendamento realizado com sucesso!";
-      feedback.style.color = "#4ade80";
-
-      setTimeout(() => {
-        window.location.href = "procura.html";
-      }, 1000);
-    } catch (error) {
-      console.error(error);
-      feedback.textContent = "Erro ao conectar com o servidor.";
-      feedback.style.color = "#f87171";
-    }
-  });
-});
+// Listener do formulário
+agendamentoForm.addEventListener("submit", enviarAgendamento);
