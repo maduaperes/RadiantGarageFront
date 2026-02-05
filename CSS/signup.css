@@ -295,13 +295,24 @@ input:-webkit-autofill {
 }
 
 .feedback-message {
-  margin-top: 20px;
+  display: none;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 4px;
   text-align: center;
-  font-size: 13px;
-  min-height: 1.2em;
-  color: #4ade80;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: bold;
+}
+
+/* Esta classe DEVE ser vermelha */
+.feedback-message.error {
+  display: block;
+  color: #cc0033;
+}
+
+/* Esta classe DEVE ser verde */
+.feedback-message.success {
+  display: block;
+  color: #2e7d32;
 }
 
 footer {

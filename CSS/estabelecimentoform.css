@@ -1,0 +1,424 @@
+/* ==========================
+   Reset e base
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    /* Sempre reserva espaço para a barra de rolagem vertical */
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(180deg, #0b1220, #111827);
+    color: #e6eef8;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================
+   HEADER
+========================== */
+header.header {
+    display: flex;
+    align-items: center;
+    /* Alinha Logo na esquerda e o right-group na direita */
+    justify-content: flex-start;
+    padding: 0.35rem 1rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    top: 0;
+    z-index: 10;
+    flex-wrap: wrap;
+    min-height: 48px;
+    /* Essencial para o posicionamento absoluto da busca */
+    position: relative;
+}
+
+/* 1. LOGO: Posição Esquerda */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1.2rem;
+    font-weight: normal;
+    flex: 0 0 auto;
+    /* Não cresce */
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+.logo span {
+    font-weight: bold;
+}
+
+.logo-icon {
+    font-size: 1.3rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 2. SEARCH-BOX: Centralização Absoluta no Meio */
+.search-box {
+    /* CHAVE: Centralização Perfeita */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 1;
+    /* Garante que fique sobre outros elementos */
+}
+
+.search-box input {
+    height: 28px;
+    width: 350px;
+    padding: 0 32px 0 8px;
+    font-size: 0.8rem;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.08);
+    color: #e6eef8;
+    transition: background 0.2s ease;
+}
+
+.search-box input::placeholder {
+    color: #94a3b8;
+}
+
+.search-box input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.search-box button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.search-box button:hover {
+    color: #fff;
+}
+
+/* 3. NOVO: CONTAINER AGRUPADOR NA EXTREMA DIREITA */
+.right-group {
+    display: flex;
+    align-items: center;
+    /* Espaço entre o menu NAV e o botão USER */
+    gap: 1.5rem;
+    /* CHAVE: Empurra o grupo inteiro o máximo possível para a direita */
+    margin-left: auto;
+    z-index: 2;
+}
+
+/* 4. NAV: Agrupamento de Links DENTRO do right-group */
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    font-size: 0.85rem;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav a:hover {
+    transform: translateY(-2px);
+    color: #aaa;
+}
+
+.nav span {
+    margin: 0 0.2rem;
+}
+
+/* 5. USER (Login): DENTRO do right-group */
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.user a {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    color: #fff;
+    background: #413ba7;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Card */
+.card {
+    width: 100%;
+    max-width: 600px;
+    padding: 50px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.35);
+    animation: fadeIn 0.6s ease;
+    color: #e6eef8;
+    margin: 0 auto;
+    margin-top: 10%;
+}
+
+/* Título */
+h2 {
+    margin-bottom: 8px;
+    font-size: 1.6rem;
+    text-align: center;
+    color: #fff;
+}
+
+/* Sub-título */
+p.subtitle {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    text-align: center;
+    color: #94a3b8;
+}
+
+/* Labels */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+/* Inputs */
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin-top: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    color: #e6eef8;
+    font-size: 0.95rem;
+    transition: background 0.25s ease, box-shadow 0.25s ease;
+}
+
+input::placeholder {
+    color: #94a3b8;
+}
+
+input:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* Botão primário */
+.primary {
+    margin-top: 18px;
+    background: #413ba7;
+    border: 0;
+    padding: 14px;
+    border-radius: 12px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Texto "muted" */
+.muted {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 14px;
+    transition: color 0.3s;
+}
+
+.muted a {
+    color: #2153f5;
+    text-decoration: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-left: 2px;
+    cursor: pointer;
+    border: none;
+}
+
+.muted a:hover {
+    transform: translateY(-2px);
+    color: #3d6aff;
+}
+
+/* Corrige o autofill do navegador para inputs (especialmente em Chrome) */
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
+    box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.07) inset !important;
+    -webkit-text-fill-color: #e6eef8 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.feedback-message {
+    display: none;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Esta classe DEVE ser vermelha */
+.feedback-message.error {
+    display: block;
+    color: #cc0033;
+}
+
+/* Esta classe DEVE ser verde */
+.feedback-message.success {
+    display: block;
+    color: #2e7d32;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.85rem;
+    background: rgba(255, 255, 255, 0.04);
+    color: #94a3b8;
+    margin-top: auto;
+}
+
+.back {
+    top: 16px;
+    left: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: -2px;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255, 255, 255, 0.07);
+    color: #e6eef8;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.12);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #94a3b8;
+    opacity: 1;
+}
+
+/* Animação de fadeIn */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+
+    header.header {
+        flex-direction: column;
+        padding: 1rem;
+        height: auto;
+    }
+
+    .logo {
+        margin-left: 0;
+        margin-bottom: 1rem;
+    }
+
+    .search-box {
+        position: relative;
+        left: 0;
+        transform: none;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+    .right-group {
+        width: 100%;
+        justify-content: space-between;
+        margin-left: 0;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+}
