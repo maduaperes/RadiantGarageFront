@@ -4,9 +4,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Escolha de Conta - RadiantGarage</title>
-    <link rel="stylesheet" href="CSS/tipodeconta.css">
+    <title>Cadastro - RadiantGarage</title>
+    <link rel="stylesheet" href="CSS/signup.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -31,39 +32,34 @@
             </nav>
 
             <div class="user">
-                <a href="profile.html">Perfil</a>
+                <a href="login.html">Login</a>
             </div>
         </div>
     </header>
 
     <main class="card">
         <div class="back" id="btnBack">↩</div>
+        <h2>Cadastro Cliente</h2>
+        <p class="subtitle">Preencha os campos abaixo para finalizar o cadastro.</p>
+        <form id="signupForm">
+            <label for="nome">Nome Completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo">
 
-        <h2>Tipo de Conta</h2>
-        <p class="subtitle">Escolha como deseja se cadastrar</p>
+            <label for="cpf">CPF</label>
+            <input type="text" id="cpf" placeholder="000.000.000-00" maxlength="14">
 
-        <div class="account-options">
+            <button class="primary" type="submit">Finalizar Cadastro</button>
+        </form>
 
-
-            <a href="clienteform.html" class="account-card">
-                <h3>Cliente</h3>
-                <p>Quero contratar serviços para meu veículo</p>
-            </a>
-
-            <a href="estabelecimentoform.html" class="account-card">
-                <h3>Estabelecimento</h3>
-                <p>Quero oferecer serviços automotivos</p>
-            </a>
-
-        </div>
         <div id="feedback" class="feedback-message"></div>
+
     </main>
 
     <footer>
         <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
     </footer>
 
-    <script src="JS/tipodeconta.js"></script>
+    <script src="JS/clienteform.js"></script>
 </body>
 
 </html>

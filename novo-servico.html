@@ -43,13 +43,21 @@
       <p class="subtitle">Cadastre um novo serviço de veículo.</p>
 
       <label for="serviceName">Nome do Serviço</label>
-      <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor">
+      <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor" required>
 
       <label for="serviceCategory">Categoria</label>
       <input type="text" id="serviceCategory" placeholder="Ex: Manutenção">
 
-      <label for="servicePrice">Preço (R$)</label>
-      <input type="text" id="servicePrice" placeholder="Ex: 250,00">
+      <div style="display: flex; gap: 15px;">
+        <div style="flex: 1;">
+          <label for="servicePrice">Preço (R$)</label>
+          <input type="text" id="servicePrice" placeholder="Ex: 250,00">
+        </div>
+        <div style="flex: 1;">
+          <label for="serviceDuration">Tempo Estimado</label>
+          <input type="text" id="serviceDuration" placeholder="Ex: 2h 30min">
+        </div>
+      </div>
 
       <label for="serviceNotes">Descrição</label>
       <textarea id="serviceNotes" placeholder="Informações adicionais sobre o serviço"></textarea>
