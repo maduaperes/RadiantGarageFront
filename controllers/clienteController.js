@@ -39,6 +39,23 @@ export async function listarClienteId(req, res) {
   }
 }
 
+export async function listarClienteLogado(req, res) {
+  try {
+    const clientes = await clienteService.getClientes(req.user.id);
+
+    if (!clientes || clientes.length === 0) {
+      return res.status(404).json({ error: "Cliente não encontrado" });
+    }
+
+    // pega o primeiro cliente do usuário
+    return res.json(clientes[0]);
+
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+}
+
+
 export async function atualizarCliente(req, res) {
   try {
     const cliente = await clienteService.updateCliente(

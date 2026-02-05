@@ -1,22 +1,20 @@
 import * as agendamentoService from '../services/agendamentoService.js'
 
 export async function criarAgendamento(req, res) {
-  const { data_hora, id_cliente, id_servico_fk, status, pagamento } = req.body
+  const { data_hora, id_servico_fk, pagamento, observacao } = req.body;
 
-  if (!data_hora || !id_cliente || !id_servico_fk) {
-    return res.status(400).json({
-      error: 'Data, cliente e serviço são obrigatórios'
-    })
+  if (!data_hora || !id_servico_fk) {
+    return res.status(400).json({ error: 'Data e serviço são obrigatórios' });
   }
 
   try {
     const agendamento = await agendamentoService.createAgendamento(
       req.user.id,
-      req.body
-    )
-    return res.status(201).json(agendamento)
+      { data_hora, id_servico_fk, pagamento, observacao }
+    );
+    return res.status(201).json(agendamento);
   } catch (err) {
-    return res.status(400).json({ error: err.message })
+    return res.status(400).json({ error: err.message });
   }
 }
 
@@ -53,7 +51,7 @@ export async function atualizarAgendamento(req, res) {
     return res.status(400).json({ error: err.message })
   }
 }
-
+ 
 export async function deletarAgendamento(req, res) {
   try {
     const result = await agendamentoService.deleteAgendamento(

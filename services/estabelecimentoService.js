@@ -31,6 +31,23 @@ export async function getEstabelecimentos(userId) {
   return data
 }
 
+export async function getByUserId(userId) {
+  const { data, error } = await supabase
+    .from("estabelecimento")
+    .select("id")
+    .eq("id_usuario", userId)
+    .maybeSingle()
+
+  if (error) {
+    console.error(error)
+    throw new Error("Erro ao buscar estabelecimento")
+  }
+
+  return data 
+}
+
+
+
 export async function getEstabelecimentoById(id, userId) {
   const { data, error } = await supabase
     .from('estabelecimento')

@@ -1,126 +1,86 @@
-// ==========================================
-// 1. RENDERIZAÇÃO DO HISTÓRICO DE SERVIÇOS
-// ==========================================
-const historyData = [
-    { servico: "Lavagem Completa", data: "05/10/2025", preco: "R$ 60,00", status: "concluido" },
-    { servico: "Polimento", data: "29/09/2025", preco: "R$ 120,00", status: "concluido" },
-    { servico: "Higienização Interna", data: "15/09/2025", preco: "R$ 80,00", status: "concluido" },
-];
+const API = "http://localhost:3000/api";
 
-const historyContainer = document.getElementById("history");
+const userName = document.getElementById("userName");
+const userContact = document.getElementById("userContact");
+const agendamentosContainer = document.getElementById("agendamentos");
 
-if (historyContainer) {
-    if (historyData.length > 0) {
-        historyContainer.innerHTML = historyData
-            .map(item => `
-                <div class="history-item">
-                    <p><strong>${item.servico}</strong> - ${item.data}</p>
-                    <p style="font-size: 0.8rem; color: #94a3b8;">Valor: ${item.preco}</p>
-                    <span class="status ${item.status}">${item.status.charAt(0).toUpperCase() + item.status.slice(1)}</span>
-                </div>
-            `).join("");
-    } else {
-        historyContainer.innerHTML = "<p style='font-size: 0.85rem; color: #94a3b8;'>Nenhum serviço encontrado.</p>";
-    }
+const token = localStorage.getItem("token");
+
+// Redireciona para login se não tiver token
+if (!token) {
+  window.location.href = "login.html";
 }
 
-// ==========================================
-// 2. SELEÇÃO DE ELEMENTOS (MODAIS E BOTÕES)
-// ==========================================
-const editModal = document.getElementById("editModal");
-const passwordModal = document.getElementById("passwordModal");
-const vehicleModal = document.getElementById("vehicleModal");
+// Função para carregar perfil do cliente
+async function carregarPerfil() {
+  try {
+    // Buscar dados do cliente logado
+    const resCliente = await fetch(`${API}/clientes/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
 
-const editBtn = document.getElementById("editProfileBtn");
-const passwordBtn = document.getElementById("changePasswordBtn");
-const addVehicleBtn = document.querySelector(".vehicles-section .btn-primary");
+    if (!resCliente.ok) throw new Error("Não foi possível carregar os dados do cliente");
 
-// ==========================================
-// 3. CONTROLE DE ABERTURA DOS MODAIS
-// ==========================================
-if (editBtn) editBtn.onclick = () => editModal.classList.remove("hidden");
-if (passwordBtn) passwordBtn.onclick = () => passwordModal.classList.remove("hidden");
-if (addVehicleBtn) addVehicleBtn.onclick = () => vehicleModal.classList.remove("hidden");
+    const cliente = await resCliente.json();
 
-// ==========================================
-// 4. CONTROLE DE FECHAMENTO (BOTÕES CANCELAR)
-// ==========================================
-document.getElementById("cancelEdit").onclick = () => fecharModal(editModal);
-document.getElementById("cancelPassword").onclick = () => fecharModal(passwordModal);
-document.getElementById("cancelVehicle").onclick = () => fecharModal(vehicleModal);
+    // Renderizar nome e CPF
+    userName.textContent = cliente.nome_cliente;
+    userContact.textContent = `CPF: ${cliente.cpf}`;
 
-// Fechar ao clicar fora do conteúdo branco do modal
-window.onclick = (event) => {
-    if (event.target == editModal) fecharModal(editModal);
-    if (event.target == passwordModal) fecharModal(passwordModal);
-    if (event.target == vehicleModal) fecharModal(vehicleModal);
-};
-
-function fecharModal(modal) {
-    modal.classList.add("hidden");
-}
-
-// ==========================================
-// 5. AÇÕES DE SALVAR
-// ==========================================
-
-// Salvar Perfil
-document.getElementById("saveEdit").onclick = () => {
-    const nameInput = document.getElementById("editName").value.trim();
-    const emailInput = document.getElementById("editEmail").value.trim();
-
-    if (nameInput) document.getElementById("userName").textContent = nameInput;
-    if (emailInput) document.getElementById("userContact").textContent = emailInput;
-
-    document.getElementById("editName").value = "";
-    document.getElementById("editEmail").value = "";
-    fecharModal(editModal);
-};
-
-// Alterar Senha
-document.getElementById("savePassword").onclick = () => {
-    const newPass = document.getElementById("newPassword").value;
-
-    if (newPass.length < 6) {
-        alert("A nova senha deve ter pelo menos 6 caracteres.");
-        return;
-    }
+    // Agora carregar os agendamentos do cliente
+    await carregarAgendamentos(cliente.id);
     
-    alert("Senha alterada com sucesso!");
-    document.getElementById("oldPassword").value = "";
-    document.getElementById("newPassword").value = "";
-    fecharModal(passwordModal);
-};
-
-// Adicionar Veículo
-document.getElementById("saveVehicle").onclick = () => {
-    const model = document.getElementById("carModel").value.trim();
-    const plate = document.getElementById("carPlate").value.trim();
-
-    if (!model || !plate) {
-        alert("Preencha todos os campos do veículo.");
-        return;
-    }
-
-    const vehicleList = document.querySelector(".vehicles-section .history-list");
-    const novoVeiculo = document.createElement("div");
-    novoVeiculo.className = "history-item";
-    novoVeiculo.innerHTML = `
-        <p><strong>${model}</strong> - ${plate}</p>
-        <span class="status concluido">Ativo</span>
-    `;
-
-    vehicleList.appendChild(novoVeiculo);
-    document.getElementById("carModel").value = "";
-    document.getElementById("carPlate").value = "";
-    fecharModal(vehicleModal);
-};
-
-// ==========================================
-// 6. FUNÇÃO DE LOGOUT
-// ==========================================
-function logout() {
-    if (confirm("Deseja realmente sair da conta?")) {
-        window.location.href = "login.html";
-    }
+  } catch (err) {
+    console.error(err);
+    userName.textContent = "Erro ao carregar perfil";
+    userContact.textContent = "";
+  }
 }
+
+// Função para carregar agendamentos
+async function carregarAgendamentos(idCliente) {
+  try {
+    const resAgend = await fetch(`${API}/agendamentos/me`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (!resAgend.ok) throw new Error("Não foi possível carregar os agendamentos");
+
+    const agendamentos = await resAgend.json();
+
+    agendamentosContainer.innerHTML = "";
+
+    if (agendamentos.length === 0) {
+      agendamentosContainer.innerHTML = "<p>Nenhum agendamento encontrado.</p>";
+      return;
+    }
+
+    agendamentos.forEach(a => {
+      const div = document.createElement("div");
+      div.classList.add("history-item");
+      div.innerHTML = `
+        <p><strong>Data:</strong> ${new Date(a.data_hora).toLocaleString('pt-BR')}</p>
+        <p><strong>Status:</strong> ${a.status}</p>
+        <p><strong>Pagamento:</strong> ${a.pagamento}</p>
+        ${a.observacao ? `<p><strong>Observação:</strong> ${a.observacao}</p>` : ""}
+      `;
+      agendamentosContainer.appendChild(div);
+    });
+
+  } catch (err) {
+    console.error(err);
+    agendamentosContainer.innerHTML = "<p>Erro ao carregar agendamentos.</p>";
+  }
+}
+
+// Logout
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "login.html";
+}
+
+document.addEventListener("DOMContentLoaded", carregarPerfil);

@@ -7,8 +7,9 @@ const router = Router()
 router.use(authMiddleware)
 
 router.get('/', agendamentoController.listarAgendamentos)
-router.post('/', agendamentoController.criarAgendamento)
+router.post('/', agendamentoController.criarAgendamento);
 router.put('/:id', agendamentoController.atualizarAgendamento)
 router.delete('/:id', agendamentoController.deletarAgendamento)
 
 export default router
+ 
