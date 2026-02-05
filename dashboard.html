@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +7,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="CSS/dashboard.css">
 </head>
-
 <body>
   <header class="header">
     <div class="logo">
@@ -29,24 +27,20 @@
         <span>|</span>
         <a href="novo-endereco.html">Novo Endereço</a>
       </nav>
-        <span>|</span>
-      <div class="nav">
-        <a id="varbuttonId"></a>
-      </div>
+      <span>|</span>
       <div class="user">
-        <a id="login" href="login.html">Login</a>
+        <a id="login" href="login.html">Sair</a>
       </div>
     </div>
   </header>
 
   <main class="dashboard">
-
     <section class="profile-overview">
       <div class="profile-card">
         <div class="profile-info">
-          <h2>Olá, Oficina Central</h2>
-          <p><strong>Endereço:</strong> Rua das Engrenagens, 123 - São Paulo, SP</p>
-          <p><strong>Contato:</strong> (11) 98888-7777 | contato@radiantgarage.com.br</p>
+          <h2 id="nomeOficina">Carregando perfil...</h2>
+          <p><strong>Endereço:</strong> <span id="endOficina">---</span></p>
+          <p><strong>Contato:</strong> <span id="contatoOficina">---</span></p>
         </div>
         <div class="profile-actions">
           <a href="profile.html" class="btn-secondary">Editar Perfil</a>
@@ -58,7 +52,6 @@
     <hr class="divider">
 
     <section class="cards-grid">
-
       <div class="card">
         <div class="card-header">
           <h3>Serviços Cadastrados</h3>
@@ -67,27 +60,7 @@
         <p class="card-description">Gerencie os serviços oferecidos pela sua oficina.</p>
 
         <ul id="listServicos" class="list-items">
-          <li>
-            <span>Troca de Óleo</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=1" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Troca de Óleo')">Remover</button>
-            </div>
-          </li>
-          <li>
-            <span>Alinhamento e Balanceamento</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=2" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Alinhamento')">Remover</button>
-            </div>
-          </li>
-          <li>
-            <span>Revisão de Freios</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=3" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Freios')">Remover</button>
-            </div>
-          </li>
+          <li>Carregando serviços...</li>
         </ul>
       </div>
 
@@ -96,40 +69,16 @@
         <p class="card-description">Acompanhe os agendamentos realizados pelos clientes.</p>
 
         <ul id="listAgendamentos" class="list-items">
-          <li>
-            <span><strong>05/10</strong> - João Silva - Motor</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-            </div>
-          </li>
-          <li>
-            <span><strong>17/10</strong> - Maria Souza - Injeção</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-
-            </div>
-          </li>
-          <li>
-            <span><strong>26/10</strong> - Carlos Oliveira - Lavagem</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-
-            </div>
-          </li>
+          <li>Carregando agendamentos...</li>
         </ul>
       </div>
-
     </section>
-
   </main>
-
-  <script src="JS/dashboard.js"></script>
 
   <footer>
     <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
   </footer>
 
-  <script src="JS/script.js"></script>
+  <script src="JS/dashboard.js"></script>
 </body>
-
 </html>

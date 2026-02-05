@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,7 +7,6 @@
     <link rel="stylesheet" href="CSS/tipodeconta.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <header class="header">
         <div class="logo">
@@ -17,12 +15,6 @@
                 <span>RadiantGarage</span>
             </a>
         </div>
-
-        <div class="search-box">
-            <input type="text" placeholder="Pesquisar serviços" />
-            <button type="button">🔍︎</button>
-        </div>
-
         <div class="right-group">
             <nav class="nav">
                 <a href="index.html">Home</a>
@@ -36,22 +28,20 @@
         <div class="back" id="btnBack">↩</div>
 
         <h2>Tipo de Conta</h2>
-        <p class="subtitle">Escolha como deseja se cadastrar</p>
+        <p class="subtitle">Escolha como deseja se cadastrar para continuar</p>
 
         <div class="account-options">
-
-
-            <a href="clienteform.html" class="account-card">
+            <a href="clienteform.html" class="account-card" data-type="cliente">
                 <h3>Cliente</h3>
                 <p>Quero contratar serviços para meu veículo</p>
             </a>
 
-            <a href="estabelecimentoform.html" class="account-card">
+            <a href="estabelecimentoform.html" class="account-card" data-type="estabelecimento">
                 <h3>Estabelecimento</h3>
                 <p>Quero oferecer serviços automotivos</p>
             </a>
-
         </div>
+        
         <div id="feedback" class="feedback-message"></div>
     </main>
 
@@ -60,8 +50,5 @@
     </footer>
 
     <script src="JS/tipodeconta.js"></script>
-    <script src="JS/script.js"></script>
-
 </body>
-
 </html>

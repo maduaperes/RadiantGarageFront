@@ -1,85 +1,48 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Novo Serviço - RadiantGarage</title>
-  <link rel="stylesheet" href="CSS/novo-servico.css"> <!-- Mesmo CSS dos outros formulários -->
+  <link rel="stylesheet" href="CSS/novo-serviço.css">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <header class="header">
     <div class="logo">
-      <a href="index.html" class="logo-link">
-        <div class="logo-icon"></div>
-        <span>RadiantGarage</span>
-      </a>
+      <div class="logo-icon"></div>
+      <span>RadiantGarage</span>
     </div>
-
-    <div class="search-box">
-      <input type="text" placeholder="Pesquisar serviços" />
-      <button type="button">🔍︎</button>
-    </div>
-
-    <div class="right-group">
-      <nav class="nav">
-        <a href="index.html">Home</a>
-        <span>|</span>
-        <a href="procura.html">Serviços</a>
-      </nav>
-        <span>|</span>
-      <div class="nav">
-        <a id="varbuttonId"></a>
-      </div>
-      <div class="user">
-        <a id="login" href="login.html">Login</a>
-      </div>
-      </div>
-    </div>
+    <nav class="nav">
+      <a href="dashboard.html">Dashboard</a>
+    </nav>
   </header>
 
-  <main class="card">
-    <form id="serviceForm">
+  <main class="main-content">
+    <div class="card">
       <div class="back" id="btnBack">↩</div>
       <h2>Novo Serviço</h2>
-      <p class="subtitle">Cadastre um novo serviço de veículo.</p>
+      <p class="subtitle">Cadastre um serviço vinculado à sua oficina</p>
 
-      <label for="serviceName">Nome do Serviço</label>
-      <input type="text" id="serviceName" placeholder="Ex: Manutenção do Motor" required>
+      <form id="serviceForm">
+        <label for="nome_servico">Nome do Serviço</label>
+        <input type="text" id="nome_servico" placeholder="Ex: Manutenção de Freio" required>
 
-      <label for="text">Categoria</label>
-      <select id="serviceCategory">
-      <option value="">Selecione a categoria</option>
-      </select>
+        <label for="custo_servico">Custo do Serviço (R$)</label>
+        <input type="number" id="custo_servico" step="0.01" placeholder="Ex: 250.00" required>
 
-      <div style="display: flex; gap: 15px;">
-        <div style="flex: 1;">
-          <label for="servicePrice">Preço (R$)</label>
-          <input type="text" id="servicePrice" placeholder="Ex: 250,00">
-        </div>
-        <div style="flex: 1;">
-          <label for="serviceDuration">Tempo Estimado</label>
-          <input type="text" id="serviceDuration" placeholder="Ex: 2h 30min">
-        </div>
-      </div>
+        <label for="tempo_estipulado">Tempo Estimado (minutos)</label>
+        <input type="number" id="tempo_estipulado" placeholder="Ex: 60" required>
 
-      <label for="serviceNotes">Descrição</label>
-      <textarea id="serviceNotes" placeholder="Informações adicionais sobre o serviço"></textarea>
+        <label for="descricao">Descrição</label>
+        <textarea id="descricao" rows="4" placeholder="Detalhes do serviço..."></textarea>
 
-      <button type="submit" class="primary">Salvar Serviço</button>
-    </form>
-
-    <div id="feedback" class="feedback-message"></div>
+        <button type="submit" class="primary">Salvar no Sistema</button>
+      </form>
+      <div id="feedback" class="feedback-message"></div>
+    </div>
   </main>
 
-  <footer>
-    <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
-  </footer>
-
   <script src="JS/novo-servico.js"></script>
-  <script src="JS/script.js"></script>
 </body>
-
 </html>
