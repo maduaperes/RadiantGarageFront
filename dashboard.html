@@ -41,51 +41,89 @@
 
   <main class="dashboard">
 
-    <!-- TEXTO DE BOAS-VINDAS -->
-    <section class="dashboard-intro">
-      <h2>Bem-vindo ao painel da RadiantGarage</h2>
-      <p>
-        Aqui você pode gerenciar os principais recursos do sistema de forma rápida e prática.
-        Utilize as opções abaixo para cadastrar novos serviços ou acompanhar os agendamentos
-        realizados pelos clientes.
-      </p>
+    <section class="profile-overview">
+      <div class="profile-card">
+        <div class="profile-info">
+          <h2>Olá, Oficina Central</h2>
+          <p><strong>Endereço:</strong> Rua das Engrenagens, 123 - São Paulo, SP</p>
+          <p><strong>Contato:</strong> (11) 98888-7777 | contato@radiantgarage.com.br</p>
+        </div>
+        <div class="profile-actions">
+          <a href="profile.html" class="btn-secondary">Editar Perfil</a>
+          <a href="novo-endereco.html" class="btn-secondary">Mudar Endereço</a>
+        </div>
+      </div>
     </section>
 
-    <!-- CARDS DE AÇÃO -->
+    <hr class="divider">
+
     <section class="cards-grid">
 
       <div class="card">
-        <h3>Cadastrar Serviço</h3>
-        <p>
-          Adicione novos serviços disponíveis para os clientes,
-          definindo descrição, tipo e demais informações.
-        </p>
-
-        <div class="card-actions">
-          <a href="novo-servico.html" class="btn-primary">
-            Novo Serviço
-          </a>
+        <div class="card-header">
+          <h3>Serviços Cadastrados</h3>
+          <a href="novo-servico.html" class="btn-add">+ Novo</a>
         </div>
+        <p class="card-description">Gerencie os serviços oferecidos pela sua oficina.</p>
+
+        <ul id="listServicos" class="list-items">
+          <li>
+            <span>Troca de Óleo</span>
+            <div class="actions-group">
+              <a href="editar-servico.html?id=1" class="btn-edit">Alterar</a>
+              <button class="btn-delete" onclick="confirmDelete('Troca de Óleo')">Remover</button>
+            </div>
+          </li>
+          <li>
+            <span>Alinhamento e Balanceamento</span>
+            <div class="actions-group">
+              <a href="editar-servico.html?id=2" class="btn-edit">Alterar</a>
+              <button class="btn-delete" onclick="confirmDelete('Alinhamento')">Remover</button>
+            </div>
+          </li>
+          <li>
+            <span>Revisão de Freios</span>
+            <div class="actions-group">
+              <a href="editar-servico.html?id=3" class="btn-edit">Alterar</a>
+              <button class="btn-delete" onclick="confirmDelete('Freios')">Remover</button>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <div class="card">
         <h3>Agendamentos Registrados</h3>
+        <p class="card-description">Acompanhe os agendamentos realizados pelos clientes.</p>
 
-        <p class="card-description">
-          Acompanhe abaixo os agendamentos realizados pelos clientes.
-        </p>
+        <ul id="listAgendamentos" class="list-items">
+          <li>
+            <span><strong>05/10</strong> - João Silva - Motor</span>
+            <div class="actions-group">
+              <a href="detalhes.html" class="btn-edit">Ver</a>
+            </div>
+          </li>
+          <li>
+            <span><strong>17/10</strong> - Maria Souza - Injeção</span>
+            <div class="actions-group">
+              <a href="detalhes.html" class="btn-edit">Ver</a>
 
-        <ul id="listAgendamentos">
-          <li>05/10 - João Silva - Manutenção do Motor</li>
-          <li>17/10 - Maria Souza - Combustível e Injeção</li>
-          <li>26/10 - Carlos Oliveira - Lavagem Simples</li>
+            </div>
+          </li>
+          <li>
+            <span><strong>26/10</strong> - Carlos Oliveira - Lavagem</span>
+            <div class="actions-group">
+              <a href="detalhes.html" class="btn-edit">Ver</a>
+
+            </div>
+          </li>
         </ul>
       </div>
-
 
     </section>
 
   </main>
+
+  <script src="JS/dashboard.js"></script>
 
   <footer>
     <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
