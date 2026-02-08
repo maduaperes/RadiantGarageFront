@@ -1,6 +1,6 @@
 import { supabase } from '../config/supabase.js'
 
-// Pega o estabelecimento do usuário (somente para serviços privados)
+
 async function getEstabelecimentoDoUsuario(userId) {
   const { data, error } = await supabase
     .from('estabelecimento')
@@ -15,7 +15,7 @@ async function getEstabelecimentoDoUsuario(userId) {
   return data.id;
 }
 
-// Criar serviço (usuário logado)
+
 export async function createServico(userId, data) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
 
@@ -36,17 +36,41 @@ export async function createServico(userId, data) {
   return servico;
 }
 
-// Listar todos os serviços (público)
+
 export async function getTodosServicos() {
   const { data, error } = await supabase
     .from('servico')
-    .select('*');
+    .select(`
+      *,
+      estabelecimento (
+        id,
+        nome_estabelecimento
+      )
+    `)
+    .order('id', { ascending: true });
 
   if (error) throw error;
+
   return data;
 }
 
-// Listar serviços do usuário logado
+
+export async function getServicosByUser(userId) {
+  const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
+
+  const { data, error } = await supabase
+    .from("servico")
+    .select("*")
+    .eq("estabelecimento", estabelecimentoId)
+    .order("id", { ascending: false });
+
+  if (error) throw error;
+
+  return data || [];
+}
+
+
+
 export async function getServicos(userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
 

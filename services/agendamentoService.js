@@ -46,6 +46,64 @@ export async function getAgendamentos(userId) {
   return data
 }
 
+export async function getAgendamentosByEstabelecimento(userId) {
+
+  const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
+
+  const { data, error } = await supabase
+    .from("agendamento")
+    .select(`
+      *,
+      cliente (
+        nome_cliente
+      ),
+      servico!inner (
+        nome_servico,
+        estabelecimento
+      )
+    `)
+    .eq("servico.estabelecimento", estabelecimentoId)
+    .order("data_hora", { ascending: false });
+
+  if (error) throw error;
+
+  return data || [];
+}
+
+
+
+export async function getAgendamentosByUser(userId) {
+
+  const { data, error } = await supabase
+    .from('agendamento')
+    .select(`
+      *,
+      cliente!inner (
+        id,
+        nome_cliente,
+        id_usuario
+      ),
+      servico (
+        id,
+        nome_servico,
+        estabelecimento (
+          id,
+          nome_estabelecimento
+        )
+      )
+    `)
+    .eq('cliente.id_usuario', userId)
+    .order('data_hora', { ascending: false });
+
+  if (error) throw error;
+
+  return data || [];
+}
+
+
+
+
+
 export async function getAgendamentoById(id, userId) {
   const { data, error } = await supabase
     .from('agendamento')

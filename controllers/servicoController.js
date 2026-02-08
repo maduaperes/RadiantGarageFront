@@ -142,4 +142,18 @@ export async function deletarServico(req, res) {
   } catch (err) {
     return res.status(400).json({ error: err.message })
   }
+
 }
+
+export async function listarMeusServicos(req, res) {
+  try {
+    const userId = req.user.id;
+
+    const servicos = await service.getServicosByUser(userId);
+
+    res.json(servicos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+

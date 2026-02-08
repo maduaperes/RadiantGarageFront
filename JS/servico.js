@@ -3,6 +3,38 @@ function getServiceIdFromURL() {
   return params.get("id");
 }
 
+
+
+async function mostrarBotaoSeCliente() {
+  const btn = document.getElementById("btnAgendar"); // 🔥 mais seguro
+  if (!btn) return;
+
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    btn.style.display = "none";
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:3000/api/clientes/me", {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (res.ok) {
+      btn.style.display = "inline-block";
+      return;
+    }
+
+    btn.style.display = "none";
+
+  } catch (e) {
+    btn.style.display = "none";
+  }
+}
+
+
+
 function renderizarServicoDetalhe(servico) {
   const container = document.getElementById("serviceDetailContainer");
   if (!container) return;
@@ -24,7 +56,7 @@ function renderizarServicoDetalhe(servico) {
 
   <div class="avaliacao">
     <span class="preco">Preço estimado: ${servico.custo_servico}</span>
-    <a href="agendamento.html?id=${servico.id}">Agendar Agora</a>
+    <a id="btnAgendar" href="agendamento.html?id=${servico.id}" style="display:none">Agendar Agora</a>
   </div>
 
     <p><strong>Tempo estimado:</strong> ${servico.tempo_estipulado} minutos</p>
@@ -32,7 +64,7 @@ function renderizarServicoDetalhe(servico) {
     <hr />
 
     <div class="detalhes-adicionais">
-      <h2>Informações do Serviço</h2>
+      <h2>Informações do Serviço:</h2>
       <ul>
         <li><strong>Nome do serviço:</strong> ${servico.nome_servico}</li>
         <li><strong>Preço estimado:</strong> ${servico.custo_servico}</li>
@@ -47,6 +79,7 @@ function renderizarServicoDetalhe(servico) {
       <p>${servico.descricao ?? "Sem descrição"}</p>
     </div>
   `;
+    mostrarBotaoSeCliente();
 }
 
 function renderizarServicosSugeridos(servicos) {
@@ -67,18 +100,19 @@ function renderizarServicosSugeridos(servicos) {
   servicos.forEach((servico, index) => {
     const li = document.createElement("li");
     li.innerHTML = `
-      <h1>${servico.nome_servico}</h1>
       <img src="${imagensSugeridas[index % imagensSugeridas.length]}" alt="Serviço">
+      <h3>${servico.nome_servico}</h3>
       <div class="service-content">
-        <h5>${servico.nome_servico}</h5>
+        <h4>${servico.estabelecimento?.nome_estabelecimento}</h4>
         <p>${servico.descricao ?? "Sem descrição"}</p>
-        <p>Preço: ${servico.custo_servico}</p>
+        <p>Preço: R$ ${servico.custo_servico}</p>
         <a href="servico.html?id=${servico.id}">Ver mais</a>
       </div>
     `;
     container.appendChild(li);
   });
 }
+
 
 async function buscarServicoPorId() {
   const serviceId = getServiceIdFromURL();
@@ -110,6 +144,9 @@ async function buscarServicosSugeridos() {
     console.error("Erro ao buscar serviços sugeridos:", error.message);
   }
 }
+
+
+
 
 document.getElementById("btnBack")?.addEventListener("click", () => window.history.back());
 

@@ -27,8 +27,10 @@ function renderizarServicos(servicos) {
 
     card.innerHTML = `
       <div class="service-info">
-        <h3>${servico.nome_servico ?? "Sem nome"}</h3>
-        <h5>R$ ${servico.custo_servico ?? "0,00"}</h5>
+      <img src="https://www.tecfil.com.br/wp-content/uploads/2020/09/galerias_tecfil-seo_0005_shutterstock_1457616980-1024x683.jpg" alt="Detalhe 4">
+        <h2>${servico.estabelecimento.nome_estabelecimento ?? "Sem nome"}</h2>
+        <h3>Serviço: ${servico.nome_servico ?? "Sem nome"}</h3>
+        <h5>Valor: R$ ${servico.custo_servico ?? "0,00"}</h5>
         <p>Tempo estimado: ${servico.tempo_estipulado ?? "N/A"} minutos</p>
         <p>${servico.descricao ?? "Sem descrição"}</p>
         <a href="servico.html?id=${servico.id}">Ver mais</a>
