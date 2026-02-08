@@ -1,30 +1,19 @@
 import * as servicoService from '../services/servicoService.js'
 
-export async function cadastrarServico(req, res) {
-  const {
-    nome_servico,
-    custo_servico,
-    descricao,
-    id_categoria_fk,
-    tempo_estipulado
-  } = req.body
-
-  if (!nome_servico || !custo_servico || !tempo_estipulado) {
-    return res.status(400).json({
-      error: 'Campos obrigatórios ausentes'
-    })
-  }
-
+export async function criarServico(req, res) {
   try {
     const servico = await servicoService.createServico(
       req.user.id,
       req.body
-    )
-    return res.status(201).json(servico)
+    );
+
+    res.status(201).json(servico);
+
   } catch (err) {
-    return res.status(400).json({ error: err.message })
+    res.status(500).json({ error: err.message });
   }
 }
+
 
 export async function listarTodosServicos(req, res) {
   try {
@@ -149,11 +138,10 @@ export async function listarMeusServicos(req, res) {
   try {
     const userId = req.user.id;
 
-    const servicos = await service.getServicosByUser(userId);
+    const servicos = await servicoService.getServicosByUser(userId);
 
-    res.json(servicos);
+    return res.json(servicos);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    return res.status(500).json({ error: err.message });
   }
 }
-

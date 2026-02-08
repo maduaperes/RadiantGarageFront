@@ -1,7 +1,6 @@
 import { supabase } from '../config/supabase.js'
 
 export async function createAgendamento(userId, data) {
-  // Pega o cliente logado pelo userId
   const { data: cliente, error: clienteError } = await supabase
     .from('cliente')
     .select('id')
@@ -34,30 +33,49 @@ export async function getAgendamentos(userId) {
     .from('agendamento')
     .select(`
       *,
-      cliente (
+      cliente:cliente!agendamento_id_cliente_fkey!inner (
         id,
-        nome_cliente
+        nome_cliente,
+        id_usuario
       )
     `)
-    .eq('cliente.id_usuario', userId)
+    .eq('cliente.id_usuario', userId);
 
-  if (error) throw error
+  if (error) throw error;
 
-  return data
+  return data;
 }
 
-export async function getAgendamentosByEstabelecimento(userId) {
 
+async function getEstabelecimentoDoUsuario(userId) {
+  const { data, error } = await supabase
+    .from('estabelecimento')
+    .select('id')
+    .eq('id_usuario', userId)
+    .single();
+
+  if (error || !data) {
+    throw new Error('Estabelecimento não encontrado para este usuário');
+  }
+
+  return data.id;
+}
+  
+
+export async function getAgendamentosByEstabelecimento(userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
 
   const { data, error } = await supabase
     .from("agendamento")
     .select(`
-      *,
-      cliente (
+      id,
+      data_hora,
+      observacao,
+      pagamento,
+      cliente:cliente (
         nome_cliente
       ),
-      servico!inner (
+      servico:servico!inner (
         nome_servico,
         estabelecimento
       )
@@ -67,8 +85,9 @@ export async function getAgendamentosByEstabelecimento(userId) {
 
   if (error) throw error;
 
-  return data || [];
+  return data ?? [];
 }
+
 
 
 
@@ -100,28 +119,33 @@ export async function getAgendamentosByUser(userId) {
   return data || [];
 }
 
-
-
-
-
-export async function getAgendamentoById(id, userId) {
+export async function getAgendamentoById(id) {
   const { data, error } = await supabase
     .from('agendamento')
     .select(`
-      *,
-      cliente (
+      id,
+      data_hora,
+      pagamento,
+      observacao,
+      cliente:cliente!agendamento_id_cliente_fkey (
         id,
-        nome_cliente
+        nome_cliente,
+        id_usuario
+      ),
+      servico:servico!agendamento_id_servico_fk_fkey (
+        id,
+        nome_servico
       )
     `)
     .eq('id', id)
-    .eq('cliente.id_usuario', userId)
-    .single()
+    .maybeSingle();
 
-  if (error || !data) throw new Error('Agendamento não encontrado')
+  if (error) throw error;
+  if (!data) throw new Error('Agendamento não encontrado');
 
-  return data
+  return data;
 }
+
 
 export async function updateAgendamento(id, userId, data) {
   const { data: agendamento, error } = await supabase

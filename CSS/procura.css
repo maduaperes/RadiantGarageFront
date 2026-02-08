@@ -382,9 +382,11 @@ button.clear-btn:hover {
 .service-results {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(275px, 1rem));
+  grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
   gap: 1rem;
 }
+
+
 
 .service-results h2 {
   grid-column: 1 / -1;

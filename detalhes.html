@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detalhes do Agendamento</title>
+  <link rel="stylesheet" href="CSS/novo-servico.css" />
+  <link rel="stylesheet" href="CSS/detalhes.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+    <div class="logo">
+      <a href="index.html" class="logo-link">
+        <div class="logo-icon"></div>
+        <span>RadiantGarage</span>
+      </a>
+    </div>
+
+    <div class="search-box">
+      <input type="text" placeholder="Pesquisar serviços" />
+      <button type="button">🔍︎</button>
+    </div>
+
+    <div class="right-group">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <span>|</span>
+        <a href="procura.html">Serviços</a>
+      </nav>
+        <span>|</span>
+      <div class="nav">
+        <a id="varbuttonId"></a>
+      </div>
+      <div class="user">
+        <a id="login" href="login.html">Login</a>
+      </div>
+
+      </div>
+    </div>
+  </header>
+  <main class="card">
+
+    <div class="back" id="btnBack">↩</div>
+
+    <h2>Detalhes do Agendamento</h2>
+
+    <div id="loading">Carregando...</div>
+
+    <div id="detalhes" style="display:none">
+      <p><strong>Data:</strong> <span id="data"></span></p>
+      <p><strong>Cliente:</strong> <span id="cliente"></span></p>
+      <p><strong>Serviço:</strong> <span id="servico"></span></p>
+      <p><strong>Pagamento:</strong> <span id="pagamento"></span></p>
+      <p><strong>Observação:</strong> <span id="observacao"></span></p>
+    </div>
+
+        <section class="card actions-card">
+
+    <h3>Ações do Agendamento</h3>
+
+    <div class="actions-buttons">
+      <button id="btnFinalizar" class="btn-success">
+        ✓ Finalizar
+      </button>
+
+      <button id="btnCancelar" class="btn-danger">
+        ✕ Cancelar
+      </button>
+    </div>
+
+  </section>
+
+
+    <div id="erro"></div>
+
+
+
+
+
+
+  </main>
+
+
+  <script src="JS/script.js"></script>
+  <script src="JS/detalhes.js"></script>
+</body>
+</html>

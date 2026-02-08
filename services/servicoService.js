@@ -71,6 +71,7 @@ export async function getServicosByUser(userId) {
 
 
 
+
 export async function getServicos(userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId);
 
