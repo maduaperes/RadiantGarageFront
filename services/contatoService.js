@@ -1,19 +1,23 @@
 import { supabase } from '../config/supabase.js'
 
-export async function createContato(data) {
-  const { data: contato, error } = await supabase
+export async function createContato({ email, telefone, celular, userId }) {
+
+  const { data, error } = await supabase
     .from('contato')
     .insert({
-      celular: data.celular,
-      telefone: data.telefone,
-      email: data.email
+      email,
+      telefone,
+      celular,
+      id_usuario: userId
     })
     .select()
-    .single()
+    .single();
 
-  if (error) throw error
-  return contato
+  if (error) throw error;
+
+  return data;
 }
+
 
 export async function getContatos() {
   const { data, error } = await supabase
@@ -61,3 +65,15 @@ export async function deleteContato(id) {
   if (error) throw error
   return { success: true }
 }
+
+export async function getByUserId(userId) {
+  const { data, error } = await supabase
+    .from("contato") // 🔥 corrigido para singular
+    .select("*")
+    .eq("id_usuario", userId)
+    .maybeSingle(); // retorna null se não existir
+
+  if (error) throw new Error("Erro ao buscar contato");
+  return data;
+}
+

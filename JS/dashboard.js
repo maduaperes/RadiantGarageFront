@@ -3,10 +3,50 @@ const token = localStorage.getItem("token");
 
 const listServicos = document.getElementById("listServicos");
 const listAgendamentos = document.getElementById("listAgendamentos");
+const nomeEl = document.getElementById("nome-estabelecimento");
+const enderecoEl = document.getElementById("endereco-completo");
+const contatoEl = document.getElementById("contato");
+const enderecoBtn = document.getElementById("endereco");
+
 
 if (!token) {
   window.location.href = "login.html";
 }
+
+async function carregarPerfil() {
+try {
+    const res = await fetch(`${API}/estabelecimentos/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error("Erro ao buscar estabelecimento");
+
+    const estabelecimento = await res.json();
+
+    // DEBUG: verifique no console o que está vindo
+    console.log("Estabelecimento recebido:", estabelecimento);
+
+    // Ajuste conforme a resposta do backend
+    const nome = estabelecimento?.nome_estabelecimento || estabelecimento?.nome || "Não informado";
+
+    nomeEl.textContent = nome;
+
+    if (estabelecimento?.id) {
+      enderecoBtn.textContent = "Alterar Estabelecimento";
+      enderecoBtn.href = "cadastro-estabelecimento.html?id=" + estabelecimento.id;
+    } else {
+      enderecoBtn.textContent = "Adicionar Estabelecimento";
+      enderecoBtn.href = "cadastro-estabelecimento.html";
+    }
+
+  } catch (err) {
+    console.error(err);
+    nomeEl.textContent = "Erro ao carregar informações";
+    enderecoBtn.textContent = "Tentar novamente";
+    enderecoBtn.href = "#";
+  }
+}
+
 
 async function carregarServicos() {
   try {
@@ -85,6 +125,7 @@ async function deletarServico(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  carregarPerfil();
   carregarServicos();
   carregarAgendamentos();
 });

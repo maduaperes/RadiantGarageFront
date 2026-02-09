@@ -11,7 +11,7 @@ const btnBack = document.getElementById('btnBack');
 // ===========================
 // URL do backend
 // ===========================
-const API_URL = "http://localhost:3000/api/contatos";
+const API = "http://localhost:3000/api/contatos";
 
 // ===========================
 // Funções de feedback
@@ -50,12 +50,15 @@ async function cadastrarContato() {
     const phone = contactPhone.value.trim();
     const mobile = contactMobile.value.trim();
 
-    // Validações
-    if (!email) return showFeedback('Por favor, insira o email do contato.');
-    if (!isValidEmail(email)) return showFeedback('Email inválido. Verifique o formato.');
+    if (!email) return showFeedback('Por favor, insira o email.');
+    if (!isValidEmail(email)) return showFeedback('Email inválido.');
 
     try {
-        const token = localStorage.getItem('token'); // Token do Supabase
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            return showFeedback('Sessão expirada. Faça login novamente.');
+        }
 
         const bodyData = {
             email,
@@ -63,13 +66,13 @@ async function cadastrarContato() {
             celular: mobile || null
         };
 
-        console.log("Dados enviados:", bodyData); // debug
+        console.log("Dados enviados:", bodyData);
 
-        const response = await fetch(API_URL, {
+        const response = await fetch(API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                ...(token && { 'Authorization': `Bearer ${token}` })
+                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(bodyData)
         });
@@ -77,24 +80,21 @@ async function cadastrarContato() {
         const data = await response.json();
 
         if (!response.ok) {
-            // Corrigido: usar 'error' que vem do backend
             throw new Error(data.error || 'Erro ao cadastrar contato.');
         }
 
-        // ✅ Salvar apenas o id_contato no localStorage
-        localStorage.setItem('currentContatoId', data.id_contato);
+        // ❌ não salva mais id localmente
+        // backend já resolve tudo pelo UUID do usuário
 
         showFeedback('Contato cadastrado com sucesso!', 'success');
 
         setTimeout(() => {
-            contactForm.reset();
-            clearFeedback();
-            window.location.href = 'tipodeconta.html'; // ou outra página
-        }, 1000);
+            window.location.href = 'tipodeconta.html';
+        }, 800);
 
     } catch (err) {
         console.error(err);
-        showFeedback(err.message || 'Erro desconhecido.');
+        showFeedback(err.message);
     }
 }
 
