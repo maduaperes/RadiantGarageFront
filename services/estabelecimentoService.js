@@ -34,16 +34,43 @@ export async function getEstabelecimentos(userId) {
 export async function getByUserId(userId) {
   const { data, error } = await supabase
     .from("estabelecimento")
-    .select("id")
+    .select("*") // ✅ AQUI
+    .eq("id_usuario", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Erro ao buscar estabelecimento");
+  }
+
+  return data;
+}
+
+export async function getEnderecoByEstabelecimentoId(estabelecimentoId) {
+  const { data, error } = await supabase
+    .from("endereco")
+    .select("*")
+    .eq("estabelecimento_id", estabelecimentoId)
+    .maybeSingle(); // retorna null se não tiver
+
+  if (error) throw error;
+
+  return data;
+}
+
+export async function getContatoByUserId(userId) {
+  const { data, error } = await supabase
+    .from("contato")
+    .select("*")
     .eq("id_usuario", userId)
     .maybeSingle()
 
   if (error) {
     console.error(error)
-    throw new Error("Erro ao buscar estabelecimento")
+    return null
   }
 
-  return data 
+  return data
 }
 
 

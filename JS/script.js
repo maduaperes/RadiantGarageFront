@@ -13,12 +13,14 @@ async function checkEstabelecimento(token) {
     if (!response.ok) return false;
 
     const data = await response.json();
-    return data?.isEstabelecimento === true;
+
+    return !!data?.id;
 
   } catch {
     return false;
   }
 }
+
 
 function logout(e) {
   e?.preventDefault();

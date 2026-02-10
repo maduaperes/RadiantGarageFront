@@ -8,6 +8,8 @@ router.use(authMiddleware)
 
 router.get('/', estabelecimentoController.listarEstabelecimentos)
 router.get("/me", estabelecimentoController.getMyEstabelecimento)
+router.get("/me/endereco",  estabelecimentoController.getMeuEndereco);
+router.get("/me/contato", estabelecimentoController.getMeuContato);
 router.get('/:id', estabelecimentoController.listarEstabelecimentoId)
 router.post('/', estabelecimentoController.cadastrarEstabelecimento)
 router.put('/:id', estabelecimentoController.atualizarEstabelecimento)

@@ -23,29 +23,49 @@ try {
 
     const estabelecimento = await res.json();
 
-    // DEBUG: verifique no console o que está vindo
-    console.log("Estabelecimento recebido:", estabelecimento);
+    const resEndereco = await fetch(`${API}/estabelecimentos/me/endereco`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-    // Ajuste conforme a resposta do backend
+    const endereco = await resEndereco.json();
+
+    if (!endereco) {
+      window.location.href = "novo-endereco.html";
+      return;
+    }
+
+    enderecoEl.innerHTML = `
+      <strong>Endereço:</strong>
+      ${endereco.rua}, ${endereco.numero} - ${endereco.cidade}, ${endereco.estado}
+    `;
+
+      const resContato = await fetch(`${API}/estabelecimentos/me/contato`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const contato = await resContato.json();
+
+    if (!contato) {
+      contatoEl.innerHTML = "<strong>Contato:</strong> Não cadastrado";
+      return;
+    }
+
+    contatoEl.innerHTML = `
+      <strong>Contato:</strong>
+      ${contato.telefone} | ${contato.email}
+    `;
+
     const nome = estabelecimento?.nome_estabelecimento || estabelecimento?.nome || "Não informado";
 
-    nomeEl.textContent = nome;
-
-    if (estabelecimento?.id) {
-      enderecoBtn.textContent = "Alterar Estabelecimento";
-      enderecoBtn.href = "cadastro-estabelecimento.html?id=" + estabelecimento.id;
-    } else {
-      enderecoBtn.textContent = "Adicionar Estabelecimento";
-      enderecoBtn.href = "cadastro-estabelecimento.html";
-    }
+    nomeEl.textContent = `Ola, ${nome}`;
 
   } catch (err) {
     console.error(err);
     nomeEl.textContent = "Erro ao carregar informações";
-    enderecoBtn.textContent = "Tentar novamente";
-    enderecoBtn.href = "#";
   }
 }
+
+
 
 
 async function carregarServicos() {
@@ -66,7 +86,6 @@ async function carregarServicos() {
       li.innerHTML = `
         <span>${servico.nome_servico}</span>
         <div class="actions-group">
-          <a href="editar-servico.html?id=${servico.id}" class="btn-edit">Alterar</a>
           <button class="btn-delete" onclick="deletarServico(${servico.id})">Remover</button>
         </div>
       `;

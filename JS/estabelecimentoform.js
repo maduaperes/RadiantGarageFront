@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showFeedback("Estabelecimento cadastrado com sucesso!", "success");
 
             setTimeout(() => {
-                window.location.href = "dashboard.html";
+                window.location.href = "novo-endereco.html";
             }, 800);
 
         } catch (err) {
