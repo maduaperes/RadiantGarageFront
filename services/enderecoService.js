@@ -1,18 +1,15 @@
 import { supabase } from '../config/supabase.js'
 
 async function getEstabelecimentoDoUsuario(userId) {
-  const { data, error } = await supabase
+  const { data } = await supabase
     .from('estabelecimento')
     .select('id')
     .eq('id_usuario', userId)
     .single()
 
-  if (error || !data) {
-    throw new Error('Estabelecimento não encontrado para este usuário')
-  }
-
-  return data.id
+  return data?.id || null
 }
+
 
 export async function createEndereco(userId, payload) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
@@ -38,6 +35,8 @@ export async function createEndereco(userId, payload) {
 export async function getEnderecos(userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)
 
+  if (!estabelecimentoId) return []
+
   const { data, error } = await supabase
     .from('endereco')
     .select('*')
@@ -47,6 +46,7 @@ export async function getEnderecos(userId) {
 
   return data
 }
+
 
 export async function getEnderecoById(id, userId) {
   const estabelecimentoId = await getEstabelecimentoDoUsuario(userId)

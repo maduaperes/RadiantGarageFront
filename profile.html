@@ -9,7 +9,6 @@
 </head>
 
 <body>
-
   <header class="header">
     <div class="logo">
       <a href="index.html" class="logo-link">
@@ -29,47 +28,35 @@
         <span>|</span>
         <a href="procura.html">Serviços</a>
       </nav>
-      <span>|</span>
+        <span>|</span>
+      <div class="nav">
+        <a id="varbuttonId"></a>
+      </div>
       <div class="user">
-        <a href="profile.html">Perfil</a>
+        <a id="login" href="login.html">Login</a>
+      </div>
+
       </div>
     </div>
   </header>
-
+  
   <main>
     <div class="profile-card">
 
-      <!-- PERFIL -->
       <div class="profile-header">
         <div class="avatar">
           <img src="https://cdn-icons-png.flaticon.com/512/3736/3736502.png">
         </div>
-
         <div class="user-info">
           <h2 id="userName">Carregando...</h2>
           <p id="userContact">---</p>
-
-          <div style="display:flex;gap:10px;margin-top:10px;">
-            <button id="editProfileBtn" class="btn-primary">
-              Editar Perfil
-            </button>
-          </div>
         </div>
       </div>
-
-      <hr style="border:0;border-top:1px solid rgba(255,255,255,0.1);margin:10px 0;">
-
-      <!-- AGENDAMENTOS -->
       <section class="history-section">
-        <h3>Meus Agendamentos</h3>
-
+        <h3>Historico de agendamentos</h3>
         <div id="agendamentos" class="history-list">
-          <!-- JS renderiza -->
         </div>
       </section>
-
-      <!-- AÇÕES -->
-      <div style="display:flex;justify-content:space-between;margin-top:10px;">
         <button onclick="location.href='procura.html'" class="btn-secondary">
           Voltar
         </button>

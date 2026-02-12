@@ -19,7 +19,7 @@
     </div>
 
     <div class="search-box">
-      <input type="text" placeholder="Pesquisar" />
+      <input type="text" placeholder="Pesquisar serviços" />
       <button type="button">🔍︎</button>
     </div>
 
@@ -27,7 +27,7 @@
       <nav class="nav">
         <a href="index.html">Home</a>
         <span>|</span>
-        <a href="novo-endereco.html">Novo Endereço</a>
+        <a href="procura.html">Serviços</a>
       </nav>
         <span>|</span>
       <div class="nav">
@@ -36,21 +36,19 @@
       <div class="user">
         <a id="login" href="login.html">Login</a>
       </div>
+
+      </div>
     </div>
   </header>
 
   <main class="dashboard">
 
-    <section class="profile-overview">
+      <section class="profile-overview">
       <div class="profile-card">
         <div class="profile-info">
-          <h2>Olá, Oficina Central</h2>
-          <p><strong>Endereço:</strong> Rua das Engrenagens, 123 - São Paulo, SP</p>
-          <p><strong>Contato:</strong> (11) 98888-7777 | contato@radiantgarage.com.br</p>
-        </div>
-        <div class="profile-actions">
-          <a href="profile.html" class="btn-secondary">Editar Perfil</a>
-          <a href="novo-endereco.html" class="btn-secondary">Mudar Endereço</a>
+          <h2 id="nome-estabelecimento">Carregando...</h2>
+          <p id="endereco-completo"><strong>Endereço:</strong> Carregando...</p>
+          <p id="contato"><strong>Contato:</strong> Carregando...</p>
         </div>
       </div>
     </section>
@@ -68,25 +66,7 @@
 
         <ul id="listServicos" class="list-items">
           <li>
-            <span>Troca de Óleo</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=1" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Troca de Óleo')">Remover</button>
-            </div>
-          </li>
-          <li>
-            <span>Alinhamento e Balanceamento</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=2" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Alinhamento')">Remover</button>
-            </div>
-          </li>
-          <li>
-            <span>Revisão de Freios</span>
-            <div class="actions-group">
-              <a href="editar-servico.html?id=3" class="btn-edit">Alterar</a>
-              <button class="btn-delete" onclick="confirmDelete('Freios')">Remover</button>
-            </div>
+            <span>Carregando...</span>
           </li>
         </ul>
       </div>
@@ -97,24 +77,7 @@
 
         <ul id="listAgendamentos" class="list-items">
           <li>
-            <span><strong>05/10</strong> - João Silva - Motor</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-            </div>
-          </li>
-          <li>
-            <span><strong>17/10</strong> - Maria Souza - Injeção</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-
-            </div>
-          </li>
-          <li>
-            <span><strong>26/10</strong> - Carlos Oliveira - Lavagem</span>
-            <div class="actions-group">
-              <a href="detalhes.html" class="btn-edit">Ver</a>
-
-            </div>
+            <span>Carregando...</span>
           </li>
         </ul>
       </div>
@@ -122,14 +85,14 @@
     </section>
 
   </main>
-
+  <script src="JS/script.js"></script>
   <script src="JS/dashboard.js"></script>
+  
 
   <footer>
     <p>&copy; 2025 RadiantGarage. Todos os direitos reservados.</p>
   </footer>
 
-  <script src="JS/script.js"></script>
 </body>
 
 </html>

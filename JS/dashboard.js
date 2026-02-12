@@ -1,97 +1,150 @@
-document.addEventListener("DOMContentLoaded", () => {
+const API = "http://localhost:3000/api";
+const token = localStorage.getItem("token");
 
-    function makeEditable(listId, editBtnId, saveBtnId, closeBtnId, storageKey) {
-        const list = document.getElementById(listId);
-        const editBtn = document.getElementById(editBtnId);
-        const saveBtn = document.getElementById(saveBtnId);
-        const closeBtn = document.getElementById(closeBtnId);
+const listServicos = document.getElementById("listServicos");
+const listAgendamentos = document.getElementById("listAgendamentos");
+const nomeEl = document.getElementById("nome-estabelecimento");
+const enderecoEl = document.getElementById("endereco-completo");
+const contatoEl = document.getElementById("contato");
+const enderecoBtn = document.getElementById("endereco");
 
-        // Guarda o estado original em texto
-        let originalItems = Array.from(list.children).map(li => li.textContent);
 
-        // Carrega do localStorage (forçando string)
-        const storedItems = JSON.parse(localStorage.getItem(storageKey));
-        if (Array.isArray(storedItems)) {
-            list.innerHTML = "";
-            storedItems.forEach(item => {
-                const li = document.createElement("li");
+if (!token) {
+  window.location.href = "login.html";
+}
 
-                // Se vier objeto antigo, converte para string
-                li.textContent = typeof item === "string"
-                    ? item
-                    : Object.values(item).join(" - ");
+async function carregarPerfil() {
+try {
+    const res = await fetch(`${API}/estabelecimentos/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-                list.appendChild(li);
-            });
+    if (!res.ok) throw new Error("Erro ao buscar estabelecimento");
 
-            originalItems = Array.from(list.children).map(li => li.textContent);
-        }
+    const estabelecimento = await res.json();
 
-        editBtn.addEventListener("click", () => {
-            list.querySelectorAll("li").forEach(li => {
-                const input = document.createElement("input");
-                input.type = "text";
-                input.value = li.textContent;
-                input.style.width = "100%";
-                input.style.marginBottom = "6px";
+    const resEndereco = await fetch(`${API}/estabelecimentos/me/endereco`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
 
-                li.textContent = "";
-                li.appendChild(input);
-            });
+    const endereco = await resEndereco.json();
 
-            editBtn.style.display = "none";
-            saveBtn.style.display = "inline-block";
-            closeBtn.style.display = "inline-block";
-        });
-
-        saveBtn.addEventListener("click", () => {
-            const newItems = [];
-
-            list.querySelectorAll("li").forEach(li => {
-                const input = li.querySelector("input");
-                if (input && input.value.trim() !== "") {
-                    const value = input.value.trim();
-                    li.textContent = value;
-                    newItems.push(value);
-                }
-            });
-
-            localStorage.setItem(storageKey, JSON.stringify(newItems));
-            originalItems = [...newItems];
-
-            editBtn.style.display = "inline-block";
-            saveBtn.style.display = "none";
-            closeBtn.style.display = "none";
-        });
-
-        closeBtn.addEventListener("click", () => {
-            // Descarta alterações e restaura
-            list.innerHTML = "";
-            originalItems.forEach(item => {
-                const li = document.createElement("li");
-                li.textContent = item;
-                list.appendChild(li);
-            });
-
-            editBtn.style.display = "inline-block";
-            saveBtn.style.display = "none";
-            closeBtn.style.display = "none";
-        });
+    if (!endereco) {
+      window.location.href = "novo-endereco.html";
+      return;
     }
 
-    makeEditable(
-        "listServicos",
-        "editServicosBtn",
-        "saveServicosBtn",
-        "closeServicosBtn",
-        "servicos"
-    );
+    enderecoEl.innerHTML = `
+      <strong>Endereço:</strong>
+      ${endereco.rua}, ${endereco.numero} - ${endereco.cidade}, ${endereco.estado}
+    `;
 
-    makeEditable(
-        "listAgendamentos",
-        "editAgendamentosBtn",
-        "saveAgendamentosBtn",
-        "closeAgendamentosBtn",
-        "agendamentos"
-    );
+      const resContato = await fetch(`${API}/estabelecimentos/me/contato`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    const contato = await resContato.json();
+
+    if (!contato) {
+      contatoEl.innerHTML = "<strong>Contato:</strong> Não cadastrado";
+      return;
+    }
+
+    contatoEl.innerHTML = `
+      <strong>Contato:</strong>
+      ${contato.telefone} | ${contato.email}
+    `;
+
+    const nome = estabelecimento?.nome_estabelecimento || estabelecimento?.nome || "Não informado";
+
+    nomeEl.textContent = `Ola, ${nome}`;
+
+  } catch (err) {
+    console.error(err);
+    nomeEl.textContent = "Erro ao carregar informações";
+  }
+}
+
+
+
+
+async function carregarServicos() {
+  try {
+    const res = await fetch(`${API}/servicos/me`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error("Erro ao buscar serviços");
+
+    const servicos = await res.json();
+
+    listServicos.innerHTML = "";
+
+    servicos.forEach(servico => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+        <span>${servico.nome_servico}</span>
+        <div class="actions-group">
+          <button class="btn-delete" onclick="deletarServico(${servico.id})">Remover</button>
+        </div>
+      `;
+
+      listServicos.appendChild(li);
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function carregarAgendamentos() {
+  try {
+    const res = await fetch(`${API}/agendamentos/estabelecimento`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error("Erro ao buscar agendamentos");
+
+    const agendamentos = await res.json();
+
+    listAgendamentos.innerHTML = "";
+
+    agendamentos.forEach(a => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+        <span>
+          <strong>${new Date(a.data_hora).toLocaleDateString("pt-BR")}</strong>
+          - ${a.cliente.nome_cliente}
+          - ${a.servico.nome_servico}
+        </span>
+        <div class="actions-group">
+          <a href="detalhes.html?id=${a.id}" class="btn-edit">Ver</a>
+        </div>
+      `;
+
+      listAgendamentos.appendChild(li);
+    });
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+async function deletarServico(id) {
+  if (!confirm("Deseja remover este serviço?")) return;
+
+  await fetch(`${API}/servicos/${id}`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` }
+  });
+
+  carregarServicos();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarPerfil();
+  carregarServicos();
+  carregarAgendamentos();
 });

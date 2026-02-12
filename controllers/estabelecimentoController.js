@@ -13,12 +13,56 @@ export async function cadastrarEstabelecimento(req, res) {
 }
 
 export async function getMyEstabelecimento(req, res) {
-  const data = await estabelecimentoService.getByUserId(req.user.id)
+  try {
+    const estabelecimento = await estabelecimentoService.getByUserId(req.user.id);
 
-  return res.json({
-    isEstabelecimento: !!data
-  })
+    if (!estabelecimento) {
+      return res.status(404).json({ error: "Estabelecimento não encontrado" });
+    }
+
+    // 🔥 RETORNA O OBJETO COMPLETO
+    return res.json(estabelecimento);
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
 }
+
+export async function getMeuEndereco(req, res) {
+  try {
+    // primeiro pega o estabelecimento do usuário
+    const estabelecimento = await estabelecimentoService.getByUserId(req.user.id);
+
+    if (!estabelecimento) {
+      return res.status(404).json({ error: "Estabelecimento não encontrado" });
+    }
+
+    // agora busca o endereço
+    const endereco = await estabelecimentoService.getEnderecoByEstabelecimentoId(
+      estabelecimento.id
+    );
+
+    return res.json(endereco); // pode ser null
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+}
+
+export async function getMeuContato(req, res) {
+  try {
+    const contato =
+      await estabelecimentoService.getContatoByUserId(req.user.id)
+
+    return res.json(contato || null)
+
+  } catch (err) {
+    console.error(err)
+    return res.json(null)
+  }
+}
+
+
 
 
 export async function listarEstabelecimentos(req, res) {

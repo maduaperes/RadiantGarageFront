@@ -1,66 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const addressForm = document.getElementById('addressForm');
-    const cepInput = document.getElementById('cep');
-    const ruaInput = document.getElementById('rua');
-    const bairroInput = document.getElementById('bairro');
-    const cidadeInput = document.getElementById('cidade');
-    const estadoInput = document.getElementById('estado');
-    const feedback = document.getElementById('feedback');
-    const btnBack = document.getElementById('btnBack');
+const API = "http://localhost:3000/api";
+const token = localStorage.getItem("token");
 
-    if (!addressForm) return;
+const form = document.getElementById("addressForm");
+const feedback = document.getElementById("feedback");
 
-    function showFeedback(message, type = 'error') {
-        feedback.textContent = message;
-        feedback.style.color = type === 'success' ? 'lightgreen' : '#f87171';
-    }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    function clearFeedback() {
-        feedback.textContent = '';
-    }
+  const body = {
+    cep: cep.value,
+    rua: rua.value,
+    cidade: cidade.value,
+    estado: estado.value,
+    numero: numero.value
+  };
 
-    // Botão voltar
-    if (btnBack) {
-        btnBack.addEventListener('click', () => {
-            window.history.back();
-        });
-    }
-
-    // Submit do formulário
-    addressForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        clearFeedback();
-
-        const cep = cepInput.value.trim();
-        const rua = ruaInput.value.trim();
-        const bairro = bairroInput.value.trim();
-        const cidade = cidadeInput.value.trim();
-        const estado = estadoInput.value.trim();
-
-        if (!cep || !rua || !bairro || !cidade || !estado) {
-            showFeedback('Preencha todos os campos.');
-            return;
-        }
-
-        const endereco = {
-            cep,
-            rua,
-            bairro,
-            cidade,
-            estado,
-            createdAt: new Date().toISOString()
-        };
-
-        const enderecos = JSON.parse(localStorage.getItem('enderecos')) || [];
-        enderecos.push(endereco);
-        localStorage.setItem('enderecos', JSON.stringify(enderecos));
-
-        showFeedback('Endereço cadastrado com sucesso!', 'success');
-
-        setTimeout(() => {
-            addressForm.reset();
-            clearFeedback();
-            window.location.href = 'dashboard.html';
-        }, 1000);
+  try {
+    const res = await fetch(`${API}/enderecos`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(body)
     });
+
+    const data = await res.json();
+
+    if (!res.ok) throw new Error(data.error);
+
+    feedback.textContent = "Endereço salvo com sucesso!";
+    feedback.style.color = "green";
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1200);
+
+  } catch (err) {
+    console.error(err);
+    feedback.textContent = err.message;
+    feedback.style.color = "red";
+  }
 });

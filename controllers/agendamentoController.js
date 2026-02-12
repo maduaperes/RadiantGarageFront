@@ -18,6 +18,32 @@ export async function criarAgendamento(req, res) {
   }
 }
 
+export async function listarAgendamentosEstabelecimento(req, res) {
+  try {
+    const userId = req.user.id;
+
+    const agendamentos = await agendamentoService.getAgendamentosByEstabelecimento(userId);
+
+    res.json(agendamentos);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
+export async function listarMeusAgendamentos(req, res) {
+  try {
+    const userId = req.user.id; // JWT
+
+    const agendamentos = await agendamentoService.getAgendamentosByUser(userId);
+
+    res.json(agendamentos);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+}
+
+
+
 export async function listarAgendamentos(req, res) {
   try {
     const agendamentos = await agendamentoService.getAgendamentos(req.user.id)

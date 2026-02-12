@@ -1,80 +1,91 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('signupForm');
-    const cpfInput = document.getElementById('cpf');
-    const feedback = document.getElementById('feedback');
-    const btnBack = document.getElementById('btnBack');
+document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Máscara de CPF corrigida
-    cpfInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, '');
+    const API = "http://localhost:3000/api";
 
-        if (value.length <= 11) {
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d)/, '$1.$2');
-            value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        }
+    // ELEMENTOS
+    const form = document.getElementById("signupForm");
+    const nomeInput = document.getElementById("nome");
+    const cpfInput = document.getElementById("cpf");
+    const feedback = document.getElementById("feedback");
+    const btnBack = document.getElementById("btnBack");
 
-        e.target.value = value;
-    });
+    if (!form) return console.error("signupForm não encontrado");
 
-    // 2. Validação oficial de CPF
-    function validarCPF(cpf) {
-        cpf = cpf.replace(/[^\d]+/g, '');
-        if (cpf.length !== 11 || !!cpf.match(/(\d)\1{10}/)) return false;
-
-        let soma = 0, resto;
-        for (let i = 1; i <= 9; i++) soma += parseInt(cpf.substring(i - 1, i)) * (11 - i);
-        resto = (soma * 10) % 11;
-        if ((resto === 10) || (resto === 11)) resto = 0;
-        if (resto !== parseInt(cpf.substring(9, 10))) return false;
-
-        soma = 0;
-        for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i - 1, i)) * (12 - i);
-        resto = (soma * 10) % 11;
-        if ((resto === 10) || (resto === 11)) resto = 0;
-        if (resto !== parseInt(cpf.substring(10, 11))) return false;
-
-        return true;
+    // FUNÇÃO DE FEEDBACK
+    function showFeedback(msg, type = "error") {
+        feedback.textContent = msg;
+        feedback.style.color = type === "error" ? "red" : "green";
     }
 
-    // 3. Gerenciar envio
-    signupForm.addEventListener('submit', (e) => {
+    // BOTÃO VOLTAR
+    btnBack?.addEventListener("click", () => window.history.back());
+
+    // SUBMIT DO FORMULÁRIO
+    form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const nome = document.getElementById('nome').value.trim();
-        const cpf = cpfInput.value;
+        const nome = nomeInput.value.trim();
+        const cpf = cpfInput.value.replace(/\D/g, '');
 
-        // Validações
-        if (nome.length < 3) {
-            showFeedback("Por favor, insira seu nome completo.", "error");
-            return;
+        if (!nome) {
+            return showFeedback("O nome do cliente é obrigatório.");
         }
 
-        if (!validarCPF(cpf)) {
-            showFeedback("CPF inválido. Verifique os números.", "error");
-            return;
+        try {
+            const token = localStorage.getItem("token");
+
+            if (!token) {
+                return showFeedback("Sessão expirada. Faça login novamente.");
+            }
+
+            // 1️⃣ Buscar o contato do usuário logado
+            const contatoResponse = await fetch(`${API}/contatos/me`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!contatoResponse.ok) {
+                throw new Error("Não foi possível obter o contato do usuário.");
+            }
+
+            const contatoData = await contatoResponse.json();
+            const contatoId = contatoData.id_contato; // pegar o id_contato da tabela contato
+
+            if (!contatoId) {
+                throw new Error("Contato não encontrado para este usuário.");
+            }
+
+            // 2️⃣ Criar cliente com o id do contato
+            const clienteBody = {
+                nome_cliente: nome,
+                cpf: cpf,
+                id_contato: contatoId
+            };
+
+            const clienteResponse = await fetch(`${API}/clientes`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(clienteBody)
+            });
+
+            const clienteData = await clienteResponse.json();
+
+            if (!clienteResponse.ok) {
+                throw new Error(clienteData.error || "Erro ao cadastrar cliente");
+            }
+
+            showFeedback("Cliente cadastrado com sucesso!", "success");
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 800);
+
+        } catch (err) {
+            console.error(err);
+            showFeedback(err.message, "error");
         }
-
-        // Caso passe nas validações: SUCESSO
-        showFeedback("Cadastro realizado com sucesso! Redirecionando...", "success");
-
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 2000);
     });
 
-    // Botão Voltar
-    if (btnBack) {
-        btnBack.addEventListener('click', () => {
-            window.history.back();
-        });
-    }
-
-    // FUNÇÃO AJUSTADA: Limpa classes anteriores para evitar cores erradas
-    function showFeedback(message, type) {
-        feedback.textContent = message;
-        // Sobrescreve todas as classes, garantindo que só exista a classe atual
-        feedback.className = `feedback-message ${type}`;
-        feedback.style.display = "block";
-    }
 });

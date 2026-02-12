@@ -1,100 +1,99 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const signupForm = document.getElementById('signupForm');
-    const cnpjInput = document.getElementById('cpf'); // ID conforme seu HTML
-    const feedback = document.getElementById('feedback');
-    const btnBack = document.getElementById('btnBack');
+// roda só depois do HTML carregar
+document.addEventListener("DOMContentLoaded", () => {
 
-    // 1. Máscara de CNPJ (00.000.000/0001-00)
-    cnpjInput.addEventListener('input', (e) => {
-        let value = e.target.value.replace(/\D/g, ''); // Remove o que não é número
-        
-        if (value.length <= 14) {
-            value = value.replace(/^(\d{2})(\d)/, '$1.$2');
-            value = value.replace(/^(\d{2})\.(\d{3})(\d)/, '$1.$2.$3');
-            value = value.replace(/\.(\d{3})(\d)/, '.$1/$2');
-            value = value.replace(/(\d{4})(\d)/, '$1-$2');
-        }
-        
-        e.target.value = value;
-    });
+    const API = "http://localhost:3000/api";
 
-    // 2. Validação de CNPJ (Algoritmo Oficial)
-    function validarCNPJ(cnpj) {
-        cnpj = cnpj.replace(/[^\d]+/g, '');
-        if (cnpj === '' || cnpj.length !== 14 || /^(\d)\1{13}$/.test(cnpj)) return false;
+    // =========================
+    // ELEMENTOS
+    // =========================
+    const form = document.getElementById("signupForm");
+    const nomeInput = document.getElementById("nome");
+    const cnpjInput = document.getElementById("cnpj");
+    const descInput = document.getElementById("description");
+    const feedback = document.getElementById("feedback");
+    const btnBack = document.getElementById("btnBack");
 
-        let tamanho = cnpj.length - 2;
-        let numeros = cnpj.substring(0, tamanho);
-        let digitos = cnpj.substring(tamanho);
-        let soma = 0;
-        let pos = tamanho - 7;
+    if (!form) return console.error("Form signupForm não encontrado");
 
-        for (let i = tamanho; i >= 1; i--) {
-            soma += numeros.charAt(tamanho - i) * pos--;
-            if (pos < 2) pos = 9;
-        }
-
-        let resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-        if (resultado != digitos.charAt(0)) return false;
-
-        tamanho = tamanho + 1;
-        numeros = cnpj.substring(0, tamanho);
-        soma = 0;
-        pos = tamanho - 7;
-        for (let i = tamanho; i >= 1; i--) {
-            soma += numeros.charAt(tamanho - i) * pos--;
-            if (pos < 2) pos = 9;
-        }
-
-        resultado = soma % 11 < 2 ? 0 : 11 - (soma % 11);
-        if (resultado != digitos.charAt(1)) return false;
-
-        return true;
-    }
-
-    // 3. Gerenciar o envio
-    signupForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const nome = document.getElementById('nome').value.trim();
-        const cnpj = cnpjInput.value;
-        const descricao = document.getElementById('description').value.trim();
-
-        // Validação de campos
-        if (nome.length < 3) {
-            showFeedback("Insira o nome do estabelecimento.", "error");
-            return;
-        }
-
-        if (!validarCNPJ(cnpj)) {
-            showFeedback("CNPJ inválido. Verifique os números.", "error");
-            return;
-        }
-
-        if (descricao.length < 10) {
-            showFeedback("A descrição deve ter pelo menos 10 caracteres.", "error");
-            return;
-        }
-
-        // Sucesso
-        showFeedback("Estabelecimento cadastrado com sucesso!", "success");
-        
-        console.log("Dados salvos:", { nome, cnpj, descricao });
-
-        setTimeout(() => {
-            window.location.href = "dashboard.html"; 
-        }, 2000);
-    });
-
-    // Botão Voltar
-    if(btnBack) {
-        btnBack.addEventListener('click', () => window.history.back());
-    }
-
-    // Função de Feedback (Corrigida para não misturar cores)
-    function showFeedback(message, type) {
+    // =========================
+    // FEEDBACK
+    // =========================
+    function showFeedback(message, type = "error") {
         feedback.textContent = message;
-        feedback.className = `feedback-message ${type}`;
-        feedback.style.display = "block";
+        feedback.style.color = type === "error" ? "red" : "green";
     }
+
+    // =========================
+    // VOLTAR
+    // =========================
+    btnBack?.addEventListener("click", () => window.history.back());
+
+    // =========================
+    // SUBMIT
+    // =========================
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const nome = nomeInput.value.trim();
+        const cnpj = cnpjInput.value.replace(/\D/g, "");
+        const descricao = descInput.value.trim();
+
+        if (!nome) return showFeedback("Informe o nome.");
+        if (!descricao) return showFeedback("Informe a descrição.");
+
+        try {
+            const token = localStorage.getItem("token");
+            if (!token) return showFeedback("Sessão expirada. Faça login novamente.");
+
+            // 🔥 Primeiro, buscar o contato do usuário logado
+            const contatoResponse = await fetch(`${API}/contatos/me`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (!contatoResponse.ok) {
+                throw new Error("Não foi possível obter o contato do usuário.");
+            }
+
+            const contatoData = await contatoResponse.json();
+            const contatoId = contatoData.id_contato;
+
+            if (!contatoId) {
+                throw new Error("Contato não encontrado para este usuário.");
+            }
+
+            // 🔥 Criando o estabelecimento com o id do contato
+            const bodyData = {
+                nome_estabelecimento: nome,
+                cnpj,
+                descricao,
+                id_contato: contatoId // associa o estabelecimento ao contato do usuário
+            };
+
+            const response = await fetch(`${API}/estabelecimentos`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify(bodyData)
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.error || "Erro ao cadastrar estabelecimento");
+            }
+
+            showFeedback("Estabelecimento cadastrado com sucesso!", "success");
+
+            setTimeout(() => {
+                window.location.href = "novo-endereco.html";
+            }, 800);
+
+        } catch (err) {
+            console.error(err);
+            showFeedback(err.message, "error");
+        }
+    });
+
 });

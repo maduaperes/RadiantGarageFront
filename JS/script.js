@@ -1,66 +1,73 @@
-const API_URL = "http://localhost:3000/api"
+const API_URL = "http://localhost:3000/api";
 
-const loginBtn = document.getElementById("login")
-const perfilBtn = document.getElementById("varbuttonId")
+document.addEventListener("DOMContentLoaded", initHeaderAuth);
 
 async function checkEstabelecimento(token) {
-  const response = await fetch(`${API_URL}/estabelecimentos/me`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
+  try {
+    const response = await fetch(`${API_URL}/estabelecimentos/me`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
 
-  if (!response.ok) return false
+    if (!response.ok) return false;
 
-  const data = await response.json()
-  return data?.isEstabelecimento === true
+    const data = await response.json();
+
+    return !!data?.id;
+
+  } catch {
+    return false;
+  }
 }
 
+
 function logout(e) {
-  e?.preventDefault()
-  localStorage.clear()
-  window.location.href = "login.html"
+  e?.preventDefault();
+  localStorage.clear();
+  window.location.href = "login.html";
 }
 
 async function initHeaderAuth() {
+  const loginBtn = document.getElementById("login");
+  const perfilBtn = document.getElementById("varbuttonId");
 
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("token");
 
+  // NÃO LOGADO
   if (!token) {
-
     if (loginBtn) {
-      loginBtn.textContent = "Login"
-      loginBtn.href = "login.html"
-      loginBtn.style.backgroundColor = ""
+      loginBtn.textContent = "Login";
+      loginBtn.href = "login.html";
+      loginBtn.style.backgroundColor = "";
     }
 
     if (perfilBtn) {
-      perfilBtn.style.display = "none"
+      perfilBtn.style.display = "none";
     }
 
-    return
+    return;
   }
 
+  // LOGADO
   if (loginBtn) {
-    loginBtn.textContent = "Logout"
-    loginBtn.href = "#"
-    loginBtn.style.backgroundColor = "red"
-    loginBtn.onclick = logout
+    loginBtn.textContent = "Logout";
+    loginBtn.href = "#";
+    loginBtn.style.backgroundColor = "red";
+    loginBtn.onclick = logout;
   }
 
-  if (!perfilBtn) return
+  if (!perfilBtn) return;
 
-  perfilBtn.style.display = "inline-block"
+  perfilBtn.style.display = "inline-block";
 
-  const isEstabelecimento = await checkEstabelecimento(token)
+  const isEstabelecimento = await checkEstabelecimento(token);
 
   if (isEstabelecimento) {
-    perfilBtn.textContent = "Dashboard"
-    perfilBtn.href = "dashboard.html"
+    perfilBtn.textContent = "Dashboard";
+    perfilBtn.href = "dashboard.html";
   } else {
-    perfilBtn.textContent = "Perfil"
-    perfilBtn.href = "profile.html"
+    perfilBtn.textContent = "Perfil";
+    perfilBtn.href = "profile.html";
   }
 }
-
-document.addEventListener("DOMContentLoaded", initHeaderAuth)
