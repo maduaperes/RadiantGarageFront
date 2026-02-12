@@ -55,7 +55,7 @@ function renderizarServicoDetalhe(servico) {
     </div>
 
   <div class="avaliacao">
-    <span class="preco">Preço estimado: ${servico.custo_servico}</span>
+    <span class="preco">Preço estimado: R$${servico.custo_servico}</span>
     <a id="btnAgendar" href="agendamento.html?id=${servico.id}" style="display:none">Agendar Agora</a>
   </div>
 
@@ -67,6 +67,7 @@ function renderizarServicoDetalhe(servico) {
       <h2>Informações do Serviço:</h2>
       <ul>
         <li><strong>Nome do serviço:</strong> ${servico.nome_servico}</li>
+        <li><strong>Nome do estabelecimento:</strong> ${servico.estabelecimento?.nome_estabelecimento}</li>
         <li><strong>Preço estimado:</strong> ${servico.custo_servico}</li>
         <li><strong>Tempo estimado:</strong> ${servico.tempo_estipulado} minutos</li>
       </ul>

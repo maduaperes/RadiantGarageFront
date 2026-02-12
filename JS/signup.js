@@ -38,12 +38,16 @@ async function loginUser(emailValue, passwordValue) {
     const data = await res.json();
 
     if (!res.ok) {
-      throw new Error(data.message || "Erro ao logar usuário.");
+      throw new Error(data.error || data.message || "Erro ao logar usuário.");
     }
 
-    if (data.token) {
-      localStorage.setItem("token", data.token);
+    const token = data.session?.access_token;
+
+    if (!token) {
+      throw new Error("Token não retornado pelo login.");
     }
+
+    localStorage.setItem("token", token);
 
     return true;
   } catch (err) {
@@ -52,6 +56,7 @@ async function loginUser(emailValue, passwordValue) {
     return false;
   }
 }
+
 
 form?.addEventListener("submit", async (event) => {
   event.preventDefault();

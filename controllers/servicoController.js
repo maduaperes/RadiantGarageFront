@@ -1,4 +1,6 @@
 import * as servicoService from '../services/servicoService.js'
+import { supabase } from '../config/supabase.js';
+
 
 export async function criarServico(req, res) {
   try {
@@ -88,14 +90,20 @@ export async function buscarServico(req, res) {
   }
 }
 
-import { supabase } from '../config/supabase.js';
 
 export async function buscarServicoPublico(req, res) {
   try {
     const { id } = req.params;
+
     const { data, error } = await supabase
       .from('servico')
-      .select('*')
+      .select(`
+        *,
+        estabelecimento (
+          id,
+          nome_estabelecimento
+        )
+      `)
       .eq('id', id)
       .single();
 
